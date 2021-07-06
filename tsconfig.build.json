@@ -3,6 +3,9 @@
     "references": [
         {
             "path": "packages/common"
+        },
+        {
+            "path": "packages/hamburger-menu"
         }
     ]
 }

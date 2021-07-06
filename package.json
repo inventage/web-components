@@ -6,8 +6,9 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf \"packages/**/lib\" \"packages/**/*.tsbuildinfo\"",
-    "build": "npm run clean && tsc -b tsconfig.build.json",
+    "clean": "rimraf 'packages/**/lib' 'packages/**/*.tgz' 'packages/**/*.tsbuildinfo'",
+    "build": "npm run clean && npm run build:css && tsc -b tsconfig.build.json",
+    "build:css": "./scripts/build-styles.sh",
     "test": "npm run test -ws"
   },
   "workspaces": [
