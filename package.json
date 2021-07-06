@@ -10,5 +10,9 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "engines": {
+    "node": ">=15",
+    "npm": "^7"
+  }
 }
