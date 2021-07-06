@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "@inventage-components/root",
+  "version": "0.0.1-alpha.0",
+  "description": "A collection of webcomponents for enterprise portals.",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
