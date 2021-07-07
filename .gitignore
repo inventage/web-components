@@ -5,3 +5,5 @@ lib/
 *.tsbuildinfo
 *.tgz
 *-css.ts
+
+/coverage/

@@ -19,14 +19,18 @@
     "lint:prettier": "prettier '**/*.{js,ts,md,css}' --check",
     "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "prepare": "husky install",
-    "test": "npm run test -ws"
+    "test": "npm run test:browser",
+    "test:browser": "wtr 'packages/**/*.test.ts' --coverage"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@open-wc/testing": "^2.5.33",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
+    "@web/dev-server-esbuild": "^0.2.12",
+    "@web/test-runner": "^0.13.13",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
