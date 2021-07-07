@@ -2,17 +2,17 @@
   "name": "@inventage-components/hamburger-menu",
   "version": "0.0.1-alpha.0",
   "description": "A simple hamburger menu component.",
+  "license": "MIT",
+  "author": "",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": [
-    "lib"
-  ],
   "types": "lib/index.d.ts",
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "lit-element": "^2.5.1"
   },

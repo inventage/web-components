@@ -11,9 +11,12 @@
     "clean": "rimraf 'packages/**/lib' 'packages/**/*.tgz' 'packages/**/*.tsbuildinfo'",
     "format": "npm run format:prettier",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
+    "format:prettier-package-json": "prettier-package-json --write package.json packages/*/package.json",
     "lint": "run-p -l lint:*",
+    "lint:eslint": "eslint --ext .ts,.html .",
     "lint:markdownlint": "git ls-files '*.md' | xargs markdownlint --ignore '**/CHANGELOG.md'",
     "lint:prettier": "prettier '**/*.{js,ts,md,css}' --check",
+    "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "prepare": "husky install",
     "test": "npm run test -ws"
   },
@@ -21,11 +24,19 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-lit": "^1.5.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "markdownlint-cli": "^0.27.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
+    "prettier-package-json": "^2.6.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.5"
   },
@@ -40,6 +51,9 @@
     "*.md": [
       "prettier --write",
       "markdownlint --ignore '**/CHANGELOG.md'"
+    ],
+    "package.json": [
+      "prettier-package-json --write"
     ]
   }
 }
