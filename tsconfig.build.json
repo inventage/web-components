@@ -1,11 +1,11 @@
 {
-    "files": [],
-    "references": [
-        {
-            "path": "packages/common"
-        },
-        {
-            "path": "packages/hamburger-menu"
-        }
-    ]
+  "files": [],
+  "references": [
+    {
+      "path": "packages/common"
+    },
+    {
+      "path": "packages/hamburger-menu"
+    }
+  ]
 }

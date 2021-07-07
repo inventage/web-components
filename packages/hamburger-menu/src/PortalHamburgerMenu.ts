@@ -40,7 +40,7 @@ export class PortalHamburgerMenu extends LitElement {
       this.dispatchEvent(
         new CustomEvent('state-changed', {
           detail: this.toggled,
-        }),
+        })
       );
     }
   }

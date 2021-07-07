@@ -6,20 +6,26 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf 'packages/**/lib' 'packages/**/*.tgz' 'packages/**/*.tsbuildinfo'",
     "build": "npm run clean && npm run build:css && tsc -b tsconfig.build.json",
     "build:css": "./scripts/build-styles.sh",
+    "clean": "rimraf 'packages/**/lib' 'packages/**/*.tgz' 'packages/**/*.tsbuildinfo'",
+    "format": "npm run format:prettier",
+    "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
+    "lint": "run-p -l lint:*",
+    "lint:prettier": "prettier '**/*.{js,ts,md,css}' --check",
     "test": "npm run test -ws"
   },
   "workspaces": [
     "packages/*"
   ],
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
+  },
   "engines": {
     "node": ">=15",
     "npm": "^7"
-  },
-  "devDependencies": {
-    "rimraf": "^3.0.2",
-    "typescript": "^4.3.5"
   }
 }
