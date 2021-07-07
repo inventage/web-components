@@ -29,7 +29,7 @@ module.exports = {
       },
     },
     {
-      files: ['web-test-runner.config.js'],
+      files: ['.eslintrc.js', 'web-test-runner.config.js'],
       env: {
         node: true,
       },
