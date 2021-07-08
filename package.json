@@ -21,6 +21,9 @@
     "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "husky install",
+    "syncpack": "run-s syncpack:*",
+    "syncpack:mismatches": "syncpack list-mismatches",
+    "syncpack:versions": "syncpack set-semver-ranges",
     "test": "npm run build && npm run test:browser",
     "test-esbuild": "npm run clean && wtr --config web-test-runner.config-esbuild.mjs",
     "test:browser": "wtr"
@@ -46,6 +49,7 @@
     "prettier": "^2.3.2",
     "prettier-package-json": "^2.6.0",
     "rimraf": "^3.0.2",
+    "syncpack": "^5.7.11",
     "typescript": "^4.3.5"
   },
   "engines": {
