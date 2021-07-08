@@ -18,6 +18,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
