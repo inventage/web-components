@@ -26,7 +26,7 @@
     "syncpack:versions": "syncpack set-semver-ranges",
     "test": "npm run test:browser",
     "test-esbuild": "npm run clean && wtr --config web-test-runner.config-esbuild.mjs",
-    "test:browser": "npm run build && wtr",
+    "test:browser": "npm run build && wtr --coverage",
     "test:watch": "npm run build && concurrently -k -r 'npm run build:tsc -- --watch --preserveWatchOutput' 'wtr --watch'"
   },
   "workspaces": [
