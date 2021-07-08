@@ -6,11 +6,6 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@inventage-components/*": ["packages/*/src"]
-    },
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

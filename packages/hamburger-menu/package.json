@@ -14,6 +14,7 @@
   },
   "types": "lib/src/index.d.ts",
   "dependencies": {
+    "@inventage-components/common": "^0.0.1-alpha.0",
     "lit-element": "^2.5.1"
   },
   "devDependencies": {
