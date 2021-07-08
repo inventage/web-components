@@ -7,7 +7,6 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
-    "incremental": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

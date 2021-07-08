@@ -9,7 +9,7 @@
     "build": "npm run clean && run-s build:*",
     "build:css": "./scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
-    "clean": "rimraf 'packages/*/lib' 'packages/*/*.tgz' 'packages/*/*.tsbuildinfo'",
+    "clean": "rimraf 'packages/*/lib' 'packages/*/*.tgz' 'packages/*/*.tsbuildinfo' './*.tsbuildinfo'",
     "format": "npm run format:prettier",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
