@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run clean && npm run build:css && tsc -b tsconfig.build.json",
     "build:css": "./scripts/build-styles.sh",
-    "clean": "rimraf 'packages/**/lib' 'packages/**/*.tgz' 'packages/**/*.tsbuildinfo'",
+    "clean": "rimraf 'packages/*/lib' 'packages/*/*.tgz' 'packages/*/*.tsbuildinfo'",
     "format": "npm run format:prettier",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
@@ -20,7 +20,7 @@
     "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "prepare": "husky install",
     "test": "npm run test:browser",
-    "test:browser": "wtr 'packages/**/*.test.ts' --coverage"
+    "test:browser": "wtr --coverage"
   },
   "workspaces": [
     "packages/*"

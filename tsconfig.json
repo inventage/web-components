@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "target": "es2019",
-    "module": "commonjs",
-    "declaration": true,
+    "module": "es2020",
+    "lib": ["es2020", "DOM", "DOM.Iterable"],
     "sourceMap": true,
     "composite": true,
+    "declaration": true,
+    "incremental": true,
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./packages",
