@@ -21,8 +21,9 @@
     "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "husky install",
-    "test": "npm run test:browser",
-    "test:browser": "wtr --coverage"
+    "test": "npm run build && npm run test:browser",
+    "test-esbuild": "npm run clean && wtr --config web-test-runner.config-esbuild.mjs",
+    "test:browser": "wtr"
   },
   "workspaces": [
     "packages/*"
