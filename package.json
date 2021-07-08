@@ -10,24 +10,24 @@
     "build:css": "./scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
     "clean": "rimraf 'packages/*/lib' 'packages/*/*.tgz' 'packages/*/*.tsbuildinfo' './*.tsbuildinfo'",
-    "format": "npm run format:prettier",
+    "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
-    "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
+    "format:prettier": "prettier '**/*.{js,ts,md,css}' '**/tsconfig*.json' --write",
     "format:prettier-package-json": "prettier-package-json --write package.json && find packages -name 'package.json' | xargs -I {} npx prettier-package-json --write {}",
     "lint": "run-p -l lint:*",
     "lint:eslint": "eslint --ext .js,.ts,.html .",
     "lint:markdownlint": "git ls-files '*.md' | xargs markdownlint --ignore '**/CHANGELOG.md'",
-    "lint:prettier": "prettier '**/*.{js,ts,md,css}' --check",
+    "lint:prettier": "prettier '**/*.{js,ts,md,css}' '**/tsconfig*.json' --check",
     "lint:prettier-package-json": "prettier-package-json --list-different package.json packages/*/package.json",
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "husky install",
     "syncpack": "run-s syncpack:*",
     "syncpack:mismatches": "syncpack list-mismatches",
     "syncpack:versions": "syncpack set-semver-ranges",
-    "test": "npm run build && npm run test:browser",
+    "test": "npm run test:browser",
     "test-esbuild": "npm run clean && wtr --config web-test-runner.config-esbuild.mjs",
-    "test:browser": "wtr",
-    "test:watch": "npm run build && wtr --watch"
+    "test:browser": "npm run build && wtr",
+    "test:watch": "npm run build && concurrently -k -r 'npm run build:tsc -- --watch --preserveWatchOutput' 'wtr --watch'"
   },
   "workspaces": [
     "packages/*"
@@ -38,6 +38,7 @@
     "@typescript-eslint/parser": "^4.28.2",
     "@web/dev-server-esbuild": "^0.2.12",
     "@web/test-runner": "^0.13.13",
+    "concurrently": "^6.2.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
@@ -60,6 +61,9 @@
   },
   "lint-staged": {
     "*.{js,ts,css}": [
+      "prettier --write"
+    ],
+    "tsconfig*.json": [
       "prettier --write"
     ],
     "*.md": [
