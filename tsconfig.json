@@ -7,6 +7,10 @@
     "declarationMap": true,
     "sourceMap": true,
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@inventage-components/*": ["packages/*/src"]
+    },
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,

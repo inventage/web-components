@@ -6,6 +6,9 @@
     },
     {
       "path": "packages/hamburger-menu"
+    },
+    {
+      "path": "packages/portal-navigation"
     }
   ]
 }

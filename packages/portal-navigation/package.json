@@ -1,0 +1,26 @@
+{
+  "name": "@inventage-components/portal-navigation",
+  "version": "0.0.1-alpha.0",
+  "description": "A component implementing an opinionated (but generic and hence configurable) navigation pattern.",
+  "license": "MIT",
+  "author": "",
+  "main": "lib/src/index.js",
+  "files": [
+    "lib/src"
+  ],
+  "scripts": {
+    "build": "rimraf lib && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "types": "lib/src/index.d.ts",
+  "dependencies": {
+    "@inventage-components/common": "^0.0.1-alpha.0",
+    "@inventage-components/hamburger-menu": "^0.0.1-alpha.0",
+    "@open-wc/scoped-elements": "^1.3.3",
+    "lit-element": "^2.5.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
+  }
+}

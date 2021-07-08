@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "outDir": "lib"
+  },
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../hamburger-menu"
+    }
+  ]
+}

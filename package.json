@@ -13,7 +13,7 @@
     "format": "npm run format:prettier",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' --write",
-    "format:prettier-package-json": "prettier-package-json --write package.json packages/*/package.json",
+    "format:prettier-package-json": "prettier-package-json --write package.json && find packages -name 'package.json' | xargs -I {} npx prettier-package-json --write {}",
     "lint": "run-p -l lint:*",
     "lint:eslint": "eslint --ext .js,.ts,.html .",
     "lint:markdownlint": "git ls-files '*.md' | xargs markdownlint --ignore '**/CHANGELOG.md'",
@@ -49,6 +49,7 @@
     "prettier": "^2.3.2",
     "prettier-package-json": "^2.6.0",
     "rimraf": "^3.0.2",
+    "shx": "^0.3.3",
     "syncpack": "^5.7.11",
     "typescript": "^4.3.5"
   },
