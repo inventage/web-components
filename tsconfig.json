@@ -7,7 +7,6 @@
     "declarationMap": true,
     "sourceMap": true,
     "strict": true,
-    "incremental": true,
     "baseUrl": ".",
     "paths": {
       "@inventage-components/*": ["packages/*/src"]

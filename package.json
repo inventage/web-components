@@ -10,7 +10,7 @@
     "build:css": "./scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
     "clean": "run-p clean:*",
-    "clean:cache": "rimraf 'packages/*/lib' 'packages/*/lib/tsconfig.tsbuildinfo' './tsconfig-build-types.tsbuildinfo'",
+    "clean:cache": "rimraf 'packages/*/lib' 'packages/*/lib/tsconfig.tsbuildinfo' './tsconfig.build-types.tsbuildinfo'",
     "clean:css": "rimraf 'packages/**/*-css.ts'",
     "clean:packages": "rimraf 'packages/*/*.tgz'",
     "clean:tsc": "npm run build:tsc -- --clean",

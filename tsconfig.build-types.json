@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "incremental": true,
     "noEmit": true
   },
   "include": ["packages/**/*.ts"],
