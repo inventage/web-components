@@ -325,11 +325,19 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // Listen for mobile breakpoint changes
     const mql = window.matchMedia(`screen and (max-width: ${this.mobileBreakpoint}px)`);
     this.isMobileBreakpoint = mql.matches;
-    this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
-    mql.addEventListener('change', e => {
-      this.isMobileBreakpoint = e.matches;
-      this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
-    });
+    // @see https://github.com/microsoft/TypeScript/issues/32210#issuecomment-701374495
+    if (mql.addEventListener) {
+      mql.addEventListener('change', e => {
+        this.isMobileBreakpoint = e.matches;
+        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
+      });
+    } else {
+      // Deprecated 'MediaQueryList' API, <Safari 14, IE, <Edge 16
+      mql.addListener(e => {
+        this.isMobileBreakpoint = e.matches;
+        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
+      });
+    }
   }
 
   updated(changedProperties: PropertyValues): void {
