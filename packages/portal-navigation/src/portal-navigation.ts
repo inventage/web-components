@@ -1,4 +1,4 @@
-import { PortalNavigation } from './PortalNavigation';
+import { PortalNavigation } from './PortalNavigation.js';
 
 customElements.define('portal-navigation', PortalNavigation);
 

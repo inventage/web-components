@@ -1,11 +1,11 @@
 import { CSSResultArray, html, state, LitElement, property, TemplateResult } from 'lit-element';
 import { ClassInfo, classMap } from 'lit-html/directives/class-map';
 import { baseStyles, Nothing } from '@inventage-components/common';
-import { styles } from './styles-css';
-import { Configuration, MenuItem, MenuLabel } from './Configuration';
+import { styles } from './styles-css.js';
+import { Configuration, MenuItem, MenuLabel } from './Configuration.js';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { PortalHamburgerMenu } from '@inventage-components/hamburger-menu';
-import { IdPath } from './IdPath';
+import { IdPath } from './IdPath.js';
 import { PropertyValues } from 'lit-element/lib/updating-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { nothing } from 'lit-html';

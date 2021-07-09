@@ -1,4 +1,4 @@
-import { PortalHamburgerMenu } from './PortalHamburgerMenu';
+import { PortalHamburgerMenu } from './PortalHamburgerMenu.js';
 
 customElements.define('portal-hamburger-menu', PortalHamburgerMenu);
 

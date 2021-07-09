@@ -1,5 +1,5 @@
 import { expect } from '@open-wc/testing';
-import { IdPath } from '../src/IdPath';
+import { IdPath } from '../src/IdPath.js';
 
 describe('IdPath', () => {
   it('with no ids returns undefined for all queries', () => {

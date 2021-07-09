@@ -1,5 +1,5 @@
-import { IdPath } from './IdPath';
-import { MenuItem } from './Configuration';
+import { IdPath } from './IdPath.js';
+import { MenuItem } from './Configuration.js';
 
 /**
  * An ObjectPath is a sequence of objects (from the menu/item data structure) starting from a menu object,

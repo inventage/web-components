@@ -2,9 +2,9 @@ import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/t
 import { setViewport } from '@web/test-runner-commands';
 import sinon from 'sinon';
 
-import '../src/portal-navigation';
-import { PortalNavigation } from '../src/PortalNavigation';
-import { MenuLabel } from '../src/Configuration';
+import '../src/portal-navigation.js';
+import { PortalNavigation } from '../src/PortalNavigation.js';
+import { MenuLabel } from '../src/Configuration.js';
 
 const TEST_DATA_JSON_PATH = '/packages/portal-navigation/test/test-data.json';
 

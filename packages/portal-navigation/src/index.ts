@@ -1,1 +1,1 @@
-export { PortalNavigation } from './PortalNavigation';
+export { PortalNavigation } from './PortalNavigation.js';

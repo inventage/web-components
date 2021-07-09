@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
 
-import { Configuration, ConfigurationData, MenuItem } from '../src/Configuration';
-import { data } from './test-data-json';
+import { Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
+import { data } from './test-data-json.js';
 
 const configurationData = data as ConfigurationData;
 

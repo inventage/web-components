@@ -1,2 +1,2 @@
-export { baseStyles } from './baseStyles';
-export { delay, Nothing } from './utils';
+export { baseStyles } from './baseStyles.js';
+export { delay, Nothing } from './utils.js';

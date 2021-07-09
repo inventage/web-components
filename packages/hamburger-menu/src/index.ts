@@ -1,1 +1,1 @@
-export { PortalHamburgerMenu } from './PortalHamburgerMenu';
+export { PortalHamburgerMenu } from './PortalHamburgerMenu.js';

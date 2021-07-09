@@ -1,12 +1,15 @@
 module.exports = {
   root: true,
+  plugins: ['import', 'lit'],
   extends: ['eslint:recommended', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:lit/recommended', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['import', 'lit'],
+  rules: {
+    'import/extensions': ['error', 'ignorePackages', { ts: 'never' }],
+  },
   overrides: [
     {
       files: ['**/*.ts'],

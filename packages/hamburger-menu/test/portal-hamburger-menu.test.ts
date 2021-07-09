@@ -1,8 +1,8 @@
 import { html, fixture, expect, assert } from '@open-wc/testing';
 import sinon from 'sinon';
 
-import { PortalHamburgerMenu } from '../src';
-import '../src/portal-hamburger-menu';
+import { PortalHamburgerMenu } from '../src/index.js';
+import '../src/portal-hamburger-menu.js';
 
 describe('<portal-hamburger-menu>', () => {
   describe('Structure', () => {

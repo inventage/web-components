@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
-import { ObjectPath } from '../src/ObjectPath';
-import { data } from './test-data-json';
-import { MenuItem } from '../src/Configuration';
+import { ObjectPath } from '../src/ObjectPath.js';
+import { data } from './test-data-json.js';
+import { MenuItem } from '../src/Configuration.js';
 
 describe('ObjectPath', () => {
   it('getObject returns object of proper level', () => {
