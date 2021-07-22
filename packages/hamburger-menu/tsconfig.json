@@ -5,7 +5,7 @@
     "rootDir": ".",
     "outDir": "lib"
   },
-  "exclude": ["stories/*.ts", "lib"],
+  "exclude": ["lib"],
   "references": [
     {
       "path": "../common"
