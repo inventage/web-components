@@ -1,4 +1,6 @@
 import { html, TemplateResult } from 'lit-html';
+import { spreadProps } from '@open-wc/lit-helpers';
+
 import '../src/portal-hamburger-menu.js';
 
 export default {
@@ -21,6 +23,7 @@ interface ArgTypes {
   toggled?: boolean;
 }
 
-const Template: Story<ArgTypes> = ({ toggled = false }: ArgTypes) => html`<portal-hamburger-menu .toggled=${toggled}></portal-hamburger-menu>`;
+const Template: Story<ArgTypes> = (args: ArgTypes) => html`<portal-hamburger-menu ...="${spreadProps(args)}"></portal-hamburger-menu>`;
 
-export const Regular = Template.bind({});
+export const Default = Template.bind({});
+Default.args = {};
