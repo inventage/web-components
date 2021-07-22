@@ -27,6 +27,7 @@
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "husky install",
     "storybook": "npm run build && run-p -l storybook:start watch:tsc watch:css",
+    "storybook:build": "npm run build && build-storybook",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
     "syncpack": "run-s syncpack:*",
     "syncpack:mismatches": "syncpack list-mismatches",
