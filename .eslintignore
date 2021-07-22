@@ -5,3 +5,5 @@ lib/
 *-css.ts
 
 /coverage/
+
+/storybook-static/

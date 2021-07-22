@@ -6,3 +6,5 @@ lib/
 package.json
 
 /coverage/
+
+/storybook-static/
