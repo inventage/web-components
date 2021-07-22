@@ -4,9 +4,8 @@ import '../src/portal-hamburger-menu.js';
 export default {
   component: 'hamburger-menu',
   title: 'Hamburger Menu',
-  args: {
-    toggled: false,
-  },
+  // For available controls
+  // @see https://storybook.js.org/docs/react/essentials/controls#annotation
   argTypes: {
     toggled: { control: 'boolean' },
   },
@@ -22,8 +21,6 @@ interface ArgTypes {
   toggled?: boolean;
 }
 
-const Template: Story<ArgTypes> = ({ toggled = false }: ArgTypes = {}): TemplateResult => {
-  return html`<portal-hamburger-menu .toggled="${toggled}"></portal-hamburger-menu>`;
-};
+const Template: Story<ArgTypes> = ({ toggled = false }: ArgTypes) => html`<portal-hamburger-menu .toggled=${toggled}></portal-hamburger-menu>`;
 
-export const Default = Template.bind({});
+export const Regular = Template.bind({});
