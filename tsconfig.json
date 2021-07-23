@@ -9,7 +9,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@inventage-components/*": ["packages/*/src"]
+      "@inventage-web-components/*": ["packages/*/src"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true,

@@ -1,5 +1,5 @@
 import { CSSResultArray, html, LitElement, property, TemplateResult } from 'lit-element';
-import { baseStyles } from '@inventage-components/common';
+import { baseStyles } from '@inventage-web-components/common';
 import { styles } from './styles-css.js';
 import { classMap } from 'lit-html/directives/class-map';
 import { PropertyDeclaration } from 'lit-element/lib/updating-element';
