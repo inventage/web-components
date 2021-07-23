@@ -12,7 +12,7 @@
     "clean": "run-p clean:*",
     "clean:cache": "rimraf 'packages/*/lib' 'packages/*/lib/tsconfig.tsbuildinfo' './tsconfig.build-types.tsbuildinfo'",
     "clean:css": "rimraf 'packages/**/*-css.ts'",
-    "clean:packages": "rimraf 'packages/*/*.tgz'",
+    "clean:packages": "rimraf *.tgz 'packages/*/*.tgz'",
     "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' '**/tsconfig*.json' --write",
