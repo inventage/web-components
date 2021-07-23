@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "@inventage-web-components/cem-preset",
+  "version": "0.0.0",
+  "description": "Custom Elements Manifest preset for Inventage Web Components",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "*.js"
+  ],
+  "dependencies": {
+    "cem-plugin-module-file-extensions": "^0.0.1",
+    "cem-plugin-readonly": "^0.0.1"
+  },
+  "keywords": [
+    "custom-elements-manifest",
+    "preset"
+  ]
+}

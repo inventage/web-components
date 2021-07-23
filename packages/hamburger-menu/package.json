@@ -16,11 +16,15 @@
     "!test/"
   ],
   "scripts": {
+    "analyze": "cem analyze --litelement",
+    "build": "rimraf lib && tsc -b .",
+    "prepublishOnly": "npm run analyze && npm run build",
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
   },
   "types": "lib/src/index.d.ts",
   "dependencies": {
     "@inventage-web-components/common": "^0.0.1-alpha.0",
     "lit-element": "^2.5.1"
-  }
+  },
+  "customElements": "custom-elements.json"
 }

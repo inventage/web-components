@@ -10,6 +10,7 @@
     "build:css": "./scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
     "build:wca": "wca analyze 'packages/*/src/**/*.ts' --outFile custom-elements-experimental.json",
+    "cem": "npm run --if-present -ws analyze",
     "clean": "run-p clean:*",
     "clean:cache": "rimraf 'packages/*/lib' 'packages/*/lib/tsconfig.tsbuildinfo' './tsconfig.build-types.tsbuildinfo'",
     "clean:css": "rimraf 'packages/**/*-css.ts'",
@@ -17,7 +18,7 @@
     "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:prettier": "prettier '**/*.{js,ts,md,css}' '**/tsconfig*.json' --write",
-    "format:prettier-package-json": "prettier-package-json --write package.json && find packages -name 'package.json' | xargs -I {} npx prettier-package-json --write {}",
+    "format:prettier-package-json": "prettier-package-json --write package.json && find . -name 'package.json' ! -path './node_modules/*' | xargs -I {} npx prettier-package-json --write {}",
     "get-ready": "npm run clean && npm run build:css",
     "postinstall": "npm run get-ready",
     "lint": "run-p -l lint:*",
@@ -41,9 +42,11 @@
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "plugins/*"
   ],
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.4.12",
     "@open-wc/lit-helpers": "^0.3.12",
     "@open-wc/testing": "^2.5.33",
     "@rollup/plugin-json": "^4.1.0",
@@ -78,6 +81,7 @@
     "node": ">=15",
     "npm": "^7"
   },
+  "customElements": "custom-elements.json",
   "lint-staged": {
     "*.{js,ts,css}": [
       "prettier --write"
