@@ -4,7 +4,7 @@ import { baseStyles, Nothing } from '@inventage-web-components/common';
 import { styles } from './styles-css.js';
 import { Configuration, MenuItem, MenuLabel } from './Configuration.js';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
-import { PortalHamburgerMenu } from '@inventage-web-components/hamburger-menu';
+import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { IdPath } from './IdPath.js';
 import { PropertyValues } from 'lit-element/lib/updating-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -240,7 +240,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   static get scopedElements(): ScopedElementsMap {
     return {
-      'portal-hamburger-menu': PortalHamburgerMenu,
+      'hamburger-menu': HamburgerMenu,
     };
   }
 

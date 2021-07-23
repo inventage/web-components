@@ -22,7 +22,7 @@ import { PropertyDeclaration } from 'lit-element/lib/updating-element';
  * @cssprop {Length} [--hamburger-hover-transition-duration=0.15s]
  * @cssprop {Length} [--hamburger-hover-transition-timing-function=linear]
  */
-export class PortalHamburgerMenu extends LitElement {
+export class HamburgerMenu extends LitElement {
   @property({
     type: Boolean,
     reflect: true,
