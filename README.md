@@ -1,4 +1,4 @@
-# `@inventage-components`
+# `@inventage-web-components`
 
 TODO
 
