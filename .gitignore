@@ -5,6 +5,7 @@ lib/
 *.tsbuildinfo
 *.tgz
 *-css.ts
+custom-elements-experimental.json
 
 /coverage/
 
