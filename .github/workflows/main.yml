@@ -60,6 +60,7 @@ jobs:
 
     needs: [lint, test]
 
+    # Make sure only main branch is deployed
     if: github.ref == 'refs/heads/main'
 
     steps:
