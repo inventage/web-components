@@ -33,7 +33,7 @@ export interface ConfigurationData {
 }
 
 /**
- * [documentation]{@link https://github.com/inventage/portal-components/blob/master/docs/portal-navigation/configuration.md}.
+ * @see https://github.com/inventage/portal-components/blob/master/docs/portal-navigation/configuration.md
  */
 export class Configuration {
   private readonly data: ConfigurationData | undefined;
