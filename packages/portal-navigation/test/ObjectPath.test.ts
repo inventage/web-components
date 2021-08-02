@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 import { ObjectPath } from '../src/ObjectPath.js';
-import { data } from './test-data-json.js';
+import * as data from './test-data.json';
 import { MenuItem } from '../src/Configuration.js';
 
 describe('ObjectPath', () => {
@@ -14,7 +14,7 @@ describe('ObjectPath', () => {
     const objectPath = new ObjectPath(<MenuItem>menu1, <MenuItem>parent2, <MenuItem>item21);
 
     // then
-    expect(objectPath.getObject(0)!.id).to.equal('menu1');
+    expect(objectPath.getObject(0)!.id).to.equal('main');
     expect(objectPath.getObject(1)!.id).to.equal('parent2');
     expect(objectPath.getObject(2)!.id).to.equal('item2.1');
     expect(objectPath.getLastItem()!.id).to.equal('item2.1');
@@ -31,7 +31,7 @@ describe('ObjectPath', () => {
     const idPath = objectPath.toIdPath();
 
     // then
-    expect(idPath.getMenuId()).to.equal('menu1');
+    expect(idPath.getMenuId()).to.equal('main');
     expect(idPath.getFirstLevelItemId()).to.equal('parent2');
     expect(idPath.getId(2)).to.equal('item2.1');
   });

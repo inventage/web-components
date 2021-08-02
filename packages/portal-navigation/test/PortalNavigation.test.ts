@@ -6,7 +6,7 @@ import '../src/portal-navigation.js';
 import { PortalNavigation } from '../src/PortalNavigation.js';
 import { MenuLabel } from '../src/Configuration.js';
 
-const TEST_DATA_JSON_PATH = '/packages/portal-navigation/test/test-data.json';
+const TEST_DATA_JSON_PATH = '/packages/portal-navigation/test/test-data.json!';
 
 type WaitUntilOptions = {
   interval?: number;
