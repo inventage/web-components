@@ -6,7 +6,7 @@ import { data } from './test-data-json.js';
 const configurationData = data as ConfigurationData;
 
 describe('Configuration', () => {
-  it.only('getMenus returns all menus', () => {
+  it('getMenus returns all menus', () => {
     const configuration = new Configuration(configurationData);
     const result = configuration.getMenus();
 

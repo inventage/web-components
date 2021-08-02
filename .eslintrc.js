@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  plugins: ['import', 'lit'],
+  plugins: ['import', 'lit', 'no-only-tests'],
   extends: ['eslint:recommended', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:lit/recommended', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -8,6 +8,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-only-tests/no-only-tests': 'error',
     'import/extensions': ['error', 'ignorePackages', { ts: 'never' }],
   },
   overrides: [
