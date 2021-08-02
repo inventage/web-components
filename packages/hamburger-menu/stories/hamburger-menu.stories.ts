@@ -27,3 +27,8 @@ const Template: Story<ArgTypes> = (args: ArgTypes) => html`<hamburger-menu ...="
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const Toggled = Template.bind({});
+Toggled.args = {
+  toggled: true,
+};
