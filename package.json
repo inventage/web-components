@@ -32,6 +32,7 @@
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "is-ci || husky install",
     "remove-node-modules": "rimraf node_modules 'packages/*/node_modules'",
+    "start": "npm run storybook",
     "storybook": "npm run build && run-p -l storybook:start watch:tsc watch:css",
     "storybook:build": "npm run build && build-storybook",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
