@@ -1,5 +1,4 @@
 import { html, TemplateResult } from 'lit-html';
-import { spreadProps } from '@open-wc/lit-helpers';
 
 import '../src/hamburger-menu.js';
 
@@ -23,7 +22,7 @@ interface ArgTypes {
   toggled?: boolean;
 }
 
-const Template: Story<ArgTypes> = (args: ArgTypes) => html`<hamburger-menu ...="${spreadProps(args)}"></hamburger-menu>`;
+const Template: Story<ArgTypes> = (args: ArgTypes) => html`<hamburger-menu ?toggled="${args.toggled}"></hamburger-menu>`;
 
 export const Default = Template.bind({});
 Default.args = {};
