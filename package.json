@@ -50,6 +50,7 @@
     "plugins/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.16.0",
     "@custom-elements-manifest/analyzer": "^0.4.16",
     "@open-wc/lit-helpers": "^0.3.12",
     "@open-wc/testing": "^2.5.33",
