@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.2-next.1
+
+### Patch Changes
+
+- cae77d2: - Add keywords to `package.json`
+
 ## 0.0.2-next.0
 
 ### Patch Changes
