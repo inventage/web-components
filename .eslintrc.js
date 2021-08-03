@@ -33,7 +33,7 @@ module.exports = {
       },
     },
     {
-      files: ['.eslintrc.js'],
+      files: ['.eslintrc.js', 'commitlint.config.js'],
       env: {
         node: true,
       },
