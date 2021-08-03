@@ -1,0 +1,89 @@
+{
+  "menus": [
+    {
+      "id": "main",
+      "items": [
+        {
+          "id": "parent1",
+          "label": { "de": "Parent1_de", "en": "Parent1_en" },
+          "url": "/some/path/parent1",
+          "application": "app1"
+        },
+        {
+          "id": "parent2",
+          "defaultItem": "item2.2",
+          "label": { "de": "Parent2_de", "en": "Parent2_en" },
+          "items": [
+            {
+              "id": "item2.1",
+              "label": { "de": "Item 2.1_de", "en": "Item 2.1_en" },
+              "url": "/some/path/item2.1",
+              "application": "app1"
+            },
+            {
+              "id": "item2.2",
+              "label": { "de": "Item 2.2_de", "en": "Item 2.2_en" },
+              "url": "/some/path/item2.2",
+              "application": "app1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "dropdown": true,
+      "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-mail' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Crect x='3' y='5' width='18' height='14' rx='2' /%3E%3Cpolyline points='3 7 12 13 21 7' /%3E%3C/svg%3E",
+      "label": { "en": "Group2_en", "de": "Group2_de" },
+      "items": [
+        {
+          "id": "parent3",
+          "label": { "de": "Parent3_de", "en": "Parent3_en" },
+          "url": "/some/path/parent3",
+          "items": [
+            {
+              "id": "item3.1",
+              "label": { "de": "Item 3.1_de", "en": "Item 3.1_en" },
+              "url": "/some/path/item3.1",
+              "application": "app2"
+            },
+            {
+              "id": "item3.2",
+              "label": { "de": "Item 3.2_de", "en": "Item 3.2_en" },
+              "url": "/some/path/item3.2",
+              "internalRouting": false
+            },
+            {
+              "label": { "de": "Item generatedId_de", "en": "Item generatedId_en" },
+              "url": "/some/path/generatedId"
+            }
+          ]
+        },
+        {
+          "id": "parent4",
+          "label": { "de": "Parent4_de", "en": "Parent4_en" },
+          "url": "/some/path/parent4"
+        }
+      ]
+    },
+    {
+      "id": "logout",
+      "items": [
+        {
+          "id": "parent5",
+          "label": "Parent5",
+          "url": "/some/path/parent5",
+          "items": [
+            {
+              "id": "item5.1",
+              "label": "Item 5.1",
+              "url": "/some/path/item5.1",
+              "internalRouting": false,
+              "destination": "extern"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

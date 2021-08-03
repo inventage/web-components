@@ -6,7 +6,7 @@ export default {
   component: 'hamburger-menu',
   title: 'Hamburger Menu',
   // For available controls
-  // @see https://storybook.js.org/docs/react/essentials/controls#annotation
+  // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
   argTypes: {
     toggled: { control: 'boolean' },
   },
