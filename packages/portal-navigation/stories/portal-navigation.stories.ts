@@ -12,7 +12,7 @@ export default {
     src: {
       control: {
         type: 'select',
-        options: ['/data/data.json', '/data/data-settings.json', '/data/test-data.json'],
+        options: ['./data/data.json', './data/data-settings.json', './data/test-data.json'],
       },
     },
     language: {
@@ -53,7 +53,7 @@ export const Default: Story<ArgTypes> = (args: ArgTypes) =>
 
 Default.args = {
   language: 'en',
-  src: '/data/data.json',
+  src: './data/data.json',
   internalRouting: true,
   currentApplication: 'ebanking',
 };
