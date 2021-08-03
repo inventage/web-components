@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@inventage-web-components/common": "0.0.2",
+    "@inventage-web-components/hamburger-menu": "0.0.2",
+    "@inventage-web-components/portal-navigation": "0.0.3",
+    "@inventage-web-components/cem-preset": "0.0.0"
+  },
+  "changesets": [
+    "famous-ants-roll"
+  ]
+}
