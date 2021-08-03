@@ -12,7 +12,7 @@ export default {
     src: {
       control: {
         type: 'select',
-        options: ['/data/data.json', '/data/data-settings.json', '/data/test-data.json'],
+        options: ['./data/data.json', './data/data-settings.json', './data/test-data.json'],
       },
     },
     language: {
