@@ -7,6 +7,7 @@ on:
 
 jobs:
   release:
+    name: Release
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
     runs-on: ubuntu-latest
@@ -36,9 +37,8 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  # Build and deploy to Github Pages
   deploy:
-    name: Deploy
+    name: Deploy to Github Pages
 
     runs-on: ubuntu-latest
 
