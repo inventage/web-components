@@ -26,5 +26,11 @@
     "@open-wc/scoped-elements": "^1.3.3",
     "lit-element": "^2.5.1"
   },
+  "keywords": [
+    "lit-element",
+    "lit-html",
+    "portal",
+    "web-components"
+  ],
   "customElements": "custom-elements.json"
 }

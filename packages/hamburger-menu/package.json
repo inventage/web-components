@@ -24,5 +24,11 @@
     "@inventage-web-components/common": "^0.0.2-next.0",
     "lit-element": "^2.5.1"
   },
+  "keywords": [
+    "lit-element",
+    "lit-html",
+    "portal",
+    "web-components"
+  ],
   "customElements": "custom-elements.json"
 }
