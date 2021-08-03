@@ -1,0 +1,15 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@inventage-web-components/common": "0.0.1",
+    "@inventage-web-components/hamburger-menu": "0.0.1",
+    "@inventage-web-components/portal-navigation": "0.0.1",
+    "@inventage-web-components/cem-preset": "0.0.0"
+  },
+  "changesets": [
+    "happy-birds-call",
+    "lemon-queens-teach",
+    "selfish-waves-try"
+  ]
+}
