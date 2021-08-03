@@ -33,6 +33,7 @@ jobs:
         with:
           publish: npm run release
           version: npm run release:prerelease
+          commit: 'chore: version packages (next)'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
