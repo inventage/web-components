@@ -146,12 +146,6 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @slot header-mobile - The slot rendered in the top bar in the mobile breakpoint
  * @slot tree-bottom - The slot rendered at the bottom of the menu tree (mobile breakpoint)
  *
- * IMPORTANT NOTE: Leave these here in order for storybook to work. Description is further down where properties are defined.
- *
- * @prop {string} src
- * @prop {string} activeUrl
- * @prop {string} currentApplication
- *
  * TODO: kebab-cased attributes
  */
 export class PortalNavigation extends ScopedElementsMixin(LitElement) {
