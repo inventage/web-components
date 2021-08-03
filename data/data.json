@@ -1,0 +1,576 @@
+{
+  "menus": [
+    {
+      "id": "main",
+      "items": [
+        {
+          "label": {
+            "de": "Home",
+            "en": "Home"
+          },
+          "url": "/ebanking/show-dashboard",
+          "application": "ebanking"
+        },
+        {
+          "defaultItem": "main.assetCount.assetOverview",
+          "id": "main.assetCount",
+          "label": {
+            "de": "Vermögen",
+            "en": "Assets"
+          },
+          "items": [
+            {
+              "id": "main.assetCount.assetOverview",
+              "label": {
+                "de": "Vermögensübersicht",
+                "en": "Asset Overview"
+              },
+              "url": "/ebanking/show-assets",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Kontoauszug",
+                "en": "Account Statement"
+              },
+              "url": "/ebanking/show-asset-statement",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Depotanalyse",
+                "en": "Portfolio Analysis"
+              },
+              "url": "/ebanking/show-asset-portfolio-analysis",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Fälligkeiten",
+                "en": "Maturities"
+              },
+              "url": "/ebanking/show-asset-maturities",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Listen",
+                "en": "Lists"
+              },
+              "url": "/ebanking/show-asset-lists",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.payments.orderOverview",
+          "label": {
+            "de": "Zahlungen",
+            "en": "Payments"
+          },
+          "items": [
+            {
+              "id": "main.payments.orderOverview",
+              "label": {
+                "de": "Auftragsübersicht",
+                "en": "Order Overview"
+              },
+              "url": "/ebanking/show-payments",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Auftrag erfassen",
+                "en": "Create Order"
+              },
+              "url": "/ebanking/create-payment",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Daueraufträge",
+                "en": "Standing Order Overview"
+              },
+              "url": "/ebanking/show-payment-standing-orders",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "ISO",
+                "en": "ISO"
+              },
+              "url": "/ebanking/show-payment-data-transfer",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "BESR",
+                "en": "BESR"
+              },
+              "url": "/ebanking/show-payment-besr",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "QRR",
+                "en": "QRR"
+              },
+              "url": "/ebanking/show-payment-camt",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "LSV",
+                "en": "LSV"
+              },
+              "url": "/ebanking/show-lsv-contracts",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.trade.stockMarketOrders",
+          "label": {
+            "de": "Handel",
+            "en": "Trade"
+          },
+          "items": [
+            {
+              "id": "main.trade.stockMarketOrders",
+              "label": {
+                "de": "Börsenaufträge",
+                "en": "Stock Market Orders"
+              },
+              "url": "/ebanking/show-stex-orders",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Kauf",
+                "en": "Buy"
+              },
+              "url": "/ebanking/create-stex-buy-order",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Verkauf",
+                "en": "Sell"
+              },
+              "url": "/ebanking/create-stex-sell-order",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.markets.marketOverview",
+          "label": {
+            "de": "Märkte",
+            "en": "Markets"
+          },
+          "items": [
+            {
+              "id": "main.markets.marketOverview",
+              "label": {
+                "de": "Marktübersicht",
+                "en": "Market Overview"
+              },
+              "url": "/marketdata/overview",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Aktien",
+                "en": "Stocks"
+              },
+              "url": "/marketdata/stocks",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Zinsen / Anleihen",
+                "en": "Bonds"
+              },
+              "url": "/marketdata/bonds",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Fonds",
+                "en": "Funds"
+              },
+              "url": "/marketdata/fonds",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Devisen",
+                "en": "Currencies"
+              },
+              "url": "/marketdata/currencies",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Rohstoffe",
+                "en": "Commodities"
+              },
+              "url": "/marketdata/commodities",
+              "application": "marketdata",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Watchliste",
+                "en": "Watchlist"
+              },
+              "url": "/marketdata/watchlist",
+              "application": "marketdata",
+              "internalRouting": false
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.documents.ePost",
+          "label": {
+            "de": "Dokumente",
+            "en": "Documents"
+          },
+          "items": [
+            {
+              "id": "main.documents.ePost",
+              "label": {
+                "de": "e-Post",
+                "en": "e-Post"
+              },
+              "url": "/ebanking/show-documents",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Archivierung",
+                "en": "Archiving"
+              },
+              "url": "/ebanking/show-delivery",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Auszug generieren",
+                "en": "Generate statements"
+              },
+              "url": "/ebanking/create-document-order",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Auszug abholen",
+                "en": "Download statements"
+              },
+              "url": "/ebanking/show-document-orders",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.products.placeholder",
+          "label": {
+            "de": "Produkte",
+            "en": "Products"
+          },
+          "items": [
+            {
+              "id": "main.products.placeholder",
+              "label": {
+                "de": "Platzhalter",
+                "en": "Placeholder"
+              },
+              "url": "/placeholder/1",
+              "application": "products",
+              "internalRouting": false
+            }
+          ]
+        },
+        {
+          "defaultItem": "main.prolink.marketOverview",
+          "label": {
+            "de": "Prolink",
+            "en": "Prolink"
+          },
+          "items": [
+            {
+              "id": "main.prolink.marketOverview",
+              "label": {
+                "de": "Märkte & Ideen",
+                "en": "Market Overview"
+              },
+              "url": "/prolink/node/95",
+              "application": "prolink",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Regulierung & Knowhow",
+                "en": "Regulations & Knowhow"
+              },
+              "url": "/prolink/node/89",
+              "application": "prolink",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Formulare",
+                "en": "Forms"
+              },
+              "url": "/prolink/node/248",
+              "application": "prolink",
+              "internalRouting": false
+            },
+            {
+              "label": {
+                "de": "Kontakte",
+                "en": "Contacts"
+              },
+              "url": "/prolink/node/394",
+              "application": "prolink",
+              "internalRouting": false
+            }
+          ]
+        },
+        {
+          "label": {
+            "de": "Superuser",
+            "en": "Superuser"
+          },
+          "items": [
+            {
+              "id": "main.superuser.userOverview",
+              "label": {
+                "de": "Benutzerübersicht",
+                "en": "User Overview"
+              },
+              "url": "/ebanking/show-users",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Benutzer erfassen",
+                "en": "Create User"
+              },
+              "url": "/ebanking/create-user",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Kundenübersicht",
+                "en": "Customer Overview"
+              },
+              "url": "/ebanking/show-customers",
+              "application": "ebanking"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "items": [
+        {
+          "id": "meta.urgent",
+          "label": "[!!!]",
+          "items": [
+            {
+              "label": "Urgent Messages",
+              "url": "/ebanking/show-urgent-messages",
+              "application": "ebanking"
+            },
+            {
+              "label": "Warnings",
+              "url": "/ebanking/show-warnings",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "id": "meta.messages",
+          "defaultItem": "meta.messages.inbox",
+          "label": {
+            "de": "Nachrichten",
+            "en": "Messages"
+          },
+          "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-mail' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Crect x='3' y='5' width='18' height='14' rx='2' /%3E%3Cpolyline points='3 7 12 13 21 7' /%3E%3C/svg%3E",
+          "items": [
+            {
+              "id": "meta.messages.inbox",
+              "label": {
+                "de": "Posteingang",
+                "en": "Inbox"
+              },
+              "url": "/ebanking/show-messages-inbox",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Postausgang",
+                "en": "Outbox"
+              },
+              "url": "/ebanking/show-messages-outbox",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Nachricht erfassen",
+                "en": "Create message"
+              },
+              "url": "/ebanking/create-message",
+              "application": "ebanking"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "dropdown": true,
+      "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-user' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3Cpath d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /%3E%3C/svg%3E",
+      "label": {
+        "en": "1001/usr",
+        "de": "1001/usr"
+      },
+      "items": [
+        {
+          "defaultItem": "profile.preferences.userSettings",
+          "label": {
+            "de": "Einstellungen",
+            "en": "Preferences"
+          },
+          "items": [
+            {
+              "id": "profile.preferences.userSettings",
+              "label": {
+                "de": "Benutzereinstellungen",
+                "en": "User Settings"
+              },
+              "url": "/ebanking/update-user-preferences",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Sicherheit",
+                "en": "Security"
+              },
+              "url": "/ebanking/update-security-preferences",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Darstellung",
+                "en": "Presentation"
+              },
+              "url": "/ebanking/update-presentation-preferences",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Benachrichtigungen",
+                "en": "Notifications"
+              },
+              "url": "/ebanking/update-notification-preferences",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Mobiles Banking",
+                "en": "Mobile Banking"
+              },
+              "url": "/ebanking/update-mobile-preferences",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "profile.manageCustomerGroups.customerGroups",
+          "label": {
+            "de": "Kundengruppen verwalten",
+            "en": "Manage customer groups"
+          },
+          "items": [
+            {
+              "id": "profile.manageCustomerGroups.customerGroups",
+              "label": {
+                "de": "Kundengruppen",
+                "en": "Customer groups"
+              },
+              "url": "/ebanking/show-customer-groups",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Kundengruppe erstellen",
+                "en": "Create customer group"
+              },
+              "url": "/ebanking/create-customer-group",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "label": {
+            "de": "Alias verwalten",
+            "en": "Manage alias"
+          },
+          "url": "/ebanking/show-alias",
+          "application": "ebanking"
+        },
+        {
+          "label": {
+            "de": "Zugriffe Dritter",
+            "en": "Third party access"
+          },
+          "url": "/ebanking/tpp-access",
+          "application": "ebanking"
+        },
+        {
+          "label": {
+            "de": "Kontakt & Support",
+            "en": "Contact & support"
+          },
+          "url": "/node/226",
+          "application": "portal",
+          "internalRouting": false,
+          "destination": "extern"
+        }
+      ]
+    },
+    {
+      "id": "logout",
+      "dropdown": true,
+      "label": "Logout",
+      "items": [
+        {
+          "label": {
+            "de": "Erscheine Offline",
+            "en": "Appear Offline"
+          },
+          "url": "/portal/api/offline",
+          "internalRouting": true,
+          "internalRoutingApplications": ["ebanking"]
+        },
+        {
+          "label": {
+            "de": "Logout",
+            "en": "Logout"
+          },
+          "url": "/portal/api/logout",
+          "internalRouting": true,
+          "internalRoutingApplications": ["ebanking"]
+        }
+      ]
+    }
+  ]
+}
