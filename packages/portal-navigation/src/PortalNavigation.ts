@@ -392,14 +392,14 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
           ${headerMenus.map((menuTemplate, index) => menuTemplate({ item: true, '-first': index === 0, '-last': index === headerMenus.length - 1 }))}
           <div class="slot-right" part="slot-right"><slot name="right"></slot></div>
           ${this.isMobileBreakpoint
-            ? html`<portal-hamburger-menu
+            ? html`<hamburger-menu
                 class="hamburger-menu"
                 part="hamburger-menu"
                 .toggled="${this.hamburgerMenuExpanded}"
                 @state-changed="${(e: CustomEvent) => {
                   this.hamburgerMenuExpanded = e.detail;
                 }}"
-              ></portal-hamburger-menu>`
+              ></hamburger-menu>`
             : nothing}
         </div>
       </header>
