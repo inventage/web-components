@@ -4,12 +4,14 @@
   "description": "A component implementing an opinionated (but generic and hence configurable) navigation pattern.",
   "license": "MIT",
   "author": "",
+  "type": "module",
   "main": "lib/src/index.js",
+  "module": "lib/src/index.js",
   "files": [
     "custom-elements.json",
-    "lib/**/*.d.ts",
-    "lib/**/*.js",
-    "lib/**/*.js.map"
+    "lib/src/**/*.d.ts",
+    "lib/src/**/*.js",
+    "lib/src/**/*.js.map"
   ],
   "scripts": {
     "analyze": "cem analyze --litelement",
