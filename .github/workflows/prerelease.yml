@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Pre-Release
+    name: Prereleases
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
     runs-on: ubuntu-latest
