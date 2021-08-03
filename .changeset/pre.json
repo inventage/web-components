@@ -8,6 +8,7 @@
     "@inventage-web-components/cem-preset": "0.0.0"
   },
   "changesets": [
+    "eight-donkeys-develop",
     "happy-birds-call",
     "lemon-queens-teach",
     "selfish-waves-try"
