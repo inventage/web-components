@@ -34,6 +34,7 @@
     "release": "sh scripts/release.sh",
     "postrelease": "npm run get-ready",
     "release:prerelease": "sh scripts/prerelease.sh",
+    "release:version": "sh scripts/version.sh",
     "remove-node-modules": "rimraf node_modules 'packages/*/node_modules'",
     "start": "npm run storybook",
     "storybook": "npm run build && run-p -l storybook:start watch:tsc watch:css",
