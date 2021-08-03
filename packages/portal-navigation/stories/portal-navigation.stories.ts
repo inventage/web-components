@@ -53,7 +53,7 @@ export const Default: Story<ArgTypes> = (args: ArgTypes) =>
 
 Default.args = {
   language: 'en',
-  src: '/data/data.json',
+  src: './data/data.json',
   internalRouting: true,
   currentApplication: 'ebanking',
 };
