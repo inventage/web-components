@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.3-next.0
+
+### Patch Changes
+
+- 4a93691: Added missing license, fixed license links.
+
 ## 0.0.2
 
 ### Patch Changes
