@@ -8,6 +8,8 @@ A simple hamburger menu component.
 
 ## Quick Start
 
+Use [unpkg.com](https://unpkg.com/browse/@inventage-web-components/hamburger-menu/) to get a simple example running in a single HTML file:
+
 ```html
 <script type="module" src="https://unpkg.com/@inventage-web-components/hamburger-menu/lib/src/hamburger-menu.js?module"></script>
 
