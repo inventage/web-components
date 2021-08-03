@@ -1,5 +1,12 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.3-next.0
+
+### Patch Changes
+
+- 6f7e820: Fixed default value for src in storybook story
+- 52496eb: Use relative paths for data.json files in storybook
+
 ## 0.0.2
 
 ### Patch Changes
