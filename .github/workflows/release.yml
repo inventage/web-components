@@ -42,7 +42,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [lint, test]
+    needs: [release]
 
     steps:
       - name: Checkout Code
