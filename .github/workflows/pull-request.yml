@@ -10,9 +10,7 @@ jobs:
   # Run codestyle checks
   lint:
     name: Lint
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -32,14 +30,11 @@ jobs:
   # Run tests
   test:
     name: Test
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
 #        node-version: [14.x, 16.x]
         node-version: [16.x]
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
