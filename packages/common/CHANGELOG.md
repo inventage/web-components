@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.3
+
+### Patch Changes
+
+- a27e5d5: Empty test release
+
 ## 0.0.3-next.0
 
 ### Patch Changes
