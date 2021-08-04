@@ -63,6 +63,8 @@ const NavigationCssClasses = {
 
 type NavigationCssClasses = typeof NavigationCssClasses;
 
+// TODO: kebab-cased attributes
+
 /**
  * A component implementing an opinionated (but generic and hence configurable) navigation pattern.
  *
@@ -145,8 +147,6 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @slot meta-right - The right slot inside the meta bar
  * @slot header-mobile - The slot rendered in the top bar in the mobile breakpoint
  * @slot tree-bottom - The slot rendered at the bottom of the menu tree (mobile breakpoint)
- *
- * TODO: kebab-cased attributes
  */
 export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   /**

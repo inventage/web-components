@@ -8,6 +8,7 @@ export default {
   title: 'Portal Navigation',
   // For available controls
   // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
+  // @see https://github.com/storybookjs/storybook/tree/next/addons/controls
   argTypes: {
     src: {
       control: {
@@ -21,6 +22,16 @@ export default {
         options: ['en', 'de'],
       },
     },
+    activeUrl: {
+      control: {
+        type: 'text',
+      },
+    },
+    '--portal-navigation-color-primary': {
+      control: {
+        type: 'color',
+      },
+    },
   },
 };
 
@@ -29,6 +40,7 @@ interface Story<T> {
 
   args?: Partial<T>;
   argTypes?: Record<string, unknown>;
+  parameters?: Record<string, unknown>;
 }
 
 interface ArgTypes {
@@ -36,10 +48,17 @@ interface ArgTypes {
   language: string;
   internalRouting?: boolean;
   currentApplication?: string;
+
+  // CSS custom props
+  '--portal-navigation-color-primary'?: string;
 }
 
-export const Default: Story<ArgTypes> = (args: ArgTypes) =>
-  html` <portal-navigation
+export const Default: Story<ArgTypes> = (args: ArgTypes) => {
+  // TODO: We could probably iterate over all properties that start with `--` and generate the styles automatically…
+  const styleContainer = document.documentElement.style;
+  args['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', args['--portal-navigation-color-primary']);
+
+  return html` <portal-navigation
     src="${args.src!}"
     language="${args.language}"
     ?internalRouting="${args.internalRouting}"
@@ -50,12 +69,21 @@ export const Default: Story<ArgTypes> = (args: ArgTypes) =>
     <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;">Left slot</span>
     <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;">Right slot</span>
   </portal-navigation>`;
+};
 
 Default.args = {
   language: 'en',
   src: './data/data.json',
   internalRouting: true,
   currentApplication: 'ebanking',
+};
+
+Default.parameters = {
+  docs: {
+    description: {
+      story: 'Individual story description, may contain `markdown` markup',
+    },
+  },
 };
 
 const dispatchBadgeEvents = () => {
