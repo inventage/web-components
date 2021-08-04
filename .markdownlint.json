@@ -3,9 +3,6 @@
     "line_length": -1
   },
   "no-bare-urls": false,
-  "no-inline-html": {
-    "allowed_elements": ["h1", "br"]
-  },
   "no-trailing-punctuation": {
     "punctuation": ".,;:!。，；：！"
   }

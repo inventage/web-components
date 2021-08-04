@@ -1,13 +1,13 @@
-<h1>
+<!-- markdownlint-disable-next-line -->
+<p>
   <img
     width="20%"
     src="./docs/logo.svg"
     alt="Inventage AG"
   />
-  <br>
-  <br>
-  Inventage Web Components
-</h1>
+</p>
+
+# Inventage Web Components
 
 [![License](https://img.shields.io/npm/l/@inventage-web-components/common?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/workflow/status/inventage/web-components/Release?style=flat-square)](https://github.com/inventage/web-components/actions)
