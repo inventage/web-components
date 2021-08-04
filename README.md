@@ -1,9 +1,13 @@
-# `@inventage-web-components`
+# inventage-web-components
 
-TODO
+[![License](https://img.shields.io/npm/l/@inventage-web-components/common?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/workflow/status/inventage/web-components/Release?style=flat-square)](https://github.com/inventage/web-components/actions)
 
-## Useful Links
+A collection of webcomponents for enterprise portals.
 
-- https://github.com/Quramy/npm-ts-workspaces-example
-- https://github.com/NiGhTTraX/ts-monorepo/tree/npm
-- https://jakeginnivan.medium.com/a-great-typescript-npm-module-mono-repo-setup-e737937210
+## Packages
+
+| Package                                                                                        | Version                                                                                                                                                                                          | Description                                                 |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| [hamburger-menu](https://inventage.github.io/web-components/?path=/story/hamburger-menu)       | [![Published on npm](https://img.shields.io/npm/v/@inventage-web-components/hamburger-menu.svg?style=flat-square)](https://www.npmjs.com/package/@inventage-web-components/hamburger-menu)       | A simple hamburger menu component.                          |
+| [portal-navigation](https://inventage.github.io/web-components/?path=/story/portal-navigation) | [![Published on npm](https://img.shields.io/npm/v/@inventage-web-components/portal-navigation.svg?style=flat-square)](https://www.npmjs.com/package/@inventage-web-components/portal-navigation) | A component implementing an opinionated navigation pattern. |
