@@ -3,8 +3,9 @@
     width="20%"
     src="./docs/logo.svg"
     alt="Inventage AG"
-    style="display: block; margin-bottom: 1rem;"
+    style="margin-bottom: 1rem;"
   />
+  <br>
   Inventage Web Components
 </h1>
 
