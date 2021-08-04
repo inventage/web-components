@@ -1,5 +1,14 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.4
+
+### Patch Changes
+
+- a27e5d5: Empty test release
+- Updated dependencies [a27e5d5]
+  - @inventage-web-components/common@0.0.3
+  - @inventage-web-components/hamburger-menu@0.0.3
+
 ## 0.0.4-next.0
 
 ### Patch Changes
