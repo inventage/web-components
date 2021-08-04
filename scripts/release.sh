@@ -7,5 +7,3 @@ else
   npm run get-ready
   npx changeset publish
 fi
-
-
