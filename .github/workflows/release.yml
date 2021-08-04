@@ -6,10 +6,8 @@ on:
       - main
 
 jobs:
-  release:
-    name: Release
-    # Prevents changesets action from creating a PR on forks
-    if: github.repository == 'inventage/web-components'
+  test:
+    name: Lint & Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,12 +25,26 @@ jobs:
       - name: Test
         run: npm run test
 
+  release:
+    name: Release
+    # Prevents changesets action from creating a PR on forks
+    if: github.repository == 'inventage/web-components'
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install packages
+        run: npm ci
+
       - name: Create Release Pull Request or Publish to npm
-        id: changesets
         uses: changesets/action@master
         with:
           publish: npm run release
-          version: npm run release:version
           commit: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,13 +56,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [release]
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: '16'
           cache: 'npm'
 
       - name: Install packages
@@ -59,8 +68,7 @@ jobs:
       - name: Storybook Build
         run: npm run storybook:build
 
-      # https://github.com/marketplace/actions/github-pages-action
-      - name: Deploys
+      - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
