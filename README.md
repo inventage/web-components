@@ -5,6 +5,7 @@
     alt="Inventage AG"
     style="margin-bottom: 1rem;"
   />
+  <br>
   Inventage Web Components
 </h1>
 
