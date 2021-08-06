@@ -54,7 +54,7 @@ describe('Configuration', () => {
     expect(result!.getId(2)).to.equal('item2.2');
   });
 
-  it('getIdPathForUrl returns first item matching url, and tries to match subpath as a fallback', () => {
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback', () => {
     const configuration = new Configuration(configurationData);
     const result = configuration.getIdPathForUrl('/some/path/item2.2/unknown-subitem');
 
@@ -65,7 +65,7 @@ describe('Configuration', () => {
 
   it('should return empty ObjectPath when menus are missing in data', () => {
     const configuration = new Configuration({});
-    const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/generatedId');
+    const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/item2.2/unknown-subitem');
 
     expect(item).to.deep.include({ objects: [] });
   });
@@ -75,6 +75,27 @@ describe('Configuration', () => {
     const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/generatedId');
 
     expect(item.getLastItem()!.id).to.not.be.undefined;
+  });
+
+  it('all ids (including the generated ones) should be unique across the entire navigation', () => {
+    const configuration = new Configuration(configurationData);
+    const menuIds: string[] = [];
+
+    const collectMenuIds = (menuItems: MenuItem[], ids: string[] = []) => {
+      menuItems.forEach(menu => {
+        ids.push(menu.id!);
+
+        if (!menu.items || menu.items.length < 1) {
+          return;
+        }
+
+        collectMenuIds(menu.items!, ids);
+      });
+    };
+
+    collectMenuIds(configuration.getMenus()!, menuIds);
+
+    expect(menuIds).to.deep.equal([...new Set(menuIds)]);
   });
 
   it('should not generate ids on invalid data', () => {
