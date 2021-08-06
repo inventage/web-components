@@ -57,6 +57,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Publishing canary releases to npm registry
+        if: steps.changesets.outputs.published != 'true'
+        run: |
+          npx changeset version --snapshot canary
+          npx changeset publish --tag canary
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   deploy:
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
