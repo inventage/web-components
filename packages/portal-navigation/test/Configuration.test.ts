@@ -1,9 +1,9 @@
 import { expect } from '@open-wc/testing';
 
 import { Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
-import * as data from './test-data.json';
+import * as dataJson from './data/test-data.json';
 
-const configurationData = data as ConfigurationData;
+const configurationData = dataJson as ConfigurationData;
 
 describe('Configuration', () => {
   it('getMenus returns all menus', () => {
@@ -21,6 +21,19 @@ describe('Configuration', () => {
     expect(result!.items!.length).to.equal(2);
     expect(result!.items![0].id).to.equal('parent1');
     expect(result!.items![1].id).to.equal('parent2');
+  });
+
+  it('getMenu should return undefined when menu is a valid object but was not found', () => {
+    const configuration = new Configuration({
+      menus: [
+        {
+          id: 'bla',
+        },
+      ],
+    });
+    const result = configuration.getMenu('main');
+
+    expect(result).to.be.undefined;
   });
 
   it('getIdPathForUrl returns first item matching url', () => {
@@ -48,6 +61,13 @@ describe('Configuration', () => {
     expect(result!.getMenuId()).to.equal('main');
     expect(result!.getFirstLevelItemId()).to.equal('parent2');
     expect(result!.getId(2)).to.equal('item2.2');
+  });
+
+  it('should return empty ObjectPath when menus are missing in data', () => {
+    const configuration = new Configuration({});
+    const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/generatedId');
+
+    expect(item).to.deep.include({ objects: [] });
   });
 
   it('should generate missing ids on creation', () => {

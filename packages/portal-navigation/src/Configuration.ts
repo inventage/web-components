@@ -100,7 +100,7 @@ export class Configuration {
    */
   getMenu(menuId: string): MenuItem | undefined {
     const menu = this.getData([`menus::${menuId}`]);
-    if (!Array.isArray(menu)) {
+    if (menu && !Array.isArray(menu)) {
       return menu;
     }
 
@@ -120,7 +120,7 @@ export class Configuration {
    * @returns the first object matching the given path or undefined
    */
   getData(keyPath: string[], data: ConfigurationData | MenuItem | undefined = this.data): MenuItem | MenuItem[] | undefined {
-    if (!data || !keyPath || keyPath.length <= 0) {
+    if (!data || !Array.isArray(keyPath) || keyPath.length <= 0) {
       return undefined;
     }
 
@@ -226,10 +226,6 @@ export class Configuration {
    * @returns the object found in data based on the given key, which is either the value of the property or a specific array element if the property's value is an array.
    */
   private resolveValue(key: string, data: ConfigurationData | MenuItem): MenuItem | undefined {
-    if (!data || !key) {
-      return undefined;
-    }
-
     const keyParts = key.split('::');
     if (keyParts.length === 1) {
       return data[key] as MenuItem;
