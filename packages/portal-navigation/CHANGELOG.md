@@ -1,5 +1,12 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.5
+
+### Patch Changes
+
+- 611170f: Add test for `breakpointChanged` event
+- 549c366: Storybook story cleanup + added CSS custom prop example
+
 ## 0.0.4
 
 ### Patch Changes
