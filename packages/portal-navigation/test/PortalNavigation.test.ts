@@ -103,9 +103,11 @@ describe('<portal-navigation>', () => {
     });
 
     it('parses activeUrl from URL when connected and an activeUrl has not been set', async () => {
-      window.history.pushState({}, '', '/test');
+      const origHref = window.location.href;
+      window.history.replaceState({}, '', '/test');
       const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
       expect(el.activeUrl).to.equal('/test');
+      window.history.replaceState({}, '', origHref);
     });
 
     it('can return its parsed configuration', async () => {
@@ -128,7 +130,7 @@ describe('<portal-navigation>', () => {
       // Set parent2 as "active" item (should default to its child…)
       const clickMenuItem = () => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!).click();
       setTimeout(clickMenuItem);
-      await aTimeout(10); // Not needed, only here so the TS compiler does not complain about an unused import…
+      await aTimeout(10); // Not needed, onlysets corresponding activePath when activeUrl is set here so the TS compiler does not complain about an unused import…
 
       // Assets part attributes
       expect(el.shadowRoot!.querySelector('[part="item-parent1"]'), 'part="item-parent1" should be present').not.to.equal(null);
