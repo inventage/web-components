@@ -67,7 +67,7 @@ jobs:
         if: steps.changesets.outputs.published != 'true' && github.event.inputs.publishCanary == '1'
         run: |
           git checkout $GITHUB_REF
-          npx changeset version --snapshot canary
+          npx changeset version --snapshot
           npx changeset publish --tag canary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
