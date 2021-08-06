@@ -4,7 +4,10 @@ import sinon from 'sinon';
 
 import '../src/portal-navigation.js';
 import { PortalNavigation } from '../src/PortalNavigation.js';
-import { MenuLabel } from '../src/Configuration.js';
+import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
+import dataJson from './data/test-data.json';
+
+const configurationData = dataJson as ConfigurationData;
 
 const TEST_DATA_JSON_PATH = '/packages/portal-navigation/test/data/test-data.json!';
 
@@ -97,6 +100,23 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getMenuId()).to.eq('meta');
       expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent3');
       expect(el.getActivePath().getId(2)).to.eq('item3.2');
+    });
+
+    it('parses activeUrl from URL when connected and an activeUrl has not been set', async () => {
+      window.history.pushState({}, '', '/test');
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      expect(el.activeUrl).to.equal('/test');
+    });
+
+    it('can return its parsed configuration', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el);
+      const configuration = el.getConfiguration();
+      expect(configuration).to.not.be.undefined;
+      expect(configuration.getMenus()?.length).to.equal(configurationData.menus?.length);
+      configuration.getMenus()?.forEach(menu => {
+        expect(menu.items?.length).to.be.equal(configurationData.menus?.find(m => m.id === menu.id)?.items?.length);
+      });
     });
 
     it('each item has a `part` attribute corresponding to its id', async () => {

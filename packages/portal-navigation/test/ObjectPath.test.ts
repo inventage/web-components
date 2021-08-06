@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 import { ObjectPath } from '../src/ObjectPath.js';
-import * as dataJson from './data/test-data.json';
+import dataJson from './data/test-data.json';
 import { ConfigurationData, MenuItem } from '../src/Configuration.js';
 
 const configurationData = dataJson as ConfigurationData;
