@@ -41,7 +41,7 @@
     "syncpack:versions": "syncpack set-semver-ranges",
     "test": "npm run test:browser",
     "test:browser": "npm run build && wtr --coverage",
-    "test:watch": "npm run build && run-p -r watch:tsc 'wtr --watch'",
+    "test:watch": "npm run build && run-p -r watch:tsc watch:css 'wtr --watch'",
     "watch:css": "onchange '**/*.scss' --exclude-path .gitignore -- npm run build:css",
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput",
     "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run build:wca"
