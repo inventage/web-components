@@ -6,10 +6,10 @@
   "scripts": {
     "analyze": "npm run --workspaces --if-present analyze",
     "postanalyze": "npm run format:package-json",
+    "analyze:wca": "wca analyze 'packages/*/src/**/*.ts' --outFile custom-elements-experimental.json",
     "build": "run-s build:*",
     "build:css": "./scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
-    "build:wca": "wca analyze 'packages/*/src/**/*.ts' --outFile custom-elements-experimental.json",
     "clean": "run-p clean:*",
     "clean:analyze": "rimraf '**/custom-elements*.json'",
     "clean:cache": "rimraf 'packages/*/lib' 'packages/*/lib/tsconfig.tsbuildinfo' './tsconfig.build-types.tsbuildinfo'",
@@ -32,7 +32,7 @@
     "release": "is-ci && changeset publish",
     "remove-node-modules": "rimraf node_modules 'packages/*/node_modules'",
     "start": "npm run storybook",
-    "storybook": "npm run build && run-p -l storybook:start watch:tsc watch:css watch:wca",
+    "storybook": "npm run build && npm run analyze:wca && run-p -l storybook:start watch:tsc watch:css watch:wca",
     "storybook:build": "npm run build && build-storybook",
     "poststorybook:build": "cp -Rpf data storybook-static/",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
@@ -41,10 +41,10 @@
     "syncpack:versions": "syncpack set-semver-ranges",
     "pretest": "npm run build",
     "test": "wtr",
-    "test:watch": "npm run build && run-p -r watch:tsc watch:css 'wtr --watch'",
+    "test:watch": "npm run build && run-p -r watch:tsc watch:css 'test -- --watch'",
     "watch:css": "onchange '**/*.scss' --exclude-path .gitignore -- npm run build:css",
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput",
-    "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run build:wca"
+    "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run analyze:wca"
   },
   "workspaces": [
     "packages/*",
