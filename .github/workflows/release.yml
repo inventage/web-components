@@ -63,6 +63,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Storybook Build
+        if: ${{ steps.changesets.outputs.published == 'true' }}
+        run: npm run storybook:build
+
+      - name: Deploy to Github Pages
+        if: ${{ steps.changesets.outputs.published == 'true' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          allow_empty_commit: true
+
       - name: Publishing canary releases to npm registry
         if: ${{ steps.changesets.outputs.published != 'true' && github.event.inputs.publishCanary == '1' }}
         run: |
@@ -71,15 +83,3 @@ jobs:
           npx changeset publish --tag canary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Storybook Build
-        if: ${{ steps.changesets.outputs.published != 'true' }}
-        run: npm run storybook:build
-
-      - name: Deploy to Github Pages
-        if: ${{ steps.changesets.outputs.published != 'true' }}
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          allow_empty_commit: true
