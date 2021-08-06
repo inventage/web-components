@@ -343,17 +343,11 @@ describe('<portal-navigation>', () => {
     });
 
     it('dispatches the "breakpointChanged" event', async () => {
-      const eventSpy = sinon.spy();
-      const el: PortalNavigation = await fixture(
-        html`<portal-navigation
-          src="${TEST_DATA_JSON_PATH}"
-          @portal-navigation.configured="${eventSpy as EventListener}"
-          mobileBreakpoint="600"
-        ></portal-navigation>`
-      );
+      const el: PortalNavigation = await fixture(html`<portal-navigation src="${TEST_DATA_JSON_PATH}" mobileBreakpoint="600"></portal-navigation>`);
       setTimeout(async () => await setViewport({ width: 600, height: 800 }));
-      await oneEvent(el, 'portal-navigation.breakpointChanged');
-      expect(eventSpy.callCount).to.equal(1);
+      const { detail } = await oneEvent(el, 'portal-navigation.breakpointChanged');
+      expect(el.isMobileBreakpoint).to.be.true;
+      expect(detail).to.be.true;
     });
   });
 });
