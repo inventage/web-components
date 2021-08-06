@@ -46,6 +46,11 @@
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput",
     "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run analyze:wca"
   },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "workspaces": [
     "packages/*",
     "plugins/*"
@@ -54,6 +59,7 @@
     "@changesets/cli": "^2.16.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/cz-commitlint": "^13.1.0",
     "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/lit-helpers": "^0.3.12",
     "@open-wc/testing": "^2.5.33",
@@ -66,6 +72,7 @@
     "@web/storybook-prebuilt": "^0.1.22",
     "@web/test-runner": "^0.13.15",
     "commitlint-plugin-workspace-scopes": "^1.1.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
