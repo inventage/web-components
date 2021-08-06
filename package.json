@@ -34,7 +34,7 @@
     "remove-node-modules": "rimraf node_modules 'packages/*/node_modules'",
     "start": "npm run storybook",
     "storybook": "npm run build && npm run analyze:wca && run-p -l storybook:start watch:tsc watch:css watch:wca",
-    "storybook:build": "npm run build && build-storybook",
+    "storybook:build": "npm run build && npm run analyze:wca && build-storybook",
     "poststorybook:build": "cp -Rpf data storybook-static/",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
     "syncpack": "run-s syncpack:*",
