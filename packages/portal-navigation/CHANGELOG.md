@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.6
+
+### Patch Changes
+
+- 23df371: Fixing released and broken version 0.0.5
+
 ## 0.0.5
 
 ### Patch Changes
