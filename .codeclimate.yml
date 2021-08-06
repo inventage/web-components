@@ -1,0 +1,4 @@
+exclude_patterns:
+  - packages/**/*.test.ts
+  - packages/**/*.d.ts
+  - '**/node_modules/**/*'
