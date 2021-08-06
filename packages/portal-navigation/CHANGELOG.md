@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.7
+
+### Patch Changes
+
+- 5a4140a: Add more test coverage
+- d020809: Increment version in lockfile
+- c7075ac: Better test for "breakpointChanged" event
+- b15d4e8: Add test case for uniqueness of generated menu (item) ids
+- f1eadd7: Added test case for retrieving the configuration from the menu
+
 ## 0.0.6
 
 ### Patch Changes
