@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      publishCanary:
+        description: 'Publish a canary release'
+        required: false
+        default: '0'
 
 jobs:
   test:
@@ -58,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publishing canary releases to npm registry
-        if: steps.changesets.outputs.published != 'true'
+        if: steps.changesets.outputs.published != 'true' && github.event.inputs.publishCanary == '1'
         run: |
           npx changeset version --snapshot canary
           npx changeset publish --tag canary
