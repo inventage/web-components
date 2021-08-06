@@ -4,7 +4,7 @@
   "description": "A collection of webcomponents for enterprise portals.",
   "license": "MIT",
   "scripts": {
-    "analyze": "npm run --if-present -ws analyze",
+    "analyze": "npm run --workspaces --if-present analyze",
     "postanalyze": "npm run format:package-json",
     "build": "run-s build:*",
     "build:css": "./scripts/build-styles.sh",
