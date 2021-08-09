@@ -1,5 +1,5 @@
 import { html, fixture, expect, assert } from '@open-wc/testing';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 
 import { HamburgerMenu } from '../src/index.js';
 import '../src/hamburger-menu.js';
@@ -43,7 +43,7 @@ describe('<hamburger-menu>', () => {
     });
 
     it('triggers "state-changed" event when clicked', async () => {
-      const changedSpy = sinon.spy();
+      const changedSpy = spy();
       const el = await fixture(html`<hamburger-menu @state-changed=${changedSpy as EventListener}></hamburger-menu>`);
 
       el.shadowRoot!.querySelector('button')!.click();
