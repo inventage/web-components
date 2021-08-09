@@ -1,6 +1,6 @@
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { setViewport } from '@web/test-runner-commands';
-import sinon from 'sinon';
+import { spy } from 'sinon';
 
 import '../src/portal-navigation.js';
 import { PortalNavigation } from '../src/PortalNavigation.js';
@@ -15,6 +15,37 @@ type WaitUntilOptions = {
   interval?: number;
   timeout?: number;
 };
+
+// From pwa-helpers
+// @see https://github.com/Polymer/pwa-helpers/blob/master/src/router.ts
+const handlerSpy = spy(e => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) {
+    return;
+  }
+
+  const anchor = e.composedPath().filter((n: HTMLElement) => n.tagName === 'A')[0] as HTMLAnchorElement | undefined;
+  if (!anchor || (anchor.target && anchor.target !== '_self') || anchor.hasAttribute('download') || anchor.getAttribute('rel') === 'external') {
+    return;
+  }
+
+  const href = anchor.href;
+  if (!href || href.indexOf('mailto:') !== -1) {
+    return;
+  }
+
+  const location = window.location;
+  const origin = location.origin || location.protocol + '//' + location.host;
+
+  if (href.indexOf(origin) !== 0) {
+    return;
+  }
+
+  e.preventDefault();
+
+  if (href !== location.href) {
+    window.history.replaceState({}, '', href);
+  }
+});
 
 /**
  * Helper function that waits until the portal navigation children have been rendered.
@@ -102,14 +133,6 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getId(2)).to.eq('item3.2');
     });
 
-    it('parses activeUrl from URL when connected and an activeUrl has not been set', async () => {
-      const origHref = window.location.href;
-      window.history.replaceState({}, '', '/test');
-      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
-      expect(el.activeUrl).to.equal('/test');
-      window.history.replaceState({}, '', origHref);
-    });
-
     it('can return its parsed configuration', async () => {
       const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
       await childrenRendered(el);
@@ -130,7 +153,7 @@ describe('<portal-navigation>', () => {
       // Set parent2 as "active" item (should default to its child…)
       const clickMenuItem = () => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!).click();
       setTimeout(clickMenuItem);
-      await aTimeout(10); // Not needed, onlysets corresponding activePath when activeUrl is set here so the TS compiler does not complain about an unused import…
+      await aTimeout(10); // Not needed, only sets corresponding activePath when activeUrl is set here so the TS compiler does not complain about an unused import…
 
       // Assets part attributes
       expect(el.shadowRoot!.querySelector('[part="item-parent1"]'), 'part="item-parent1" should be present').not.to.equal(null);
@@ -164,38 +187,24 @@ describe('<portal-navigation>', () => {
   });
 
   describe('Routing', () => {
-    it.skip('sets activeUrl from current window location', async () => {
-      // Cannot implement this yet since we cannot mock window.location in tests
+    let origHref: string;
+
+    beforeEach(() => {
+      origHref = window.location.href;
+      document.addEventListener('click', handlerSpy);
     });
 
-    it('does route externally when default item of parent item has other application', async () => {
-      // const eventSpy = sinon.spy();
-      // const el: PortalNavigation = await fixture(html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting @portal-navigation.routeTo="${eventSpy as EventListener}"></portal-navigation>`);
-      const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting></portal-navigation>`
-      );
-      await childrenRendered(el);
+    afterEach(() => {
+      document.removeEventListener('click', handlerSpy);
+      window.history.replaceState({}, '', origHref);
+    });
 
-      // Menu item from app1, should navigate externally
-      const menuItem = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]');
-
-      // If the event does not get prevented in the component, we would navigate away from the page…
-      let externalNavigationOccurred = false;
-      // let clickEvent: Event;
-      menuItem.addEventListener('click', (e: Event) => {
-        // clickEvent = e;
-        e.preventDefault();
-        externalNavigationOccurred = true;
-      });
-
-      // Click menu item here
-      setTimeout(() => menuItem.click());
-      await aTimeout(1); // Needed, otherwise the click event hasn't occurred yet…
-
-      // noinspection JSUnusedAssignment
-      // expect(clickEvent!.defaultPrevented).to.be.false;
-      expect(externalNavigationOccurred).to.be.true;
-      // expect(eventSpy.callCount).to.equal(0);
+    it('sets activeUrl from current window location', async () => {
+      const origHref = window.location.href;
+      window.history.replaceState({}, '', '/test');
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      expect(el.activeUrl).to.equal('/test');
+      window.history.replaceState({}, '', origHref);
     });
 
     it('does route internally when default item of parent item has same application', async () => {
@@ -209,25 +218,13 @@ describe('<portal-navigation>', () => {
       const { detail } = await oneEvent(el, 'portal-navigation.routeTo');
 
       expect(detail.url).to.equal('/some/path/item2.2');
-    });
-
-    it('does route internally when default item of parent item has same application', async () => {
-      const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app1" internalRouting></portal-navigation>`
-      );
-      await childrenRendered(el);
-
-      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
-      const { detail } = await oneEvent(el, 'portal-navigation.routeTo');
-
-      expect(detail.url).to.equal('/some/path/item2.2');
       expect(el.getActivePath().getMenuId()).to.equal('main');
       expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent2');
       expect(el.getActivePath().getId(2)).to.equal('item2.2');
     });
 
     it('does not close an expanded mobile menu when the parent item with a default item has been clicked', async () => {
-      const eventSpy = sinon.spy();
+      const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation
           src="${TEST_DATA_JSON_PATH}"
@@ -249,7 +246,7 @@ describe('<portal-navigation>', () => {
     });
 
     it('does close an expanded mobile menu when a non-parent item has been clicked', async () => {
-      const eventSpy = sinon.spy();
+      const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation
           src="${TEST_DATA_JSON_PATH}"
@@ -272,6 +269,23 @@ describe('<portal-navigation>', () => {
       expect(el.hamburgerMenuExpanded).to.be.false;
     });
 
+    it('does route externally when default item of parent item has other application', async () => {
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting></portal-navigation>`
+      );
+      await childrenRendered(el);
+
+      // Menu item from app1, should navigate externally
+      const menuItem = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]');
+
+      // Click menu item here
+      const clicked = oneEvent(document, 'click');
+      setTimeout(() => menuItem.click());
+      await clicked;
+
+      expect(window.location.pathname).to.equal('/some/path/item2.2');
+    });
+
     it('does route externally when item overrides globally set internalRouting=true with false.', async () => {
       const el: PortalNavigation = await fixture(
         html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting></portal-navigation>`
@@ -280,31 +294,21 @@ describe('<portal-navigation>', () => {
 
       // First open parent
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent3"]')).click());
-      await aTimeout(1);
+      await childrenRendered(el, '[part="item-item3.2"]');
 
       // Then select menu item that should navigate away from the page
       const menuItem = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-item3.2"]');
 
-      // If the event does not get prevented in the component, we would navigate away from the page…
-      let externalNavigationOccurred = false;
-      let clickEvent: Event;
-      menuItem.addEventListener('click', (e: Event) => {
-        clickEvent = e;
-        e.preventDefault(); // prevent navigating away from page
-        externalNavigationOccurred = true;
-      });
-
       // Click menu item here
+      const clicked = oneEvent(document, 'click');
       setTimeout(() => menuItem.click());
-      await aTimeout(1);
+      await clicked;
 
-      // noinspection JSUnusedAssignment
-      expect(clickEvent!.defaultPrevented).to.be.true;
-      expect(externalNavigationOccurred).to.be.true;
+      expect(window.location.pathname).to.equal('/some/path/item3.2');
     });
 
     it('does ignore default item when destination is "extern" on parent item clicks, and does call e.preventDefault()', async () => {
-      const eventSpy = sinon.spy();
+      const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation src="${TEST_DATA_JSON_PATH}" internalRouting @portal-navigation.routeTo="${eventSpy as EventListener}"></portal-navigation>`
       );
@@ -339,7 +343,7 @@ describe('<portal-navigation>', () => {
 
   describe('Events', () => {
     it('dispatches the "configured" event', async () => {
-      const eventSpy = sinon.spy();
+      const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation src="${TEST_DATA_JSON_PATH}" @portal-navigation.configured="${eventSpy as EventListener}"></portal-navigation>`
       );
@@ -348,7 +352,7 @@ describe('<portal-navigation>', () => {
     });
 
     it('dispatches the "setLanguage" event', async () => {
-      const eventSpy = sinon.spy();
+      const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html` <portal-navigation language="de" @portal-navigation.setLanguage="${eventSpy as EventListener}"></portal-navigation>`
       );

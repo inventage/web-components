@@ -628,7 +628,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
           [NavigationCssClasses.selected]: active,
         })}"
         target="${destination === 'extern' && !hasItems ? '_blank' : '_self'}"
-        @click="${(e: Event) => this._onLink(e, item)}"
+        @click="${(e: Event) => this.__onLink(e, item)}"
         >${PortalNavigation._createLinkTemplate(id!, label, icon, badge)}${isTreeMode && hasItems
           ? html`<span class="tree-parent-indicator indicator" part="tree-parent-indicator"></span>`
           : nothing}</a
@@ -680,7 +680,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         'menu-link': true,
         [NavigationCssClasses.selected]: active,
       })}"
-      @click="${(e: Event) => this._onLink(e, item)}"
+      @click="${(e: Event) => this.__onLink(e, item)}"
       target="${destination === 'extern' ? '_blank' : '_self'}"
       >${PortalNavigation._createLinkTemplate(id!, label, icon, badge)}</a
     >`;
@@ -747,13 +747,13 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    *
    * TODO: Make this method protected / private, and we also need to adopt the tests…
    */
-  _onLink(e: Event, item: MenuItem): void {
+  private __onLink(e: Event, item: MenuItem): void {
     if (!item) {
       return;
     }
 
     const hasItems = item.items && item.items.length > 0;
-    const internalRouting = this.isInternalRouting(item);
+    const internalRouting = this.__isInternalRouting(item);
 
     if (!hasItems) {
       if (internalRouting) {
@@ -780,10 +780,8 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    *
    * @param item the item to check.
    * @returns true if the item is internal.
-   *
-   * TODO: Make this method protected / private, and we also need to adopt the tests…
    */
-  isInternalRouting(item?: MenuItem): boolean {
+  private __isInternalRouting(item?: MenuItem): boolean {
     let refItem: MenuItem | undefined = item;
     if (item && item.items && item.items.length > 0) {
       refItem = this.__getDefaultItemOf(item);
