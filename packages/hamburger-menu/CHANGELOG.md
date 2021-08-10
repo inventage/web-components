@@ -1,5 +1,12 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.4
+
+### Patch Changes
+
+- 35d57d9: Fix event names in JSDoc comments
+- 4dd5dae: Minor fix for sinon imports in tests
+
 ## 0.0.3
 
 ### Patch Changes

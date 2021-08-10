@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.8
+
+### Patch Changes
+
+- 35d57d9: Fix event names in JSDoc comments
+- d1abc20: Made some internal methods private, added better tests for external routing.
+- Updated dependencies [35d57d9]
+- Updated dependencies [4dd5dae]
+  - @inventage-web-components/hamburger-menu@0.0.4
+
 ## 0.0.7
 
 ### Patch Changes
