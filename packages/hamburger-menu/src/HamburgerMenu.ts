@@ -7,7 +7,7 @@ import { PropertyDeclaration } from 'lit-element/lib/updating-element';
 /**
  * A simple hamburger menu component.
  *
- * @fires 'state-changed' - Event fired when the hamburger menu state changes.
+ * @fires state-changed - Event fired when the hamburger menu state changes.
  *
  * @prop {Boolean} toggled - Reflects the toggled state.
  *
