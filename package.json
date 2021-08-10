@@ -57,6 +57,7 @@
     "plugins/*"
   ],
   "devDependencies": {
+    "@changesets/changelog-git": "^0.1.7",
     "@changesets/cli": "^2.16.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
