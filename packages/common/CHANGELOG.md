@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.4
+
+### Patch Changes
+
+- [`03daeb5`](https://github.com/inventage/web-components/commit/03daeb5978e3a7ffa37acd409b0019a2bd027d70) Thanks [@peschee](https://github.com/peschee)! - Use `@changesets/changelog-github` for changelog generation
+
 ## 0.0.3
 
 ### Patch Changes
