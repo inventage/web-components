@@ -1,5 +1,13 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.6
+
+### Patch Changes
+
+- 8a8eca8: Use `@changesets/changelog-git` for changelog generation
+- Updated dependencies [8a8eca8]
+  - @inventage-web-components/common@0.0.5
+
 ## 0.0.5
 
 ### Patch Changes

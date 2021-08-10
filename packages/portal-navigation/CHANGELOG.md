@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.10
+
+### Patch Changes
+
+- 8a8eca8: Use `@changesets/changelog-git` for changelog generation
+- d19b6d2: Add installation instructions and code example to README
+- Updated dependencies [8a8eca8]
+  - @inventage-web-components/common@0.0.5
+  - @inventage-web-components/hamburger-menu@0.0.6
+
 ## 0.0.9
 
 ### Patch Changes

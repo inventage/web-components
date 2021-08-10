@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.5
+
+### Patch Changes
+
+- 8a8eca8: Use `@changesets/changelog-git` for changelog generation
+
 ## 0.0.4
 
 ### Patch Changes
