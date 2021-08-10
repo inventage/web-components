@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.9
+
+### Patch Changes
+
+- [`03daeb5`](https://github.com/inventage/web-components/commit/03daeb5978e3a7ffa37acd409b0019a2bd027d70) Thanks [@peschee](https://github.com/peschee)! - Use `@changesets/changelog-github` for changelog generation
+
+- Updated dependencies [[`03daeb5`](https://github.com/inventage/web-components/commit/03daeb5978e3a7ffa37acd409b0019a2bd027d70)]:
+  - @inventage-web-components/common@0.0.4
+  - @inventage-web-components/hamburger-menu@0.0.5
+
 ## 0.0.8
 
 ### Patch Changes
