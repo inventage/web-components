@@ -42,7 +42,6 @@
     "test": "npm run build && wtr",
     "test:coverage": "npm run test -- --coverage",
     "test:watch": "npm run build && run-p -r watch:tsc watch:css 'test -- --watch'",
-    "version": "is-ci && sh scripts/version.sh",
     "watch:css": "onchange '**/*.scss' --exclude-path .gitignore -- npm run build:css",
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput",
     "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run analyze:wca"
