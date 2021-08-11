@@ -64,7 +64,6 @@ jobs:
         uses: changesets/action@master
         with:
           version: npm run version
-          commit: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
