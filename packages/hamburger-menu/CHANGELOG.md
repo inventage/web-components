@@ -1,5 +1,12 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [b3057c0]
+  - @inventage-web-components/common@0.0.10
+
 ## 0.0.11
 
 ### Patch Changes
