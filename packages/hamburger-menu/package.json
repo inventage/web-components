@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/hamburger-menu",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A simple hamburger menu component.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",
@@ -27,7 +27,7 @@
   },
   "types": "lib/src/index.d.ts",
   "dependencies": {
-    "@inventage-web-components/common": "^0.0.8",
+    "@inventage-web-components/common": "^0.0.9",
     "lit-element": "^2.5.1",
     "tslib": "^2.3.0"
   },

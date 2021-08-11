@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.9
+
+### Patch Changes
+
+- 55343d9: Test release for Github action fixes
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.15
+
+### Patch Changes
+
+- 55343d9: Test release for Github action fixes
+- Updated dependencies [55343d9]
+  - @inventage-web-components/common@0.0.9
+  - @inventage-web-components/hamburger-menu@0.0.11
+
 ## 0.0.14
 
 ### Patch Changes
