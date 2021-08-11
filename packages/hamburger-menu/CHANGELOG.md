@@ -1,5 +1,13 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.11
+
+### Patch Changes
+
+- 55343d9: Test release for Github action fixes
+- Updated dependencies [55343d9]
+  - @inventage-web-components/common@0.0.9
+
 ## 0.0.10
 
 ### Patch Changes
