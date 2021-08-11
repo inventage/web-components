@@ -5,5 +5,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@inventage-web-components/cem-preset"]
+  "ignore": ["@inventage-web-components/cem-preset", "@inventage-web-components/markdown-storybook"]
 }
