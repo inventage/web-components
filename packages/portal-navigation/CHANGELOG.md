@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.18
+
+### Patch Changes
+
+- Updated dependencies [2cc54a2]
+  - @inventage-web-components/common@0.0.11
+  - @inventage-web-components/hamburger-menu@0.0.13
+
 ## 0.0.17
 
 ### Patch Changes
