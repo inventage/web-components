@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.8
+
+### Patch Changes
+
+- 62d385e: Do not inline ts helpers, use `importHelpers` and build-time dependencies on `tslib` instead
+
 ## 0.0.7
 
 ### Patch Changes

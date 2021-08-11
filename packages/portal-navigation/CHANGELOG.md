@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.12
+
+### Patch Changes
+
+- 62d385e: Do not inline ts helpers, use `importHelpers` and build-time dependencies on `tslib` instead
+- Updated dependencies [62d385e]
+  - @inventage-web-components/hamburger-menu@0.0.8
+
 ## 0.0.11
 
 ### Patch Changes
