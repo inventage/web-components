@@ -23,6 +23,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "importHelpers": true,
     "plugins": [
       {
         "name": "ts-lit-plugin",
