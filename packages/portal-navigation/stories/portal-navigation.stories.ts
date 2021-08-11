@@ -86,7 +86,7 @@ Default.parameters = {
   },
 };
 
-export const Empty: Story<ArgTypes> = () => {
+export const Empty: Story<ArgTypes> = (_args: ArgTypes) => {
   return html` <portal-navigation></portal-navigation>`;
 };
 
