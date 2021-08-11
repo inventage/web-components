@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.11
+
+### Patch Changes
+
+- 2cc54a2: Re-add missing publish step in Github actions
+
 ## 0.0.10
 
 ### Patch Changes
