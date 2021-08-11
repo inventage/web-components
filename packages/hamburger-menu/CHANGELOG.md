@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.14
+
+### Patch Changes
+
+- e41e693: Use a separate storybook deployment script
+
 ## 0.0.13
 
 ### Patch Changes
