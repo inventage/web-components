@@ -86,6 +86,42 @@ Default.parameters = {
   },
 };
 
+export const Empty: Story<ArgTypes> = () => {
+  return html` <portal-navigation></portal-navigation>`;
+};
+
+Empty.parameters = {
+  docs: {
+    description: {
+      story: 'Empty `<portal-navigation>` tag without any `src` specified does not render anything.',
+    },
+  },
+};
+
+export const Test: Story<ArgTypes> = (args: ArgTypes) => {
+  return html` <portal-navigation
+    src="${args.src!}"
+    language="${args.language}"
+    ?internalRouting="${args.internalRouting}"
+    currentApplication="${args.currentApplication!}"
+    @portal-navigation.configured="${dispatchBadgeEventsTest}"
+  >
+  </portal-navigation>`;
+};
+
+Test.args = {
+  language: 'en',
+  src: './data/test-data.json',
+};
+
+Test.parameters = {
+  docs: {
+    description: {
+      story: 'This story renders the configuration (data) from the integration tests.',
+    },
+  },
+};
+
 const dispatchBadgeEvents = () => {
   document.dispatchEvent(
     new CustomEvent(PortalNavigation.events.setBadgeValue, {
@@ -119,6 +155,26 @@ const dispatchBadgeEvents = () => {
       detail: {
         url: '/ebanking/update-notification-preferences',
         value: 34,
+      },
+    })
+  );
+};
+
+const dispatchBadgeEventsTest = () => {
+  document.dispatchEvent(
+    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+      detail: {
+        id: 'meta',
+        value: 9,
+      },
+    })
+  );
+
+  document.dispatchEvent(
+    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+      detail: {
+        id: 'parent2',
+        value: { en: 'new', de: 'neu' },
       },
     })
   );
