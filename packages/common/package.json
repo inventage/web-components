@@ -3,7 +3,13 @@
   "version": "0.0.5",
   "description": "Shared, common functionality for @inventage-web-components packages.",
   "license": "MIT",
-  "author": "",
+  "author": "Inventage AG <info@inventage.com>",
+  "homepage": "https://github.com/inventage/web-components/tree/main/packages/common#readme",
+  "repository": {
+    "url": "inventage/web-components",
+    "directory": "packages/common"
+  },
+  "bugs": "https://github.com/inventage/web-components/issues",
   "type": "module",
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",

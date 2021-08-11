@@ -3,7 +3,13 @@
   "version": "0.0.10",
   "description": "A component implementing an opinionated (but generic and hence configurable) navigation pattern.",
   "license": "MIT",
-  "author": "",
+  "author": "Inventage AG <info@inventage.com>",
+  "homepage": "https://github.com/inventage/web-components/tree/main/packages/portal-navigation#readme",
+  "repository": {
+    "url": "inventage/web-components",
+    "directory": "packages/portal-navigation"
+  },
+  "bugs": "https://github.com/inventage/web-components/issues",
   "type": "module",
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",

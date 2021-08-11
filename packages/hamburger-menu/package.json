@@ -3,7 +3,13 @@
   "version": "0.0.6",
   "description": "A simple hamburger menu component.",
   "license": "MIT",
-  "author": "",
+  "author": "Inventage AG <info@inventage.com>",
+  "homepage": "https://github.com/inventage/web-components/tree/main/packages/hamburger-menu#readme",
+  "repository": {
+    "url": "inventage/web-components",
+    "directory": "packages/hamburger-menu"
+  },
+  "bugs": "https://github.com/inventage/web-components/issues",
   "type": "module",
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",
