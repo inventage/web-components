@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.11
+
+### Patch Changes
+
+- be30ab0: Display all controls even in the Empty storybook story
+- 87e4923: Add more storybook stories with examples
+- 41754be: Add markdown files (documentation) to storybook docs
+- a857d1e: Add missing meta fields (github repo, issues, etc.) to `package.json`
+- Updated dependencies [a857d1e]
+  - @inventage-web-components/common@0.0.6
+  - @inventage-web-components/hamburger-menu@0.0.7
+
 ## 0.0.10
 
 ### Patch Changes

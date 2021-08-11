@@ -1,5 +1,13 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.7
+
+### Patch Changes
+
+- a857d1e: Add missing meta fields (github repo, issues, etc.) to `package.json`
+- Updated dependencies [a857d1e]
+  - @inventage-web-components/common@0.0.6
+
 ## 0.0.6
 
 ### Patch Changes
