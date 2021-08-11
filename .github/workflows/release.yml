@@ -61,7 +61,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request or Publish to npm
-        if: github.event.inputs.publishCanary != '1'
         uses: changesets/action@master
         with:
           publish: npm run release
@@ -70,7 +69,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publishing canary releases to npm registry
-        if: github.event.inputs.publishCanary == '1'
+        if: steps.changesets.outputs.published != 'true' && github.event.inputs.publishCanary == '1'
         run: |
           git checkout $GITHUB_REF
           npx changeset version --snapshot
