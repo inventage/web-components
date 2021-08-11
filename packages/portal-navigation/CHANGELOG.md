@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.16
+
+### Patch Changes
+
+- 617d4ad: Add missing class comment for `Configuration`
+
 ## 0.0.15
 
 ### Patch Changes
