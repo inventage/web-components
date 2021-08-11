@@ -11,6 +11,7 @@
 
 [![License](https://img.shields.io/npm/l/@inventage-web-components/common?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/workflow/status/inventage/web-components/Release?style=flat-square)](https://github.com/inventage/web-components/actions)
+[![Coverage](https://img.shields.io/codeclimate/coverage/inventage/web-components?style=flat-square)](https://codeclimate.com/github/inventage/web-components)
 
 A collection of webcomponents for enterprise portals.
 
