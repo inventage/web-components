@@ -510,7 +510,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @param {*} value - the badge value (could be a l11n label object)
    */
   setBadgeValue(key: string, value: unknown): void {
-    // TODO: write to Store instead of temporary map
+    // TODO: write to Store instead of temporary map?
     this.temporaryBadgeValues.set(key, value);
     this.requestUpdateInternal();
   }
@@ -524,7 +524,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @returns the badge value associated with the id or url or undefined if none exists.
    */
   getBadgeValue(id: string, url?: string): string | undefined {
-    // TODO: read from Store instead of temporary map
+    // TODO: read from Store instead of temporary map?
     let value = this.temporaryBadgeValues.get(id);
     if (!value && url) {
       value = this.temporaryBadgeValues.get(url);
@@ -744,8 +744,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    *
    * @param e - the click event.
    * @param item - the item being clicked.
-   *
-   * TODO: Make this method protected / private, and we also need to adopt the tests…
    */
   private __onLink(e: Event, item: MenuItem): void {
     if (!item) {

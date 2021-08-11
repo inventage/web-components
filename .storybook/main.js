@@ -1,12 +1,17 @@
-const rollupJson = require('@rollup/plugin-json');
+const json = require('@rollup/plugin-json');
+const { storybookRollupPlugin } = require('@inventage-web-components/markdown-storybook');
 
 module.exports = {
-  stories: ['../packages/*/lib/stories/*.stories.js'],
+  stories: ['../packages/*/docs/**/*.md', '../packages/*/lib/stories/*.stories.js'],
 
   rollupConfig(config) {
-    // Add a new plugin to the build
+    // Replace Modern Web plugin MD support with plain markdown support
+    config.plugins = config.plugins.filter(plugin => plugin.name !== 'md');
+    config.plugins.unshift(storybookRollupPlugin());
+
+    // Add additional plugins to the build
     // @see https://modern-web.dev/docs/dev-server/plugins/storybook/#customizing-the-build
-    config.plugins.push(rollupJson());
+    config.plugins.push(json());
 
     return config;
   },

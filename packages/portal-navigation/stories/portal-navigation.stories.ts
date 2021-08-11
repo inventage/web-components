@@ -78,14 +78,6 @@ Default.args = {
   currentApplication: 'ebanking',
 };
 
-Default.parameters = {
-  docs: {
-    description: {
-      story: 'Individual story description, may contain `markdown` markup',
-    },
-  },
-};
-
 export const Empty: Story<ArgTypes> = (_args: ArgTypes) => {
   return html` <portal-navigation></portal-navigation>`;
 };

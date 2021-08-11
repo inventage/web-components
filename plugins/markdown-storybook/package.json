@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@inventage-web-components/markdown-storybook",
+  "version": "0.0.0",
+  "description": "Plugins for custom markdown files handling in storybook",
+  "license": "MIT",
+  "files": [
+    "**/*.js",
+    "**/*.mjs"
+  ],
+  "dependencies": {
+    "@web/dev-server-storybook": "^0.3.7",
+    "js-yaml": "^4.1.0",
+    "remark-frontmatter": "^3.0.0",
+    "remark-gfm": "^1.0.0",
+    "remark-highlight.js": "^6.0.0",
+    "remark-html": "^13.0.1",
+    "remark-parse": "^9.0.0",
+    "unified": "^9.2.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    }
+  }
+}
