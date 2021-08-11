@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.0.10
+
+### Patch Changes
+
+- b3057c0: Do not use custom script for releases
+
 ## 0.0.9
 
 ### Patch Changes
