@@ -1,7 +1,3 @@
-/**
- * Wraps the json structured configuration of a portal navigation, does some basic sanitizing of the received data
- * (e.g. generating missing ids), and provides convenience functions to access menus and items with the data.
- */
 import { ObjectPath } from './ObjectPath.js';
 import { IdPath } from './IdPath.js';
 
@@ -33,6 +29,9 @@ export interface ConfigurationData {
 }
 
 /**
+ * Wraps the json structured configuration of a portal navigation, does some basic sanitizing of the received data
+ * (e.g. generating missing ids), and provides convenience functions to access menus and items with the data.
+ *
  * @see https://github.com/inventage/portal-components/blob/master/docs/portal-navigation/configuration.md
  */
 export class Configuration {
