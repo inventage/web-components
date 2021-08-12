@@ -4,4 +4,4 @@
 npx changeset version
 npm install
 git add .
-git commit -m "chore: version release packages"
+git commit -m "chore: version packages"
