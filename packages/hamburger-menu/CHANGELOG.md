@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.0.17
+
+### Patch Changes
+
+- f6beaec: Test release for Github action fixes
+
 ## 0.0.16
 
 ### Patch Changes
