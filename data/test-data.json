@@ -25,6 +25,16 @@
               "label": { "de": "Item 2.2_de", "en": "Item 2.2_en" },
               "url": "/some/path/item2.2",
               "application": "app1"
+            },
+            {
+              "label": { "de": "Item 2.3_de", "en": "Item 2.3_en" },
+              "url": "/some/path/item2.3",
+              "application": "app1"
+            },
+            {
+              "label": { "de": "Item 2.4_de", "en": "Item 2.4_en" },
+              "url": "/some/path/item2.4",
+              "application": "app1"
             }
           ]
         }
