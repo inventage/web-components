@@ -1,9 +1,8 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@1.6.0/schema.json",
   "changelog": "@changesets/changelog-git",
   "commit": false,
   "access": "public",
   "baseBranch": "main",
-  "updateInternalDependencies": "patch",
+  "updateInternalDependencies": "minor",
   "ignore": ["@inventage-web-components/cem-preset", "@inventage-web-components/markdown-storybook"]
 }
