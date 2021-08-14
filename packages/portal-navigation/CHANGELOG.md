@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.23
+
+### Patch Changes
+
+- 67a08d5: Test release for Github action fixes
+
 ## 0.0.22
 
 ### Patch Changes
