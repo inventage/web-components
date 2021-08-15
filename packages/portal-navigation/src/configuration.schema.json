@@ -10,6 +10,8 @@
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
+        "required": ["id"],
         "properties": {
           "id": {
             "enum": ["main", "settings", "meta", "profile", "logout"]
@@ -17,12 +19,14 @@
           "dropdown": {
             "type": "boolean"
           },
+          "label": {
+            "$ref": "#/$defs/label"
+          },
           "icon": {
             "type": "string"
           },
           "items": {
             "type": "array",
-            "minItems": 1,
             "items": {
               "$ref": "#/$defs/menuItem"
             }
@@ -51,7 +55,7 @@
     "menuItem": {
       "type": "object",
       "additionalProperties": false,
-      "oneOf": [
+      "anyOf": [
         {
           "required": ["label"]
         },
@@ -72,6 +76,9 @@
         "application": {
           "type": "string"
         },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
         "icon": {
           "type": "string"
         },
@@ -87,12 +94,8 @@
             "type": "string"
           }
         },
-        "label": {
-          "$ref": "#/$defs/label"
-        },
         "items": {
           "type": "array",
-          "minItems": 1,
           "items": {
             "$ref": "#/$defs/menuItem"
           }
