@@ -12,8 +12,7 @@ export default {
   argTypes: {
     src: {
       control: {
-        type: 'select',
-        options: ['./data/data.json', './data/data-settings.json', './data/test-data.json'],
+        type: 'text',
       },
     },
     language: {
@@ -86,6 +85,28 @@ Empty.parameters = {
   docs: {
     description: {
       story: 'Empty `<portal-navigation>` tag without any `src` specified does not render anything.',
+    },
+  },
+};
+
+export const Basic: Story<ArgTypes> = (args: ArgTypes) => {
+  return html` <portal-navigation
+    src="${args.src!}"
+    ?internalRouting="${args.internalRouting}"
+    currentApplication="${args.currentApplication!}"
+  ></portal-navigation>`;
+};
+
+Basic.args = {
+  src: './data/basic.json',
+  internalRouting: true,
+  currentApplication: 'app1',
+};
+
+Basic.parameters = {
+  docs: {
+    description: {
+      story: 'TODO',
     },
   },
 };
