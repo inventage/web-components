@@ -1,5 +1,15 @@
 # @inventage-web-components/common
 
+## 0.1.0
+
+### Minor Changes
+
+- 2acd897: Provide `lit-html` and `lit-element` and related exports for other `@inventage-web-components` packages
+
+### Patch Changes
+
+- af5e012: Add sideEffects to package.json
+
 ## 0.0.11
 
 ### Patch Changes

@@ -1,5 +1,24 @@
 # @inventage-web-components/portal-navigation
 
+## 0.1.0
+
+### Minor Changes
+
+- 467e204: Remove tslib and lit dependencies, these are provided by the common package
+
+### Patch Changes
+
+- 2acd897: Use `lit-html` and `lit-element` and related exports from `@inventage-web-components/common` package.
+- af5e012: Add sideEffects to package.json
+- 3a35db2: Add JSPM example
+- Updated dependencies [2acd897]
+- Updated dependencies [2acd897]
+- Updated dependencies [abbeb80]
+- Updated dependencies [af5e012]
+- Updated dependencies [467e204]
+  - @inventage-web-components/hamburger-menu@0.1.0
+  - @inventage-web-components/common@0.1.0
+
 ## 0.0.24
 
 ### Patch Changes

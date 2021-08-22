@@ -1,5 +1,19 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.1.0
+
+### Minor Changes
+
+- abbeb80: Add exports to package.json
+- 467e204: Remove tslib and lit dependencies, these are provided by the common package
+
+### Patch Changes
+
+- 2acd897: Use `lit-html` and `lit-element` and related exports from `@inventage-web-components/common` package.
+- Updated dependencies [2acd897]
+- Updated dependencies [af5e012]
+  - @inventage-web-components/common@0.1.0
+
 ## 0.0.17
 
 ### Patch Changes
