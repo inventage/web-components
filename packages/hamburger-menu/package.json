@@ -25,6 +25,9 @@
     "prepublishOnly": "npm run analyze && npm run build",
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
   },
+  "sideEffects": [
+    "lib/src/hamburger-menu.js"
+  ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
     "@inventage-web-components/common": "^0.0.11",
@@ -37,5 +40,10 @@
     "portal",
     "web-components"
   ],
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./hamburger-menu": "./lib/src/hamburger-menu.js",
+    "./hamburger-menu.js": "./lib/src/hamburger-menu.js"
+  }
 }
