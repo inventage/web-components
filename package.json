@@ -33,7 +33,7 @@
     "release": "is-ci &&  sh scripts/publish.sh",
     "remove-node-modules": "rimraf node_modules 'packages/*/node_modules'",
     "start": "npm run storybook",
-    "storybook": "npm run build && npm run analyze:wca && run-p -l storybook:start watch:tsc watch:css watch:wca",
+    "storybook": "npm run build && npm run analyze:wca && run-p -l storybook:start watch:*",
     "storybook:build": "npm run build && npm run analyze:wca && build-storybook",
     "poststorybook:build": "cp -LRpf data storybook-static/",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
@@ -44,7 +44,7 @@
     "test:coverage": "npm run test -- --coverage",
     "test:watch": "npm run build && run-p -r watch:tsc watch:css 'test -- --watch'",
     "version": "is-ci && sh scripts/version.sh",
-    "watch:css": "onchange '**/*.scss' --exclude-path .gitignore -- npm run build:css",
+    "watch:css": "onchange '**/*.css' --exclude-path .gitignore -- npm run build:css",
     "watch:tsc": "npm run build:tsc -- --watch --preserveWatchOutput",
     "watch:wca": "onchange 'packages/*/src/**/*.ts' --exclude-path .gitignore -- npm run analyze:wca"
   },
