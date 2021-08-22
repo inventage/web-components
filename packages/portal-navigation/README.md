@@ -8,15 +8,14 @@ A component implementing an opinionated (but generic and hence configurable) nav
 
 ## Quick Start
 
-Use [unpkg.com](https://unpkg.com/browse/@inventage-web-components/portal-navigation/) to get a simple example running in a single HTML file:
+Use [jspm.dev](https://jspm.org/docs/cdn#jspmdev) to get a simple example running in a single HTML file:
 
 ```html
-<script type="module" src="https://unpkg.com/@inventage-web-components/portal-navigation/lib/src/portal-navigation.js?module"></script>
-
-<portal-navigation src="/path/to/data.json"></portal-navigation>
+<script type="module" src="https://jspm.dev/@inventage-web-components/portal-navigation/portal-navigation.js"></script>
+<portal-navigation src="./test-data.json" currentApplication="app1" internalRouting></portal-navigation>
 ```
 
-Here's an [example of this method](https://plum-maze-visor.glitch.me/) to get you started.
+Here's an [example of this method](https://tender-glowing-income.glitch.me/) to get you started.
 
 ## Installation
 
