@@ -1,4 +1,4 @@
-import { html, TemplateResult } from 'lit-html';
+import { html, TemplateResult } from '@inventage-web-components/common';
 
 import '../src/hamburger-menu.js';
 

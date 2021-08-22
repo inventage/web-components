@@ -10,10 +10,3 @@
  * @param time
  */
 export const delay = (time: number): Promise<void> => new Promise(r => setTimeout(r, time));
-
-/**
- * lit-html does not provide a type for the special `nothing` sentinel value so we define one here…
- *
- * @see https://github.com/typescript-eslint/typescript-eslint/issues/2063#issuecomment-675156492
- */
-export type Nothing = Record<string, never>;

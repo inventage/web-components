@@ -19,6 +19,7 @@ module.exports = {
       rules: {
         'import/named': 'off',
         'import/no-unresolved': 'off',
+        'import/order': 'warn',
         'no-unexpected-multiline': 'off',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -28,6 +29,27 @@ module.exports = {
           'warn',
           {
             argsIgnorePattern: '^_',
+          },
+        ],
+      },
+    },
+    {
+      files: ['packages/**/*.ts'],
+      excludedFiles: 'packages/common/**/*.ts',
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              {
+                name: 'lit-html',
+                message: 'Please use @inventage-web-components/common instead.',
+              },
+              {
+                name: 'lit-element',
+                message: 'Please use @inventage-web-components/common instead.',
+              },
+            ],
           },
         ],
       },

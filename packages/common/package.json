@@ -14,7 +14,6 @@
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",
   "files": [
-    "custom-elements.json",
     "lib/src/**/*.d.ts",
     "lib/src/**/*.js",
     "lib/src/**/*.js.map"

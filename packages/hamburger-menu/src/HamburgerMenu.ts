@@ -1,8 +1,7 @@
-import { CSSResultArray, html, LitElement, property, TemplateResult } from 'lit-element';
-import { baseStyles } from '@inventage-web-components/common';
-import { styles } from './styles-css.js';
+import { CSSResultArray, html, LitElement, property, TemplateResult, baseStyles } from '@inventage-web-components/common';
 import { classMap } from 'lit-html/directives/class-map';
 import { PropertyDeclaration } from 'lit-element/lib/updating-element';
+import { styles } from './styles-css.js';
 
 /**
  * A simple hamburger menu component.

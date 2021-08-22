@@ -1,14 +1,12 @@
-import { CSSResultArray, html, state, LitElement, property, TemplateResult } from 'lit-element';
+import { baseStyles, CSSResultArray, html, LitElement, Nothing, nothing, property, state, TemplateResult } from '@inventage-web-components/common';
 import { ClassInfo, classMap } from 'lit-html/directives/class-map';
-import { baseStyles, Nothing } from '@inventage-web-components/common';
-import { styles } from './styles-css.js';
-import { Configuration, MenuItem, MenuLabel } from './Configuration.js';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
-import { IdPath } from './IdPath.js';
 import { PropertyValues } from 'lit-element/lib/updating-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { nothing } from 'lit-html';
+import { IdPath } from './IdPath.js';
+import { Configuration, MenuItem, MenuLabel } from './Configuration.js';
+import { styles } from './styles-css.js';
 
 /**
  * A listing of key menu ids that are handled specifically by the portal navigation component.
@@ -369,16 +367,16 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
      */
     const headerMenus = [
       (classInfo: ClassInfo = {}) =>
-        !this.isMobileBreakpoint && menuMeta !== nothing ? html`<div class="menu-meta menu ${classMap(classInfo)}">${menuMeta}</div>` : nothing,
+        !this.isMobileBreakpoint && menuMeta !== nothing ? html` <div class="menu-meta menu ${classMap(classInfo)}">${menuMeta}</div>` : nothing,
       (classInfo: ClassInfo = {}) =>
-        !this.isMobileBreakpoint && menuProfile !== nothing ? html`<div class="menu-profile menu ${classMap(classInfo)}">${menuProfile}</div>` : nothing,
+        !this.isMobileBreakpoint && menuProfile !== nothing ? html` <div class="menu-profile menu ${classMap(classInfo)}">${menuProfile}</div>` : nothing,
       (classInfo: ClassInfo = {}) =>
         menuLogout !== nothing && ((this.isMobileBreakpoint && this.logoutMenuInMobileHeader) || (!this.isMobileBreakpoint && !this.logoutMenuInMetaBar))
-          ? html`<div class="menu-logout menu ${classMap(classInfo)}">${menuLogout}</div>`
+          ? html` <div class="menu-logout menu ${classMap(classInfo)}">${menuLogout}</div>`
           : nothing,
     ].filter(menuTemplate => menuTemplate() !== nothing);
 
-    return html`<div
+    return html` <div
       class="container ${classMap({ '-mobile': this.isMobileBreakpoint, '-open': this.hamburgerMenuExpanded, '-empty': mainMenusEmpty })}"
       part="container"
     >
@@ -386,13 +384,21 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
       <header class="navigation-header" part="navigation-header">
         <div class="container-max-width inner navigation-header-inner" part="navigation-header-container">
-          <div class="slot-logo" part="slot-logo"><slot name="logo"></slot></div>
-          <div class="slot-left" part="slot-left"><slot name="left"></slot></div>
-          <div class="slot-header-mobile" part="slot-header-mobile"><slot name="header-mobile"></slot></div>
+          <div class="slot-logo" part="slot-logo">
+            <slot name="logo"></slot>
+          </div>
+          <div class="slot-left" part="slot-left">
+            <slot name="left"></slot>
+          </div>
+          <div class="slot-header-mobile" part="slot-header-mobile">
+            <slot name="header-mobile"></slot>
+          </div>
           ${headerMenus.map((menuTemplate, index) => menuTemplate({ item: true, '-first': index === 0, '-last': index === headerMenus.length - 1 }))}
-          <div class="slot-right" part="slot-right"><slot name="right"></slot></div>
+          <div class="slot-right" part="slot-right">
+            <slot name="right"></slot>
+          </div>
           ${this.isMobileBreakpoint
-            ? html`<hamburger-menu
+            ? html` <hamburger-menu
                 class="hamburger-menu"
                 part="hamburger-menu"
                 .toggled="${this.hamburgerMenuExpanded}"
@@ -406,13 +412,14 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
       ${mainMenusEmpty
         ? nothing
-        : html`<main class="main" part="main">
+        : html` <main class="main" part="main">
             ${!this.isMobileBreakpoint && (menuMain !== nothing || menuSettings !== nothing)
-              ? html`<div class="container-max-width inner">
-              ${menuMain !== nothing ? html`<div class="menu-main menu" part="menu-main">${menuMain}</div>` : nothing}
-              ${menuSettings !== nothing ? html`<div class="menu-settings menu" part="menu-settings">${menuSettings}</div>` : nothing}
-              </div>
-            </div>`
+              ? html`
+                  <div class='container-max-width inner'>
+                    ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main">${menuMain}</div>` : nothing}
+                    ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings">${menuSettings}</div>` : nothing}
+                  </div>
+                  </div>`
               : nothing}
             ${this.isMobileBreakpoint && this.hamburgerMenuExpanded
               ? html` <!-- Meta bar -->
@@ -420,13 +427,17 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
                   <!-- Hamburger Menu Tree Elements -->
                   <div class="tree-container" part="tree-container">
                     ${this._createTreeTemplate()}
-                    <div class="slot-tree-bottom"><slot name="tree-bottom"></slot></div>
+                    <div class="slot-tree-bottom">
+                      <slot name="tree-bottom"></slot>
+                    </div>
                   </div>`
               : nothing}
           </main>`}
       ${!this.isMobileBreakpoint && currentItems !== nothing
-        ? html`<div class="current" part="current">
-            <div class="container-max-width inner"><div class="menu-current menu" part="menu-current">${currentItems}</div></div>
+        ? html` <div class="current" part="current">
+            <div class="container-max-width inner">
+              <div class="menu-current menu" part="menu-current">${currentItems}</div>
+            </div>
           </div>`
         : nothing}
     </div>`;
@@ -551,13 +562,17 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @private
    */
   private renderMetaBar(menuLogout: TemplateResult | Nothing = nothing) {
-    return html`<div class="meta-bar" part="meta-bar">
+    return html` <div class="meta-bar" part="meta-bar">
       <div class="container-max-width inner">
-        <div class="slot-meta-left" part="slot-meta-left"><slot name="meta-left"></slot></div>
+        <div class="slot-meta-left" part="slot-meta-left">
+          <slot name="meta-left"></slot>
+        </div>
         ${menuLogout !== nothing && this.logoutMenuInMetaBar && !(this.isMobileBreakpoint && this.logoutMenuInMobileHeader)
-          ? html`<div class="menu-logout menu-logout-meta menu">${menuLogout}</div>`
+          ? html` <div class="menu-logout menu-logout-meta menu">${menuLogout}</div>`
           : nothing}
-        <div class="slot-meta-right" part="slot-meta-right"><slot name="meta-right"></slot></div>
+        <div class="slot-meta-right" part="slot-meta-right">
+          <slot name="meta-right"></slot>
+        </div>
       </div>
     </div>`;
   }
@@ -634,7 +649,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
           : nothing}</a
       >
       ${isTreeMode && active && hasItems
-        ? html`<div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem))}</div>`
+        ? html` <div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem))}</div>`
         : nothing}`;
   }
 
