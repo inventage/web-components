@@ -25,6 +25,9 @@
     "prepublishOnly": "npm run analyze && npm run build",
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
   },
+  "sideEffects": [
+    "lib/src/portal-navigation.js"
+  ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
     "@inventage-web-components/common": "^0.0.11",
