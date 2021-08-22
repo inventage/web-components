@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.0.24
+
+### Patch Changes
+
+- d4f76a5: Add subpath exports to package.json
+
 ## 0.0.23
 
 ### Patch Changes
