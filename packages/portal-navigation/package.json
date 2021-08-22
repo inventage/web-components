@@ -39,5 +39,10 @@
     "portal",
     "web-components"
   ],
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./portal-navigation": "./lib/src/portal-navigation.js",
+    "./portal-navigation.js": "./lib/src/portal-navigation.js"
+  }
 }
