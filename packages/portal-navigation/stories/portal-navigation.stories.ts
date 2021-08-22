@@ -1,7 +1,7 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
 
 import '../src/portal-navigation.js';
-import { PortalNavigation } from '@inventage-web-components/portal-navigation';
+import { PortalNavigation } from '../src/PortalNavigation.js';
 
 export default {
   component: 'portal-navigation',
