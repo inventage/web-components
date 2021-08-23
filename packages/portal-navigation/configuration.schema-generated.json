@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": {
+    "anyOf": [
+      {
+        "items": {
+          "$ref": "#/definitions/FirstLevelMenuItem"
+        },
+        "type": "array"
+      },
+      {
+        "not": {
+        }
+      }
+    ]
+  },
+  "definitions": {
+    "FirstLevelMenuItem": {
+      "properties": {
+        "defaultItem": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "dropdown": {
+          "type": "boolean"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/definitions/NavigationMenuName"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          },
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuLabel"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "MenuItem": {
+      "additionalProperties": {
+      },
+      "properties": {
+        "defaultItem": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "dropdown": {
+          "type": "boolean"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          },
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuLabel"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MenuLabel": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "properties": {
+        "de": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "en",
+        "de"
+      ],
+      "type": "object"
+    },
+    "NavigationMenuName": {
+      "enum": [
+        "main",
+        "settings",
+        "meta",
+        "profile",
+        "logout"
+      ],
+      "type": "string"
+    }
+  },
+  "description": "A configuration for the portal-navigation",
+  "properties": {
+    "menus": {
+      "items": {
+        "$ref": "#/definitions/FirstLevelMenuItem"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

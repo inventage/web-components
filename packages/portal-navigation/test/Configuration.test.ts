@@ -24,10 +24,12 @@ describe('Configuration', () => {
   });
 
   it('getMenu should return undefined when menu is a valid object but was not found', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const configuration = new Configuration({
       menus: [
         {
-          id: 'bla',
+          id: 'profile',
         },
       ],
     });

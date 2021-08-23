@@ -38,8 +38,8 @@ const NavigationMenus = {
   logout: 'logout',
 } as const;
 
-type NavigationMenus = typeof NavigationMenus;
-type NavigationMenuNames = keyof typeof NavigationMenus;
+export type NavigationMenuType = typeof NavigationMenus;
+export type NavigationMenuName = keyof typeof NavigationMenus;
 
 const NavigationEventNamespace = 'portal-navigation';
 
@@ -243,14 +243,14 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   /**
    * A listing of key menu ids that are handled specifically by the portal navigation component.
    */
-  static get menuIds(): NavigationMenus {
+  static get menuIds(): NavigationMenuType {
     return NavigationMenus;
   }
 
   /**
    * A specifically handled menu ids in the order they will be displayed in the hamburger menu.
    */
-  static get menuIdsOrdered(): NavigationMenuNames[] {
+  static get menuIdsOrdered(): NavigationMenuName[] {
     return Object.values(PortalNavigation.menuIds);
   }
 

@@ -22,8 +22,12 @@
   "scripts": {
     "analyze": "cem analyze --litelement",
     "build": "rimraf lib && tsc -b .",
+    "lint": "run-s validate:*",
     "prepublishOnly": "npm run analyze && npm run build",
-    "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
+    "schema": "ts-json-schema-generator --tsconfig '../../tsconfig.json' --path 'src/**/*.ts' --type 'ConfigurationData' --no-top-ref -o configuration.schema-generated.json",
+    "test": "echo \"Error: run tests from mono-repo root.\" && exit 1",
+    "validate:custom": "ajv validate -s configuration.schema.json -d '../../data/*.json'",
+    "validate:generated": "ajv validate -s configuration.schema-generated.json -d '../../data/*.json'"
   },
   "sideEffects": [
     "src/portal-navigation.js"
@@ -33,6 +37,10 @@
     "@inventage-web-components/common": "^0.1.0",
     "@inventage-web-components/hamburger-menu": "^0.2.0",
     "@open-wc/scoped-elements": "^1.3.3"
+  },
+  "devDependencies": {
+    "ajv-cli": "^5.0.0",
+    "ts-json-schema-generator": "^0.95.0"
   },
   "keywords": [
     "lit-element",

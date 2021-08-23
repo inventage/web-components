@@ -1,13 +1,11 @@
 import { ObjectPath } from './ObjectPath.js';
 import { IdPath } from './IdPath.js';
-
-export interface SelectorFunction {
-  (menu: MenuItem): boolean;
-}
+import { NavigationMenuName } from './PortalNavigation.js';
 
 export interface MenuLabel {
   en: string;
   de: string;
+
   [key: string]: string;
 }
 
@@ -20,12 +18,25 @@ export interface MenuItem {
   dropdown?: boolean;
   items?: MenuItem[];
   defaultItem?: string;
+
   [key: string]: unknown;
 }
 
+export interface FirstLevelMenuItem extends MenuItem {
+  id: NavigationMenuName;
+}
+
+/**
+ * A configuration for the portal-navigation
+ */
 export interface ConfigurationData {
-  menus?: MenuItem[];
-  [key: string]: MenuItem[] | undefined;
+  menus?: FirstLevelMenuItem[];
+
+  [key: string]: FirstLevelMenuItem[] | undefined;
+}
+
+export interface SelectorFunction {
+  (menu: MenuItem): boolean;
 }
 
 /**
@@ -82,10 +93,10 @@ export class Configuration {
   /**
    * @returns returns all menus within the 'menus' property of the dataset.
    */
-  getMenus(): MenuItem[] | undefined {
+  getMenus(): FirstLevelMenuItem[] | undefined {
     const menus = this.getData(['menus']);
     if (Array.isArray(menus)) {
-      return menus;
+      return menus as FirstLevelMenuItem[];
     }
 
     return undefined;
@@ -111,14 +122,14 @@ export class Configuration {
    * By default the configurations data will be used, but you can pass subsets of the data to only search these parts.
    * A key within the path can be a simple string (referring to a property name) or a two strings delimited by '::'.
    * This refers to a menu/item (by id) within an array structure. e.g. ['menus::menu1', 'items::item3'] would find
-   * the first item with id 'menu3' (in array property named 'items') of menu with id 'menu1' (in array of property
+   * the first item with id 'item3' (in array property named 'items') of menu with id 'menu1' (in array of property
    * named 'menus').
    *
    * @param keyPath a path of property names describing the path to the object to be found.
    * @param data the data set to be searched. the configurations data set by default.
    * @returns the first object matching the given path or undefined
    */
-  getData(keyPath: string[], data: ConfigurationData | MenuItem | undefined = this.data): MenuItem | MenuItem[] | undefined {
+  getData(keyPath: string[], data: ConfigurationData | MenuItem | undefined = this.data): FirstLevelMenuItem[] | MenuItem | MenuItem[] | undefined {
     if (!data || !Array.isArray(keyPath) || keyPath.length <= 0) {
       return undefined;
     }
@@ -224,10 +235,10 @@ export class Configuration {
    * @param data - a object from the data set.
    * @returns the object found in data based on the given key, which is either the value of the property or a specific array element if the property's value is an array.
    */
-  private resolveValue(key: string, data: ConfigurationData | MenuItem): MenuItem | undefined {
+  private resolveValue(key: string, data: ConfigurationData | MenuItem | FirstLevelMenuItem): MenuItem | undefined {
     const keyParts = key.split('::');
     if (keyParts.length === 1) {
-      return data[key] as MenuItem;
+      return data[key] as FirstLevelMenuItem;
     }
 
     if (keyParts.length === 2) {
