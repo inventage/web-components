@@ -18,11 +18,7 @@ export interface MenuLabel {
   [key: string]: string;
 }
 
-export interface MenuItem {
-  /**
-   * The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.
-   */
-  id?: string;
+export interface BaseMenuItem {
   /**
    * The label of a menu item
    */
@@ -34,6 +30,17 @@ export interface MenuItem {
    */
   icon?: string;
   /**
+   * A list of child menu items
+   */
+  items?: MenuItem[];
+}
+
+export interface MenuItem extends BaseMenuItem {
+  /**
+   * The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.
+   */
+  id?: string;
+  /**
    * The URL this menu item points to
    */
   url?: string;
@@ -42,18 +49,28 @@ export interface MenuItem {
    */
   destination?: 'extern';
   /**
-   * A list of child menu items
-   */
-  items?: MenuItem[];
-  /**
    * An id of a child menu item where this item points to by default.
    */
   defaultItem?: string;
 
-  [key: string]: unknown;
+  /**
+   * The application this menu item belongs to. If the navigation's current application equals this and internal routing is enabled,
+   * navigating to the item's URL will be prevented and an event will be thrown instead.
+   */
+  application?: string;
+
+  /**
+   * Whether to use internal routing for this specific menu item. This overrides any global internal routing setting.
+   */
+  internalRouting?: boolean;
+
+  /**
+   * This can be used instead of application to allow for internal routing within multiple applications.
+   */
+  internalRoutingApplications?: string[];
 }
 
-export interface FirstLevelMenuItem extends MenuItem {
+export interface FirstLevelMenuItem extends BaseMenuItem {
   /**
    * The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids.
    */
@@ -63,6 +80,8 @@ export interface FirstLevelMenuItem extends MenuItem {
    */
   dropdown?: boolean;
 }
+
+export type CommonMenuItem = MenuItem | FirstLevelMenuItem;
 
 /**
  * A configuration for the portal-navigation
@@ -80,7 +99,7 @@ export interface ConfigurationData {
 }
 
 export interface SelectorFunction {
-  (menu: MenuItem): boolean;
+  (menu: CommonMenuItem): boolean;
 }
 
 /**
@@ -118,7 +137,7 @@ export class Configuration {
    * @param nextAvailableId the next available id.
    * @returns the next available id.
    */
-  private generateMissingIds(menu: MenuItem, nextAvailableId: number): number {
+  private generateMissingIds(menu: CommonMenuItem, nextAvailableId: number): number {
     let id = nextAvailableId;
     if (!menu.id) {
       menu.id = `${id}`;
@@ -152,10 +171,10 @@ export class Configuration {
    * @param {string} menuId - a menuId of a menu found within the configuration.
    * @returns the menu object found in the configuration.
    */
-  getMenu(menuId: string): MenuItem | undefined {
+  getMenu(menuId: string): FirstLevelMenuItem | undefined {
     const menu = this.getData([`menus::${menuId}`]);
     if (menu && !Array.isArray(menu)) {
-      return menu;
+      return menu as FirstLevelMenuItem;
     }
 
     return;
@@ -173,7 +192,7 @@ export class Configuration {
    * @param data the data set to be searched. the configurations data set by default.
    * @returns the first object matching the given path or undefined
    */
-  getData(keyPath: string[], data: ConfigurationData | MenuItem | undefined = this.data): FirstLevelMenuItem[] | MenuItem | MenuItem[] | undefined {
+  getData(keyPath: string[], data: ConfigurationData | CommonMenuItem | undefined = this.data): CommonMenuItem | Array<CommonMenuItem> | undefined {
     if (!data || !Array.isArray(keyPath) || keyPath.length <= 0) {
       return undefined;
     }
@@ -200,15 +219,18 @@ export class Configuration {
     if (!url) {
       return undefined;
     }
-    const result = this.getIdPathForSelection(object => object.url === url);
+
+    const result = this.getIdPathForSelection(object => (object as MenuItem).url === url);
     if (result && !result.isEmpty()) {
       return result;
     }
+
     const index = url.lastIndexOf('/');
-    if (index > 0) {
-      return this.getIdPathForUrl(url.substring(0, index));
+    if (index < 1) {
+      return;
     }
-    return undefined;
+
+    return this.getIdPathForUrl(url.substring(0, index));
   }
 
   /**
@@ -251,7 +273,11 @@ export class Configuration {
    * @param selector a result will be returned if an item is found for which selector returns true.
    * @returns {any[]|undefined} the object path (as an array) to the item selected by selector or undefined it none can be found.
    */
-  private __getObjectPathForSelection(visitedObjects: MenuItem[], currentObject: MenuItem, selector: SelectorFunction): MenuItem[] | undefined {
+  private __getObjectPathForSelection(
+    visitedObjects: CommonMenuItem[],
+    currentObject: CommonMenuItem,
+    selector: SelectorFunction
+  ): CommonMenuItem[] | undefined {
     const newVisitedObject = visitedObjects.concat(currentObject);
     if (currentObject && selector(currentObject)) {
       return newVisitedObject;
@@ -279,14 +305,14 @@ export class Configuration {
    * @param data - a object from the data set.
    * @returns the object found in data based on the given key, which is either the value of the property or a specific array element if the property's value is an array.
    */
-  private resolveValue(key: string, data: ConfigurationData | MenuItem | FirstLevelMenuItem): MenuItem | undefined {
+  private resolveValue(key: string, data: ConfigurationData | MenuItem | FirstLevelMenuItem): FirstLevelMenuItem | MenuItem | undefined {
     const keyParts = key.split('::');
     if (keyParts.length === 1) {
-      return data[key] as FirstLevelMenuItem;
+      return (data as Record<string, MenuItem | FirstLevelMenuItem>)[key];
     }
 
     if (keyParts.length === 2) {
-      const values = (data[keyParts[0]] as MenuItem[])?.filter(object => object.id === keyParts[1]);
+      const values = (data as Record<string, Array<MenuItem | FirstLevelMenuItem>>)[keyParts[0]]?.filter(object => object.id === keyParts[1]);
       if (values?.length > 0) {
         return values[0];
       }

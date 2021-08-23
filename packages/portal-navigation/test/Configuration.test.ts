@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 
-import { Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
+import { CommonMenuItem, Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
 import dataJson from './data/test-data.json';
 
 const configurationData = dataJson as ConfigurationData;
@@ -67,14 +67,14 @@ describe('Configuration', () => {
 
   it('should return empty ObjectPath when menus are missing in data', () => {
     const configuration = new Configuration({});
-    const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/item2.2/unknown-subitem');
+    const item = configuration.getObjectPathForSelection(object => (object as MenuItem).url === '/some/path/item2.2/unknown-subitem');
 
     expect(item).to.deep.include({ objects: [] });
   });
 
   it('should generate missing ids on creation', () => {
     const configuration = new Configuration(configurationData);
-    const item = configuration.getObjectPathForSelection(object => object.url === '/some/path/generatedId');
+    const item = configuration.getObjectPathForSelection(object => (object as MenuItem).url === '/some/path/generatedId');
 
     expect(item.getLastItem()!.id).to.not.be.undefined;
   });
@@ -83,7 +83,7 @@ describe('Configuration', () => {
     const configuration = new Configuration(configurationData);
     const menuIds: string[] = [];
 
-    const collectMenuIds = (menuItems: MenuItem[], ids: string[] = []) => {
+    const collectMenuIds = (menuItems: CommonMenuItem[], ids: string[] = []) => {
       menuItems.forEach(menu => {
         ids.push(menu.id!);
 

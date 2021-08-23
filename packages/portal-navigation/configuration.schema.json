@@ -6,16 +6,8 @@
   },
   "definitions": {
     "FirstLevelMenuItem": {
+      "additionalProperties": false,
       "properties": {
-        "defaultItem": {
-          "description": "An id of a child menu item where this item points to by default.",
-          "type": "string"
-        },
-        "destination": {
-          "const": "extern",
-          "description": "If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)",
-          "type": "string"
-        },
         "dropdown": {
           "description": "If true, the items in this first level menu item will be rendered in a dropdown.",
           "type": "boolean"
@@ -45,18 +37,18 @@
             }
           ],
           "description": "The label of a menu item"
-        },
-        "url": {
-          "description": "The URL this menu item points to",
-          "type": "string"
         }
       },
       "required": ["id"],
       "type": "object"
     },
     "MenuItem": {
-      "additionalProperties": {},
+      "additionalProperties": false,
       "properties": {
+        "application": {
+          "description": "The application this menu item belongs to. If the navigation's current application equals this and internal routing is enabled, navigating to the item's URL will be prevented and an event will be thrown instead.",
+          "type": "string"
+        },
         "defaultItem": {
           "description": "An id of a child menu item where this item points to by default.",
           "type": "string"
@@ -73,6 +65,17 @@
         "id": {
           "description": "The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.",
           "type": "string"
+        },
+        "internalRouting": {
+          "description": "Whether to use internal routing for this specific menu item. This overrides any global internal routing setting.",
+          "type": "boolean"
+        },
+        "internalRoutingApplications": {
+          "description": "This can be used instead of application to allow for internal routing within multiple applications.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "items": {
           "description": "A list of child menu items",

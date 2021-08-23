@@ -5,7 +5,7 @@ import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { PropertyValues } from 'lit-element/lib/updating-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { IdPath } from './IdPath.js';
-import { Configuration, MenuItem, MenuLabel } from './Configuration.js';
+import { CommonMenuItem, Configuration, MenuItem, MenuLabel } from './Configuration.js';
 import { styles } from './styles-css.js';
 
 /**
@@ -797,7 +797,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   private __isInternalRouting(item?: MenuItem): boolean {
     let refItem: MenuItem | undefined = item;
     if (item && item.items && item.items.length > 0) {
-      refItem = this.__getDefaultItemOf(item);
+      refItem = <MenuItem>this.__getDefaultItemOf(item);
     }
 
     // Allow global `internalRouting` to be overridden by the item specific `internalRouting` property
@@ -816,7 +816,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // Current application was set, but item is not application specific…
     if (refItem && !('application' in refItem)) {
       // We check whether the current application is in the list of `internalRoutingApplications`
-      return 'internalRoutingApplications' in refItem && Array.prototype.includes.call(refItem.internalRoutingApplications, this.currentApplication);
+      return (
+        'internalRoutingApplications' in refItem && Array.prototype.includes.call((refItem as MenuItem).internalRoutingApplications, this.currentApplication)
+      );
     }
 
     return !!refItem && refItem.application === this.currentApplication;
@@ -855,7 +857,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       this.dispatchEvent(
         new CustomEvent(PortalNavigation.events.routeTo, {
           detail: {
-            url: refItem!.url,
+            url: (refItem as MenuItem)!.url,
             label: refItem!.label,
           },
           bubbles: true,
@@ -876,8 +878,8 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @param item the item whose default item should be found.
    * @returns the default item of the given item or undefined if no child items exist.
    */
-  private __getDefaultItemOf(item: MenuItem): MenuItem | undefined {
-    const { defaultItem, items } = item;
+  private __getDefaultItemOf(item: CommonMenuItem): MenuItem | undefined {
+    const { defaultItem, items } = item as MenuItem;
 
     // there are no items to choose from
     if (!Array.isArray(items) || items.length < 1) {
@@ -896,10 +898,10 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @param labelProvider the raw label (localized labels array) or simple label or an object containing this
    * information within a property 'label'.
    */
-  private __getLabel(labelProvider: string | MenuItem | MenuLabel): string {
-    let labelObj: string | MenuItem | MenuLabel | undefined = labelProvider;
+  private __getLabel(labelProvider: string | CommonMenuItem | MenuLabel): string {
+    let labelObj: string | CommonMenuItem | MenuLabel | undefined = labelProvider;
     if ('label' in <never>labelProvider) {
-      labelObj = (labelProvider as MenuItem).label;
+      labelObj = (labelProvider as CommonMenuItem).label;
     }
 
     if (typeof labelObj === 'string') {
