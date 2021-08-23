@@ -1,5 +1,16 @@
 # @inventage-web-components/portal-navigation
 
+## 0.3.0
+
+### Minor Changes
+
+- 28b5ec7: Introduce the concept of BaseMenuItem, MenuItem, FirstLevelMenuItem and CommonMenuItem for better JSON schema generation
+
+### Patch Changes
+
+- d00eabf: Add JSON schema for configuration
+- 8c16981: @open-wc/scoped-elements ^1.3.3 → ^1.3.4
+
 ## 0.2.0
 
 ### Minor Changes
