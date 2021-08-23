@@ -1,106 +1,136 @@
 {
+  "$id": "configuration",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Configuration",
-  "description": "A configuration for the portal-navigation",
-  "type": "object",
-  "required": ["menus"],
-  "properties": {
-    "menus": {
-      "description": "Menus desc…",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["id"],
-        "properties": {
-          "id": {
-            "enum": ["main", "settings", "meta", "profile", "logout"]
-          },
-          "dropdown": {
-            "type": "boolean"
-          },
-          "label": {
-            "$ref": "#/$defs/label"
-          },
-          "icon": {
-            "type": "string"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/menuItem"
-            }
-          }
-        }
-      }
-    }
+  "additionalProperties": {
+    "description": "Additional properties are allowed but will be ignored"
   },
-  "$defs": {
-    "label": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "patternProperties": {
-            "^[a-z]{2}$": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "menuItem": {
-      "type": "object",
-      "additionalProperties": false,
-      "anyOf": [
-        {
-          "required": ["label"]
-        },
-        {
-          "required": ["icon"]
-        }
-      ],
+  "definitions": {
+    "FirstLevelMenuItem": {
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "defaultItem": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "application": {
-          "type": "string"
-        },
-        "label": {
-          "$ref": "#/$defs/label"
-        },
-        "icon": {
+          "description": "An id of a child menu item where this item points to by default.",
           "type": "string"
         },
         "destination": {
+          "const": "extern",
+          "description": "If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)",
           "type": "string"
         },
-        "internalRouting": {
+        "dropdown": {
+          "description": "If true, the items in this first level menu item will be rendered in a dropdown.",
           "type": "boolean"
         },
-        "internalRoutingApplications": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "icon": {
+          "description": "Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/definitions/NavigationMenuName",
+          "description": "The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids."
         },
         "items": {
-          "type": "array",
+          "description": "A list of child menu items",
           "items": {
-            "$ref": "#/$defs/menuItem"
-          }
+            "$ref": "#/definitions/MenuItem"
+          },
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuLabel"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "The label of a menu item"
+        },
+        "url": {
+          "description": "The URL this menu item points to",
+          "type": "string"
         }
-      }
+      },
+      "required": ["id"],
+      "type": "object"
+    },
+    "MenuItem": {
+      "additionalProperties": {},
+      "properties": {
+        "defaultItem": {
+          "description": "An id of a child menu item where this item points to by default.",
+          "type": "string"
+        },
+        "destination": {
+          "const": "extern",
+          "description": "If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)",
+          "type": "string"
+        },
+        "icon": {
+          "description": "Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of child menu items",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          },
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuLabel"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "The label of a menu item"
+        },
+        "url": {
+          "description": "The URL this menu item points to",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MenuLabel": {
+      "additionalProperties": {
+        "description": "You can have as many additional language keys as you want…",
+        "type": "string"
+      },
+      "properties": {
+        "de": {
+          "description": "German translation of the label",
+          "type": "string"
+        },
+        "en": {
+          "description": "English translation of the label",
+          "type": "string"
+        }
+      },
+      "required": ["en", "de"],
+      "type": "object"
+    },
+    "NavigationMenuName": {
+      "enum": ["main", "settings", "meta", "profile", "logout"],
+      "type": "string"
     }
-  }
+  },
+  "description": "A configuration for the portal-navigation",
+  "properties": {
+    "menus": {
+      "description": "A list of top-level menus",
+      "items": {
+        "$ref": "#/definitions/FirstLevelMenuItem"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
 }
