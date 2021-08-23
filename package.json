@@ -19,14 +19,14 @@
     "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
     "format:package-json": "prettier-package-json --write package.json && find . -name 'package.json' ! -path './node_modules/*' | xargs -I {} npx prettier-package-json --write {}",
-    "format:prettier": "prettier '**/*.{cjs,mjs,js,ts,md,css}' '**/tsconfig*.json' --write",
+    "format:prettier": "prettier '**/*.{cjs,mjs,js,ts,md,css}' '**/tsconfig*.json' '**/*.schema*.json' --write",
     "get-ready": "npm run clean && npm run build:css",
     "postinstall": "npm run get-ready",
     "lint": "run-p -l lint:* && npm run --workspaces --if-present lint",
     "lint:eslint": "eslint --ext .js,.ts,.html .",
     "lint:markdown": "git ls-files '*.md' | xargs markdownlint --ignore '**/CHANGELOG.md' --ignore '.changeset/**.md'",
     "lint:package-json": "prettier-package-json --list-different package.json packages/*/package.json",
-    "lint:prettier": "prettier '**/*.{cjs,mjs,js,ts,md,css}' '**/tsconfig*.json' --check",
+    "lint:prettier": "prettier '**/*.{cjs,mjs,js,ts,md,css}' '**/tsconfig*.json' '**/*.schema*.json' --check",
     "prelint:types": "npm run build:css",
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "is-ci || husky install",
@@ -109,6 +109,9 @@
       "prettier --write"
     ],
     "tsconfig*.json": [
+      "prettier --write"
+    ],
+    "*.schema*.json": [
       "prettier --write"
     ],
     "*.md": [

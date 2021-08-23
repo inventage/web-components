@@ -3,36 +3,80 @@ import { IdPath } from './IdPath.js';
 import { NavigationMenuName } from './PortalNavigation.js';
 
 export interface MenuLabel {
+  /**
+   * English translation of the label
+   */
   en: string;
+  /**
+   * German translation of the label
+   */
   de: string;
 
+  /**
+   * You can have as many additional language keys as you want…
+   */
   [key: string]: string;
 }
 
 export interface MenuItem {
+  /**
+   * The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.
+   */
   id?: string;
+  /**
+   * The label of a menu item
+   */
   label?: MenuLabel | string;
+  /**
+   * Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+   */
   icon?: string;
+  /**
+   * The URL this menu item points to
+   */
   url?: string;
-  destination?: string;
-  dropdown?: boolean;
+  /**
+   * If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)
+   */
+  destination?: 'extern';
+  /**
+   * A list of child menu items
+   */
   items?: MenuItem[];
+  /**
+   * An id of a child menu item where this item points to by default.
+   */
   defaultItem?: string;
 
   [key: string]: unknown;
 }
 
 export interface FirstLevelMenuItem extends MenuItem {
+  /**
+   * The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids.
+   */
   id: NavigationMenuName;
+  /**
+   * If true, the items in this first level menu item will be rendered in a dropdown.
+   */
+  dropdown?: boolean;
 }
 
 /**
  * A configuration for the portal-navigation
  */
 export interface ConfigurationData {
+  /**
+   * A list of top-level menus
+   */
   menus?: FirstLevelMenuItem[];
 
-  [key: string]: FirstLevelMenuItem[] | undefined;
+  /**
+   * Additional properties are allowed but will be ignored
+   */
+  [key: string]: unknown;
 }
 
 export interface SelectorFunction {

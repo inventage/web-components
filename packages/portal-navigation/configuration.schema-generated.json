@@ -1,4 +1,5 @@
 {
+  "$id": "configuration",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": {
     "anyOf": [
@@ -9,8 +10,7 @@
         "type": "array"
       },
       {
-        "not": {
-        }
+        "not": {}
       }
     ]
   },
@@ -24,13 +24,16 @@
           "type": "string"
         },
         "dropdown": {
+          "description": "If true, the items in this first level menu item will be rendered in a dropdown.",
           "type": "boolean"
         },
         "icon": {
+          "description": "Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.",
           "type": "string"
         },
         "id": {
-          "$ref": "#/definitions/NavigationMenuName"
+          "$ref": "#/definitions/NavigationMenuName",
+          "description": "The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids."
         },
         "items": {
           "items": {
@@ -46,20 +49,18 @@
             {
               "type": "string"
             }
-          ]
+          ],
+          "description": "The label of a menu item"
         },
         "url": {
           "type": "string"
         }
       },
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "type": "object"
     },
     "MenuItem": {
-      "additionalProperties": {
-      },
+      "additionalProperties": {},
       "properties": {
         "defaultItem": {
           "type": "string"
@@ -67,13 +68,12 @@
         "destination": {
           "type": "string"
         },
-        "dropdown": {
-          "type": "boolean"
-        },
         "icon": {
+          "description": "Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.",
           "type": "string"
         },
         "id": {
+          "description": "The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.",
           "type": "string"
         },
         "items": {
@@ -90,7 +90,8 @@
             {
               "type": "string"
             }
-          ]
+          ],
+          "description": "The label of a menu item"
         },
         "url": {
           "type": "string"
@@ -100,30 +101,24 @@
     },
     "MenuLabel": {
       "additionalProperties": {
+        "description": "You can have as many additional language keys as you want…",
         "type": "string"
       },
       "properties": {
         "de": {
+          "description": "German translation of the label",
           "type": "string"
         },
         "en": {
+          "description": "English translation of the label",
           "type": "string"
         }
       },
-      "required": [
-        "en",
-        "de"
-      ],
+      "required": ["en", "de"],
       "type": "object"
     },
     "NavigationMenuName": {
-      "enum": [
-        "main",
-        "settings",
-        "meta",
-        "profile",
-        "logout"
-      ],
+      "enum": ["main", "settings", "meta", "profile", "logout"],
       "type": "string"
     }
   },

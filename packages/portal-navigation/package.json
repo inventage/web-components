@@ -24,8 +24,9 @@
     "build": "rimraf lib && tsc -b .",
     "lint": "run-s validate:*",
     "prepublishOnly": "npm run analyze && npm run build",
-    "schema": "ts-json-schema-generator --tsconfig '../../tsconfig.json' --path 'src/**/*.ts' --type 'ConfigurationData' --no-top-ref -o configuration.schema-generated.json",
+    "schema": "ts-json-schema-generator -i configuration --tsconfig '../../tsconfig.json' --path 'src/**/*.ts' --type 'ConfigurationData' --no-top-ref -o configuration.schema-generated.json",
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1",
+    "validate:compile": "ajv compile -s  '*.schema.json'",
     "validate:custom": "ajv validate -s configuration.schema.json -d '../../data/*.json'",
     "validate:generated": "ajv validate -s configuration.schema-generated.json -d '../../data/*.json'"
   },
