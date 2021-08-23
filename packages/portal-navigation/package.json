@@ -14,6 +14,7 @@
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",
   "files": [
+    "configuration.schema.json",
     "custom-elements.json",
     "lib/src/**/*.d.ts",
     "lib/src/**/*.js",
