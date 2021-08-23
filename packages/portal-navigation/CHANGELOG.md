@@ -1,5 +1,16 @@
 # @inventage-web-components/portal-navigation
 
+## 0.2.0
+
+### Minor Changes
+
+- a288eb3: Fix sideEffects configuration
+
+### Patch Changes
+
+- Updated dependencies [a288eb3]
+  - @inventage-web-components/hamburger-menu@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
