@@ -89,27 +89,27 @@ Empty.parameters = {
   },
 };
 
-export const Basic: Story<ArgTypes> = (args: ArgTypes) => {
-  return html` <portal-navigation
-    src="${args.src!}"
-    ?internalRouting="${args.internalRouting}"
-    currentApplication="${args.currentApplication!}"
-  ></portal-navigation>`;
-};
-
-Basic.args = {
-  src: './data/basic.json',
-  internalRouting: true,
-  currentApplication: 'app1',
-};
-
-Basic.parameters = {
-  docs: {
-    description: {
-      story: 'TODO',
-    },
-  },
-};
+// export const Basic: Story<ArgTypes> = (args: ArgTypes) => {
+//   return html` <portal-navigation
+//     src="${args.src!}"
+//     ?internalRouting="${args.internalRouting}"
+//     currentApplication="${args.currentApplication!}"
+//   ></portal-navigation>`;
+// };
+//
+// Basic.args = {
+//   src: './data/basic.json',
+//   internalRouting: true,
+//   currentApplication: 'app1',
+// };
+//
+// Basic.parameters = {
+//   docs: {
+//     description: {
+//       story: 'TODO',
+//     },
+//   },
+// };
 
 export const Test: Story<ArgTypes> = (args: ArgTypes) => {
   return html` <portal-navigation

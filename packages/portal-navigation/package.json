@@ -26,7 +26,7 @@
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
   },
   "sideEffects": [
-    "lib/src/portal-navigation.js"
+    "src/portal-navigation.js"
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {

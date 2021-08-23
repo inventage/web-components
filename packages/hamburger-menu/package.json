@@ -26,7 +26,7 @@
     "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
   },
   "sideEffects": [
-    "lib/src/hamburger-menu.js"
+    "src/hamburger-menu.js"
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
