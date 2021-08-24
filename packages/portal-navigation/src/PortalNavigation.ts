@@ -87,8 +87,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop {color} [--portal-navigation-color-badge-background=var(--portal-navigation-color-secondary)] Badge background color
  * @cssprop {color} [--portal-navigation-color-dropdown-background=white] Dropdown background color
  * @cssprop {color} [--portal-navigation-color-border=rgba(44, 62, 80, 0.1)] Default border color
- * @cssprop {color} [--portal-navigation-color-header-background=rgba(66, 135, 245, 0.1)] Header element background color
- * @cssprop {color} [--portal-navigation-color-meta-bar-background=rgba(66, 135, 245, 0.2)] Meta bar element background color
+ * @cssprop {color} [--portal-navigation-color-header-background=#eef3fe] Header element background color
+ * @cssprop {color} [--portal-navigation-color-meta-bar-background=#dbe7fd] Meta bar element background color
  *
  * @cssprop [--portal-navigation-tree-parent-border-top=none] Tree item parent border top
  * @cssprop [--portal-navigation-tree-parent-border-bottom=solid 1px var(--portal-navigation-color-border, rgba(44, 62, 80, 0.1))] Tree item parent border bottom

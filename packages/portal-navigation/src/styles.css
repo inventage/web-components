@@ -23,7 +23,7 @@
  * Meta bar styles
  */
 .meta-bar {
-  background: var(--portal-navigation-color-meta-bar-background, rgba(66, 135, 245, 0.2));
+  background: var(--portal-navigation-color-meta-bar-background, #dbe7fd);
 }
 
 .meta-bar > .inner {
@@ -47,7 +47,7 @@
  * Navigation header
  */
 .navigation-header {
-  background: var(--portal-navigation-color-header-background, rgba(66, 135, 245, 0.1));
+  background: var(--portal-navigation-color-header-background, #eef3fe);
 }
 
 .navigation-header > .inner {
@@ -63,7 +63,7 @@
  * Main menu wrapper
  */
 .main {
-  background: var(--portal-navigation-color-main-background, var(--portal-navigation-color-header-background, rgba(66, 135, 245, 0.1)));
+  background: var(--portal-navigation-color-main-background, var(--portal-navigation-color-header-background, #eef3fe));
 }
 
 .main:empty {
