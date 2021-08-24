@@ -1,0 +1,8 @@
+{
+  "ignore": {
+    "globby": {
+      "versions": ">=12",
+      "reason": "Is ESM only and has a dependency on 'slash' which breaks the markdown-storybook custom plugin (which has to be CJS for now because of storybook…)"
+    }
+  }
+}

@@ -5,11 +5,11 @@ import { spy } from 'sinon';
 import '../src/portal-navigation.js';
 import { PortalNavigation } from '../src/PortalNavigation.js';
 import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
-import dataJson from './data/test-data.json';
+import dataJson from '../data/test-data.json';
 
 const configurationData = dataJson as ConfigurationData;
 
-const TEST_DATA_JSON_PATH = '/packages/portal-navigation/test/data/test-data.json!';
+const TEST_DATA_JSON_PATH = './data/test-data.json!';
 
 type WaitUntilOptions = {
   interval?: number;
