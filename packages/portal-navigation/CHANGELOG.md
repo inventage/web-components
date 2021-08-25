@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.4.1
+
+### Patch Changes
+
+- [`faf4284`](https://github.com/inventage/web-components/commit/faf428475f37e22410de540035ae1702577dbcbd) Thanks [@peschee](https://github.com/peschee)! - Add --portal-navigation-z-index-sticky
+
 ## 0.4.0
 
 ### Minor Changes
