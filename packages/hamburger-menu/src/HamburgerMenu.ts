@@ -1,6 +1,4 @@
-import { CSSResultArray, html, LitElement, property, TemplateResult, baseStyles } from '@inventage-web-components/common';
-import { classMap } from 'lit-html/directives/class-map';
-import { PropertyDeclaration } from 'lit-element/lib/updating-element';
+import { CSSResultArray, html, LitElement, property, TemplateResult, baseStyles, classMap, PropertyDeclaration } from '@inventage-web-components/common';
 import { styles } from './styles-css.js';
 
 /**

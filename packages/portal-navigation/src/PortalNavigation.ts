@@ -1,5 +1,19 @@
-import { baseStyles, CSSResultArray, html, LitElement, Nothing, nothing, property, state, TemplateResult } from '@inventage-web-components/common';
-import { ClassInfo, classMap } from 'lit-html/directives/class-map';
+import {
+  baseStyles,
+  CSSResultArray,
+  html,
+  LitElement,
+  Nothing,
+  nothing,
+  property,
+  state,
+  TemplateResult,
+  query,
+  ClassInfo,
+  classMap,
+  PropertyValues,
+  ifDefined,
+} from '@inventage-web-components/common';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { PropertyValues } from 'lit-element/lib/updating-element';

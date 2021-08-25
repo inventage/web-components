@@ -50,6 +50,12 @@ module.exports = {
                 message: 'Please use @inventage-web-components/common instead.',
               },
             ],
+            patterns: [
+              {
+                group: ['lit-html/*', 'lit-element/*'],
+                message: 'Please use @inventage-web-components/common instead.',
+              },
+            ],
           },
         ],
       },
