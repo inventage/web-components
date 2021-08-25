@@ -79,4 +79,11 @@ export default {
   coverageConfig: {
     exclude: ['coverage/**/*', 'packages/**/*.test.{ts,js}', '**/node_modules/**/*'],
   },
+  // Increase timeout when needed (e.g. when debugging visually in a browser)
+  // @see https://modern-web.dev/docs/test-runner/test-frameworks/mocha/#configuring-mocha-options
+  // testFramework: {
+  //   config: {
+  //     timeout: '200000',
+  //   },
+  // },
 };

@@ -48,6 +48,21 @@ const handlerSpy = spy(e => {
 });
 
 /**
+ * Checks whether an element is in viewport
+ *
+ * @param element
+ */
+const isInViewport = (element: Element) => {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+/**
  * Helper function that waits until the portal navigation children have been rendered.
  *
  * @param el
@@ -114,6 +129,108 @@ describe('<portal-navigation>', () => {
 
       await childrenRendered(el);
       await expect(el).to.be.accessible();
+    });
+
+    it('is not visible when scrolled and not sticky (desktop)', async () => {
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>${[...Array(20).keys()].map(
+            () =>
+              html`<p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
+                ligula mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus
+                porttitor, mi ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo
+                sit amet, rhoncus tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum
+                semper. Duis pulvinar id tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor
+                tincidunt, mattis sapien. Cras mi turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas
+                metus tellus, finibus non volutpat vel, egestas quis velit.
+              </p>`
+          )}`
+      );
+      window.scroll(0, 1000);
+      expect(isInViewport(el.shadowRoot!.querySelector('.container')!)).to.be.false;
+    });
+
+    it('is visible when scrolled and sticky (desktop)', async () => {
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky></portal-navigation>${[...Array(20).keys()].map(
+            () =>
+              html`<p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
+                ligula mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus
+                porttitor, mi ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo
+                sit amet, rhoncus tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum
+                semper. Duis pulvinar id tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor
+                tincidunt, mattis sapien. Cras mi turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas
+                metus tellus, finibus non volutpat vel, egestas quis velit.
+              </p>`
+          )}`
+      );
+      window.scroll(0, 1000);
+      expect(isInViewport(el.shadowRoot!.querySelector('.container')!)).to.be.true;
+    });
+
+    it('is not visible when scrolled and not sticky (mobile)', async () => {
+      await setViewport({ width: 600, height: 400 });
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" mobileBreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
+            () =>
+              html`<p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
+                ligula mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus
+                porttitor, mi ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo
+                sit amet, rhoncus tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum
+                semper. Duis pulvinar id tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor
+                tincidunt, mattis sapien. Cras mi turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas
+                metus tellus, finibus non volutpat vel, egestas quis velit.
+              </p>`
+          )}`
+      );
+      window.scroll(0, 1000);
+      expect(isInViewport(el.shadowRoot!.querySelector('.container')!)).to.be.false;
+    });
+
+    it('is visible when scrolled and sticky (mobile)', async () => {
+      await setViewport({ width: 600, height: 400 });
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky mobileBreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
+            () =>
+              html`<p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
+                ligula mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus
+                porttitor, mi ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo
+                sit amet, rhoncus tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum
+                semper. Duis pulvinar id tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor
+                tincidunt, mattis sapien. Cras mi turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas
+                metus tellus, finibus non volutpat vel, egestas quis velit.
+              </p>`
+          )}`
+      );
+      window.scroll(0, 1000);
+      expect(isInViewport(el.shadowRoot!.querySelector('.container')!)).to.be.true;
+    });
+
+    it('adds top padding to anchor element when sticky', async () => {
+      const el: PortalNavigation = await fixture(
+        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky anchor="body"></portal-navigation>${[...Array(20).keys()].map(
+            () =>
+              html`<p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
+                ligula mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus
+                porttitor, mi ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo
+                sit amet, rhoncus tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum
+                semper. Duis pulvinar id tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor
+                tincidunt, mattis sapien. Cras mi turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas
+                metus tellus, finibus non volutpat vel, egestas quis velit.
+              </p>`
+          )}`
+      );
+      const container = el.shadowRoot!.querySelector('.container')!;
+      const body = document.querySelector('body')!;
+      await waitUntil(() => container.getBoundingClientRect().height > 0, 'Container should have a height', { interval: 10, timeout: 10000 });
+      await waitUntil(() => body.style.paddingTop !== '', 'Anchor should have a padding', { interval: 10, timeout: 10000 });
+      const { height = 0 } = container.getBoundingClientRect() || {};
+      expect(height).to.be.greaterThan(0);
+      expect(body!.style.paddingTop).to.equal(`${height}px`);
     });
   });
 
@@ -224,6 +341,7 @@ describe('<portal-navigation>', () => {
     });
 
     it('does not close an expanded mobile menu when the parent item with a default item has been clicked', async () => {
+      // noinspection DuplicatedCode
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation
@@ -246,6 +364,7 @@ describe('<portal-navigation>', () => {
     });
 
     it('does close an expanded mobile menu when a non-parent item has been clicked', async () => {
+      // noinspection DuplicatedCode
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
         html`<portal-navigation
@@ -263,7 +382,7 @@ describe('<portal-navigation>', () => {
 
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click()); // Open accordion first
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-item2.2"]')).click()); // Click a child
-      await aTimeout(1);
+      await oneEvent(el, 'hamburgerMenuExpanded');
 
       expect(eventSpy.callCount).to.equal(2);
       expect(el.hamburgerMenuExpanded).to.be.false;
