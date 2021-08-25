@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/portal-navigation",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A component implementing an opinionated (but generic and hence configurable) navigation pattern.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",
