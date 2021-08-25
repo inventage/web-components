@@ -16,8 +16,7 @@ import {
 } from '@inventage-web-components/common';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
-import { PropertyValues } from 'lit-element/lib/updating-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { debounce } from 'ts-debounce';
 import { IdPath } from './IdPath.js';
 import { CommonMenuItem, Configuration, MenuItem, MenuLabel } from './Configuration.js';
 import { styles } from './styles-css.js';
@@ -103,6 +102,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop {color} [--portal-navigation-color-border=rgba(44, 62, 80, 0.1)] Default border color
  * @cssprop {color} [--portal-navigation-color-header-background=#eef3fe] Header element background color
  * @cssprop {color} [--portal-navigation-color-meta-bar-background=#dbe7fd] Meta bar element background color
+ * @cssprop {color} [--portal-navigation-color-main-background=var(--portal-navigation-color-header-background)] Main element background color
+ * @cssprop {color} [--portal-navigation-color-current-background=#fff] Current element background color (element that holds the 2nd level navigation)
  *
  * @cssprop [--portal-navigation-tree-parent-border-top=none] Tree item parent border top
  * @cssprop [--portal-navigation-tree-parent-border-bottom=solid 1px var(--portal-navigation-color-border, rgba(44, 62, 80, 0.1))] Tree item parent border bottom
@@ -230,6 +231,21 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   hamburgerMenuExpanded = false;
 
   /**
+   * Controls whether the navigation should be "sticky" (on the top of the "anchor")
+   * The anchor element should have a "position: relative;" for the sticky position to work.
+   */
+  @property({ type: Boolean })
+  sticky = false;
+
+  /**
+   * Selector of the anchor navigation should "anchor" to when sticky.
+   * This selector is fed to querySelectorAll().
+   * If the navigation is not sticky. this will have no effect.
+   */
+  @property()
+  anchor?: string;
+
+  /**
    * The current path of "active" items. e.g. if an item in level 2 is clicked it's parent item and the corresponding menu would be considered "active"
    *
    * @private
@@ -240,9 +256,16 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   @state()
   private activeDropdown?: string;
 
+  @query('.container')
+  private container?: HTMLDivElement;
+
   private temporaryBadgeValues = new Map();
 
   private configuration = new Configuration();
+
+  private anchorElement?: HTMLElement;
+
+  private initialAnchorElementPadding?: string;
 
   static get scopedElements(): ScopedElementsMap {
     return {
@@ -289,6 +312,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // @see https://open-wc.org/faq/events.html#on-elements-outside-of-your-element
     this.__setBadgeValueEventListener = this.__setBadgeValueEventListener.bind(this);
     this.__globalClickListener = this.__globalClickListener.bind(this);
+
+    // Always debounce anchor padding updates
+    this.updateAnchorPaddingWhenSticky = debounce(this.updateAnchorPaddingWhenSticky, 100).bind(this);
   }
 
   connectedCallback(): void {
@@ -305,11 +331,16 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       this.activeUrl = pathname;
     }
 
+    // Detect whether we have an anchor element
+    // Currently, we only set the anchor element once (when element is connected to the DOM)
+    this.anchorElement = this.getElementForAnchor();
+
     // Register global listeners
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     document.addEventListener(PortalNavigation.events.setBadgeValue, this.__setBadgeValueEventListener);
     document.addEventListener('click', this.__globalClickListener);
+    window.addEventListener('resize', this.updateAnchorPaddingWhenSticky);
   }
 
   disconnectedCallback(): void {
@@ -318,6 +349,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // @ts-ignore
     document.removeEventListener(PortalNavigation.events.setBadgeValue, this.__setBadgeValueEventListener);
     document.removeEventListener('click', this.__globalClickListener);
+    window.removeEventListener('resize', this.updateAnchorPaddingWhenSticky);
 
     super.disconnectedCallback && super.disconnectedCallback();
   }
@@ -357,9 +389,22 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       this.__updateActivePathFromUrl();
     }
 
+    // Restore initial anchor element padding, since at this point, it has been changed by us
+    if (changedProperties.has('sticky') && !this.sticky && this.anchorElement && this.initialAnchorElementPadding !== undefined) {
+      this.anchorElement.style.paddingTop = this.initialAnchorElementPadding;
+      this.initialAnchorElementPadding = undefined;
+    }
+
     if (changedProperties.has('hamburgerMenuExpanded')) {
       this.dispatchEvent(new CustomEvent(PortalNavigation.events.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, bubbles: true }));
+
+      // Prevent anchor overflowing in mobile when navigation is sticky + open
+      if (this.sticky && this.anchorElement && this.mobileBreakpoint) {
+        this.anchorElement.style.overflowY = this.hamburgerMenuExpanded ? 'hidden' : 'visible';
+      }
     }
+
+    this.updateAnchorPaddingWhenSticky();
   }
 
   render(): TemplateResult | Nothing {
@@ -391,7 +436,12 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     ].filter(menuTemplate => menuTemplate() !== nothing);
 
     return html` <div
-      class="container ${classMap({ '-mobile': this.isMobileBreakpoint, '-open': this.hamburgerMenuExpanded, '-empty': mainMenusEmpty })}"
+      class="container ${classMap({
+        '-mobile': this.isMobileBreakpoint,
+        '-open': this.hamburgerMenuExpanded,
+        '-sticky': this.sticky,
+        '-empty': mainMenusEmpty,
+      })}"
       part="container"
     >
       ${!this.isMobileBreakpoint ? this.renderMetaBar(menuLogout) : nothing}
@@ -931,6 +981,57 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     return '';
+  }
+
+  /**
+   * Updates the padding of the anchor when navigation should be sticky.
+   *
+   * @private
+   */
+  private updateAnchorPaddingWhenSticky() {
+    // Bail when anchor is available or we're not in sticky mode
+    if (!this.sticky || !this.anchorElement) {
+      return;
+    }
+
+    // Do nothing to the padding when the mobile menu is open
+    if (this.isMobileBreakpoint && this.hamburgerMenuExpanded) {
+      return;
+    }
+
+    const { height = 0 } = this.container?.getBoundingClientRect() || {};
+    if (height <= 0) {
+      return;
+    }
+
+    const targetPadding = `${height}px`;
+    if (this.anchorElement.style.paddingTop === targetPadding) {
+      return;
+    }
+
+    // Save initial padding in case we need to restore it later
+    if (this.initialAnchorElementPadding === undefined) {
+      this.initialAnchorElementPadding = this.anchorElement.style.paddingTop;
+    }
+
+    this.anchorElement.style.paddingTop = targetPadding;
+  }
+
+  /**
+   * Tries to find the anchor element used when navigation is sticky.
+   * @private
+   */
+  private getElementForAnchor(): HTMLElement | undefined {
+    if (!this.shadowRoot) {
+      return;
+    }
+
+    const [anchor] = this.shadowRoot.ownerDocument.querySelectorAll(`${this.anchor}`);
+    if (!anchor || !(anchor instanceof HTMLElement)) {
+      return;
+    }
+
+    return anchor;
   }
 
   /**

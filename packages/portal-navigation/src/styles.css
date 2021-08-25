@@ -78,6 +78,10 @@
 /**
  * Current wrapper (2nd level items)
  */
+.current {
+  background: var(--portal-navigation-color-current-background, #fff);
+}
+
 .current > .inner {
   display: flex;
   justify-content: var(--portal-navigation-current-justify-content, flex-end);
@@ -269,6 +273,25 @@
 .hamburger-menu {
   margin-left: auto;
   display: flex;
+}
+
+/**
+ * Sticky styles
+ */
+.container.-sticky {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.container.-sticky.-mobile.-open {
+  height: 100%;
+}
+
+.container.-sticky.-mobile .main {
+  overflow: auto;
+  flex: 1 1 auto;
 }
 
 /**
