@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 0.4.0
+
+### Minor Changes
+
+- [`db3a7da`](https://github.com/inventage/web-components/commit/db3a7da46b168498d4dd6bd173b9bf2a353c80ee) Thanks [@peschee](https://github.com/peschee)! - Add possibility for the navigation to be sticky (relative to a given anchor)
+
+### Patch Changes
+
+- [`2614cf7`](https://github.com/inventage/web-components/commit/2614cf7cd9d1ae46042f2ef90c0c05a7b749a0db) Thanks [@peschee](https://github.com/peschee)! - Import all lit\* things from @inventage-web-components/common
+
+* [`0cbaa38`](https://github.com/inventage/web-components/commit/0cbaa38aba1ecad6896001f0a877652fca0eeac8) Thanks [@peschee](https://github.com/peschee)! - Use non-transparent default colors for backgrounds
+
 ## 0.3.0
 
 ### Minor Changes

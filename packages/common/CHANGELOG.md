@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.1.1
+
+### Patch Changes
+
+- [`2614cf7`](https://github.com/inventage/web-components/commit/2614cf7cd9d1ae46042f2ef90c0c05a7b749a0db) Thanks [@peschee](https://github.com/peschee)! - Import all lit\* things from @inventage-web-components/common
+
 ## 0.1.0
 
 ### Minor Changes
