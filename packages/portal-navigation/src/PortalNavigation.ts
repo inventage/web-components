@@ -135,6 +135,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop [--portal-navigation-current-justify-content=flex-end] Horizontal centering of the items in the current menu (container)
 
  * @cssprop [--portal-navigation-menu-item-white-space=nowrap] Menu item white space wrap
+ * @cssprop [--portal-navigation-z-index-sticky=100] z-index for when navigation is sticky
+ *
  *
  * @csspart container - The top-level, container element wrapping everything inside the host element
  * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)

@@ -283,6 +283,7 @@
   left: 0;
   top: 0;
   width: 100%;
+  z-index: var(--portal-navigation-z-index-sticky, 100);
 }
 
 .container.-sticky.-mobile.-open {
