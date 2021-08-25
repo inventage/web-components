@@ -239,8 +239,12 @@ Sticky.args = {
 Sticky.parameters = {
   docs: {
     description: {
-      story: 'TODO',
+      story: `The navigation can be made "sticky", by setting the \`sticky\` attribute/property as well as defining a valid CSS selector for an \`anchor\` element in the shadowDOM host the navigation will be positioned to.
+This \`anchor\` element needs to have a \`position: relative\` for the \`position: fixed\` of the navigation to work.
+`,
     },
+    inlineStories: false,
+    iframeHeight: '400px',
   },
 };
 
