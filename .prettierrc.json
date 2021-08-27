@@ -3,5 +3,13 @@
   "arrowParens": "avoid",
   "printWidth": 160,
   "tabWidth": 2,
-  "trailingComma": "es5"
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
