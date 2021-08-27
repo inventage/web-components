@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.5.0
+
+### Minor Changes
+
+- [`0afc1ed`](https://github.com/inventage/web-components/commit/0afc1ed406167a719c18a9902518e4a08645cfae) Adds an `expanded` configuration property to first level menu items. When this is set to `true`, the menu's items (**children**) will be rendered visible (**expanded**) when in **mobile breakpoint**.
+
 ## 0.4.3
 
 ### Patch Changes
