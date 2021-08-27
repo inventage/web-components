@@ -6,7 +6,6 @@ lib/
 *.tgz
 *-css.ts
 
-custom-elements-experimental.json
 custom-elements.json
 
 /coverage/
