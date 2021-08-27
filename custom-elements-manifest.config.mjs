@@ -4,5 +4,6 @@ import { moduleFileExtensionsPlugin } from 'cem-plugin-module-file-extensions';
 export default {
   globs: ['packages/*/src/**.ts'],
   outdir: '.',
+  litElement: true,
   plugins: [moduleFileExtensionsPlugin()],
 };
