@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.4.2
+
+### Patch Changes
+
+- [`a9285bd`](https://github.com/inventage/web-components/commit/a9285bd4631b1fbd97537ec090cafcacd7f83154) Add "current" slot rendered next to current items (2nd level) container in desktop only
+
 ## 0.4.1
 
 ### Patch Changes
