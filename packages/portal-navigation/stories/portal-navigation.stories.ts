@@ -1,4 +1,5 @@
-import { html, TemplateResult } from '@inventage-web-components/common';
+import { html } from '@inventage-web-components/common';
+import { Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { PortalNavigation } from '../src/PortalNavigation.js';
@@ -38,14 +39,6 @@ export default {
     },
   },
 };
-
-interface Story<T> {
-  (args: T): TemplateResult;
-
-  args?: Partial<T>;
-  argTypes?: Record<string, unknown>;
-  parameters?: Record<string, unknown>;
-}
 
 interface ArgTypes {
   src?: string;

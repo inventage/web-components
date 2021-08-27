@@ -41,6 +41,7 @@
     "ts-debounce": "^3.0.0"
   },
   "devDependencies": {
+    "@inventage-web-components/dev-helpers": "*",
     "ajv-cli": "^5.0.0",
     "ts-json-schema-generator": "^0.95.0"
   },

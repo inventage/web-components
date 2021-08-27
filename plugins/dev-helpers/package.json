@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@inventage-web-components/dev-helpers",
+  "version": "0.0.0",
+  "description": "Various helpers used during development",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/src/index.js",
+  "module": "lib/src/index.js",
+  "files": [
+    "lib/src/**/*.d.ts",
+    "lib/src/**/*.js",
+    "lib/src/**/*.js.map"
+  ],
+  "types": "lib/src/index.d.ts",
+  "devDependencies": {
+    "@inventage-web-components/common": "*"
+  }
+}

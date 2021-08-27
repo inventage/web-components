@@ -9,6 +9,9 @@
     },
     {
       "path": "packages/portal-navigation"
+    },
+    {
+      "path": "plugins/dev-helpers"
     }
   ]
 }

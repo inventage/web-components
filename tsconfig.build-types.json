@@ -4,6 +4,6 @@
     "incremental": true,
     "noEmit": true
   },
-  "include": ["packages/**/*.ts"],
-  "exclude": ["packages/*/lib"]
+  "include": ["packages/**/*.ts", "plugins/**/*.ts"],
+  "exclude": ["packages/*/lib", "plugins/*/lib"]
 }

@@ -12,6 +12,9 @@
     },
     {
       "path": "../hamburger-menu"
+    },
+    {
+      "path": "../../plugins/dev-helpers"
     }
   ]
 }
