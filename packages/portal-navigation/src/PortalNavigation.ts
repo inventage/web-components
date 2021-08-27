@@ -18,7 +18,7 @@ import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements
 import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { debounce } from 'ts-debounce';
 import { IdPath } from './IdPath.js';
-import { CommonMenuItem, Configuration, MenuItem, MenuLabel } from './Configuration.js';
+import { CommonMenuItem, Configuration, FirstLevelMenuItem, MenuItem, MenuLabel } from './Configuration.js';
 import { styles } from './styles-css.js';
 
 /**
@@ -690,12 +690,13 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @param item the item to be rendered.
    * @param isTreeMode whether this template should be provided for tree mode (hamburger menu) or default display purposes.
    */
-  private _createFirstLevelItemTemplate(item: MenuItem, isTreeMode = false): TemplateResult {
+  private _createFirstLevelItemTemplate(item: FirstLevelMenuItem | MenuItem, isTreeMode = false): TemplateResult {
     const { id, icon, items } = item;
     const hasItems = items && items.length > 0;
     const badge = this.getBadgeValue(id!);
     const label = this.__getLabel(item);
     const active = this.activePath.contains(id!);
+    const { expanded = false } = item as Record<string, boolean>;
 
     let refItem = item;
     if (hasItems) {
@@ -720,7 +721,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
           ? html`<span class="tree-parent-indicator indicator" part="tree-parent-indicator"></span>`
           : nothing}</a
       >
-      ${isTreeMode && active && hasItems
+      ${isTreeMode && (active || expanded) && hasItems
         ? html` <div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem))}</div>`
         : nothing}`;
   }

@@ -8,8 +8,21 @@
     "FirstLevelMenuItem": {
       "additionalProperties": false,
       "properties": {
-        "dropdown": {
-          "description": "If true, the items in this first level menu item will be rendered in a dropdown.",
+        "application": {
+          "description": "The application this menu item belongs to. If the navigation's current application equals this and internal routing is enabled, navigating to the item's URL will be prevented and an event will be thrown instead.",
+          "type": "string"
+        },
+        "defaultItem": {
+          "description": "An id of a child menu item where this item points to by default.",
+          "type": "string"
+        },
+        "destination": {
+          "const": "extern",
+          "description": "If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)",
+          "type": "string"
+        },
+        "expanded": {
+          "description": "If true, the menu item will be rendered as \"expanded\" in mobile breakpoint",
           "type": "boolean"
         },
         "icon": {
@@ -17,8 +30,19 @@
           "type": "string"
         },
         "id": {
-          "$ref": "#/definitions/NavigationMenuName",
-          "description": "The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids."
+          "description": "The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.",
+          "type": "string"
+        },
+        "internalRouting": {
+          "description": "Whether to use internal routing for this specific menu item. This overrides any global internal routing setting.",
+          "type": "boolean"
+        },
+        "internalRoutingApplications": {
+          "description": "This can be used instead of application to allow for internal routing within multiple applications.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "items": {
           "description": "A list of child menu items",
@@ -37,9 +61,12 @@
             }
           ],
           "description": "The label of a menu item"
+        },
+        "url": {
+          "description": "The URL this menu item points to",
+          "type": "string"
         }
       },
-      "required": ["id"],
       "type": "object"
     },
     "MenuItem": {
@@ -123,6 +150,43 @@
     "NavigationMenuName": {
       "enum": ["main", "settings", "meta", "profile", "logout"],
       "type": "string"
+    },
+    "RootLevelMenuItem": {
+      "additionalProperties": false,
+      "properties": {
+        "dropdown": {
+          "description": "If true, the items in this first level menu item will be rendered in a dropdown.",
+          "type": "boolean"
+        },
+        "icon": {
+          "description": "Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/definitions/NavigationMenuName",
+          "description": "The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids."
+        },
+        "items": {
+          "description": "A list of child menu items",
+          "items": {
+            "$ref": "#/definitions/FirstLevelMenuItem"
+          },
+          "type": "array"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuLabel"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "The label of a menu item"
+        }
+      },
+      "required": ["id"],
+      "type": "object"
     }
   },
   "description": "A configuration for the portal-navigation",
@@ -130,7 +194,7 @@
     "menus": {
       "description": "A list of top-level menus",
       "items": {
-        "$ref": "#/definitions/FirstLevelMenuItem"
+        "$ref": "#/definitions/RootLevelMenuItem"
       },
       "type": "array"
     }

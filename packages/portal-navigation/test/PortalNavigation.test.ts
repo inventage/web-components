@@ -70,7 +70,7 @@ const isInViewport = (element: Element) => {
  * @param options
  * @see https://open-wc.org/docs/testing/helpers/#waituntil
  */
-const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options?: WaitUntilOptions) => {
+const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options: WaitUntilOptions = { interval: 10 }) => {
   await waitUntil(() => !!el.shadowRoot?.querySelector(selector), 'Element did not render children', options);
 };
 
@@ -133,7 +133,7 @@ describe('<portal-navigation>', () => {
 
     it('is not visible when scrolled and not sticky (desktop)', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>${[...Array(20).keys()].map(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>${[...Array(20).keys()].map(
             () =>
               html`<p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
@@ -152,7 +152,7 @@ describe('<portal-navigation>', () => {
 
     it('is visible when scrolled and sticky (desktop)', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky></portal-navigation>${[...Array(20).keys()].map(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" sticky></portal-navigation>${[...Array(20).keys()].map(
             () =>
               html`<p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
@@ -172,7 +172,7 @@ describe('<portal-navigation>', () => {
     it('is not visible when scrolled and not sticky (mobile)', async () => {
       await setViewport({ width: 600, height: 400 });
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" mobileBreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" mobilebreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
             () =>
               html`<p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
@@ -192,7 +192,7 @@ describe('<portal-navigation>', () => {
     it('is visible when scrolled and sticky (mobile)', async () => {
       await setViewport({ width: 600, height: 400 });
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky mobileBreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" sticky mobilebreakpoint="600"></portal-navigation>${[...Array(20).keys()].map(
             () =>
               html`<p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
@@ -211,7 +211,7 @@ describe('<portal-navigation>', () => {
 
     it('adds top padding to anchor element when sticky', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" sticky anchor="body"></portal-navigation>${[...Array(20).keys()].map(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" sticky anchor="body"></portal-navigation>${[...Array(20).keys()].map(
             () =>
               html`<p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat
@@ -231,6 +231,20 @@ describe('<portal-navigation>', () => {
       const { height = 0 } = container.getBoundingClientRect() || {};
       expect(height).to.be.greaterThan(0);
       expect(body!.style.paddingTop).to.equal(`${height}px`);
+    });
+
+    it('expanded menu items show their children in mobile breakpoint', async () => {
+      await setViewport({ width: 600, height: 400 });
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" mobilebreakpoint="600" currentapplication="app1" internalrouting></portal-navigation>`
+      );
+
+      el.hamburgerMenuExpanded = true;
+      await childrenRendered(el, '[part="item-item5.1"]');
+      // console.log(el.shadowRoot!.querySelector('[part="item-item5.1"]'));
+      //
+      // await aTimeout(100000);
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part="item-item5.1"]')!).to.be.visible;
     });
   });
 
@@ -326,7 +340,7 @@ describe('<portal-navigation>', () => {
 
     it('does route internally when default item of parent item has same application', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app1" internalRouting></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" currentapplication="app1" internalrouting></portal-navigation>`
       );
       await childrenRendered(el);
 
@@ -344,12 +358,12 @@ describe('<portal-navigation>', () => {
       // noinspection DuplicatedCode
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation
+        html` <portal-navigation
           src="${TEST_DATA_JSON_PATH}"
-          currentApplication="app1"
-          internalRouting
-          mobileBreakpoint="1500"
-          hamburgerMenuExpanded
+          currentapplication="app1"
+          internalrouting
+          mobilebreakpoint="1500"
+          hamburgermenuexpanded
           @hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`
       );
@@ -367,12 +381,12 @@ describe('<portal-navigation>', () => {
       // noinspection DuplicatedCode
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation
+        html` <portal-navigation
           src="${TEST_DATA_JSON_PATH}"
-          currentApplication="app1"
-          internalRouting
-          mobileBreakpoint="1500"
-          hamburgerMenuExpanded
+          currentapplication="app1"
+          internalrouting
+          mobilebreakpoint="1500"
+          hamburgermenuexpanded
           @hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`
       );
@@ -390,7 +404,7 @@ describe('<portal-navigation>', () => {
 
     it('does route externally when default item of parent item has other application', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" currentapplication="app2" internalrouting></portal-navigation>`
       );
       await childrenRendered(el);
 
@@ -405,9 +419,9 @@ describe('<portal-navigation>', () => {
       expect(window.location.pathname).to.equal('/some/path/item2.2');
     });
 
-    it('does route externally when item overrides globally set internalRouting=true with false.', async () => {
+    it('does route externally when item overrides globally set internalrouting=true with false.', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" currentApplication="app2" internalRouting></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" currentapplication="app2" internalrouting></portal-navigation>`
       );
       await childrenRendered(el);
 
@@ -429,7 +443,7 @@ describe('<portal-navigation>', () => {
     it('does ignore default item when destination is "extern" on parent item clicks, and does call e.preventDefault()', async () => {
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" internalRouting @portal-navigation.routeTo="${eventSpy as EventListener}"></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" internalrouting @portal-navigation.routeTo="${eventSpy as EventListener}"></portal-navigation>`
       );
       await childrenRendered(el);
 
@@ -444,7 +458,7 @@ describe('<portal-navigation>', () => {
 
     it('dispatches the "routeTo" event', async () => {
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" internalrouting currentapplication="app2"></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" internalrouting currentapplication="app2"></portal-navigation>`
       );
       await childrenRendered(el, '[part="item-parent3"]');
 
@@ -464,7 +478,7 @@ describe('<portal-navigation>', () => {
     it('dispatches the "configured" event', async () => {
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
-        html`<portal-navigation src="${TEST_DATA_JSON_PATH}" @portal-navigation.configured="${eventSpy as EventListener}"></portal-navigation>`
+        html` <portal-navigation src="${TEST_DATA_JSON_PATH}" @portal-navigation.configured="${eventSpy as EventListener}"></portal-navigation>`
       );
       await oneEvent(el, 'portal-navigation.configured');
       expect(eventSpy.callCount).to.equal(1);
@@ -488,7 +502,7 @@ describe('<portal-navigation>', () => {
     });
 
     it('dispatches the "breakpointChanged" event', async () => {
-      const el: PortalNavigation = await fixture(html`<portal-navigation src="${TEST_DATA_JSON_PATH}" mobileBreakpoint="600"></portal-navigation>`);
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}" mobilebreakpoint="600"></portal-navigation>`);
       setTimeout(async () => await setViewport({ width: 600, height: 800 }));
       const { detail } = await oneEvent(el, 'portal-navigation.breakpointChanged');
       expect(el.isMobileBreakpoint).to.be.true;

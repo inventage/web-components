@@ -23,12 +23,14 @@ export interface BaseMenuItem {
    * The label of a menu item
    */
   label?: MenuLabel | string;
+
   /**
    * Optional icon, will be set as the `src` property of an `img` element, so any valid URL is valid here. Data URLs are supported as well.
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
    */
   icon?: string;
+
   /**
    * A list of child menu items
    */
@@ -40,14 +42,18 @@ export interface MenuItem extends BaseMenuItem {
    * The id of the menu item. If not set, it will be generated automatically and should be unique across all menu items in the menu.
    */
   id?: string;
+
   /**
    * The URL this menu item points to
    */
   url?: string;
+
   /**
    * If 'extern' is set here, the URL of the menu item will open a new window/tab (as in `_blank` for target)
    */
+
   destination?: 'extern';
+
   /**
    * An id of a child menu item where this item points to by default.
    */
@@ -70,18 +76,31 @@ export interface MenuItem extends BaseMenuItem {
   internalRoutingApplications?: string[];
 }
 
-export interface FirstLevelMenuItem extends BaseMenuItem {
+export interface FirstLevelMenuItem extends MenuItem {
+  /**
+   * If true, the menu item will be rendered as "expanded" in mobile breakpoint
+   */
+  expanded?: boolean;
+}
+
+export interface RootLevelMenuItem extends BaseMenuItem {
   /**
    * The id of the first level menu item. Has to be a valid id from the list of possible first level menu item ids.
    */
   id: NavigationMenuName;
+
   /**
    * If true, the items in this first level menu item will be rendered in a dropdown.
    */
   dropdown?: boolean;
+
+  /**
+   * A list of child menu items
+   */
+  items?: FirstLevelMenuItem[];
 }
 
-export type CommonMenuItem = MenuItem | FirstLevelMenuItem;
+export type CommonMenuItem = RootLevelMenuItem | FirstLevelMenuItem | MenuItem;
 
 /**
  * A configuration for the portal-navigation
@@ -90,7 +109,7 @@ export interface ConfigurationData {
   /**
    * A list of top-level menus
    */
-  menus?: FirstLevelMenuItem[];
+  menus?: RootLevelMenuItem[];
 
   /**
    * Additional properties are allowed but will be ignored
@@ -156,10 +175,10 @@ export class Configuration {
   /**
    * @returns returns all menus within the 'menus' property of the dataset.
    */
-  getMenus(): FirstLevelMenuItem[] | undefined {
+  getMenus(): RootLevelMenuItem[] | undefined {
     const menus = this.getData(['menus']);
     if (Array.isArray(menus)) {
-      return menus as FirstLevelMenuItem[];
+      return menus as RootLevelMenuItem[];
     }
 
     return undefined;
@@ -171,10 +190,10 @@ export class Configuration {
    * @param {string} menuId - a menuId of a menu found within the configuration.
    * @returns the menu object found in the configuration.
    */
-  getMenu(menuId: string): FirstLevelMenuItem | undefined {
+  getMenu(menuId: string): RootLevelMenuItem | undefined {
     const menu = this.getData([`menus::${menuId}`]);
     if (menu && !Array.isArray(menu)) {
-      return menu as FirstLevelMenuItem;
+      return menu as RootLevelMenuItem;
     }
 
     return;
@@ -305,14 +324,14 @@ export class Configuration {
    * @param data - a object from the data set.
    * @returns the object found in data based on the given key, which is either the value of the property or a specific array element if the property's value is an array.
    */
-  private resolveValue(key: string, data: ConfigurationData | MenuItem | FirstLevelMenuItem): FirstLevelMenuItem | MenuItem | undefined {
+  private resolveValue(key: string, data: ConfigurationData | MenuItem | RootLevelMenuItem): RootLevelMenuItem | MenuItem | undefined {
     const keyParts = key.split('::');
     if (keyParts.length === 1) {
-      return (data as Record<string, MenuItem | FirstLevelMenuItem>)[key];
+      return (data as Record<string, MenuItem | RootLevelMenuItem>)[key];
     }
 
     if (keyParts.length === 2) {
-      const values = (data as Record<string, Array<MenuItem | FirstLevelMenuItem>>)[keyParts[0]]?.filter(object => object.id === keyParts[1]);
+      const values = (data as Record<string, Array<MenuItem | RootLevelMenuItem>>)[keyParts[0]]?.filter(object => object.id === keyParts[1]);
       if (values?.length > 0) {
         return values[0];
       }
