@@ -12,6 +12,10 @@
     "lib/src/**/*.js",
     "lib/src/**/*.js.map"
   ],
+  "scripts": {
+    "build": "rimraf lib && tsc -b .",
+    "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
+  },
   "types": "lib/src/index.d.ts",
   "devDependencies": {
     "@inventage-web-components/common": "*"

@@ -1,5 +1,5 @@
-import { html, TemplateResult } from '@inventage-web-components/common';
-
+import { html } from '@inventage-web-components/common';
+import { Story } from '@inventage-web-components/dev-helpers';
 import '../src/hamburger-menu.js';
 
 export default {
@@ -12,17 +12,11 @@ export default {
   },
 };
 
-interface Story<T> {
-  (args: T): TemplateResult;
-  args?: Partial<T>;
-  argTypes?: Record<string, unknown>;
-}
-
 interface ArgTypes {
   toggled?: boolean;
 }
 
-const Template: Story<ArgTypes> = (args: ArgTypes) => html`<hamburger-menu ?toggled="${args.toggled}"></hamburger-menu>`;
+const Template: Story<ArgTypes> = (args: ArgTypes) => html` <hamburger-menu ?toggled="${args.toggled}"></hamburger-menu>`;
 
 export const Default = Template.bind({});
 Default.args = {};
