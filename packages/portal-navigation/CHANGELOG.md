@@ -34,40 +34,40 @@
 
 ### Minor Changes
 
-- 28b5ec7: Introduce the concept of BaseMenuItem, MenuItem, FirstLevelMenuItem and CommonMenuItem for better JSON schema generation
+- [`28b5ec7`](https://github.com/inventage/web-components/commit/28b5ec7) Introduce the concept of BaseMenuItem, MenuItem, FirstLevelMenuItem and CommonMenuItem for better JSON schema generation
 
 ### Patch Changes
 
-- d00eabf: Add JSON schema for configuration
-- 8c16981: @open-wc/scoped-elements ^1.3.3 → ^1.3.4
+- [`d00eabf`](https://github.com/inventage/web-components/commit/d00eabf) Add JSON schema for configuration
+- [`8c16981`](https://github.com/inventage/web-components/commit/8c16981) @open-wc/scoped-elements ^1.3.3 → ^1.3.4
 
 ## 0.2.0
 
 ### Minor Changes
 
-- a288eb3: Fix sideEffects configuration
+- [`a288eb3`](https://github.com/inventage/web-components/commit/a288eb3) Fix sideEffects configuration
 
 ### Patch Changes
 
-- Updated dependencies [a288eb3]
+- Updated dependencies [`a288eb3`](https://github.com/inventage/web-components/commit/a288eb3)
   - @inventage-web-components/hamburger-menu@0.2.0
 
 ## 0.1.0
 
 ### Minor Changes
 
-- 467e204: Remove tslib and lit dependencies, these are provided by the common package
+- [`467e204`](https://github.com/inventage/web-components/commit/467e204) Remove tslib and lit dependencies, these are provided by the common package
 
 ### Patch Changes
 
-- 2acd897: Use `lit-html` and `lit-element` and related exports from `@inventage-web-components/common` package.
-- af5e012: Add sideEffects to package.json
-- 3a35db2: Add JSPM example
-- Updated dependencies [2acd897]
-- Updated dependencies [2acd897]
-- Updated dependencies [abbeb80]
-- Updated dependencies [af5e012]
-- Updated dependencies [467e204]
+- [`2acd897`](https://github.com/inventage/web-components/commit/2acd897) Use `lit-html` and `lit-element` and related exports from `@inventage-web-components/common` package.
+- [`af5e012`](https://github.com/inventage/web-components/commit/af5e012) Add sideEffects to package.json
+- [`3a35db2`](https://github.com/inventage/web-components/commit/3a35db2) Add JSPM example
+- Updated dependencies [`2acd897`](https://github.com/inventage/web-components/commit/2acd897)
+- Updated dependencies [`2acd897`](https://github.com/inventage/web-components/commit/2acd897)
+- Updated dependencies [`abbeb80`](https://github.com/inventage/web-components/commit/abbeb80)
+- Updated dependencies [`af5e012`](https://github.com/inventage/web-components/commit/af5e012)
+- Updated dependencies [`467e204`](https://github.com/inventage/web-components/commit/467e204)
   - @inventage-web-components/hamburger-menu@0.1.0
   - @inventage-web-components/common@0.1.0
 
@@ -75,47 +75,47 @@
 
 ### Patch Changes
 
-- d4f76a5: Add subpath exports to package.json
+- [`d4f76a5`](https://github.com/inventage/web-components/commit/d4f76a5) Add subpath exports to package.json
 
 ## 0.0.23
 
 ### Patch Changes
 
-- 67a08d5: Test release for Github action fixes
+- [`67a08d5`](https://github.com/inventage/web-components/commit/67a08d5) Test release for Github action fixes
 
 ## 0.0.22
 
 ### Patch Changes
 
-- Updated dependencies [f6beaec]
+- Updated dependencies [`f6beaec`](https://github.com/inventage/web-components/commit/f6beaec)
   - @inventage-web-components/hamburger-menu@0.0.17
 
 ## 0.0.21
 
 ### Patch Changes
 
-- Updated dependencies [72687b1]
+- Updated dependencies [`72687b1`](https://github.com/inventage/web-components/commit/72687b1)
   - @inventage-web-components/hamburger-menu@0.0.16
 
 ## 0.0.20
 
 ### Patch Changes
 
-- Updated dependencies [d7f98d0]
+- Updated dependencies [`d7f98d0`](https://github.com/inventage/web-components/commit/d7f98d0)
   - @inventage-web-components/hamburger-menu@0.0.15
 
 ## 0.0.19
 
 ### Patch Changes
 
-- Updated dependencies [e41e693]
+- Updated dependencies [`e41e693`](https://github.com/inventage/web-components/commit/e41e693)
   - @inventage-web-components/hamburger-menu@0.0.14
 
 ## 0.0.18
 
 ### Patch Changes
 
-- Updated dependencies [2cc54a2]
+- Updated dependencies [`2cc54a2`](https://github.com/inventage/web-components/commit/2cc54a2)
   - @inventage-web-components/common@0.0.11
   - @inventage-web-components/hamburger-menu@0.0.13
 
@@ -123,7 +123,7 @@
 
 ### Patch Changes
 
-- Updated dependencies [b3057c0]
+- Updated dependencies [`b3057c0`](https://github.com/inventage/web-components/commit/b3057c0)
   - @inventage-web-components/common@0.0.10
   - @inventage-web-components/hamburger-menu@0.0.12
 
@@ -131,14 +131,14 @@
 
 ### Patch Changes
 
-- 617d4ad: Add missing class comment for `Configuration`
+- [`617d4ad`](https://github.com/inventage/web-components/commit/617d4ad) Add missing class comment for `Configuration`
 
 ## 0.0.15
 
 ### Patch Changes
 
-- 55343d9: Test release for Github action fixes
-- Updated dependencies [55343d9]
+- [`55343d9`](https://github.com/inventage/web-components/commit/55343d9) Test release for Github action fixes
+- Updated dependencies [`55343d9`](https://github.com/inventage/web-components/commit/55343d9)
   - @inventage-web-components/common@0.0.9
   - @inventage-web-components/hamburger-menu@0.0.11
 
@@ -146,7 +146,7 @@
 
 ### Patch Changes
 
-- Updated dependencies [d83aec9]
+- Updated dependencies [`d83aec9`](https://github.com/inventage/web-components/commit/d83aec9)
   - @inventage-web-components/common@0.0.8
   - @inventage-web-components/hamburger-menu@0.0.10
 
@@ -154,7 +154,7 @@
 
 ### Patch Changes
 
-- Updated dependencies [e0dae87]
+- Updated dependencies [`e0dae87`](https://github.com/inventage/web-components/commit/e0dae87)
   - @inventage-web-components/common@0.0.7
   - @inventage-web-components/hamburger-menu@0.0.9
 
@@ -162,19 +162,19 @@
 
 ### Patch Changes
 
-- 62d385e: Do not inline ts helpers, use `importHelpers` and build-time dependencies on `tslib` instead
-- Updated dependencies [62d385e]
+- [`62d385e`](https://github.com/inventage/web-components/commit/62d385e) Do not inline ts helpers, use `importHelpers` and build-time dependencies on `tslib` instead
+- Updated dependencies [`62d385e`](https://github.com/inventage/web-components/commit/62d385e)
   - @inventage-web-components/hamburger-menu@0.0.8
 
 ## 0.0.11
 
 ### Patch Changes
 
-- be30ab0: Display all controls even in the Empty storybook story
-- 87e4923: Add more storybook stories with examples
-- 41754be: Add markdown files (documentation) to storybook docs
-- a857d1e: Add missing meta fields (github repo, issues, etc.) to `package.json`
-- Updated dependencies [a857d1e]
+- [`be30ab0`](https://github.com/inventage/web-components/commit/be30ab0) Display all controls even in the Empty storybook story
+- [`87e4923`](https://github.com/inventage/web-components/commit/87e4923) Add more storybook stories with examples
+- [`41754be`](https://github.com/inventage/web-components/commit/41754be) Add markdown files (documentation) to storybook docs
+- [`a857d1e`](https://github.com/inventage/web-components/commit/a857d1e) Add missing meta fields (github repo, issues, etc.) to `package.json`
+- Updated dependencies [`a857d1e`](https://github.com/inventage/web-components/commit/a857d1e)
   - @inventage-web-components/common@0.0.6
   - @inventage-web-components/hamburger-menu@0.0.7
 
@@ -182,9 +182,9 @@
 
 ### Patch Changes
 
-- 8a8eca8: Use `@changesets/changelog-git` for changelog generation
-- d19b6d2: Add installation instructions and code example to README
-- Updated dependencies [8a8eca8]
+- [`8a8eca8`](https://github.com/inventage/web-components/commit/8a8eca8) Use `@changesets/changelog-git` for changelog generation
+- [`d19b6d2`](https://github.com/inventage/web-components/commit/d19b6d2) Add installation instructions and code example to README
+- Updated dependencies [`8a8eca8`](https://github.com/inventage/web-components/commit/8a8eca8)
   - @inventage-web-components/common@0.0.5
   - @inventage-web-components/hamburger-menu@0.0.6
 
@@ -202,41 +202,41 @@
 
 ### Patch Changes
 
-- 35d57d9: Fix event names in JSDoc comments
-- d1abc20: Made some internal methods private, added better tests for external routing.
-- Updated dependencies [35d57d9]
-- Updated dependencies [4dd5dae]
+- [`35d57d9`](https://github.com/inventage/web-components/commit/35d57d9) Fix event names in JSDoc comments
+- [`d1abc20`](https://github.com/inventage/web-components/commit/d1abc20) Made some internal methods private, added better tests for external routing.
+- Updated dependencies [`35d57d9`](https://github.com/inventage/web-components/commit/35d57d9)
+- Updated dependencies [`4dd5dae`](https://github.com/inventage/web-components/commit/4dd5dae)
   - @inventage-web-components/hamburger-menu@0.0.4
 
 ## 0.0.7
 
 ### Patch Changes
 
-- 5a4140a: Add more test coverage
-- d020809: Increment version in lockfile
-- c7075ac: Better test for "breakpointChanged" event
-- b15d4e8: Add test case for uniqueness of generated menu (item) ids
-- f1eadd7: Added test case for retrieving the configuration from the menu
+- [`5a4140a`](https://github.com/inventage/web-components/commit/5a4140a) Add more test coverage
+- [`d020809`](https://github.com/inventage/web-components/commit/d020809) Increment version in lockfile
+- [`c7075ac`](https://github.com/inventage/web-components/commit/c7075ac) Better test for "breakpointChanged" event
+- [`b15d4e8`](https://github.com/inventage/web-components/commit/b15d4e8) Add test case for uniqueness of generated menu (item) ids
+- [`f1eadd7`](https://github.com/inventage/web-components/commit/f1eadd7) Added test case for retrieving the configuration from the menu
 
 ## 0.0.6
 
 ### Patch Changes
 
-- 23df371: Fixing released and broken version 0.0.5
+- [`23df371`](https://github.com/inventage/web-components/commit/23df371) Fixing released and broken version 0.0.5
 
 ## 0.0.5
 
 ### Patch Changes
 
-- 611170f: Add test for `breakpointChanged` event
-- 549c366: Storybook story cleanup + added CSS custom prop example
+- [`611170f`](https://github.com/inventage/web-components/commit/611170f) Add test for `breakpointChanged` event
+- [`549c366`](https://github.com/inventage/web-components/commit/549c366) Storybook story cleanup + added CSS custom prop example
 
 ## 0.0.4
 
 ### Patch Changes
 
-- a27e5d5: Empty test release
-- Updated dependencies [a27e5d5]
+- [`a27e5d5`](https://github.com/inventage/web-components/commit/a27e5d5) Empty test release
+- Updated dependencies [`a27e5d5`](https://github.com/inventage/web-components/commit/a27e5d5)
   - @inventage-web-components/common@0.0.3
   - @inventage-web-components/hamburger-menu@0.0.3
 
@@ -244,8 +244,8 @@
 
 ### Patch Changes
 
-- 4a93691: Added missing license, fixed license links.
-- Updated dependencies [4a93691]
+- [`4a93691`](https://github.com/inventage/web-components/commit/4a93691) Added missing license, fixed license links.
+- Updated dependencies [`4a93691`](https://github.com/inventage/web-components/commit/4a93691)
   - @inventage-web-components/common@0.0.3-next.0
   - @inventage-web-components/hamburger-menu@0.0.3-next.0
 
@@ -253,31 +253,31 @@
 
 ### Patch Changes
 
-- 6f7e820: Fixed default value for src in storybook story
-- 52496eb: Use relative paths for data.json files in storybook
+- [`6f7e820`](https://github.com/inventage/web-components/commit/6f7e820) Fixed default value for src in storybook story
+- [`52496eb`](https://github.com/inventage/web-components/commit/52496eb) Use relative paths for data.json files in storybook
 
 ## 0.0.3-next.0
 
 ### Patch Changes
 
-- 6f7e820: Fixed default value for src in storybook story
-- 52496eb: Use relative paths for data.json files in storybook
+- [`6f7e820`](https://github.com/inventage/web-components/commit/6f7e820) Fixed default value for src in storybook story
+- [`52496eb`](https://github.com/inventage/web-components/commit/52496eb) Use relative paths for data.json files in storybook
 
 ## 0.0.2
 
 ### Patch Changes
 
-- cae77d2: - Add keywords to `package.json`
-- 6fc5042: Add initial README versions
-- 9c100e6: Add a default storybook story
+- [`cae77d2`](https://github.com/inventage/web-components/commit/cae77d2) - Add keywords to `package.json`
+- [`6fc5042`](https://github.com/inventage/web-components/commit/6fc5042) Add initial README versions
+- [`9c100e6`](https://github.com/inventage/web-components/commit/9c100e6) Add a default storybook story
 
   Make sure the Web Dev Server config for storybook only serves `custom-elements-experimental.json` as `js`, since we need to serve other JSON files as JSON (e.g. for `src` attribute / property in this component)
 
   Fix wrong `hamburger-menu` custom tag usage
 
-- Updated dependencies [cae77d2]
-- Updated dependencies [6fc5042]
-- Updated dependencies [9c100e6]
+- Updated dependencies [`cae77d2`](https://github.com/inventage/web-components/commit/cae77d2)
+- Updated dependencies [`6fc5042`](https://github.com/inventage/web-components/commit/6fc5042)
+- Updated dependencies [`9c100e6`](https://github.com/inventage/web-components/commit/9c100e6)
   - @inventage-web-components/common@0.0.2
   - @inventage-web-components/hamburger-menu@0.0.2
 
@@ -285,8 +285,8 @@
 
 ### Patch Changes
 
-- cae77d2: - Add keywords to `package.json`
-- Updated dependencies [cae77d2]
+- [`cae77d2`](https://github.com/inventage/web-components/commit/cae77d2) - Add keywords to `package.json`
+- Updated dependencies [`cae77d2`](https://github.com/inventage/web-components/commit/cae77d2)
   - @inventage-web-components/common@0.0.2-next.1
   - @inventage-web-components/hamburger-menu@0.0.2-next.1
 
@@ -294,15 +294,15 @@
 
 ### Patch Changes
 
-- 6fc5042: Add initial README versions
-- 9c100e6: Add a default storybook story
+- [`6fc5042`](https://github.com/inventage/web-components/commit/6fc5042) Add initial README versions
+- [`9c100e6`](https://github.com/inventage/web-components/commit/9c100e6) Add a default storybook story
 
   Make sure the Web Dev Server config for storybook only serves `custom-elements-experimental.json` as `js`, since we need to serve other JSON files as JSON (e.g. for `src` attribute / property in this component)
 
   Fix wrong `hamburger-menu` custom tag usage
 
-- Updated dependencies [6fc5042]
-- Updated dependencies [9c100e6]
+- Updated dependencies [`6fc5042`](https://github.com/inventage/web-components/commit/6fc5042)
+- Updated dependencies [`9c100e6`](https://github.com/inventage/web-components/commit/9c100e6)
   - @inventage-web-components/common@0.0.2-next.0
   - @inventage-web-components/hamburger-menu@0.0.2-next.0
 
@@ -310,8 +310,8 @@
 
 ### Patch Changes
 
-- 05d8bdd: Do not include test + stories in final npm package
-- Updated dependencies [05d8bdd]
+- [`05d8bdd`](https://github.com/inventage/web-components/commit/05d8bdd) Do not include test + stories in final npm package
+- Updated dependencies [`05d8bdd`](https://github.com/inventage/web-components/commit/05d8bdd)
   - @inventage-web-components/common@0.0.1
   - @inventage-web-components/hamburger-menu@0.0.1
 
@@ -319,7 +319,7 @@
 
 ### Patch Changes
 
-- 05d8bdd: Do not include test + stories in final npm package
-- Updated dependencies [05d8bdd]
+- [`05d8bdd`](https://github.com/inventage/web-components/commit/05d8bdd) Do not include test + stories in final npm package
+- Updated dependencies [`05d8bdd`](https://github.com/inventage/web-components/commit/05d8bdd)
   - @inventage-web-components/common@0.0.1-next.1
   - @inventage-web-components/hamburger-menu@0.0.1-next.1
