@@ -133,6 +133,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  *
  * @cssprop [--portal-navigation-main-justify-content=flex-end] Horizontal centering of the items in the main menu (container)
  * @cssprop [--portal-navigation-current-justify-content=flex-end] Horizontal centering of the items in the current menu (container)
+ * @cssprop [--portal-navigation-current-slot-order=0] Order of the element holding the current slot
 
  * @cssprop [--portal-navigation-menu-item-white-space=nowrap] Menu item white space wrap
  * @cssprop [--portal-navigation-z-index-sticky=100] z-index for when navigation is sticky
@@ -162,6 +163,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @slot meta-right - The right slot inside the meta bar
  * @slot header-mobile - The slot rendered in the top bar in the mobile breakpoint
  * @slot tree-bottom - The slot rendered at the bottom of the menu tree (mobile breakpoint)
+ * @slot current - The slot rendered next to the current items (2nd level), in non-mobile variant only
  */
 export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   /**
@@ -502,6 +504,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       ${!this.isMobileBreakpoint && currentItems !== nothing
         ? html` <div class="current" part="current">
             <div class="container-max-width inner">
+              <div class="slot-current">
+                <slot name="current"></slot>
+              </div>
               <div class="menu-current menu" part="menu-current">${currentItems}</div>
             </div>
           </div>`

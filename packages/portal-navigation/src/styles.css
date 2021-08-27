@@ -262,8 +262,13 @@
  */
 .slot-left,
 .slot-right,
-.slot-logo {
+.slot-logo,
+.slot-current {
   display: flex;
+}
+
+.slot-current {
+  order: var(--portal-navigation-current-slot-order, 0);
 }
 
 .slot-left {

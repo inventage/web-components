@@ -64,18 +64,26 @@ export const Default: Story<ArgTypes> = (args: ArgTypes) => {
   const styleContainer = document.documentElement.style;
   args['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', args['--portal-navigation-color-primary']);
 
-  return html` <portal-navigation
-    src="${args.src!}"
-    language="${args.language}"
-    ?internalRouting="${args.internalRouting}"
-    currentApplication="${args.currentApplication!}"
-    ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
-    @portal-navigation.configured="${dispatchBadgeEvents}"
-  >
-    <span slot="logo" style="font-size: 0.75rem; display: flex; align-items: center;">Logo slot</span>
-    <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;">Left slot</span>
-    <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;">Right slot</span>
-  </portal-navigation>`;
+  return html` <style>
+      /*portal-navigation {*/
+      /*  --portal-navigation-current-justify-content: space-between;*/
+      /*  --portal-navigation-current-slot-order: 1;*/
+      /*}*/
+    </style>
+
+    <portal-navigation
+      src="${args.src!}"
+      language="${args.language}"
+      ?internalRouting="${args.internalRouting}"
+      currentApplication="${args.currentApplication!}"
+      ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
+      @portal-navigation.configured="${dispatchBadgeEvents}"
+    >
+      <span slot="logo" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">logo</code> slot</span>
+      <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">left</code> slot</span>
+      <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">right</code> slot</span>
+      <span slot="current" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">current</code> slot</span>
+    </portal-navigation>`;
 };
 
 Default.args = {
