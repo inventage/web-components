@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.4.3
+
+### Patch Changes
+
+- [`d8d0612`](https://github.com/inventage/web-components/commit/d8d06125987245abbc4fb02ee847c4834385b031) Add missing CSS part `slot-current` for current slot wrapper element
+
 ## 0.4.2
 
 ### Patch Changes
