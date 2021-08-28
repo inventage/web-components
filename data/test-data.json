@@ -83,6 +83,7 @@
           "id": "parent5",
           "label": "Parent5",
           "url": "/some/path/parent5",
+          "expanded": true,
           "items": [
             {
               "id": "item5.1",
