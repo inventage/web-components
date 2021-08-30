@@ -9,7 +9,7 @@
     "**/*.mjs"
   ],
   "dependencies": {
-    "@web/dev-server-storybook": "^0.3.7",
+    "@web/dev-server-storybook": "^0.3.8",
     "js-yaml": "^4.1.0",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",

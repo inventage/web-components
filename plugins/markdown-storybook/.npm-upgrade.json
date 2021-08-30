@@ -1,0 +1,28 @@
+{
+  "ignore": {
+    "remark-frontmatter": {
+      "versions": ">=4",
+      "reason": "Cannot update because this package is ESM only."
+    },
+    "remark-gfm": {
+      "versions": ">=2",
+      "reason": "Cannot update because this package is ESM only."
+    },
+    "remark-highlight.js": {
+      "versions": ">=7",
+      "reason": "Cannot update because this package is ESM only."
+    },
+    "remark-html": {
+      "versions": ">=14",
+      "reason": "Cannot update because this package is ESM only."
+    },
+    "remark-parse": {
+      "versions": ">=10",
+      "reason": "Cannot update because this package is ESM only."
+    },
+    "unified": {
+      "versions": ">=10",
+      "reason": "Cannot update because this package is ESM only."
+    }
+  }
+}
