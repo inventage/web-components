@@ -17,9 +17,9 @@ export default {
       },
     },
     language: {
+      options: ['en', 'de'],
       control: {
         type: 'inline-radio',
-        options: ['en', 'de'],
       },
     },
     activeUrl: {
