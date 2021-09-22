@@ -11,7 +11,7 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   watch: true,
   open: true,
   mimeTypes: {
-    'custom-elements-experimental.json': 'js',
+    'custom-elements.json': 'js',
   },
   plugins: [
     storybookWdsPlugin(),

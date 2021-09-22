@@ -149,7 +149,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart slot-left - Slot element wrapper for the left slot
  * @csspart slot-right - Slot element wrapper for the right slot
  * @csspart slot-current - Slot element wrapper for the current slot
- * @csspart menu-main-items - Element wrapper for the main menu items (1st level)
+ * @csspart menu-main - Element wrapper for the main menu items (1st level)
  * @csspart meta-bar - Element wrapper for the meta bar
  * @csspart navigation-header - Element wrapper for the navigation header
  * @csspart main - Element wrapper for the main navigation area / container
