@@ -13,6 +13,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: ['commitlint.config.js'],
+      env: {
+        node: true,
+      },
+    },
+    {
       files: ['**/*.ts'],
       extends: ['plugin:@typescript-eslint/recommended'],
       plugins: ['@typescript-eslint'],
