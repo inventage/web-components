@@ -372,14 +372,14 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     if (mql.addEventListener) {
       mql.addEventListener('change', e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
+        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     } else {
       // Deprecated 'MediaQueryList' API, <Safari 14, IE, <Edge 16
       // noinspection JSDeprecatedSymbols
       mql.addListener(e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
+        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     }
   }
@@ -388,7 +388,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('language')) {
-      this.dispatchEvent(new CustomEvent(PortalNavigation.events.setLanguage, { detail: this.language, bubbles: true }));
+      this.dispatchEvent(new CustomEvent(PortalNavigation.events.setLanguage, { detail: this.language, composed: true, bubbles: true }));
     }
 
     if (changedProperties.has('activeUrl')) {
@@ -402,7 +402,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     if (changedProperties.has('hamburgerMenuExpanded')) {
-      this.dispatchEvent(new CustomEvent(PortalNavigation.events.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, bubbles: true }));
+      this.dispatchEvent(new CustomEvent(PortalNavigation.events.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, composed: true, bubbles: true }));
 
       // Prevent anchor overflowing in mobile when navigation is sticky + open
       if (this.sticky && this.anchorElement && this.mobileBreakpoint) {
@@ -552,7 +552,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         const data = await response.json();
 
         this.configuration = new Configuration(data);
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.configured, { detail: this.configuration }));
+        this.dispatchEvent(new CustomEvent(PortalNavigation.events.configured, { detail: this.configuration, composed: true, bubbles: true }));
         this.__updateActivePathFromUrl();
         this.requestUpdateInternal();
       } catch (e) {
