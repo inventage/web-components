@@ -1,4 +1,4 @@
-import { html } from '@inventage-web-components/common';
+import { html, TemplateResult } from '@inventage-web-components/common';
 import { Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
@@ -52,38 +52,39 @@ interface ArgTypes {
   '--portal-navigation-color-primary'?: string;
 }
 
-export const Default: Story<ArgTypes> = (args: ArgTypes) => {
+const Template = (args: ArgTypes): TemplateResult => {
   // TODO: We could probably iterate over all properties that start with `--` and generate the styles automatically…
   const styleContainer = document.documentElement.style;
   args['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', args['--portal-navigation-color-primary']);
 
-  return html` <style>
-      /*portal-navigation {*/
-      /*  --portal-navigation-current-justify-content: space-between;*/
-      /*  --portal-navigation-current-slot-order: 1;*/
-      /*}*/
-    </style>
-
-    <portal-navigation
-      src="${args.src!}"
-      language="${args.language}"
-      ?internalRouting="${args.internalRouting}"
-      currentApplication="${args.currentApplication!}"
-      ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
-      @portal-navigation.configured="${dispatchBadgeEvents}"
-    >
-      <span slot="logo" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">logo</code> slot</span>
-      <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">left</code> slot</span>
-      <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">right</code> slot</span>
-      <span slot="current" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">current</code> slot</span>
-    </portal-navigation>`;
+  return html`<portal-navigation
+    src="${args.src!}"
+    language="${args.language}"
+    ?internalRouting="${args.internalRouting}"
+    currentApplication="${args.currentApplication!}"
+    ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
+    @portal-navigation.configured="${dispatchBadgeEvents}"
+  >
+    <span slot="logo" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">logo</code> slot</span>
+    <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">left</code> slot</span>
+    <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">right</code> slot</span>
+    <span slot="current" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">current</code> slot</span>
+  </portal-navigation>`;
 };
 
+export const Default: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 Default.args = {
   language: 'en',
   src: './data/data.json',
   internalRouting: true,
   currentApplication: 'ebanking',
+};
+
+export const Mobile: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+Mobile.parameters = {
+  viewport: {
+    defaultViewport: 'mobile2',
+  },
 };
 
 export const Empty: Story<ArgTypes> = (_args: ArgTypes) => {
