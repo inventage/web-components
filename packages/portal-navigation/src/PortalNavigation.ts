@@ -376,6 +376,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       });
     } else {
       // Deprecated 'MediaQueryList' API, <Safari 14, IE, <Edge 16
+      // noinspection JSDeprecatedSymbols
       mql.addListener(e => {
         this.isMobileBreakpoint = e.matches;
         this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint }));
@@ -483,12 +484,10 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         ? nothing
         : html` <main class="main" part="main">
             ${!this.isMobileBreakpoint && (menuMain !== nothing || menuSettings !== nothing)
-              ? html`
-                  <div class='container-max-width inner'>
-                    ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main">${menuMain}</div>` : nothing}
-                    ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings">${menuSettings}</div>` : nothing}
-                  </div>
-                  </div>`
+              ? html` <div class="container-max-width inner">
+                  ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main">${menuMain}</div>` : nothing}
+                  ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings">${menuSettings}</div>` : nothing}
+                </div>`
               : nothing}
             ${this.isMobileBreakpoint && this.hamburgerMenuExpanded
               ? html` <!-- Meta bar -->
