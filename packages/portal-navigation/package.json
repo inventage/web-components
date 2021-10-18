@@ -31,7 +31,7 @@
     "validate:schema": "ajv validate -s configuration.schema.json -d './data/*.json'"
   },
   "sideEffects": [
-    "src/portal-navigation.js"
+    "**/portal-navigation.js"
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
