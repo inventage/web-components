@@ -77,6 +77,7 @@ export const NavigationEventListeners = {
 
 const NavigationCssClasses = {
   selected: '-selected',
+  expanded: '-expanded',
 } as const;
 
 type NavigationCssClasses = typeof NavigationCssClasses;
@@ -713,6 +714,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
           'menu-link': true,
           'tree-parent': isTreeMode,
           [NavigationCssClasses.selected]: active,
+          [NavigationCssClasses.expanded]: expanded,
         })}"
         target="${destination === 'extern' && !hasItems ? '_blank' : '_self'}"
         @click="${(e: Event) => this.__onLink(e, item)}"
@@ -839,6 +841,23 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
     const hasItems = item.items && item.items.length > 0;
     const internalRouting = this.__isInternalRouting(item);
+    const { expanded = false } = item as Record<string, boolean>;
+
+    // On mobile and for items with children, we compare the active path to the path of the item clicked
+    // If they match, this means we will reset the active path which should "close" an open menu
+    const objectPath = this.configuration.getObjectPathForSelection(object => object.id === item.id);
+    if (this.isMobileBreakpoint && hasItems && (this.activePath.equals(objectPath.toIdPath()) || expanded)) {
+      e.preventDefault();
+      this.activePath = new IdPath();
+      return;
+    }
+
+    // Open external items with children in mobile as well
+    if (this.isMobileBreakpoint && hasItems && !internalRouting) {
+      e.preventDefault();
+      this.activePath = objectPath.toIdPath();
+      return;
+    }
 
     if (!hasItems) {
       if (internalRouting) {
@@ -913,7 +932,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     let closeHamburgerExpanded = true;
     if (hasItems) {
       refItem = this.__getDefaultItemOf(selectedItem!);
-      dispatchEvent = !!refItem && refItem.destination !== 'extern';
+      dispatchEvent = !!refItem && !this.isMobileBreakpoint && refItem.destination !== 'extern';
 
       // Expanded hamburger should be closed only when the clicked item does not have an internal default item
       // This ensures that accordions in mobile breakpoint can be expanded. The routeTo event will still be thrown

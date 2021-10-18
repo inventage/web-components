@@ -53,4 +53,13 @@ describe('IdPath', () => {
     expect(idPath2.getId(2)).to.equal('item');
     expect(idPath2.getId(3)).to.equal('sub-item');
   });
+
+  it('can compare whether two id paths are equal', () => {
+    const idPath = new IdPath('menu', 'parent', 'item');
+    const otherPath = new IdPath('menu', 'parent', 'item');
+    const thirdPath = new IdPath('menu', 'parent', 'item2');
+
+    expect(idPath.equals(otherPath)).to.be.true;
+    expect(idPath.equals(thirdPath)).to.be.false;
+  });
 });

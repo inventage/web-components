@@ -37,6 +37,42 @@
               "application": "app1"
             }
           ]
+        },
+        {
+          "id": "parent6",
+          "label": { "de": "Parent6_de", "en": "Parent6_en" },
+          "items": [
+            {
+              "id": "item6.1",
+              "label": { "de": "Item 6.1_de", "en": "Item 6.1_en" },
+              "url": "/some/path/item6.1",
+              "application": "app1"
+            },
+            {
+              "id": "item6.2",
+              "label": { "de": "Item 6.2_de", "en": "Item 6.2_en" },
+              "url": "/some/path/item6.2",
+              "application": "app1"
+            }
+          ]
+        },
+        {
+          "id": "parent7",
+          "label": { "de": "Parent7_de", "en": "Parent7_en" },
+          "items": [
+            {
+              "id": "item7.1",
+              "label": { "de": "Item 7.1_de", "en": "Item 7.1_en" },
+              "url": "/some/path/item7.1",
+              "application": "app2"
+            },
+            {
+              "id": "item7.2",
+              "label": { "de": "Item 7.2_de", "en": "Item 7.2_en" },
+              "url": "/some/path/item7.2",
+              "application": "app2"
+            }
+          ]
         }
       ]
     },

@@ -229,7 +229,8 @@
   margin-left: auto;
 }
 
-.tree-parent.-selected > .indicator {
+.tree-parent.-selected > .indicator,
+.tree-parent.-expanded > .indicator {
   transform: rotate(180deg);
   transition: transform 0.125s;
 }

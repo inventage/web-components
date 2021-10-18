@@ -1,11 +1,14 @@
 import { spy } from 'sinon';
 
+export const DEFAULT_VIEWPORT_WIDTH = 1200;
+export const DEFAULT_VIEWPORT_HEIGHT = 800;
+
 /**
  * From pwa-helpers
  *
  * @see https://github.com/Polymer/pwa-helpers/blob/master/src/router.ts
  */
-export const handlerSpy = spy(e => {
+export const globalClickHandlerSpy = spy(e => {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) {
     return;
   }

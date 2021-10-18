@@ -154,6 +154,8 @@ export const Test: Story<ArgTypes> = (args: ArgTypes) => {
 
 Test.args = {
   language: 'en',
+  currentApplication: 'app1',
+  internalRouting: true,
   src: './data/test-data.json',
 };
 

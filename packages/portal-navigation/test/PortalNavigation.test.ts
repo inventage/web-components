@@ -3,10 +3,10 @@ import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
 import '../src/portal-navigation.js';
-import { PortalNavigation, NavigationEventListeners } from '../src/PortalNavigation.js';
+import { NavigationEventListeners, PortalNavigation } from '../src/PortalNavigation.js';
 import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
 import dataJson from '../data/test-data.json';
-import { handlerSpy, isInViewport } from './test-utils.js';
+import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, globalClickHandlerSpy, isInViewport } from './test-utils.js';
 
 const configurationData = dataJson as ConfigurationData;
 
@@ -25,12 +25,12 @@ type WaitUntilOptions = {
  * @param options
  * @see https://open-wc.org/docs/testing/helpers/#waituntil
  */
-const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options: WaitUntilOptions = { interval: 10 }) => {
+const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options: WaitUntilOptions = { interval: 10, timeout: 10000 }) => {
   await waitUntil(() => !!el.shadowRoot?.querySelector(selector), 'Element did not render children', options);
 };
 
 beforeEach(async () => {
-  await setViewport({ width: 1200, height: 800 });
+  await setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT });
 });
 
 /**
@@ -277,11 +277,11 @@ describe('<portal-navigation>', () => {
 
     beforeEach(() => {
       origHref = window.location.href;
-      document.addEventListener('click', handlerSpy);
+      document.addEventListener('click', globalClickHandlerSpy);
     });
 
     afterEach(() => {
-      document.removeEventListener('click', handlerSpy);
+      document.removeEventListener('click', globalClickHandlerSpy);
       window.history.replaceState({}, '', origHref);
     });
 
@@ -317,7 +317,7 @@ describe('<portal-navigation>', () => {
           src="${TEST_DATA_JSON_PATH}"
           currentapplication="app1"
           internalrouting
-          mobilebreakpoint="1500"
+          mobilebreakpoint="${DEFAULT_VIEWPORT_WIDTH - 1}"
           hamburgermenuexpanded
           @portal-navigation.hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`
@@ -325,11 +325,81 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el);
 
       expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(eventSpy.callCount).to.equal(1);
 
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
 
       expect(eventSpy.callCount).to.equal(1);
       expect(el.hamburgerMenuExpanded).to.be.true;
+    });
+
+    it('does open menu items with children in mobile breakpoint without navigating', async () => {
+      await setViewport({ width: 600, height: DEFAULT_VIEWPORT_HEIGHT });
+
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation
+          src="${TEST_DATA_JSON_PATH}"
+          currentapplication="app1"
+          internalrouting
+          mobilebreakpoint="${DEFAULT_VIEWPORT_WIDTH - 1}"
+          hamburgermenuexpanded
+        ></portal-navigation>`
+      );
+      await childrenRendered(el);
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
+      await childrenRendered(el, '[part="item-item2.1"]');
+
+      expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(el.getActivePath().getMenuId()).to.equal('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent2');
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent6"]')).click());
+      await childrenRendered(el, '[part="item-item6.1"]');
+
+      expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(el.getActivePath().getMenuId()).to.equal('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent6');
+
+      // External item (different app)
+      const windowLocationBefore = window.location.pathname;
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent7"]')).click());
+      await childrenRendered(el, '[part="item-item7.1"]');
+
+      expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(el.getActivePath().getMenuId()).to.equal('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent7');
+
+      // Location should not change (no external routing)
+      expect(window.location.pathname).to.equal(windowLocationBefore);
+    });
+
+    it('does close menu items with children in mobile breakpoint without navigating', async () => {
+      await setViewport({ width: 600, height: DEFAULT_VIEWPORT_HEIGHT });
+
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation
+          src="${TEST_DATA_JSON_PATH}"
+          currentapplication="app1"
+          internalrouting
+          mobilebreakpoint="${DEFAULT_VIEWPORT_WIDTH - 1}"
+          hamburgermenuexpanded
+        ></portal-navigation>`
+      );
+      await childrenRendered(el);
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
+      await childrenRendered(el, '[part="item-item2.1"]');
+
+      expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(el.getActivePath().getMenuId()).to.equal('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent2');
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
+      await aTimeout(100);
+
+      expect(el.hamburgerMenuExpanded).to.be.true;
+      expect(el.getActivePath().isEmpty()).to.be.true;
     });
 
     it('does close an expanded mobile menu when a non-parent item has been clicked', async () => {
@@ -340,7 +410,7 @@ describe('<portal-navigation>', () => {
           src="${TEST_DATA_JSON_PATH}"
           currentapplication="app1"
           internalrouting
-          mobilebreakpoint="1500"
+          mobilebreakpoint="${DEFAULT_VIEWPORT_WIDTH - 1}"
           hamburgermenuexpanded
           @portal-navigation.hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`

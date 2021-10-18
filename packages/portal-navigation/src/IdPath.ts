@@ -70,4 +70,13 @@ export class IdPath {
   concat(...ids: (string | undefined)[]): IdPath {
     return new IdPath(...this.ids, ...ids);
   }
+
+  /**
+   * Equal comparator for id paths.
+   *
+   * @param otherPath
+   */
+  equals(otherPath: IdPath) {
+    return this.ids.length === otherPath.ids.length && this.ids.every(id => id && otherPath.contains(id));
+  }
 }
