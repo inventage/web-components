@@ -56,17 +56,24 @@ export type NavigationMenuName = keyof typeof NavigationMenus;
 
 const NavigationEventNamespace = 'portal-navigation';
 
-const NavigationEvents = {
+/**
+ * List of events this component throws
+ */
+export const NavigationEvents = {
   routeTo: `${NavigationEventNamespace}.routeTo`,
   setLanguage: `${NavigationEventNamespace}.setLanguage`,
-  setBadgeValue: `${NavigationEventNamespace}.setBadgeValue`,
   configured: `${NavigationEventNamespace}.configured`,
   breakpointChanged: `${NavigationEventNamespace}.breakpointChanged`,
-  firstUpdated: 'firstUpdated',
-  hamburgerMenuExpanded: 'hamburgerMenuExpanded',
+  firstUpdated: `${NavigationEventNamespace}.firstUpdated`,
+  hamburgerMenuExpanded: `${NavigationEventNamespace}.hamburgerMenuExpanded`,
 } as const;
 
-type NavigationEvents = typeof NavigationEvents;
+/**
+ * List of events this component listens to
+ */
+export const NavigationEventListeners = {
+  setBadgeValue: `${NavigationEventNamespace}.setBadgeValue`,
+} as const;
 
 const NavigationCssClasses = {
   selected: '-selected',
@@ -297,13 +304,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   }
 
   /**
-   * A listing of events this components fires or listens to.
-   */
-  static get events(): NavigationEvents {
-    return NavigationEvents;
-  }
-
-  /**
    * A listing of css classes that are frequently used in a generic manner.
    */
   static get classes(): NavigationCssClasses {
@@ -343,7 +343,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // Register global listeners
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    document.addEventListener(PortalNavigation.events.setBadgeValue, this.__setBadgeValueEventListener);
+    document.addEventListener(NavigationEventListeners.setBadgeValue, this.__setBadgeValueEventListener);
     document.addEventListener('click', this.__globalClickListener);
     window.addEventListener('resize', this.updateAnchorPaddingWhenSticky);
   }
@@ -352,7 +352,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // Remove existing global listeners
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    document.removeEventListener(PortalNavigation.events.setBadgeValue, this.__setBadgeValueEventListener);
+    document.removeEventListener(NavigationEventListeners.setBadgeValue, this.__setBadgeValueEventListener);
     document.removeEventListener('click', this.__globalClickListener);
     window.removeEventListener('resize', this.updateAnchorPaddingWhenSticky);
 
@@ -363,7 +363,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     /**
      * Throw event when the component is rendered for the first time
      */
-    this.dispatchEvent(new CustomEvent(PortalNavigation.events.firstUpdated, { detail: this }));
+    this.dispatchEvent(new CustomEvent(NavigationEvents.firstUpdated, { detail: this }));
 
     // Listen for mobile breakpoint changes
     const mql = window.matchMedia(`screen and (max-width: ${this.mobileBreakpoint}px)`);
@@ -372,14 +372,14 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     if (mql.addEventListener) {
       mql.addEventListener('change', e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
+        this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     } else {
       // Deprecated 'MediaQueryList' API, <Safari 14, IE, <Edge 16
       // noinspection JSDeprecatedSymbols
       mql.addListener(e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
+        this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     }
   }
@@ -388,7 +388,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('language')) {
-      this.dispatchEvent(new CustomEvent(PortalNavigation.events.setLanguage, { detail: this.language, composed: true, bubbles: true }));
+      this.dispatchEvent(new CustomEvent(NavigationEvents.setLanguage, { detail: this.language, composed: true, bubbles: true }));
     }
 
     if (changedProperties.has('activeUrl')) {
@@ -402,7 +402,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     if (changedProperties.has('hamburgerMenuExpanded')) {
-      this.dispatchEvent(new CustomEvent(PortalNavigation.events.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, composed: true, bubbles: true }));
+      this.dispatchEvent(new CustomEvent(NavigationEvents.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, composed: true, bubbles: true }));
 
       // Prevent anchor overflowing in mobile when navigation is sticky + open
       if (this.sticky && this.anchorElement && this.mobileBreakpoint) {
@@ -552,7 +552,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         const data = await response.json();
 
         this.configuration = new Configuration(data);
-        this.dispatchEvent(new CustomEvent(PortalNavigation.events.configured, { detail: this.configuration, composed: true, bubbles: true }));
+        this.dispatchEvent(new CustomEvent(NavigationEvents.configured, { detail: this.configuration, composed: true, bubbles: true }));
         this.__updateActivePathFromUrl();
         this.requestUpdateInternal();
       } catch (e) {
@@ -927,7 +927,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
     if (dispatchEvent) {
       this.dispatchEvent(
-        new CustomEvent(PortalNavigation.events.routeTo, {
+        new CustomEvent(NavigationEvents.routeTo, {
           detail: {
             url: (refItem as MenuItem)!.url,
             label: refItem!.label,

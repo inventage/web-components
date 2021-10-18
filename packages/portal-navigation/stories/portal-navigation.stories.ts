@@ -2,7 +2,7 @@ import { html, TemplateResult } from '@inventage-web-components/common';
 import { generateParagraphs, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
-import { PortalNavigation } from '../src/PortalNavigation.js';
+import { NavigationEventListeners, NavigationEvents } from '../src/PortalNavigation.js';
 
 export default {
   component: 'portal-navigation',
@@ -40,7 +40,7 @@ export default {
   },
   parameters: {
     actions: {
-      handles: [Object.values(PortalNavigation.events)],
+      handles: [Object.values(NavigationEvents)],
     },
   },
 };
@@ -167,7 +167,7 @@ Test.parameters = {
 
 const dispatchBadgeEvents = () => {
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         id: 'profile.preferences.userSettings',
         value: { en: 'NEW', de: 'NEU' },
@@ -176,7 +176,7 @@ const dispatchBadgeEvents = () => {
   );
 
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         id: 'meta.messages',
         value: 9,
@@ -185,7 +185,7 @@ const dispatchBadgeEvents = () => {
   );
 
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         id: 'main.assetCount',
         value: { en: 'new', de: 'neu' },
@@ -194,7 +194,7 @@ const dispatchBadgeEvents = () => {
   );
 
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         url: '/ebanking/update-notification-preferences',
         value: 34,
@@ -205,7 +205,7 @@ const dispatchBadgeEvents = () => {
 
 const dispatchBadgeEventsTest = () => {
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         id: 'meta',
         value: 9,
@@ -214,7 +214,7 @@ const dispatchBadgeEventsTest = () => {
   );
 
   document.dispatchEvent(
-    new CustomEvent(PortalNavigation.events.setBadgeValue, {
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
       detail: {
         id: 'parent2',
         value: { en: 'new', de: 'neu' },

@@ -3,7 +3,7 @@ import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
 import '../src/portal-navigation.js';
-import { PortalNavigation } from '../src/PortalNavigation.js';
+import { PortalNavigation, NavigationEventListeners } from '../src/PortalNavigation.js';
 import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
 import dataJson from '../data/test-data.json';
 
@@ -107,7 +107,7 @@ describe('<portal-navigation>', () => {
           src="${TEST_DATA_JSON_PATH}"
           @portal-navigation.configured="${() => {
             document.dispatchEvent(
-              new CustomEvent(PortalNavigation.events.setBadgeValue, {
+              new CustomEvent(NavigationEventListeners.setBadgeValue, {
                 detail: {
                   id: 'meta',
                   value: 9,
@@ -116,7 +116,7 @@ describe('<portal-navigation>', () => {
             );
 
             document.dispatchEvent(
-              new CustomEvent(PortalNavigation.events.setBadgeValue, {
+              new CustomEvent(NavigationEventListeners.setBadgeValue, {
                 detail: {
                   id: 'parent2',
                   value: { en: 'new', de: 'neu' },
@@ -300,7 +300,7 @@ describe('<portal-navigation>', () => {
           src="${TEST_DATA_JSON_PATH}"
           @portal-navigation.configured="${() => {
             document.dispatchEvent(
-              new CustomEvent(PortalNavigation.events.setBadgeValue, {
+              new CustomEvent(NavigationEventListeners.setBadgeValue, {
                 detail: {
                   id: 'parent2',
                   value: badgeLabel,
@@ -364,7 +364,7 @@ describe('<portal-navigation>', () => {
           internalrouting
           mobilebreakpoint="1500"
           hamburgermenuexpanded
-          @hamburgerMenuExpanded="${eventSpy as EventListener}"
+          @portal-navigation.hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`
       );
       await childrenRendered(el);
@@ -387,7 +387,7 @@ describe('<portal-navigation>', () => {
           internalrouting
           mobilebreakpoint="1500"
           hamburgermenuexpanded
-          @hamburgerMenuExpanded="${eventSpy as EventListener}"
+          @portal-navigation.hamburgerMenuExpanded="${eventSpy as EventListener}"
         ></portal-navigation>`
       );
       await childrenRendered(el);
@@ -396,7 +396,7 @@ describe('<portal-navigation>', () => {
 
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click()); // Open accordion first
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-item2.2"]')).click()); // Click a child
-      await oneEvent(el, 'hamburgerMenuExpanded');
+      await oneEvent(el, 'portal-navigation.hamburgerMenuExpanded');
 
       expect(eventSpy.callCount).to.equal(2);
       expect(el.hamburgerMenuExpanded).to.be.false;
