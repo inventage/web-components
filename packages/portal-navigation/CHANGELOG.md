@@ -1,5 +1,25 @@
 # @inventage-web-components/portal-navigation
 
+## 0.6.0
+
+### Minor Changes
+
+- [`4ea7c46`](https://github.com/inventage/web-components/commit/4ea7c4644ad7d443f4f60651eb5a427e2e7bcb11) Added **expanding menus** in mobile breakpoint.
+
+  This feature expands menu items with children instead of navigating to their defaults. This makes browsing menu item's children easier on mobile.
+
+* [`3ccdeb6`](https://github.com/inventage/web-components/commit/3ccdeb64dad719550bc78cc93b6692011bc68c57) **BREAKING**: Renamed events in order for all events that the component throws to be namespaced. The two events that make this a breaking change are `hamburgerMenuExpanded` and `firstUpdated`. These are now prefixed with the global component event prefix `portal-navigation.` (e.g. `hamburgerMenuExpanded` → `portal-navigation.hamburgerMenuExpanded`).
+
+  All events have been unified by using `composed: true` and `bubbles: true`, which means you do not have listen to them on the element directly.
+
+### Patch Changes
+
+- [`105832a`](https://github.com/inventage/web-components/commit/105832a0e13a759f264a621b46d4d0768837166d) Remove superfluous closing `</div>` in one template
+
+* [`b7f1ee2`](https://github.com/inventage/web-components/commit/b7f1ee23931d64e92179909af4fcc1ac383d97dd) All `portalNavigation.*` events should bubble out of the shadow DOM.
+
+- [`3927bf3`](https://github.com/inventage/web-components/commit/3927bf31a79d97777bbcfb602901458965494395) Fix `sideEffects` definition in `package.json`
+
 ## 0.5.0
 
 ### Minor Changes

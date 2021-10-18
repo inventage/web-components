@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.2.2
+
+### Patch Changes
+
+- [`3927bf3`](https://github.com/inventage/web-components/commit/3927bf31a79d97777bbcfb602901458965494395) Fix `sideEffects` definition in `package.json`
+
 ## 0.2.1
 
 ### Patch Changes
