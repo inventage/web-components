@@ -3,6 +3,14 @@
     "globby": {
       "versions": ">=12",
       "reason": "Is ESM only and has a dependency on 'slash' which breaks the markdown-storybook custom plugin (which has to be CJS for now because of storybook…)"
+    },
+    "@open-wc/testing": {
+      "versions": ">=3",
+      "reason": "Upgrade together with Lit 2.x upgrade"
+    },
+    "lit-html": {
+      "versions": ">=2",
+      "reason": "Major upgrade, upgrade all packages at once"
     }
   }
 }
