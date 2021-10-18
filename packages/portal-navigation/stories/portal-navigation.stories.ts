@@ -57,6 +57,9 @@ const Template = (args: ArgTypes): TemplateResult => {
   const styleContainer = document.documentElement.style;
   args['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', args['--portal-navigation-color-primary']);
 
+  // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
+  document.querySelector('body')!.style.paddingTop = '';
+
   return html`<portal-navigation
     src="${args.src!}"
     language="${args.language}"
