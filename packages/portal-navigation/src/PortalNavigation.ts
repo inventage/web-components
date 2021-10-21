@@ -373,14 +373,12 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     if (mql.addEventListener) {
       mql.addEventListener('change', e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     } else {
       // Deprecated 'MediaQueryList' API, <Safari 14, IE, <Edge 16
       // noinspection JSDeprecatedSymbols
       mql.addListener(e => {
         this.isMobileBreakpoint = e.matches;
-        this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
       });
     }
   }
@@ -409,6 +407,10 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       if (this.sticky && this.anchorElement && this.mobileBreakpoint) {
         this.anchorElement.style.overflowY = this.hamburgerMenuExpanded ? 'hidden' : 'visible';
       }
+    }
+
+    if (changedProperties.has('breakpointChanged')) {
+      this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
     this.updateAnchorPaddingWhenSticky();
