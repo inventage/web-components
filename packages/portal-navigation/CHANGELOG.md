@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.7.0
+
+### Minor Changes
+
+- [`d8bb19c`](https://github.com/inventage/web-components/commit/d8bb19c010afe0fd96e349554a3d3aee1df4c5da) Hide tree parent indicator (arrow) in mobile breakpoint for `expanded` menu items.
+
+### Patch Changes
+
+- [`9b38371`](https://github.com/inventage/web-components/commit/9b38371ef0023ccc11a29cb82d1b49f73d9db3af) Add missing space between `meta-left` and `meta-right` meta bar slots
+
 ## 0.6.1
 
 ### Patch Changes
