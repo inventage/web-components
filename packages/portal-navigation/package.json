@@ -21,7 +21,7 @@
     "lib/src/**/*.js.map"
   ],
   "scripts": {
-    "analyze": "cem analyze --litelement",
+    "analyze": "cem analyze",
     "build": "rimraf lib && tsc -b .",
     "lint": "run-s validate:*",
     "prepublishOnly": "npm run analyze && npm run build",

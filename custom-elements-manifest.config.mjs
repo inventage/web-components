@@ -1,9 +1,9 @@
-import { moduleFileExtensionsPlugin } from 'cem-plugin-module-file-extensions';
+import { plugins } from '@inventage-web-components/cem-preset';
 
 // @see https://github.com/webcomponents/custom-elements-manifest
 export default {
-  globs: ['packages/*/src/**.ts'],
+  globs: ['packages/*/src/**/*.ts'],
   outdir: '.',
-  litElement: true,
-  plugins: [moduleFileExtensionsPlugin()],
+  litelement: true,
+  plugins: [...plugins],
 };
