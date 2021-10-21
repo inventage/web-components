@@ -28,6 +28,7 @@
 
 .meta-bar > .inner {
   display: flex;
+  justify-content: space-between;
 }
 
 .meta-bar:empty {
