@@ -409,7 +409,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       }
     }
 
-    if (changedProperties.has('breakpointChanged')) {
+    if (changedProperties.has('isMobileBreakpoint')) {
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
