@@ -87,9 +87,10 @@ type NavigationCssClasses = typeof NavigationCssClasses;
 /**
  * A component implementing an opinionated (but generic and hence configurable) navigation pattern.
  *
+ * @fires portal-navigation.firstUpdated - Event fired when the component has been rendered for the first time.
+ * @fires portal-navigation.configured - Event fired when the configuration has been successfully loaded.
  * @fires portal-navigation.routeTo - Event fired when an item with a url is clicked and the routing is done internally.
  * @fires portal-navigation.setLanguage - Event fired when the 'lang' property changes.
- * @fires portal-navigation.configured - Event fired when the configuration has been successfully loaded.
  * @fires portal-navigation.breakpointChanged - Event fired when the mobile breakpoint media query state changes.
  *
  * @listens 'portal-navigation.setBadgeValue' - Listens to event that change the badge value of an item or menu and sets that value accordingly.
@@ -361,9 +362,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   }
 
   firstUpdated(): void {
-    /**
-     * Throw event when the component is rendered for the first time
-     */
     this.dispatchEvent(new CustomEvent(NavigationEvents.firstUpdated, { detail: this }));
 
     // Listen for mobile breakpoint changes
