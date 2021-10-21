@@ -240,10 +240,14 @@
   margin-left: auto;
 }
 
-.tree-parent.-selected > .indicator,
-.tree-parent.-expanded > .indicator {
+.tree-parent.-expanded > .indicator,
+.tree-parent.-selected > .indicator {
   transform: rotate(180deg);
   transition: transform 0.125s;
+}
+
+.tree-parent.-expanded > .indicator {
+  display: none;
 }
 
 .tree-parent-indicator {
