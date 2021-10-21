@@ -116,8 +116,10 @@
   color: var(--portal-navigation-color-selected, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
 }
 
-.menu-link:hover {
-  color: var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
+@media (hover: hover) {
+  .menu-link:hover {
+    color: var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
+  }
 }
 
 .menu-link > .icon {
@@ -161,8 +163,10 @@
   color: var(--portal-navigation-color-link-current, var(--portal-navigation-color-link));
 }
 
-.menu-current > .link:not(.-selected):hover {
-  color: var(--portal-navigation-color-hover-current, var(--portal-navigation-color-hover));
+@media (hover: hover) {
+  .menu-current > .link:not(.-selected):hover {
+    color: var(--portal-navigation-color-hover-current, var(--portal-navigation-color-hover));
+  }
 }
 
 /**
@@ -201,9 +205,14 @@
 }
 
 .dropdown .-selected > link,
-.dropdown:hover > link,
 .dropdown:focus > link {
   box-shadow: inset 4px 0 currentColor;
+}
+
+@media (hover: hover) {
+  .dropdown:hover > link {
+    box-shadow: inset 4px 0 currentColor;
+  }
 }
 
 .dropdown > .link {
@@ -211,8 +220,10 @@
   padding: var(--portal-navigation-dropdown-item-padding-y, 0.5rem) var(--portal-navigation-dropdown-item-padding-x, 1rem);
 }
 
-.dropdown > .link:hover {
-  color: var(--portal-navigation-color-hover-dropdown, var(--portal-navigation-color-hover));
+@media (hover: hover) {
+  .dropdown > .link:hover {
+    color: var(--portal-navigation-color-hover-dropdown, var(--portal-navigation-color-hover));
+  }
 }
 
 /**
