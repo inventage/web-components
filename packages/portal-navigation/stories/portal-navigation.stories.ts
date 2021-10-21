@@ -47,7 +47,7 @@ export default {
 
 interface ArgTypes {
   src?: string;
-  language: string;
+  language?: string;
   internalRouting?: boolean;
   currentApplication?: string;
   logoutMenuInMetaBar?: boolean;
@@ -57,13 +57,10 @@ interface ArgTypes {
   '--portal-navigation-color-primary'?: string;
 }
 
-const Template = ({
-  src = './data/data.json',
-  language = 'en',
-  internalRouting = true,
-  currentApplication = 'ebanking',
-  ...rest
-}: ArgTypes): TemplateResult => {
+const Template = (
+  { src = './data/data.json', language = 'en', internalRouting = true, currentApplication = 'ebanking', ...rest }: ArgTypes,
+  content?: TemplateResult | TemplateResult[]
+): TemplateResult => {
   // TODO: We could probably iterate over all properties that start with `--` and generate the styles automatically…
   const styleContainer = document.documentElement.style;
   rest['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', rest['--portal-navigation-color-primary']);
@@ -79,15 +76,24 @@ const Template = ({
     ?logoutMenuInMetaBar="${rest.logoutMenuInMetaBar}"
     @portal-navigation.configured="${dispatchBadgeEvents}"
   >
-    <span slot="logo" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">logo</code> slot</span>
-    <span slot="left" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">left</code> slot</span>
-    <span slot="right" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">right</code> slot</span>
-    <span slot="current" style="font-size: 0.75rem; display: flex; align-items: center;"><code style="padding-right: 0.5em;">current</code> slot</span>
+    ${content}
   </portal-navigation>`;
 };
 
+/**
+ * Default example story.
+ *
+ * @param args
+ * @constructor
+ */
 export const Default: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 
+/**
+ * Mobile breakpoint story.
+ *
+ * @param args
+ * @constructor
+ */
 export const Mobile: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 Mobile.parameters = {
   viewport: {
@@ -95,8 +101,35 @@ Mobile.parameters = {
   },
 };
 
-export const Empty: Story<ArgTypes> = (_args: ArgTypes) => {
-  return html` <portal-navigation></portal-navigation>`;
+/**
+ * Story showing all slots.
+ *
+ * @param args
+ * @constructor
+ */
+export const Slots: Story<ArgTypes> = (args: ArgTypes) => {
+  const slot = (name: string) =>
+    html`<span slot="${name}" style="font-size: 0.75rem; display: flex; align-items: center; color: #c0392b"
+      ><code style="padding-right: 0.5em;"><b>${name}</b></code> slot
+    </span>`;
+  const slots = ['logo', 'right', 'left', 'meta-left', 'meta-right', 'header-mobile', 'tree-bottom', 'current'];
+
+  return Template(
+    args,
+    slots.map(name => html`${slot(name)}`)
+  );
+};
+
+/**
+ * Empty data story
+ *
+ * @param args
+ * @constructor
+ */
+export const Empty: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+
+Empty.args = {
+  src: '',
 };
 
 Empty.parameters = {
@@ -144,7 +177,7 @@ This \`anchor\` element needs to have a \`position: relative\` for the \`positio
 export const Test: Story<ArgTypes> = (args: ArgTypes) => {
   return html` <portal-navigation
     src="${args.src!}"
-    language="${args.language}"
+    language="${args.language ?? ''}"
     ?internalRouting="${args.internalRouting}"
     currentApplication="${args.currentApplication!}"
     @portal-navigation.configured="${dispatchBadgeEventsTest}"
