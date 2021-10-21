@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.6.1
+
+### Patch Changes
+
+- [`54d99b5`](https://github.com/inventage/web-components/commit/54d99b5110d72192fd56d4e9ec9f472428169174) Fix an issue where the `breakpointChanged` event was not thrown.
+
+* [`61214f2`](https://github.com/inventage/web-components/commit/61214f27c0b327d931fbc0ad63f51482676f5399) Fix an issue where the `breakpointChanged` event was not thrown initially (even though the property changed).
+
+- [`502ac52`](https://github.com/inventage/web-components/commit/502ac52ea95f17677b03ab0a8799080b482cbf2f) Use `@media (hover: hover)` query to fix [«sticky» hover states](https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/) on touch devices.
+
 ## 0.6.0
 
 ### Minor Changes
