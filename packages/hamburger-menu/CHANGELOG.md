@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.2.3
+
+### Patch Changes
+
+- [`2790959`](https://github.com/inventage/web-components/commit/279095946dceb04815aea925a1136065f05dc53e) Add missing `tslib` dependency
+
 ## 0.2.2
 
 ### Patch Changes
