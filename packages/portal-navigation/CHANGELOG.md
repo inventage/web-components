@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.7.1
+
+### Patch Changes
+
+- [`2790959`](https://github.com/inventage/web-components/commit/279095946dceb04815aea925a1136065f05dc53e) Add missing `tslib` dependency
+
 ## 0.7.0
 
 ### Minor Changes
