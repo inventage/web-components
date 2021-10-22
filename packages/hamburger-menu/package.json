@@ -30,7 +30,8 @@
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
-    "@inventage-web-components/common": "^0.1.0"
+    "@inventage-web-components/common": "^0.1.0",
+    "tslib": "^2.0.0"
   },
   "keywords": [
     "lit-element",
