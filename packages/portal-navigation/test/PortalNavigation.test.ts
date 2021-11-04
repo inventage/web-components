@@ -270,6 +270,25 @@ describe('<portal-navigation>', () => {
       expect(el.getTemporaryBadgeValues().get('parent2')).equals(badgeLabel);
       expect(el.shadowRoot!.querySelector('[part="badge-parent2"]')).not.to.be.null;
     });
+
+    it('sets the active url using event listeners', async () => {
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation
+          src="${TEST_DATA_JSON_PATH}"
+          @portal-navigation.configured="${() => {
+            document.dispatchEvent(
+              new CustomEvent(NavigationEventListeners.setActiveUrl, {
+                detail: '/some/path/item2.2',
+              })
+            );
+          }}"
+        ></portal-navigation>`
+      );
+      await childrenRendered(el, '[part="item-item2.2"]');
+
+      expect(el.activeUrl).equals('/some/path/item2.2');
+      expect(el.shadowRoot!.querySelector('[part="item-item2.2"]')).not.to.be.null;
+    });
   });
 
   describe('Routing', () => {

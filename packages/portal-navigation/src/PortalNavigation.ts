@@ -73,6 +73,7 @@ export const NavigationEvents = {
  */
 export const NavigationEventListeners = {
   setBadgeValue: `${NavigationEventNamespace}.setBadgeValue`,
+  setActiveUrl: `${NavigationEventNamespace}.setActiveUrl`,
 } as const;
 
 const NavigationCssClasses = {
@@ -94,6 +95,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @fires portal-navigation.breakpointChanged - Event fired when the mobile breakpoint media query state changes.
  *
  * @listens 'portal-navigation.setBadgeValue' - Listens to event that change the badge value of an item or menu and sets that value accordingly.
+ * @listens 'portal-navigation.setActiveUrl' - Listens to event that change the active menu item.
  *
  * @cssprop {color} [--portal-navigation-color-primary=#555] Primary color used for text elements
  * @cssprop {color} [--portal-navigation-color-secondary=rgb(10, 81, 194)] Secondary color used for highlights
@@ -147,9 +149,6 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop [--portal-navigation-menu-item-white-space=nowrap] Menu item white space wrap
  * @cssprop [--portal-navigation-z-index-sticky=100] z-index for when navigation is sticky
  *
- *
- * @csspart container - The top-level, container element wrapping everything inside the host element
- * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)
  * @csspart slot-header-mobile - Slot element wrapper between the hamburger menu element and the logo slot
  * @csspart slot-meta-left - Slot element wrapper for the left part of the meta bar
  * @csspart slot-meta-right - Slot element wrapper for the right part of the meta bar
@@ -158,6 +157,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart slot-left - Slot element wrapper for the left slot
  * @csspart slot-right - Slot element wrapper for the right slot
  * @csspart slot-current - Slot element wrapper for the current slot
+ * @csspart container - The top-level, container element wrapping everything inside the host element
+ * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)
  * @csspart menu-main - Element wrapper for the main menu items (1st level)
  * @csspart meta-bar - Element wrapper for the meta bar
  * @csspart navigation-header - Element wrapper for the navigation header
@@ -318,6 +319,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // Make sure global (document / window) listeners are bound to `this`, otherwise we cannot properly remove them
     // @see https://open-wc.org/faq/events.html#on-elements-outside-of-your-element
     this.__setBadgeValueEventListener = this.__setBadgeValueEventListener.bind(this);
+    this.__setActiveUrlEventListener = this.__setActiveUrlEventListener.bind(this);
     this.__globalClickListener = this.__globalClickListener.bind(this);
 
     // Always debounce anchor padding updates
@@ -346,6 +348,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     document.addEventListener(NavigationEventListeners.setBadgeValue, this.__setBadgeValueEventListener);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.addEventListener(NavigationEventListeners.setActiveUrl, this.__setActiveUrlEventListener);
     document.addEventListener('click', this.__globalClickListener);
     window.addEventListener('resize', this.updateAnchorPaddingWhenSticky);
   }
@@ -355,6 +360,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     document.removeEventListener(NavigationEventListeners.setBadgeValue, this.__setBadgeValueEventListener);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    document.removeEventListener(NavigationEventListeners.setActiveUrl, this.__setActiveUrlEventListener);
     document.removeEventListener('click', this.__globalClickListener);
     window.removeEventListener('resize', this.updateAnchorPaddingWhenSticky);
 
@@ -579,10 +587,26 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * Listener function that processes a setBadgeValue event.
    */
   private __setBadgeValueEventListener(e: CustomEvent) {
-    const { detail } = e;
-    if (detail) {
-      this.setBadgeValue(detail.id || detail.url, detail.value);
+    const { detail: { id, url, value } = {} } = e;
+    if ((id === undefined && url === undefined) || value === undefined) {
+      console.warn('The event payload has to define an "id" or "url" property as well as "value".');
+      return;
     }
+
+    this.setBadgeValue(id || url, value);
+  }
+
+  /**
+   * Listener function that processes a setActiveUrl event.
+   */
+  private __setActiveUrlEventListener(e: CustomEvent) {
+    const { detail: url } = e;
+    if (url === undefined || typeof url !== 'string') {
+      console.warn('Event payload was either not defined or not a string.');
+      return;
+    }
+
+    this.activeUrl = url;
   }
 
   /**

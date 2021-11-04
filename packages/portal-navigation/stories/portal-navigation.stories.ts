@@ -89,6 +89,98 @@ const Template = (
 export const Default: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 
 /**
+ * Example with event listeners.
+ *
+ * @param args
+ * @constructor
+ */
+export const EventListeners: Story<ArgTypes> = (args: ArgTypes) => html`
+  ${Template(args)}
+
+  <style>
+    .event-list > .item {
+      margin-bottom: 1.5rem;
+    }
+
+    .event-list-item > .trigger {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-docs pre {
+      margin: 1rem 0 0;
+    }
+  </style>
+
+  <p>This component defines event listeners for the following events. You can click on each event to trigger an example.</p>
+  <ul class="event-list">
+    <li class="item event-list-item">
+      <a
+        href="#"
+        class="trigger"
+        @click="${(e: MouseEvent) => {
+          e.preventDefault();
+          document.dispatchEvent(
+            new CustomEvent(NavigationEventListeners.setBadgeValue, {
+              detail: {
+                id: '0',
+                value: getRandomInt(1, 1000),
+              },
+            })
+          );
+        }}"
+        ><code>${NavigationEventListeners.setBadgeValue}</code></a
+      >
+      <span class="docs event-docs">
+        Sets a random label (between <code>1</code> and <code>1000</code>) on the menu item with id <code>"0"</code>. <br /><br />
+        Example code:
+        <pre>
+document.dispatchEvent(
+  new CustomEvent(NavigationEventListeners.setBadgeValue, {
+    detail: {
+      id: '0',
+      value: getRandomInt(1, 1000),
+    },
+  })
+);
+        </pre
+        >
+      </span>
+    </li>
+    <li class="item event-list-item">
+      <a
+        href="#"
+        class="trigger"
+        @click="${(e: MouseEvent) => {
+          e.preventDefault();
+          document.dispatchEvent(
+            new CustomEvent(NavigationEventListeners.setActiveUrl, {
+              detail: '/ebanking/show-payment-standing-orders',
+            })
+          );
+        }}"
+        ><code>${NavigationEventListeners.setActiveUrl}</code></a
+      >
+      <span class="docs event-docs">
+        Sets the active url of the navigation to the event payload. This also marks the corresponding menu item, if found, «active» or «selected».
+        <br /><br />
+        Example code:
+        <pre>
+document.dispatchEvent(
+  new CustomEvent(NavigationEventListeners.setActiveUrl, {
+    detail: '/ebanking/show-payment-standing-orders',
+  })
+);
+        </pre
+        >
+      </span>
+    </li>
+  </ul>
+`;
+
+/**
  * Mobile breakpoint story.
  *
  * @param args
@@ -200,6 +292,9 @@ Test.parameters = {
   },
 };
 
+/**
+ * Dispatches some example setBadgeValue events.
+ */
 const dispatchBadgeEvents = () => {
   document.dispatchEvent(
     new CustomEvent(NavigationEventListeners.setBadgeValue, {
@@ -238,6 +333,9 @@ const dispatchBadgeEvents = () => {
   );
 };
 
+/**
+ * Dispatches some example setBadgeValue events for the test-data.json story.
+ */
 const dispatchBadgeEventsTest = () => {
   document.dispatchEvent(
     new CustomEvent(NavigationEventListeners.setBadgeValue, {
@@ -256,4 +354,15 @@ const dispatchBadgeEventsTest = () => {
       },
     })
   );
+};
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values
+ * @param min
+ * @param max
+ */
+const getRandomInt = (min: number, max: number): number => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 };
