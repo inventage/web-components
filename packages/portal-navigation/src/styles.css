@@ -111,6 +111,8 @@
   color: var(--portal-navigation-color-link, var(--portal-navigation-color-primary));
   padding: var(--portal-navigation-menu-item-padding-y, 0.5rem) var(--portal-navigation-menu-item-padding-x, 0);
   white-space: var(--portal-navigation-menu-item-white-space, nowrap);
+
+  cursor: pointer; /* because we can have a element without an href attribute */
 }
 
 .menu-link.-selected {
