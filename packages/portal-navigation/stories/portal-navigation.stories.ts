@@ -138,10 +138,49 @@ export const EventListeners: Story<ArgTypes> = (args: ArgTypes) => html`
         Example code:
         <pre>
 document.dispatchEvent(
-  new CustomEvent(NavigationEventListeners.setBadgeValue, {
+  new CustomEvent('${NavigationEventListeners.setBadgeValue}', {
     detail: {
       id: '0',
-      value: getRandomInt(1, 1000),
+      value: 123,
+    },
+  })
+);
+        </pre
+        >
+      </span>
+    </li>
+    <li class="item event-list-item">
+      <a
+        href="#"
+        class="trigger"
+        @click="${(e: MouseEvent) => {
+          e.preventDefault();
+          document.dispatchEvent(
+            new CustomEvent(NavigationEventListeners.setBadgeValue, {
+              detail: {
+                id: '0',
+                value: {
+                  en: `${getRandomInt(1, 1000)} (en)`,
+                  de: `${getRandomInt(1, 1000)} (de)`,
+                },
+              },
+            })
+          );
+        }}"
+        ><code>${NavigationEventListeners.setBadgeValue}</code></a
+      >
+      <span class="docs event-docs">
+        The <code>value</code> property on the event payload can also be an object that maps a navigation language (e.g. <code>en</code>) to a string. This
+        allows you to define i18n badges on menu items. Example code:
+        <pre>
+document.dispatchEvent(
+  new CustomEvent('${NavigationEventListeners.setBadgeValue}', {
+    detail: {
+      id: '0',
+      value: {
+        en: '123 (en)',
+        de: '123 (de)',
+      },
     },
   })
 );
@@ -169,7 +208,7 @@ document.dispatchEvent(
         Example code:
         <pre>
 document.dispatchEvent(
-  new CustomEvent(NavigationEventListeners.setActiveUrl, {
+  new CustomEvent('${NavigationEventListeners.setActiveUrl}', {
     detail: '/ebanking/show-payment-standing-orders',
   })
 );
