@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.2
+
+### Patch Changes
+
+- [`d1d817d`](https://github.com/inventage/web-components/commit/d1d817da5c740ade2731296e2797358baa2d8a24) Fixes an issue where the `setBadgeValue` event would not properly set a badge by url if it had already been set for that item by id.
+
 ## 0.8.1
 
 ### Patch Changes
