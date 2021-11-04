@@ -274,7 +274,12 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   @query('.container')
   private container?: HTMLDivElement;
 
-  private temporaryBadgeValues = new Map();
+  /**
+   * Map of menu item ids → badges
+   *
+   * @private
+   */
+  private badgeValues = new Map();
 
   private configuration = new Configuration();
 
@@ -588,12 +593,22 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    */
   private __setBadgeValueEventListener(e: CustomEvent) {
     const { detail: { id, url, value } = {} } = e;
-    if ((id === undefined && url === undefined) || value === undefined) {
-      console.warn('The event payload has to define an "id" or "url" property as well as "value".');
+    if (value === undefined) {
+      console.warn('The event payload has to define a "value" property.');
       return;
     }
 
-    this.setBadgeValue(id || url, value);
+    if (id !== undefined) {
+      this.setBadgeValueFromId(id, value);
+      return;
+    }
+
+    if (url !== undefined) {
+      this.setBadgeValueFromUrl(url, value);
+      return;
+    }
+
+    console.warn('The event payload has to define an "id" or "url" property.');
   }
 
   /**
@@ -610,16 +625,35 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   }
 
   /**
-   * Set a badge value for a specific key. Menus/items will automatically look up badge values by their id. Items will
-   * first check for badge values by using their id and then by using their url.
+   * Set a badge value for a specific id. Menus/items will automatically look up badge values by their id.
    *
-   * @param {string} key - menuId or itemId or url
+   * @param {string} id - menuId or itemId
    * @param {*} value - the badge value (could be a l11n label object)
    */
-  setBadgeValue(key: string, value: unknown): void {
-    // TODO: write to Store instead of temporary map?
-    this.temporaryBadgeValues.set(key, value);
+  setBadgeValueFromId(id: string, value: unknown): void {
+    this.badgeValues.set(id, value);
     this.requestUpdateInternal();
+  }
+
+  /**
+   * Set a badge value for a specific url.
+   * The method performs a url → id lookup and only inserts a badge value if an id for the given url has been found.
+   *
+   * @param {string} url
+   * @param {*} value - the badge value (could be a l11n label object)
+   */
+  setBadgeValueFromUrl(url: string, value: unknown): void {
+    const path = this.configuration.getIdPathForUrl(url);
+    if (!path) {
+      return;
+    }
+
+    const id = path.getLastLevelItemId();
+    if (!id) {
+      return;
+    }
+
+    this.setBadgeValueFromId(id, value);
   }
 
   /**
@@ -632,9 +666,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    */
   getBadgeValue(id: string, url?: string): string | undefined {
     // TODO: read from Store instead of temporary map?
-    let value = this.temporaryBadgeValues.get(id);
+    let value = this.badgeValues.get(id);
     if (!value && url) {
-      value = this.temporaryBadgeValues.get(url);
+      value = this.badgeValues.get(url);
     }
 
     if (value && typeof value === 'object' && value.constructor === Object) {
@@ -1103,6 +1137,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * Returns the internal temporary badge values property.
    */
   getTemporaryBadgeValues(): Map<unknown, unknown> {
-    return this.temporaryBadgeValues;
+    return this.badgeValues;
   }
 }

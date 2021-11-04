@@ -62,4 +62,24 @@ describe('IdPath', () => {
     expect(idPath.equals(otherPath)).to.be.true;
     expect(idPath.equals(thirdPath)).to.be.false;
   });
+
+  it('can return first level item id', () => {
+    const idPath = new IdPath('menu', 'parent', 'item');
+    const otherPath = new IdPath();
+    const thirdPath = new IdPath('foo');
+
+    expect(idPath.getFirstLevelItemId()).to.equal('parent');
+    expect(otherPath.getFirstLevelItemId()).to.be.undefined;
+    expect(thirdPath.getFirstLevelItemId()).to.be.undefined;
+  });
+
+  it('can return last level item id', () => {
+    const idPath = new IdPath('menu', 'parent', 'item');
+    const otherPath = new IdPath();
+    const thirdPath = new IdPath('menu', 'parent');
+
+    expect(idPath.getLastLevelItemId()).to.equal('item');
+    expect(otherPath.getLastLevelItemId()).to.be.undefined;
+    expect(thirdPath.getLastLevelItemId()).to.equal('parent');
+  });
 });

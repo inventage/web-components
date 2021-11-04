@@ -41,6 +41,19 @@ export class IdPath {
   }
 
   /**
+   * Convenience function to get the last-level id of the path.
+   *
+   * @returns an id or undefined
+   */
+  getLastLevelItemId(): string | undefined {
+    if (this.ids.length < 1) {
+      return;
+    }
+
+    return this.getId(this.ids.length - 1);
+  }
+
+  /**
    * Check whether or not the path contains a given id.
    *
    * @param id - an id to look for in the path.

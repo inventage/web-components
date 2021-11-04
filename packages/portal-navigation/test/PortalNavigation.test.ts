@@ -196,9 +196,7 @@ describe('<portal-navigation>', () => {
 
       el.hamburgerMenuExpanded = true;
       await childrenRendered(el, '[part="item-item5.1"]');
-      // console.log(el.shadowRoot!.querySelector('[part="item-item5.1"]'));
-      //
-      // await aTimeout(100000);
+
       expect(<HTMLElement>el.shadowRoot!.querySelector('[part="item-item5.1"]')!).to.be.visible;
     });
   });
@@ -237,9 +235,8 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el);
 
       // Set parent2 as "active" item (should default to its child…)
-      const clickMenuItem = () => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!).click();
-      setTimeout(clickMenuItem);
-      await aTimeout(10); // Not needed, only sets corresponding activePath when activeUrl is set here so the TS compiler does not complain about an unused import…
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!).click());
+      await aTimeout(10);
 
       // Assets part attributes
       expect(el.shadowRoot!.querySelector('[part="item-parent1"]'), 'part="item-parent1" should be present').not.to.equal(null);
@@ -269,6 +266,7 @@ describe('<portal-navigation>', () => {
 
       expect(el.getTemporaryBadgeValues().get('parent2')).equals(badgeLabel);
       expect(el.shadowRoot!.querySelector('[part="badge-parent2"]')).not.to.be.null;
+      expect(el.shadowRoot!.querySelector('[part="badge-parent2"]')!.textContent).to.equal('new');
     });
 
     it('sets badge for a given menu item url', async () => {
@@ -291,10 +289,46 @@ describe('<portal-navigation>', () => {
       );
       await childrenRendered(el, '[part="item-item2.2"]');
 
-      // await aTimeout(100000);
-
-      expect(el.getTemporaryBadgeValues().get('/some/path/item2.2')).equals(badgeLabel);
+      expect(el.getTemporaryBadgeValues().get('item2.2')).equals(badgeLabel);
       expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')).not.to.be.null;
+      expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')!.textContent).to.equal('new');
+    });
+
+    it('sets badge for a given menu item id, then url', async () => {
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation
+          src="${TEST_DATA_JSON_PATH}"
+          activeUrl="/some/path/item2.2"
+          @portal-navigation.configured="${() => {
+            document.dispatchEvent(
+              new CustomEvent(NavigationEventListeners.setBadgeValue, {
+                detail: {
+                  id: 'item2.2',
+                  value: 1,
+                },
+              })
+            );
+          }}"
+        ></portal-navigation>`
+      );
+
+      await childrenRendered(el, '[part="item-item2.2"]');
+      expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')!.textContent).to.equal('1');
+
+      setTimeout(() => {
+        document.dispatchEvent(
+          new CustomEvent(NavigationEventListeners.setBadgeValue, {
+            detail: {
+              url: '/some/path/item2.2',
+              value: 2,
+            },
+          })
+        );
+      });
+      await aTimeout(10);
+
+      await childrenRendered(el, '[part="badge-item2.2"]');
+      expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')!.textContent).to.equal('2');
     });
 
     it('sets the active url using event listeners', async () => {
@@ -441,7 +475,7 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent2');
 
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
-      await aTimeout(100);
+      await aTimeout(10);
 
       expect(el.hamburgerMenuExpanded).to.be.true;
       expect(el.getActivePath().isEmpty()).to.be.true;
@@ -518,7 +552,7 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el);
 
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent5"]')).click());
-      await aTimeout(1);
+      await aTimeout(10);
 
       expect(eventSpy.callCount).to.equal(0);
       expect(el.getActivePath().getMenuId()).to.equal('logout');
