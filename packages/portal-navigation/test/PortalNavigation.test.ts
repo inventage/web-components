@@ -248,7 +248,7 @@ describe('<portal-navigation>', () => {
       expect(el.shadowRoot!.querySelector('[part="item-item2.2"]'), 'part="item-item2.2" should be present').not.to.equal(null);
     });
 
-    it('sets badge for a given menu item', async () => {
+    it('sets badge for a given menu item id', async () => {
       const badgeLabel: MenuLabel = { en: 'new', de: 'neu' };
       const el: PortalNavigation = await fixture(
         html` <portal-navigation
@@ -269,6 +269,32 @@ describe('<portal-navigation>', () => {
 
       expect(el.getTemporaryBadgeValues().get('parent2')).equals(badgeLabel);
       expect(el.shadowRoot!.querySelector('[part="badge-parent2"]')).not.to.be.null;
+    });
+
+    it('sets badge for a given menu item url', async () => {
+      const badgeLabel: MenuLabel = { en: 'new', de: 'neu' };
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation
+          src="${TEST_DATA_JSON_PATH}"
+          activeUrl="/some/path/item2.2"
+          @portal-navigation.configured="${() => {
+            document.dispatchEvent(
+              new CustomEvent(NavigationEventListeners.setBadgeValue, {
+                detail: {
+                  url: '/some/path/item2.2',
+                  value: badgeLabel,
+                },
+              })
+            );
+          }}"
+        ></portal-navigation>`
+      );
+      await childrenRendered(el, '[part="item-item2.2"]');
+
+      // await aTimeout(100000);
+
+      expect(el.getTemporaryBadgeValues().get('/some/path/item2.2')).equals(badgeLabel);
+      expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')).not.to.be.null;
     });
 
     it('sets the active url using event listeners', async () => {

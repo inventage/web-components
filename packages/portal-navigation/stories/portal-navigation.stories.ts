@@ -98,13 +98,17 @@ export const EventListeners: Story<ArgTypes> = (args: ArgTypes) => html`
   ${Template(args)}
 
   <style>
+    .event-list {
+      max-width: 75ch;
+    }
+
     .event-list > .item {
       margin-bottom: 1.5rem;
     }
 
     .event-list-item > .trigger {
       text-decoration: none;
-      color: inherit;
+      color: rgb(10, 81, 194);
       display: block;
       margin-bottom: 0.5rem;
     }
@@ -134,7 +138,7 @@ export const EventListeners: Story<ArgTypes> = (args: ArgTypes) => html`
         ><code>${NavigationEventListeners.setBadgeValue}</code></a
       >
       <span class="docs event-docs">
-        Sets a random label (between <code>1</code> and <code>1000</code>) on the menu item with id <code>"0"</code>. <br /><br />
+        Sets a random number between 1 and 1000 as badge on the menu item with id <code>"0"</code>. <br /><br />
         Example code:
         <pre>
 document.dispatchEvent(
@@ -158,7 +162,7 @@ document.dispatchEvent(
           document.dispatchEvent(
             new CustomEvent(NavigationEventListeners.setBadgeValue, {
               detail: {
-                id: '0',
+                url: '/ebanking/show-dashboard',
                 value: {
                   en: `${getRandomInt(1, 1000)} (en)`,
                   de: `${getRandomInt(1, 1000)} (de)`,
@@ -171,12 +175,14 @@ document.dispatchEvent(
       >
       <span class="docs event-docs">
         The <code>value</code> property on the event payload can also be an object that maps a navigation language (e.g. <code>en</code>) to a string. This
-        allows you to define i18n badges on menu items. Example code:
+        allows you to define i18n badges on menu items. Instead of an <code>id</code>, you can also pass an <code>url</code> property in the event payload to
+        target a menu item by its url.<br /><br />
+        Example code:
         <pre>
 document.dispatchEvent(
   new CustomEvent('${NavigationEventListeners.setBadgeValue}', {
     detail: {
-      id: '0',
+      url: '/ebanking/show-dashboard',
       value: {
         en: '123 (en)',
         de: '123 (de)',

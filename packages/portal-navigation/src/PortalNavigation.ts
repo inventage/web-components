@@ -715,9 +715,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * @param isTreeMode whether this template should be provided for tree mode (hamburger menu) or default display purposes.
    */
   private _createFirstLevelItemTemplate(item: FirstLevelMenuItem | MenuItem, isTreeMode = false): TemplateResult {
-    const { id, icon, items } = item;
+    const { id, icon, url, items } = item;
     const hasItems = items && items.length > 0;
-    const badge = this.getBadgeValue(id!);
+    const badge = this.getBadgeValue(id!, url);
     const label = this.__getLabel(item);
     const active = this.activePath.contains(id!);
     const { expanded = false } = item as Record<string, boolean>;
@@ -727,7 +727,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
       refItem = this.__getDefaultItemOf(item) || item;
     }
 
-    const { url, destination } = refItem;
+    const { destination } = refItem;
 
     return html`<a
         href="${ifDefined(url)}"
