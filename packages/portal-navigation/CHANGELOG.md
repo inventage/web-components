@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.1
+
+### Patch Changes
+
+- [`cfd90ea`](https://github.com/inventage/web-components/commit/cfd90ea1b0988793ba76471638365b6180ac8745) Add example for `setBadgeValue` using `url` instead of an `id` property for selecting menu items.
+
+* [`6d172fc`](https://github.com/inventage/web-components/commit/6d172fc377961b1674bdf37b3ade704638655703) Display `.menu-item` elements with `cursor: pointer`, even when they do not have a `href` attribute defined (since they might have a `defaultItem`)
+
 ## 0.8.0
 
 ### Minor Changes
