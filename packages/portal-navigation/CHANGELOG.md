@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.0
+
+### Minor Changes
+
+- [`fd7c029`](https://github.com/inventage/web-components/commit/fd7c029bb8d4a35111f0121ade988869c3dd37c8) Add `setActiveUrl` event listener for setting the active url (and the derived active path) through events.
+
+### Patch Changes
+
+- [`4200e67`](https://github.com/inventage/web-components/commit/4200e6761dd9c791e19877c9cb49db6755256375) Minor dependency update
+
+* [`891e992`](https://github.com/inventage/web-components/commit/891e9921fc3defefefd6f28d3ad9e634b11baf90) Better documentation for events in storybook
+
 ## 0.7.1
 
 ### Patch Changes
