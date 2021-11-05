@@ -1,1 +1,1 @@
-export { PortalNavigation } from './PortalNavigation.js';
+export { NavigationEvents, NavigationEventListeners, PortalNavigation } from './PortalNavigation.js';
