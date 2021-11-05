@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.3
+
+### Patch Changes
+
+- [`e18a409`](https://github.com/inventage/web-components/commit/e18a409254b7f811504f7ce344a582bbf85abf74) Add exports for `NavigationEventListeners` and `NavigationEvents`
+
+* [`2ade867`](https://github.com/inventage/web-components/commit/2ade8679e8e16cd87abe03590ed7ae895b41e826) Replace `aTimeout` promises with `oneEvent` in tests.
+
 ## 0.8.2
 
 ### Patch Changes
