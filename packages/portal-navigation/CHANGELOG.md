@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.4
+
+### Patch Changes
+
+- [`9a61a24`](https://github.com/inventage/web-components/commit/9a61a244ec5f31b189b5911bd2daa9e9c9760276) Fixes an issue where the `setActiveUrl` event would not properly update the `activePath` in some cases.
+
 ## 0.8.3
 
 ### Patch Changes
