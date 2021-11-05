@@ -1,4 +1,4 @@
-import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
@@ -235,8 +235,10 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el);
 
       // Set parent2 as "active" item (should default to its child…)
-      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!).click());
-      await aTimeout(10);
+      const clickElement = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')!;
+      const clicked = oneEvent(clickElement, 'click');
+      setTimeout(() => clickElement.click());
+      await clicked;
 
       // Assets part attributes
       expect(el.shadowRoot!.querySelector('[part="item-parent1"]'), 'part="item-parent1" should be present').not.to.equal(null);
@@ -315,6 +317,7 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el, '[part="item-item2.2"]');
       expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')!.textContent).to.equal('1');
 
+      const event = oneEvent(document, NavigationEventListeners.setBadgeValue);
       setTimeout(() => {
         document.dispatchEvent(
           new CustomEvent(NavigationEventListeners.setBadgeValue, {
@@ -325,7 +328,7 @@ describe('<portal-navigation>', () => {
           })
         );
       });
-      await aTimeout(10);
+      await event;
 
       await childrenRendered(el, '[part="badge-item2.2"]');
       expect(el.shadowRoot!.querySelector('[part="badge-item2.2"]')!.textContent).to.equal('2');
@@ -474,8 +477,10 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getMenuId()).to.equal('main');
       expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent2');
 
-      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]')).click());
-      await aTimeout(10);
+      const clickElement = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent2"]');
+      const click = oneEvent(clickElement, 'click');
+      setTimeout(() => clickElement.click());
+      await click;
 
       expect(el.hamburgerMenuExpanded).to.be.true;
       expect(el.getActivePath().isEmpty()).to.be.true;
@@ -551,8 +556,10 @@ describe('<portal-navigation>', () => {
       );
       await childrenRendered(el);
 
-      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent5"]')).click());
-      await aTimeout(10);
+      const clickElement = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent5"]');
+      const clicked = oneEvent(clickElement, 'click');
+      setTimeout(() => clickElement.click());
+      await clicked;
 
       expect(eventSpy.callCount).to.equal(0);
       expect(el.getActivePath().getMenuId()).to.equal('logout');
