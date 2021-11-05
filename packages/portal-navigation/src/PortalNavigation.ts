@@ -622,6 +622,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     this.activeUrl = url;
+    this.requestUpdateInternal('activeUrl');
   }
 
   /**
