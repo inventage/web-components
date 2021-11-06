@@ -375,6 +375,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   }
 
   firstUpdated(): void {
+    /** @ignore */
     this.dispatchEvent(new CustomEvent(NavigationEvents.firstUpdated, { detail: this }));
 
     // Listen for mobile breakpoint changes
@@ -398,6 +399,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('language')) {
+      /** @ignore */
       this.dispatchEvent(new CustomEvent(NavigationEvents.setLanguage, { detail: this.language, composed: true, bubbles: true }));
     }
 
@@ -412,6 +414,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     if (changedProperties.has('hamburgerMenuExpanded')) {
+      /** @ignore */
       this.dispatchEvent(new CustomEvent(NavigationEvents.hamburgerMenuExpanded, { detail: this.hamburgerMenuExpanded, composed: true, bubbles: true }));
 
       // Prevent anchor overflowing in mobile when navigation is sticky + open
@@ -421,6 +424,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     if (changedProperties.has('isMobileBreakpoint')) {
+      /** @ignore */
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
@@ -566,6 +570,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         const data = await response.json();
 
         this.configuration = new Configuration(data);
+        /** @ignore */
         this.dispatchEvent(new CustomEvent(NavigationEvents.configured, { detail: this.configuration, composed: true, bubbles: true }));
         this.__updateActivePathFromUrl();
         this.requestUpdateInternal();
@@ -1004,6 +1009,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     if (dispatchEvent) {
+      /** @ignore */
       this.dispatchEvent(
         new CustomEvent(NavigationEvents.routeTo, {
           detail: {
