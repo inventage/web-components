@@ -22,7 +22,7 @@ for file in "${cssfiles[@]}"; do
  *
  * It is generated automatically from a given .css file inside the build-styles.sh script.
  */
-import { css } from 'lit-element';
+import { css } from '@inventage-web-components/common';
 
 export const styles = css\`
 %s
