@@ -1,6 +1,7 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
-import { NavigationEventListeners } from '@inventage-web-components/portal-navigation';
 import { getRandomInt } from '@inventage-web-components/dev-helpers';
+
+import { NavigationEventListeners } from '../src/PortalNavigation.js';
 
 export const eventListenerDocs = (): TemplateResult => {
   return html`
