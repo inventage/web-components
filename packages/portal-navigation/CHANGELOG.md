@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.6
+
+### Patch Changes
+
+- [`aae981a`](https://github.com/inventage/web-components/commit/aae981aa3160027d362c082900a8cffb8302ce44) Cleanup storybook docs
+
+* [`e5318c6`](https://github.com/inventage/web-components/commit/e5318c673fa41b0c0ec3424d79f3ab53308d6965) Exclude `private` and `protected` members from custom-elements-manifest.json
+
 ## 0.8.5
 
 ### Patch Changes
