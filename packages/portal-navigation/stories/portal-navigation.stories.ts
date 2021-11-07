@@ -1,11 +1,11 @@
-import { html, TemplateResult } from '@inventage-web-components/common';
+import { html, ifDefined, TemplateResult } from '@inventage-web-components/common';
 import {
   generateParagraphs,
   getCssArgs,
   getCssPropArgTypes,
-  getCssProperties,
+  getCustomElement,
   Package,
-  setCssStyleFromArgsWithDefaults,
+  setCssStyleFromArgs,
   Story,
 } from '@inventage-web-components/dev-helpers';
 
@@ -14,14 +14,15 @@ import { NavigationEvents } from '../src/PortalNavigation.js';
 import cem from '../custom-elements.json';
 import { dispatchBadgeEvents, dispatchBadgeEventsTest, eventListenerDocs } from './helpers.js';
 
-const cssProperties = getCssProperties(cem as Package, 'src/PortalNavigation.js', 'PortalNavigation');
+const customElement = getCustomElement(cem as Package, 'src/PortalNavigation.js', 'PortalNavigation');
 
 export default {
   component: 'portal-navigation',
   title: 'Portal Navigation',
   // Defaults for CSS props
   args: {
-    ...getCssArgs(cssProperties),
+    language: 'en',
+    ...getCssArgs(customElement),
   },
   // For available controls
   // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
@@ -49,7 +50,7 @@ export default {
       },
     },
     // CSS prop arg types
-    ...getCssPropArgTypes(cssProperties),
+    ...getCssPropArgTypes(customElement),
   },
   parameters: {
     actions: {
@@ -70,20 +71,20 @@ interface ArgTypes {
 }
 
 const Template = (
-  { src = './data/data.json', language = 'en', internalRouting = true, currentApplication = 'ebanking', ...rest }: ArgTypes,
+  { src = './data/data.json', currentApplication = 'ebanking', ...rest }: ArgTypes,
   content?: TemplateResult | TemplateResult[]
 ): TemplateResult => {
   // Automatically set styles for each CSS custom prop passed as argument
-  setCssStyleFromArgsWithDefaults(rest, cssProperties, document.documentElement.style);
+  setCssStyleFromArgs(rest, document.documentElement.style);
 
   // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
   document.querySelector('body')!.style.paddingTop = '';
 
   return html` <portal-navigation
     src="${src!}"
-    language="${language}"
-    ?internalRouting="${internalRouting}"
-    currentApplication="${currentApplication!}"
+    language="${ifDefined(rest.language)}"
+    currentApplication="${ifDefined(currentApplication)}"
+    ?internalRouting="${rest.internalRouting}"
     ?logoutMenuInMetaBar="${rest.logoutMenuInMetaBar}"
     @portal-navigation.configured="${dispatchBadgeEvents}"
   >
