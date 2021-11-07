@@ -262,8 +262,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * The current path of "active" items. e.g. if an item in level 2 is clicked it's parent item and the corresponding menu would be considered "active"
-   *
-   * @private
    */
   @state()
   private activePath = new IdPath();
@@ -276,8 +274,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * Map of menu item ids → badges
-   *
-   * @private
    */
   private badgeValues = new Map();
 
@@ -287,6 +283,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   private initialAnchorElementPadding?: string;
 
+  /**
+   * @internal
+   */
   static get scopedElements(): ScopedElementsMap {
     return {
       'hamburger-menu': HamburgerMenu,
@@ -299,6 +298,8 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * A listing of key menu ids that are handled specifically by the portal navigation component.
+   *
+   * @private
    */
   static get menuIds(): NavigationMenuType {
     return NavigationMenus;
@@ -306,6 +307,8 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * A specifically handled menu ids in the order they will be displayed in the hamburger menu.
+   *
+   * @private
    */
   static get menuIdsOrdered(): NavigationMenuName[] {
     return Object.values(PortalNavigation.menuIds);
@@ -313,6 +316,8 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * A listing of css classes that are frequently used in a generic manner.
+   *
+   * @private
    */
   static get classes(): NavigationCssClasses {
     return NavigationCssClasses;
@@ -328,6 +333,9 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     this.__globalClickListener = this.__globalClickListener.bind(this);
 
     // Always debounce anchor padding updates
+    /**
+     * @internal
+     */
     this.updateAnchorPaddingWhenSticky = debounce(this.updateAnchorPaddingWhenSticky, 100).bind(this);
   }
 
@@ -695,7 +703,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * in mobile breakpoint (to make the entire container scrollable, if need be).
    *
    * @param menuLogout
-   * @private
    */
   private renderMetaBar(menuLogout: TemplateResult | Nothing = nothing) {
     return html` <div class="meta-bar" part="meta-bar">
@@ -1077,8 +1084,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * Updates the padding of the anchor when navigation should be sticky.
-   *
-   * @private
    */
   private updateAnchorPaddingWhenSticky() {
     // Bail when anchor is available or we're not in sticky mode
@@ -1111,7 +1116,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * Tries to find the anchor element used when navigation is sticky.
-   * @private
    */
   private getElementForAnchor(): HTMLElement | undefined {
     if (!this.shadowRoot) {

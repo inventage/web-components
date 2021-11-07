@@ -5,5 +5,4 @@ export default {
   globs: ['src/**/*.ts'],
   litelement: true,
   plugins: [...plugins],
-  litElement: true,
 };
