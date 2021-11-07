@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.5
+
+### Patch Changes
+
+- [`22fa8c1`](https://github.com/inventage/web-components/commit/22fa8c1846711fc1dc28cfb28607965c7340be3b) Import `css` from `@inventage-web-components/common` instead of `lit-element` directly
+
+* [`8914720`](https://github.com/inventage/web-components/commit/8914720677828f1b93c3388dde875efc2edd97cd) Add `argTypes` from CSS custom properties from CEM
+
 ## 0.8.4
 
 ### Patch Changes
