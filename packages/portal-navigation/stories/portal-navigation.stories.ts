@@ -1,28 +1,23 @@
 import { html, ifDefined, TemplateResult } from '@inventage-web-components/common';
-import {
-  generateParagraphs,
-  getCssArgs,
-  getCssPropArgTypes,
-  getCustomElement,
-  Package,
-  setCssStyleFromArgs,
-  Story,
-} from '@inventage-web-components/dev-helpers';
+import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { NavigationEvents } from '../src/PortalNavigation.js';
 import cem from '../custom-elements.json';
-import { dispatchBadgeEvents, dispatchBadgeEventsTest, eventListenerDocs } from './helpers.js';
+import { dispatchBadgeEvents, eventListenerDocs } from './helpers.js';
 
 const customElement = getCustomElement(cem as Package, 'src/PortalNavigation.js', 'PortalNavigation');
 
 export default {
   component: 'portal-navigation',
   title: 'Portal Navigation',
-  // Defaults for CSS props
+  // Default arguments
   args: {
+    src: './data/data.json',
     language: 'en',
-    ...getCssArgs(customElement),
+    internalRouting: true,
+    currentApplication: 'ebanking',
+    // ...getCssArgs(customElement),
   },
   // For available controls
   // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
@@ -40,6 +35,11 @@ export default {
       },
     },
     activeUrl: {
+      control: {
+        type: 'text',
+      },
+    },
+    currentApplication: {
       control: {
         type: 'text',
       },
@@ -62,34 +62,45 @@ export default {
 interface ArgTypes {
   src?: string;
   language?: string;
-  internalRouting?: boolean;
+  activeUrl?: string;
   currentApplication?: string;
+  anchor?: string;
+  internalRouting?: boolean;
   logoutMenuInMetaBar?: boolean;
+  logoutMenuInMobileHeader?: boolean;
+  mobileBreakpoint?: number;
+  isMobileBreakpoint?: boolean;
   sticky?: boolean;
 
   [key: string]: unknown;
 }
 
-const Template = (
-  { src = './data/data.json', currentApplication = 'ebanking', ...rest }: ArgTypes,
-  content?: TemplateResult | TemplateResult[]
-): TemplateResult => {
+const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], content?: TemplateResult | TemplateResult[]): TemplateResult => {
   // Automatically set styles for each CSS custom prop passed as argument
-  setCssStyleFromArgs(rest, document.documentElement.style);
+  setCssStyleFromArgs(args, document.documentElement.style);
 
   // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
   document.querySelector('body')!.style.paddingTop = '';
 
-  return html` <portal-navigation
-    src="${src!}"
-    language="${ifDefined(rest.language)}"
-    currentApplication="${ifDefined(currentApplication)}"
-    ?internalRouting="${rest.internalRouting}"
-    ?logoutMenuInMetaBar="${rest.logoutMenuInMetaBar}"
-    @portal-navigation.configured="${dispatchBadgeEvents}"
-  >
+  return html`
+    <portal-navigation
+      src="${ifDefined(args.src)}"
+      language="${ifDefined(args.language)}"
+      activeUrl="${ifDefined(args.activeUrl)}"
+      currentApplication="${ifDefined(args.currentApplication)}"
+      anchor="${ifDefined(args.anchor)}"
+      mobileBreakpoint=${ifDefined(args.mobileBreakpoint)}
+      ?internalRouting="${args.internalRouting}"
+      ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
+      ?logoutMenuInMobileHeader="${args.logoutMenuInMobileHeader}"
+      ?isMobileBreakpoint="${args.isMobileBreakpoint}"
+      ?sticky="${args.sticky}"
+      @portal-navigation.configured="${dispatchBadgeEvents}"
+    >
+      ${slots}
+    </portal-navigation>
     ${content}
-  </portal-navigation>`;
+  `;
 };
 
 /**
@@ -99,6 +110,10 @@ const Template = (
  * @constructor
  */
 export const Default: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+Default.args = {
+  language: 'en',
+  internalRouting: true,
+};
 
 /**
  * Example with event listeners.
@@ -166,26 +181,13 @@ Empty.parameters = {
  * @param args
  * @constructor
  */
-export const Sticky: Story<ArgTypes> = (args: ArgTypes) => {
-  return html`
-    <portal-navigation
-      src="${args.src!}"
-      ?internalRouting="${args.internalRouting}"
-      currentApplication="${args.currentApplication!}"
-      ?sticky="${args.sticky}"
-      anchor="body"
-      @portal-navigation.configured="${dispatchBadgeEventsTest}"
-    ></portal-navigation>
-
-    ${generateParagraphs(20)};
-  `;
-};
+export const Sticky: Story<ArgTypes> = (args: ArgTypes) => Template(args, undefined, html`<div class="content">${generateParagraphs(20)}</div>`);
 
 Sticky.args = {
   src: './data/test-data.json',
-  internalRouting: true,
   currentApplication: 'app1',
   sticky: true,
+  anchor: '.content',
 };
 
 Sticky.parameters = {
@@ -206,16 +208,7 @@ This \`anchor\` element needs to have a \`position: relative\` for the \`positio
  * @param args
  * @constructor
  */
-export const Test: Story<ArgTypes> = (args: ArgTypes) => {
-  return html` <portal-navigation
-    src="${args.src!}"
-    language="${args.language ?? ''}"
-    ?internalRouting="${args.internalRouting}"
-    currentApplication="${args.currentApplication!}"
-    @portal-navigation.configured="${dispatchBadgeEventsTest}"
-  >
-  </portal-navigation>`;
-};
+export const Test: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 
 Test.args = {
   language: 'en',

@@ -135,29 +135,6 @@ document.dispatchEvent(
 };
 
 /**
- * Dispatches some example setBadgeValue events for the test-data.json story.
- */
-export const dispatchBadgeEventsTest = () => {
-  document.dispatchEvent(
-    new CustomEvent(NavigationEventListeners.setBadgeValue, {
-      detail: {
-        id: 'meta',
-        value: 9,
-      },
-    })
-  );
-
-  document.dispatchEvent(
-    new CustomEvent(NavigationEventListeners.setBadgeValue, {
-      detail: {
-        id: 'parent2',
-        value: { en: 'new', de: 'neu' },
-      },
-    })
-  );
-};
-
-/**
  * Dispatches some example setBadgeValue events.
  */
 export const dispatchBadgeEvents = () => {
@@ -193,6 +170,25 @@ export const dispatchBadgeEvents = () => {
       detail: {
         url: '/ebanking/update-notification-preferences',
         value: 34,
+      },
+    })
+  );
+
+  // Badges for test-data.json
+  document.dispatchEvent(
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
+      detail: {
+        id: 'meta',
+        value: 9,
+      },
+    })
+  );
+
+  document.dispatchEvent(
+    new CustomEvent(NavigationEventListeners.setBadgeValue, {
+      detail: {
+        id: 'parent2',
+        value: { en: 'new', de: 'neu' },
       },
     })
   );

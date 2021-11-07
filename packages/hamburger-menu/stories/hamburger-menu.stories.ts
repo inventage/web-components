@@ -1,5 +1,5 @@
 import { html } from '@inventage-web-components/common';
-import { getCssArgs, getCssPropArgTypes, getCustomElement, getPropertyArgs, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
+import { getCssPropArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
 import '../src/hamburger-menu.js';
 import cem from '../custom-elements.json';
 
@@ -9,10 +9,10 @@ export default {
   component: 'hamburger-menu',
   title: 'Hamburger Menu',
   // Defaults for CSS props
-  args: {
-    ...getPropertyArgs(customElement),
-    ...getCssArgs(customElement),
-  },
+  // args: {
+  //   ...getPropertyArgs(customElement),
+  //   ...getCssArgs(customElement),
+  // },
   // For available controls
   // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
   argTypes: {

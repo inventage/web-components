@@ -254,7 +254,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
 
   /**
    * Selector of the anchor navigation should "anchor" to when sticky.
-   * This selector is fed to querySelectorAll().
+   * This selector is fed to `querySelectorAll()`.
    * If the navigation is not sticky. this will have no effect.
    */
   @property()
