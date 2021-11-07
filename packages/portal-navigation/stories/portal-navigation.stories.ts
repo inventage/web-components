@@ -4,6 +4,7 @@ import {
   getCssArgs,
   getCssPropArgTypes,
   getCssProperties,
+  Package,
   setCssStyleFromArgsWithDefaults,
   Story,
 } from '@inventage-web-components/dev-helpers';
@@ -13,9 +14,7 @@ import { NavigationEvents } from '../src/PortalNavigation.js';
 import cem from '../custom-elements.json';
 import { dispatchBadgeEvents, dispatchBadgeEventsTest, eventListenerDocs } from './helpers.js';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const cssProperties = getCssProperties(cem, 'src/PortalNavigation.js', 'PortalNavigation');
+const cssProperties = getCssProperties(cem as Package, 'src/PortalNavigation.js', 'PortalNavigation');
 
 export default {
   component: 'portal-navigation',
