@@ -70,6 +70,7 @@ interface ArgTypes {
   logoutMenuInMobileHeader?: boolean;
   mobileBreakpoint?: number;
   isMobileBreakpoint?: boolean;
+  hamburgerMenuExpanded?: boolean;
   sticky?: boolean;
 
   [key: string]: unknown;
@@ -94,6 +95,7 @@ const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], con
       ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
       ?logoutMenuInMobileHeader="${args.logoutMenuInMobileHeader}"
       ?isMobileBreakpoint="${args.isMobileBreakpoint}"
+      ?hamburgerMenuExpanded="${args.hamburgerMenuExpanded}"
       ?sticky="${args.sticky}"
       @portal-navigation.configured="${dispatchBadgeEvents}"
     >
@@ -130,6 +132,9 @@ export const EventListeners: Story<ArgTypes> = (args: ArgTypes) => html` ${Templ
  * @constructor
  */
 export const Mobile: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+Mobile.args = {
+  hamburgerMenuExpanded: true,
+};
 Mobile.parameters = {
   viewport: {
     defaultViewport: 'mobile2',
