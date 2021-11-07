@@ -5,7 +5,7 @@
     "rootDir": ".",
     "outDir": "lib"
   },
-  "exclude": ["lib"],
+  "include": ["**/*.ts", "**/*.json"],
   "references": [
     {
       "path": "../common"

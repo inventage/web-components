@@ -1,13 +1,29 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
-import { generateParagraphs, Story } from '@inventage-web-components/dev-helpers';
+import {
+  generateParagraphs,
+  getCssArgs,
+  getCssPropArgTypes,
+  getCssProperties,
+  setCssStyleFromArgsWithDefaults,
+  Story,
+} from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { NavigationEvents } from '../src/PortalNavigation.js';
+import cem from '../custom-elements.json';
 import { dispatchBadgeEvents, dispatchBadgeEventsTest, eventListenerDocs } from './helpers.js';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const cssProperties = getCssProperties(cem, 'src/PortalNavigation.js', 'PortalNavigation');
 
 export default {
   component: 'portal-navigation',
   title: 'Portal Navigation',
+  // Defaults for CSS props
+  args: {
+    ...getCssArgs(cssProperties),
+  },
   // For available controls
   // @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
   // @see https://github.com/storybookjs/storybook/tree/next/addons/controls
@@ -28,16 +44,13 @@ export default {
         type: 'text',
       },
     },
-    '--portal-navigation-color-primary': {
-      control: {
-        type: 'color',
-      },
-    },
     anchor: {
       control: {
         type: 'text',
       },
     },
+    // CSS prop arg types
+    ...getCssPropArgTypes(cssProperties),
   },
   parameters: {
     actions: {
@@ -54,17 +67,15 @@ interface ArgTypes {
   logoutMenuInMetaBar?: boolean;
   sticky?: boolean;
 
-  // CSS custom props
-  '--portal-navigation-color-primary'?: string;
+  [key: string]: unknown;
 }
 
 const Template = (
   { src = './data/data.json', language = 'en', internalRouting = true, currentApplication = 'ebanking', ...rest }: ArgTypes,
   content?: TemplateResult | TemplateResult[]
 ): TemplateResult => {
-  // TODO: We could probably iterate over all properties that start with `--` and generate the styles automatically…
-  const styleContainer = document.documentElement.style;
-  rest['--portal-navigation-color-primary'] && styleContainer.setProperty('--portal-navigation-color-primary', rest['--portal-navigation-color-primary']);
+  // Automatically set styles for each CSS custom prop passed as argument
+  setCssStyleFromArgsWithDefaults(rest, cssProperties, document.documentElement.style);
 
   // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
   document.querySelector('body')!.style.paddingTop = '';

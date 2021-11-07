@@ -18,6 +18,7 @@
   },
   "types": "lib/src/index.d.ts",
   "devDependencies": {
-    "@inventage-web-components/common": "*"
+    "@inventage-web-components/common": "*",
+    "custom-elements-manifest": "^1.0.0"
   }
 }
