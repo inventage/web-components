@@ -2,4 +2,5 @@ exclude_patterns:
   - packages/**/*.stories.ts
   - packages/**/*.test.ts
   - packages/**/*.d.ts
+  - packages/**/stories/**/*
   - '**/node_modules/**/*'
