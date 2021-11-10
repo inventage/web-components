@@ -4,4 +4,5 @@ exclude_patterns:
   - packages/**/*.d.ts
   - packages/**/stories/**/*
   - packages/**/test/**/*
+  - plugins/**/*
   - '**/node_modules/**/*'
