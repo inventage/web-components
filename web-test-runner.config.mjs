@@ -83,7 +83,7 @@ export default {
   // @see https://modern-web.dev/docs/test-runner/test-frameworks/mocha/#configuring-mocha-options
   testFramework: {
     config: {
-      timeout: '200000',
+      timeout: process.argv.includes('--increase-timeout') ? 200000 : 2000,
     },
   },
 };
