@@ -65,6 +65,9 @@ export default {
     },
     visualRegressionPlugin({
       update: process.argv.includes('--update-visual-baseline'),
+      diffOptions: {
+        threshold: 0.2,
+      },
     }),
   ],
   middleware: [
