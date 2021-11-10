@@ -36,6 +36,13 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
+      - name: Archive visual diff results
+        uses: actions/upload-artifact@v2
+        with:
+          name: visual-diffs
+          path: screenshots
+          retention-days: 7
+
   release:
     name: Release & Deploy
     # Prevents changesets action from creating a PR on forks

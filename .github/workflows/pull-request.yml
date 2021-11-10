@@ -30,3 +30,10 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+      - name: Archive visual diff results
+        uses: actions/upload-artifact@v2
+        with:
+          name: visual-diffs
+          path: screenshots
+          retention-days: 7
