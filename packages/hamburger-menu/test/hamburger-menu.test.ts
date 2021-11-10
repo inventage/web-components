@@ -1,4 +1,5 @@
 import { html, fixture, expect, assert } from '@open-wc/testing';
+import { visualDiff } from '@web/test-runner-visual-regression';
 import { spy } from 'sinon';
 
 import { HamburgerMenu } from '../src/index.js';
@@ -9,6 +10,16 @@ describe('<hamburger-menu>', () => {
     it('is defined', () => {
       const el = document.createElement('hamburger-menu');
       assert.instanceOf(el, HamburgerMenu);
+    });
+
+    it('can diff an element', async () => {
+      const el: HamburgerMenu = await fixture(html`<hamburger-menu></hamburger-menu>`);
+      await visualDiff(el, 'hamburger-menu');
+    });
+
+    it('can diff an element (toggled)', async () => {
+      const el: HamburgerMenu = await fixture(html`<hamburger-menu toggled></hamburger-menu>`);
+      await visualDiff(el, 'hamburger-menu-toggled');
     });
   });
 

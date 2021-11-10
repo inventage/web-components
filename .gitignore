@@ -11,3 +11,6 @@ custom-elements.json
 /coverage/
 
 /storybook-static/
+
+# Visual diffs for testing
+/screenshots/*/failed/

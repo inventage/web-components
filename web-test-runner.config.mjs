@@ -1,4 +1,5 @@
 import { fromRollup } from '@web/dev-server-rollup';
+import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugin';
 import rollupJson from '@rollup/plugin-json';
 import globby from 'globby';
 
@@ -62,6 +63,9 @@ export default {
         }
       },
     },
+    visualRegressionPlugin({
+      update: process.argv.includes('--update-visual-baseline'),
+    }),
   ],
   middleware: [
     /**
