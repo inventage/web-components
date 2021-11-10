@@ -38,6 +38,7 @@ jobs:
 
       - name: Archive visual diff results
         uses: actions/upload-artifact@v2
+        if: failure() && steps.Test.outcome == 'failure'
         with:
           name: visual-diffs
           path: screenshots
