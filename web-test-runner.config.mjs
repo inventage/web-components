@@ -66,7 +66,7 @@ export default {
     visualRegressionPlugin({
       update: process.argv.includes('--update-visual-baseline'),
       diffOptions: {
-        includeAA: false,
+        includeAA: true,
       },
     }),
   ],
