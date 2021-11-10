@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.7
+
+### Patch Changes
+
+- [`7f373a6`](https://github.com/inventage/web-components/commit/7f373a60e35a52527db27027e17d81096fc3a908) Add test for routing menu items internally when no application has been set.
+
+* [`d9c8bb5`](https://github.com/inventage/web-components/commit/d9c8bb51be596a5b7caab0375f160205e05a6f8f) Add visual regression tests
+
+- [`5a088b1`](https://github.com/inventage/web-components/commit/5a088b1a70516c571e81fcd7c036429f61c14a31) Better vertically center menu item badge text.
+
 ## 0.8.6
 
 ### Patch Changes

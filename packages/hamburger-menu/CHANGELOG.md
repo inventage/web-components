@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.2.6
+
+### Patch Changes
+
+- [`d9c8bb5`](https://github.com/inventage/web-components/commit/d9c8bb51be596a5b7caab0375f160205e05a6f8f) Add visual regression tests
+
 ## 0.2.5
 
 ### Patch Changes
