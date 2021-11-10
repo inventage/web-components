@@ -216,7 +216,6 @@ This \`anchor\` element needs to have a \`position: relative\` for the \`positio
 export const Test: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 
 Test.args = {
-  language: 'en',
   currentApplication: 'app1',
   internalRouting: true,
   src: './data/test-data.json',

@@ -583,6 +583,17 @@ describe('<portal-navigation>', () => {
         en: 'Item 3.1_en',
       });
     });
+
+    it('dispatches the "routeTo" event when item has internalrouting=true and menu has no application set.', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el);
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent1"]')).click());
+      const { detail } = await oneEvent(el, 'portal-navigation.routeTo');
+
+      expect(window.location.pathname).to.equal('/');
+      expect(detail.url).to.equal('/some/path/parent1');
+    });
   });
 
   describe('Events', () => {

@@ -7,7 +7,9 @@
           "id": "parent1",
           "label": { "de": "Parent1_de", "en": "Parent1_en" },
           "url": "/some/path/parent1",
-          "application": "app1"
+          "application": "app1",
+          "expanded": false,
+          "internalRouting": true
         },
         {
           "id": "parent2",
