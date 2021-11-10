@@ -65,9 +65,10 @@ export default {
     },
     visualRegressionPlugin({
       update: process.argv.includes('--update-visual-baseline'),
+      // @see https://github.com/mapbox/pixelmatch#api
       diffOptions: {
         threshold: 0.2,
-        includeAA: true,
+        includeAA: false,
       },
     }),
   ],
