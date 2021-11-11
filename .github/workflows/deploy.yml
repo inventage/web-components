@@ -15,7 +15,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm install --no-save
+        run: npm ci
 
       - name: Storybook Build
         run: npm run storybook:build
