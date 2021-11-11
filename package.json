@@ -19,7 +19,7 @@
     "commit": "cz",
     "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",
-    "format:package-json": "find . -name 'package.json' ! -path './node_modules/*' | xargs -I {} npx prettier-package-json --write {}",
+    "format:package-json": "find . -name 'package.json' ! -path '*/node_modules/*' | xargs -I {} npx prettier-package-json --write {}",
     "format:prettier": "prettier '**/*.{cjs,mjs,js,ts,md,css}' '**/tsconfig*.json' '**/*.schema*.json' --write",
     "get-ready": "npm run build:css && npm run analyze",
     "postinstall": "npm run clean",
