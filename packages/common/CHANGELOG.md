@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.1.3
+
+### Patch Changes
+
+- [`55fe0e4`](https://github.com/inventage/web-components/commit/55fe0e4bc5a7f2ae2048eb1089bc843ef703e8e6) Empty release to fix changeset issues.
+
 ## 0.1.2
 
 ### Patch Changes
