@@ -1,9 +1,36 @@
 import { fromRollup } from '@web/dev-server-rollup';
+import { playwrightLauncher } from '@web/test-runner-playwright';
 import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugin';
 import rollupJson from '@rollup/plugin-json';
 import globby from 'globby';
 
 const json = fromRollup(rollupJson);
+
+/**
+ * Define playwright browsers to launch.
+ *
+ * @type {PlaywrightLauncher[]}
+ */
+const SINGLE_BROWSER = [playwrightLauncher({ product: 'chromium' })];
+const ALL_BROWSERS = [
+  playwrightLauncher({ product: 'chromium' }),
+  playwrightLauncher({ product: 'webkit' }),
+  playwrightLauncher({
+    product: 'firefox',
+    launchOptions: {
+      firefoxUserPrefs: {
+        'toolkit.telemetry.reportingpolicy.firstRun': false,
+        'browser.shell.checkDefaultBrowser': false,
+        'browser.bookmarks.restore_default_bookmarks': false,
+        'dom.disable_open_during_load': false,
+        'dom.max_script_run_time': 0,
+        'dom.min_background_timeout_value': 10,
+        'extensions.autoDisableScopes': 0,
+        'extensions.enabledScopes': 15,
+      },
+    },
+  }),
+];
 
 /**
  * Analyses all requests to paths that contain 'data/' and rewrites them to files found in 'packages/…/data' directories.
@@ -44,8 +71,9 @@ export async function rewriteDataJsonPaths(context, next) {
 }
 
 export default {
-  files: 'packages/**/*.test.js',
   nodeResolve: true,
+  concurrency: 4,
+  concurrentBrowsers: 1,
   plugins: [
     json(),
     {
@@ -84,6 +112,23 @@ export default {
       return next();
     },
     rewriteDataJsonPaths,
+  ],
+  groups: [
+    {
+      name: 'single',
+      files: 'packages/**/*.test.js',
+      browsers: SINGLE_BROWSER,
+    },
+    {
+      name: 'all',
+      files: 'packages/**/*.test.js',
+      browsers: ALL_BROWSERS,
+    },
+    {
+      name: 'vrt',
+      files: 'packages/**/*.test-vrt.js',
+      browsers: ALL_BROWSERS,
+    },
   ],
   coverageConfig: {
     exclude: ['coverage/**/*', 'packages/**/*.test.{ts,js}', '**/node_modules/**/*'],
