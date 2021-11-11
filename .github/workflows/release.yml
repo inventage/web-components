@@ -29,7 +29,7 @@ jobs:
         run: npm run lint
 
       - name: Test
-        run: npm run test:ci
+        run: sudo npx playwright install-deps && npm run test:ci
 
       - name: Publish Code Coverage
         uses: paambaati/codeclimate-action@v2.7.5
@@ -50,7 +50,7 @@ jobs:
           run: npm ci
 
         - name: Test
-          run: npm run test:vrt
+          run: sudo npx playwright install-deps && npm run test:vrt
 
         - name: Archive visual diff results
           uses: actions/upload-artifact@v2
