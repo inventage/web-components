@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.2.7
+
+### Patch Changes
+
+- [`02228c4`](https://github.com/inventage/web-components/commit/02228c4f07e12c7bafdacf0bd0d3b264e38efd63) Empty release to fix changeset issues.
+
 ## 0.2.6
 
 ### Patch Changes
