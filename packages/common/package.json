@@ -35,5 +35,8 @@
     "portal",
     "web-components"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "customElements": "custom-elements.json"
 }
