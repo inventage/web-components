@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm ci
+        run: npm install --no-save
 
       - name: Lint
         run: npm run lint
@@ -47,7 +47,7 @@ jobs:
             cache: 'npm'
 
         - name: Install packages
-          run: npm ci
+          run: npm install --no-save
 
         - name: Test
           run: npm run test:vrt
@@ -74,7 +74,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm ci
+        run: npm install --no-save
 
       - name: Create .npmrc
         run: |
