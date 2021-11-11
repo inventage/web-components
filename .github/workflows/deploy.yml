@@ -22,7 +22,10 @@ jobs:
 
       - name: Install packages
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Postinstall
+        run: npm run postinstall
 
       - name: Storybook Build
         run: npm run storybook:build

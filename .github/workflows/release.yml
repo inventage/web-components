@@ -30,7 +30,10 @@ jobs:
 
       - name: Install packages
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Postinstall
+        run: npm run postinstall
 
       - name: Lint
         run: npm run lint
@@ -61,7 +64,10 @@ jobs:
 
         - name: Install packages
           if: steps.cache-node-modules.outputs.cache-hit != 'true'
-          run: npm ci
+          run: npm ci --ignore-scripts
+
+        - name: Postinstall
+          run: npm run postinstall
 
         - name: Test
           run: npm run test:vrt
@@ -95,7 +101,10 @@ jobs:
 
       - name: Install packages
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Postinstall
+        run: npm run postinstall
 
       - name: Create .npmrc
         run: |
