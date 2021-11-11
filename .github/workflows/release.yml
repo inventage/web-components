@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
     inputs:
+      skipCache:
+        description: 'Skips caching of node_modules'
+        required: false
+        default: '0'
       publishCanary:
         description: 'Publish a canary release'
         required: false
@@ -29,7 +33,7 @@ jobs:
           key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true' && github.event.inputs.skipCache != '1'
         run: npm ci --ignore-scripts
 
       - name: Postinstall
@@ -63,7 +67,7 @@ jobs:
             key: modules-${{ hashFiles('package-lock.json') }}
 
         - name: Install packages
-          if: steps.cache-node-modules.outputs.cache-hit != 'true'
+          if: steps.cache-node-modules.outputs.cache-hit != 'true' && github.event.inputs.skipCache != '1'
           run: npm ci --ignore-scripts
 
         - name: Postinstall
@@ -100,7 +104,7 @@ jobs:
           key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true' && github.event.inputs.skipCache != '1'
         run: npm ci --ignore-scripts
 
       - name: Postinstall
