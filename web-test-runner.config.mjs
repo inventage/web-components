@@ -1,4 +1,5 @@
 import { fromRollup } from '@web/dev-server-rollup';
+import { chromeLauncher } from '@web/test-runner';
 import { playwrightLauncher } from '@web/test-runner-playwright';
 import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugin';
 import rollupJson from '@rollup/plugin-json';
@@ -7,11 +8,17 @@ import globby from 'globby';
 const json = fromRollup(rollupJson);
 
 /**
+ * Single browser default.
+ *
+ * @type {ChromeLauncher[]}
+ */
+const SINGLE_BROWSER = [chromeLauncher({ launchOptions: { args: ['--no-sandbox'] } })];
+
+/**
  * Define playwright browsers to launch.
  *
  * @type {PlaywrightLauncher[]}
  */
-const SINGLE_BROWSER = [playwrightLauncher({ product: 'chromium' })];
 const ALL_BROWSERS = [
   playwrightLauncher({ product: 'chromium' }),
   playwrightLauncher({ product: 'webkit' }),
@@ -125,7 +132,7 @@ export default {
     {
       name: 'vrt',
       files: 'packages/**/*.test-vrt.js',
-      browsers: ALL_BROWSERS,
+      browsers: SINGLE_BROWSER,
     },
   ],
   coverageConfig: {

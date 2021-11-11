@@ -16,6 +16,7 @@
     "clean:cache": "rimraf '{packages,plugins}/*/lib' '{packages,plugins}/*/lib/tsconfig.tsbuildinfo' './tsconfig.build-types.tsbuildinfo'",
     "clean:css": "rimraf 'packages/**/*-css.ts'",
     "clean:packages": "rimraf *.tgz '{packages,plugins}/*/*.tgz'",
+    "clean:screenshots": "rimraf screenshots/*/failed",
     "commit": "cz",
     "format": "run-s -l format:*",
     "format:eslint": "eslint --ext .js,.ts,.html . --fix",

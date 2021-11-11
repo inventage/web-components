@@ -50,7 +50,7 @@ jobs:
           run: npm ci
 
         - name: Test
-          run: sudo npx playwright install-deps && npm run test:vrt
+          run: npm run test:vrt
 
         - name: Archive visual diff results
           uses: actions/upload-artifact@v2

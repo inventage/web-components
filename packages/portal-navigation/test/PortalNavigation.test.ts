@@ -25,7 +25,7 @@ type WaitUntilOptions = {
  * @param options
  * @see https://open-wc.org/docs/testing/helpers/#waituntil
  */
-const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options: WaitUntilOptions = { interval: 10, timeout: 10000 }) => {
+export const childrenRendered = async (el: HTMLElement, selector = '[part="item-parent2"]', options: WaitUntilOptions = { interval: 10, timeout: 10000 }) => {
   await waitUntil(() => !!el.shadowRoot?.querySelector(selector), 'Element did not render children', options);
 };
 

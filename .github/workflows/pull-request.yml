@@ -30,3 +30,27 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+  vrt:
+    name: Visual Regression Test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Test
+        run: npm run test:vrt
+
+      - name: Archive visual diff results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: visual-diffs
+          path: screenshots
+          retention-days: 7
