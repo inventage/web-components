@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.8.8
+
+### Patch Changes
+
+- [`02228c4`](https://github.com/inventage/web-components/commit/02228c4f07e12c7bafdacf0bd0d3b264e38efd63) Empty release to fix changeset issues.
+
 ## 0.8.7
 
 ### Patch Changes
