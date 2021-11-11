@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      skipCache:
-        description: 'Skips caching of node_modules'
-        required: false
-        default: '0'
       publishCanary:
         description: 'Publish a canary release'
         required: false
@@ -27,18 +23,13 @@ jobs:
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
       - uses: actions/cache@v2
-        id: cache-node-modules
+        id: cache-npm
         with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
-        if: steps.cache-node-modules.outputs.cache-hit != 'true' || github.event.inputs.skipCache == '1'
         run: npm ci
-
-      - name: Postinstall
-        if: steps.cache-node-modules.outputs.cache-hit == 'true' && github.event.inputs.skipCache != '1'
-        run: npm run postinstall && npx playwright install
 
       - name: Lint
         run: npm run lint
@@ -62,18 +53,13 @@ jobs:
 
         # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
         - uses: actions/cache@v2
-          id: cache-node-modules
+          id: cache-npm
           with:
-            path: ./node_modules
-            key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+            path: ~/.npm
+            key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
 
         - name: Install packages
-          if: steps.cache-node-modules.outputs.cache-hit != 'true' || github.event.inputs.skipCache == '1'
           run: npm ci
-
-        - name: Postinstall
-          if: steps.cache-node-modules.outputs.cache-hit == 'true' && github.event.inputs.skipCache != '1'
-          run: npm run postinstall && npx playwright install
 
         - name: Test
           run: npm run test:vrt
@@ -100,13 +86,12 @@ jobs:
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
       - uses: actions/cache@v2
-        id: cache-node-modules
+        id: cache-npm
         with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          path: ./npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
-        if: steps.cache-node-modules.outputs.cache-hit != 'true' || github.event.inputs.skipCache == '1'
         run: npm ci
 
       - name: Create .npmrc
