@@ -133,7 +133,7 @@ export default {
   },
   testFramework: {
     config: {
-      timeout: 5000,
+      timeout: 2000,
     },
   },
 };
