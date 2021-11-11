@@ -60,6 +60,7 @@ jobs:
         - name: Install packages
           if: steps.cache.outputs.cache-hit != 'true'
           run: npm ci
+
         - name: Test
           run: npm run test:vrt
 
