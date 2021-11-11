@@ -18,10 +18,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm ci --ignore-scripts
-
-      - name: Postinstall
-        run: npm run postinstall
+        run: npm ci
 
       - name: Lint
         run: npm run lint
@@ -45,7 +42,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm ci --ignore-scripts
+        run: npm ci
 
       - name: Postinstall
         run: npm run postinstall

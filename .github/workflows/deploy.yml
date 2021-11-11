@@ -15,10 +15,7 @@ jobs:
           cache: 'npm'
 
       - name: Install packages
-        run: npm ci --ignore-scripts
-
-      - name: Postinstall
-        run: npm run postinstall
+        run: npm ci
 
       - name: Storybook Build
         run: npm run storybook:build
