@@ -31,7 +31,7 @@
     "prelint:types": "npm run build:css",
     "lint:types": "tsc -b tsconfig.build-types.json",
     "prepare": "is-ci || husky install",
-    "release": "is-ci &&  sh scripts/publish.sh",
+    "release": "is-ci && sh scripts/publish.sh",
     "remove-node-modules": "rimraf node_modules '{packages,plugins}/*/node_modules'",
     "start": "npm run storybook",
     "storybook": "npm run build && npm run analyze && run-p -l storybook:start watch:*",
