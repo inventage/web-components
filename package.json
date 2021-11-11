@@ -45,7 +45,7 @@
     "test:all": "npm run build && wtr --group all",
     "test:ci": "npm run test:all -- --coverage",
     "test:update-screenshots": "npm run test:vrt -- --update-visual-baseline",
-    "test:vrt": "npm run build && wtr --group vrt",
+    "test:vrt": "npm run build && wtr --config web-test-runner.config-vrt.mjs --group vrt",
     "test:watch": "npm run build && run-p -r watch:tsc watch:css 'test -- --watch'",
     "version": "is-ci && sh scripts/version.sh",
     "watch:cem-packages": "npm run analyze:cem-packages -- --watch",

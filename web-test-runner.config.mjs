@@ -72,8 +72,6 @@ export async function rewriteDataJsonPaths(context, next) {
 
 export default {
   nodeResolve: true,
-  concurrency: 4,
-  concurrentBrowsers: 1,
   plugins: [
     json(),
     {
@@ -137,7 +135,7 @@ export default {
   // @see https://modern-web.dev/docs/test-runner/test-frameworks/mocha/#configuring-mocha-options
   testFramework: {
     config: {
-      timeout: process.argv.includes('--increase-timeout') ? 200000 : 2000,
+      timeout: process.argv.includes('--increase-timeout') ? 200000 : 5000,
     },
   },
 };
