@@ -15,9 +15,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-          cache: 'npm'
+
+      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+      - uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Lint
@@ -39,9 +45,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-          cache: 'npm'
+
+      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+      - uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install packages
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Test
