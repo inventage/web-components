@@ -192,7 +192,7 @@ Sticky.args = {
   src: './data/test-data.json',
   currentApplication: 'app1',
   sticky: true,
-  anchor: '.content',
+  anchor: 'body',
 };
 
 Sticky.parameters = {
