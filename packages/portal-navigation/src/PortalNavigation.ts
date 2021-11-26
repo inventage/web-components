@@ -123,6 +123,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop {length} [--portal-navigation-font-size-badge=1rem] Font size for badges
  * @cssprop {length} [--portal-navigation-font-size-tree-second-level=1rem] Font size for tree 2nd level items (mobile breakpoint)
  * @cssprop [--portal-navigation-font-family=sans-serif] Default font family
+ * @cssprop [--portal-navigation-font-family-badge=var(--portal-navigation-color-border, sans-serif)] Default badge font family
  *
  * @cssprop {length} [--portal-navigation-horizontal-base=1rem] Horizontal base unit
  * @cssprop {length} [--portal-navigation-vertical-base=0.5rem] Vertical base unit

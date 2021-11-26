@@ -148,7 +148,7 @@
   padding: 2px 8px;
   text-align: center;
   color: var(--portal-navigation-color-badge, white);
-  font-family: Helvetica, sans-serif;
+  font-family: var(--portal-navigation-font-family-badge, var(--portal-navigation-font-family, sans-serif));
   transform: translate(5%, -30%);
 }
 
