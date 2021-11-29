@@ -1,5 +1,5 @@
 import { html, ifDefined, TemplateResult } from '@inventage-web-components/common';
-import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
+import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { NavigationEvents } from '../src/PortalNavigation.js';
@@ -78,7 +78,7 @@ interface ArgTypes {
 
 const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], content?: TemplateResult | TemplateResult[]): TemplateResult => {
   // Automatically set styles for each CSS custom prop passed as argument
-  setCssStyleFromArgs(args, document.documentElement.style);
+  // setCssStyleFromArgs(args, document.documentElement.style);
 
   // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
   document.querySelector('body')!.style.paddingTop = '';
@@ -90,7 +90,7 @@ const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], con
       activeUrl="${ifDefined(args.activeUrl)}"
       currentApplication="${ifDefined(args.currentApplication)}"
       anchor="${ifDefined(args.anchor)}"
-      mobileBreakpoint=${ifDefined(args.mobileBreakpoint)}
+      mobileBreakpoint="${ifDefined(args.mobileBreakpoint)}"
       ?internalRouting="${args.internalRouting}"
       ?logoutMenuInMetaBar="${args.logoutMenuInMetaBar}"
       ?logoutMenuInMobileHeader="${args.logoutMenuInMobileHeader}"
@@ -186,7 +186,7 @@ Empty.parameters = {
  * @param args
  * @constructor
  */
-export const Sticky: Story<ArgTypes> = (args: ArgTypes) => Template(args, undefined, html`<div class="content">${generateParagraphs(20)}</div>`);
+export const Sticky: Story<ArgTypes> = (args: ArgTypes) => Template(args, undefined, html` <div class="content">${generateParagraphs(20)}</div>`);
 
 Sticky.args = {
   src: './data/test-data.json',
