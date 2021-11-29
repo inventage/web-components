@@ -126,6 +126,14 @@ jobs:
           publish_dir: ./storybook-static
           allow_empty_commit: true
 
+      - name: Deploy to netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=storybook-static --prod
+
       - name: Publishing canary releases to npm registry
         if: env.package_published_on_npm != '1' && github.event.inputs.publishCanary == '1'
         run: |
