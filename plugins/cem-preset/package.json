@@ -10,8 +10,8 @@
     "*.js"
   ],
   "dependencies": {
-    "cem-plugin-module-file-extensions": "^0.0.1",
-    "cem-plugin-readonly": "^0.0.1"
+    "cem-plugin-module-file-extensions": "^0.0.2",
+    "cem-plugin-readonly": "^0.0.2"
   },
   "keywords": [
     "custom-elements-manifest",
