@@ -50,24 +50,6 @@ export const getCssProperties = (element?: CustomElement): CssCustomProperty[] =
 };
 
 /**
- * Returns the list of attributes for the given custom element.
- *
- * @param element
- */
-export const getAttributes = (element?: CustomElement): CssCustomProperty[] => {
-  if (!element) {
-    return [];
-  }
-
-  const { attributes } = element;
-  if (!attributes) {
-    return [];
-  }
-
-  return attributes;
-};
-
-/**
  * Returns the argType object with all CSS properties for the given custom element.
  *
  * @param element
@@ -113,22 +95,6 @@ export const getCssArgs = (element?: CustomElement): Record<string, unknown> => 
   cssProperties.map(prop => (cssArgs[prop.name] = prop.default));
 
   return cssArgs;
-};
-
-/**
- * Returns the list of arguments (mapping name → default value) for all attributes for the given custom element.
- *
- * @param element
- */
-export const getPropertyArgs = (element?: CustomElement): Record<string, unknown> => {
-  const args: Record<string, unknown> = {};
-  const attributes = getAttributes(element);
-
-  attributes.map(attr => {
-    console.log('attr', attr);
-  });
-
-  return args;
 };
 
 /**
