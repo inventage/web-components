@@ -20,6 +20,11 @@ export default {
     // CSS prop arg types
     ...getCssPropArgTypes(customElement),
   },
+  parameters: {
+    actions: {
+      handles: ['state-changed'],
+    },
+  },
 };
 
 interface ArgTypes {

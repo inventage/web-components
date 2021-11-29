@@ -48,7 +48,6 @@ module.exports = {
     },
     {
       files: ['packages/**/*.ts'],
-      excludedFiles: 'packages/common/**/*.ts',
       rules: {
         'no-restricted-imports': [
           'error',
@@ -56,16 +55,47 @@ module.exports = {
             paths: [
               {
                 name: 'lit-html',
-                message: 'Please use @inventage-web-components/common instead.',
+                message: 'Outdated version, use lit instead.',
               },
               {
                 name: 'lit-element',
-                message: 'Please use @inventage-web-components/common instead.',
+                message: 'Outdated version, use lit instead.',
               },
             ],
             patterns: [
               {
                 group: ['lit-html/*', 'lit-element/*'],
+                message: 'Outdated version, use lit instead.',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      files: ['packages/**/*.ts'],
+      excludedFiles: 'packages/common/**/*.ts',
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              {
+                name: 'lit',
+                message: 'Please use @inventage-web-components/common instead.',
+              },
+            ],
+            patterns: [
+              {
+                group: ['lit/directives/*'],
+                message: 'Please use @inventage-web-components/common/directives.js instead.',
+              },
+              {
+                group: ['lit/decorators/*'],
+                message: 'Please use @inventage-web-components/common/decorators.js instead.',
+              },
+              {
+                group: ['lit/*'],
                 message: 'Please use @inventage-web-components/common instead.',
               },
             ],

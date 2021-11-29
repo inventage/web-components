@@ -26,10 +26,10 @@
   "sideEffects": false,
   "types": "lib/src/index.d.ts",
   "dependencies": {
-    "lit-element": "^2.5.1",
-    "lit-html": "^1.4.1"
+    "lit": "^2.0.2"
   },
   "keywords": [
+    "lit",
     "lit-element",
     "lit-html",
     "portal",
@@ -38,5 +38,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./src/*": "./lib/src/*",
+    "./decorators": "./lib/src/decorators.js",
+    "./decorators.js": "./lib/src/decorators.js",
+    "./directives": "./lib/src/directives.js",
+    "./directives.js": "./lib/src/directives.js",
+    "./html": "./lib/src/html.js",
+    "./html.js": "./lib/src/html.js"
+  }
 }

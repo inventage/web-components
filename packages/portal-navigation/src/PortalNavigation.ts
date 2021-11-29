@@ -1,19 +1,6 @@
-import {
-  baseStyles,
-  CSSResultArray,
-  html,
-  LitElement,
-  Nothing,
-  nothing,
-  property,
-  state,
-  TemplateResult,
-  query,
-  ClassInfo,
-  classMap,
-  PropertyValues,
-  ifDefined,
-} from '@inventage-web-components/common';
+import { baseStyles, CSSResultArray, html, LitElement, nothing, PropertyValues, TemplateResult } from '@inventage-web-components/common';
+import { property, state, query } from '@inventage-web-components/common/src/decorators.js';
+import { classMap, ClassInfo, ifDefined } from '@inventage-web-components/common/src/directives.js';
 import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { debounce } from 'ts-debounce';
@@ -440,7 +427,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     this.updateAnchorPaddingWhenSticky();
   }
 
-  render(): TemplateResult | Nothing {
+  render(): unknown {
     if (!this.src) {
       return nothing;
     }
@@ -582,7 +569,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
         /** @ignore */
         this.dispatchEvent(new CustomEvent(NavigationEvents.configured, { detail: this.configuration, composed: true, bubbles: true }));
         this.__updateActivePathFromUrl();
-        this.requestUpdateInternal();
+        this.requestUpdate();
       } catch (e) {
         // eslint-disable-next-line no-console
         console.warn('An error occurred when fetching remote data…', e);
@@ -636,7 +623,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
     }
 
     this.activeUrl = url;
-    this.requestUpdateInternal('activeUrl');
+    this.requestUpdate('activeUrl');
   }
 
   /**
@@ -647,7 +634,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    */
   setBadgeValueFromId(id: string, value: unknown): void {
     this.badgeValues.set(id, value);
-    this.requestUpdateInternal();
+    this.requestUpdate();
   }
 
   /**
@@ -705,7 +692,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    *
    * @param menuLogout
    */
-  private renderMetaBar(menuLogout: TemplateResult | Nothing = nothing) {
+  private renderMetaBar(menuLogout: unknown = nothing) {
     return html` <div class="meta-bar" part="meta-bar">
       <div class="container-max-width inner">
         <div class="slot-meta-left" part="slot-meta-left">
@@ -727,7 +714,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    *
    * @param menuId the menu id for which to build a menu html template.
    */
-  private _createMenuTemplate(menuId: string): TemplateResult | Nothing {
+  private _createMenuTemplate(menuId: string): unknown {
     const menu = this.configuration.getMenu(menuId);
     if (!menu || !menu.items || menu.items.length <= 0) {
       return nothing;
@@ -803,7 +790,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * Creates the html template for the third row (second-level), which displays only if the active path
    * has a first-level item selection and that item has child items.
    */
-  private _createCurrentItemsTemplate(): TemplateResult | Nothing {
+  private _createCurrentItemsTemplate(): unknown {
     const parentItemId = this.activePath.getFirstLevelItemId();
     if (!parentItemId) {
       return nothing;
@@ -880,7 +867,7 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
    * Creates the html template for tree mode (hamburger menu).
    * You may override this to customize the order and elements of the tree structure for the hamburger menu.
    */
-  private _createTreeTemplate(): TemplateResult[] | Nothing {
+  private _createTreeTemplate(): unknown {
     const templates: TemplateResult[] = [];
 
     // Remove logout menu from tree template if it should be displayed in mobile header

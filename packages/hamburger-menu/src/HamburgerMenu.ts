@@ -1,4 +1,6 @@
-import { CSSResultArray, html, LitElement, property, TemplateResult, baseStyles, classMap, PropertyDeclaration } from '@inventage-web-components/common';
+import { baseStyles, CSSResultArray, html, LitElement, PropertyValues, TemplateResult } from '@inventage-web-components/common';
+import { property } from '@inventage-web-components/common/src/decorators.js';
+import { classMap } from '@inventage-web-components/common/src/directives.js';
 import { styles } from './styles-css.js';
 
 /**
@@ -30,13 +32,15 @@ export class HamburgerMenu extends LitElement {
     return [baseStyles, styles];
   }
 
-  requestUpdateInternal(name?: PropertyKey, oldValue?: unknown, options?: PropertyDeclaration): void {
-    super.requestUpdateInternal(name, oldValue, options);
+  protected updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
 
-    if (name === 'toggled') {
+    if (changedProperties.has('toggled') && changedProperties.get('toggled') !== undefined) {
       this.dispatchEvent(
         new CustomEvent('state-changed', {
           detail: this.toggled,
+          bubbles: true,
+          composed: true,
         })
       );
     }
