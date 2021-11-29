@@ -37,7 +37,6 @@
   "dependencies": {
     "@inventage-web-components/common": "^0.2.0",
     "@inventage-web-components/hamburger-menu": "^0.3.0",
-    "@open-wc/scoped-elements": "^2.0.1",
     "ts-debounce": "^4.0.0",
     "tslib": "^2.0.0"
   },
@@ -58,6 +57,7 @@
   "customElements": "custom-elements.json",
   "exports": {
     ".": "./lib/src/index.js",
+    "./src/*": "./lib/src/*",
     "./portal-navigation": "./lib/src/portal-navigation.js",
     "./portal-navigation.js": "./lib/src/portal-navigation.js"
   }
