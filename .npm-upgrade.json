@@ -7,10 +7,6 @@
     "@open-wc/testing": {
       "versions": ">=3",
       "reason": "Upgrade together with Lit 2.x upgrade"
-    },
-    "lit-html": {
-      "versions": ">=2",
-      "reason": "Major upgrade, upgrade all packages at once"
     }
   }
 }
