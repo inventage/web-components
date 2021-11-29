@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.9.0
+
+### Minor Changes
+
+- [`224263c`](https://github.com/inventage/web-components/commit/224263c998c2805f444b3b45b4f8e600c89a46e6) Do not use `Helvetica` as the explicit `font-family` for badges. This change adds a new CSS custom property `--portal-navigation-font-family-badge` for the font-family in badges.
+
+### Patch Changes
+
+- [`1b02481`](https://github.com/inventage/web-components/commit/1b024816ba24978ad33aef241b37fe9799f0b973) Dependencies upgrades
+
 ## 0.8.9
 
 ### Patch Changes
