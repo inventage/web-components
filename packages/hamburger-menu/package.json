@@ -45,6 +45,7 @@
   "customElements": "custom-elements.json",
   "exports": {
     ".": "./lib/src/index.js",
+    "./src/*": "./lib/src/*",
     "./hamburger-menu": "./lib/src/hamburger-menu.js",
     "./hamburger-menu.js": "./lib/src/hamburger-menu.js"
   }

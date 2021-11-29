@@ -1,12 +1,12 @@
 import { baseStyles, CSSResultArray, html, LitElement, nothing, PropertyValues, TemplateResult } from '@inventage-web-components/common';
 import { property, state, query } from '@inventage-web-components/common/src/decorators.js';
 import { classMap, ClassInfo, ifDefined } from '@inventage-web-components/common/src/directives.js';
-import { ScopedElementsMap, ScopedElementsMixin } from '@open-wc/scoped-elements';
-import { HamburgerMenu } from '@inventage-web-components/hamburger-menu';
 import { debounce } from 'ts-debounce';
+import '@inventage-web-components/hamburger-menu/src/hamburger-menu.js';
+
 import { IdPath } from './IdPath.js';
-import { CommonMenuItem, Configuration, FirstLevelMenuItem, MenuItem, MenuLabel } from './Configuration.js';
 import { styles } from './styles-css.js';
+import { CommonMenuItem, Configuration, FirstLevelMenuItem, MenuItem, MenuLabel } from './Configuration.js';
 
 /**
  * A listing of key menu ids that are handled specifically by the portal navigation component.
@@ -164,7 +164,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @slot tree-bottom - The slot rendered at the bottom of the menu tree (mobile breakpoint)
  * @slot current - The slot rendered next to the current items (2nd level), in non-mobile variant only
  */
-export class PortalNavigation extends ScopedElementsMixin(LitElement) {
+export class PortalNavigation extends LitElement {
   /**
    * Location from where to fetch configuration data file.
    */
@@ -270,15 +270,6 @@ export class PortalNavigation extends ScopedElementsMixin(LitElement) {
   private anchorElement?: HTMLElement;
 
   private initialAnchorElementPadding?: string;
-
-  /**
-   * @internal
-   */
-  static get scopedElements(): ScopedElementsMap {
-    return {
-      'hamburger-menu': HamburgerMenu,
-    };
-  }
 
   static get styles(): CSSResultArray {
     return [baseStyles, styles];
