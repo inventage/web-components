@@ -1,5 +1,16 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.3.0
+
+### Minor Changes
+
+- [`2d708d1`](https://github.com/inventage/web-components/commit/2d708d1d39cc456a4ee88d13afcb06c0baee8ed7) This is the last [Lit 1](https://lit-element.polymer-project.org) release. Future releases will be using [Lit 2](https://lit.dev)
+
+### Patch Changes
+
+- Updated dependencies [[`2d708d1`](https://github.com/inventage/web-components/commit/2d708d1d39cc456a4ee88d13afcb06c0baee8ed7)]:
+  - @inventage-web-components/common@0.2.0
+
 ## 0.2.8
 
 ### Patch Changes
