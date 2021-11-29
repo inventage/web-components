@@ -1,4 +1,5 @@
-import { html, ifDefined, TemplateResult } from '@inventage-web-components/common';
+import { html, TemplateResult } from '@inventage-web-components/common';
+import { ifDefined } from '@inventage-web-components/common/src/directives.js';
 import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';

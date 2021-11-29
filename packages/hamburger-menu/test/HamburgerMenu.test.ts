@@ -1,5 +1,4 @@
-import { assert, expect, fixture, html } from '@open-wc/testing';
-import { spy } from 'sinon';
+import { assert, expect, fixture, html, oneEvent } from '@open-wc/testing';
 
 import { HamburgerMenu } from '../src/index.js';
 import '../src/hamburger-menu.js';
@@ -43,14 +42,15 @@ describe('<hamburger-menu>', () => {
     });
 
     it('triggers "state-changed" event when clicked', async () => {
-      const changedSpy = spy();
-      const el = await fixture(html` <hamburger-menu @state-changed="${changedSpy as EventListener}"></hamburger-menu>`);
+      const el: HamburgerMenu = await fixture(html` <hamburger-menu></hamburger-menu>`);
+      setTimeout(() => el.shadowRoot!.querySelector('button')!.click());
+      const { detail: toggledTo } = await oneEvent(el, 'state-changed');
 
-      el.shadowRoot!.querySelector('button')!.click();
-      expect(changedSpy.callCount).to.equal(1);
+      expect(toggledTo).to.equal(true);
 
-      el.shadowRoot!.querySelector('button')!.click();
-      expect(changedSpy.callCount).to.equal(2);
+      el.toggled = false;
+      const { detail: toggledBack } = await oneEvent(el, 'state-changed');
+      expect(toggledBack).to.equal(false);
     });
   });
 
