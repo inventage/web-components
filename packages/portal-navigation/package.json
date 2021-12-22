@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/portal-navigation",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "A component implementing an opinionated (but generic and hence configurable) navigation pattern.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",
@@ -35,8 +35,8 @@
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
-    "@inventage-web-components/common": "^0.2.0",
-    "@inventage-web-components/hamburger-menu": "^0.3.0",
+    "@inventage-web-components/common": "^0.3.0",
+    "@inventage-web-components/hamburger-menu": "^0.4.0",
     "ts-debounce": "^4.0.0",
     "tslib": "^2.0.0"
   },
