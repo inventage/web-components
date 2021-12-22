@@ -1,6 +1,7 @@
+const path = require('path');
+const replace = require('replace-in-file');
 const json = require('@rollup/plugin-json');
 const { storybookRollupPlugin } = require('@inventage-web-components/markdown-storybook');
-const replace = require('@rollup/plugin-replace');
 
 const BUILD_VERSION =
   process.env.GITHUB_RUN_ID && process.env.GITHUB_SHA
@@ -20,12 +21,23 @@ module.exports = {
     // Add additional plugins to the build
     // @see https://modern-web.dev/docs/dev-server/plugins/storybook/#customizing-the-build
     config.plugins.push(json());
-    config.plugins.push(
-      replace({
-        preventAssignment: false,
-        __BUILD_VERSION__: BUILD_VERSION,
-      })
-    );
+    config.plugins.push({
+      name: 'replace-build-id',
+      generateBundle() {
+        try {
+          const results = replace.sync({
+            files: `${path.resolve(__dirname, '..', 'storybook-static')}/*.html`,
+            from: /__BUILD_VERSION__/g,
+            to: BUILD_VERSION,
+          });
+
+          // prettier-ignore
+          console.log(`Build version replaced in files:\n\n`, results.filter(r => r.hasChanged).map(r => `  ${r.file}`).join('\n'));
+        } catch (error) {
+          console.error('Could not set build version:', error);
+        }
+      },
+    });
 
     return config;
   },
