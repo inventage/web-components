@@ -1,8 +1,8 @@
 import { baseStyles, CSSResultArray, html, LitElement, nothing, PropertyValues, TemplateResult } from '@inventage-web-components/common';
-import { property, state, query } from '@inventage-web-components/common/src/decorators.js';
-import { classMap, ClassInfo, ifDefined } from '@inventage-web-components/common/src/directives.js';
+import { property, state, query } from '@inventage-web-components/common/lib/src/decorators.js';
+import { classMap, ClassInfo, ifDefined } from '@inventage-web-components/common/lib/src/directives.js';
 import { debounce } from 'ts-debounce';
-import '@inventage-web-components/hamburger-menu/src/hamburger-menu.js';
+import '@inventage-web-components/hamburger-menu/lib/src/hamburger-menu.js';
 
 import { IdPath } from './IdPath.js';
 import { styles } from './styles-css.js';

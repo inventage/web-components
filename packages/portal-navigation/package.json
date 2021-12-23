@@ -57,7 +57,7 @@
   "customElements": "custom-elements.json",
   "exports": {
     ".": "./lib/src/index.js",
-    "./src/*": "./lib/src/*",
+    "./lib/src/*": "./lib/src/*",
     "./portal-navigation": "./lib/src/portal-navigation.js",
     "./portal-navigation.js": "./lib/src/portal-navigation.js"
   }

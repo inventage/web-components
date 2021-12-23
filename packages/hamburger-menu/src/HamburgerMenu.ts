@@ -1,6 +1,6 @@
 import { baseStyles, CSSResultArray, html, LitElement, PropertyValues, TemplateResult } from '@inventage-web-components/common';
-import { property } from '@inventage-web-components/common/src/decorators.js';
-import { classMap } from '@inventage-web-components/common/src/directives.js';
+import { property } from '@inventage-web-components/common/lib/src/decorators.js';
+import { classMap } from '@inventage-web-components/common/lib/src/directives.js';
 import { styles } from './styles-css.js';
 
 /**

@@ -41,7 +41,7 @@
   "customElements": "custom-elements.json",
   "exports": {
     ".": "./lib/src/index.js",
-    "./src/*": "./lib/src/*",
+    "./lib/src/*": "./lib/src/*",
     "./decorators": "./lib/src/decorators.js",
     "./decorators.js": "./lib/src/decorators.js",
     "./directives": "./lib/src/directives.js",

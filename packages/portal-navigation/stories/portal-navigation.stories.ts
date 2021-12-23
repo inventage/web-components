@@ -1,9 +1,9 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
-import { ifDefined } from '@inventage-web-components/common/src/directives.js';
+import { ifDefined } from '@inventage-web-components/common/lib/src/directives.js';
 import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
-import { NavigationEvents } from '../src/PortalNavigation.js';
+import { NavigationEvents } from '../src/index.js';
 import cem from '../custom-elements.json';
 import { dispatchBadgeEvents, eventListenerDocs } from './helpers.js';
 
