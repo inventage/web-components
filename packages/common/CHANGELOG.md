@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.4.0
+
+### Minor Changes
+
+- [`b3c3cba`](https://github.com/inventage/web-components/commit/b3c3cbaa23598c658af0fab1ae58ba778a52eb57) Prepend `lib` to exports defined in `package.json`
+
 ## 0.3.0
 
 ### Minor Changes

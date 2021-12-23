@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 0.12.0
+
+### Minor Changes
+
+- [`b3c3cba`](https://github.com/inventage/web-components/commit/b3c3cbaa23598c658af0fab1ae58ba778a52eb57) Prepend `lib` to exports defined in `package.json`
+
+### Patch Changes
+
+- Updated dependencies [[`b3c3cba`](https://github.com/inventage/web-components/commit/b3c3cbaa23598c658af0fab1ae58ba778a52eb57)]:
+  - @inventage-web-components/common@0.4.0
+  - @inventage-web-components/hamburger-menu@0.5.0
+
 ## 0.11.0
 
 ### Minor Changes
