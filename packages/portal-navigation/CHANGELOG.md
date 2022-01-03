@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.12.1
+
+### Patch Changes
+
+- [`eee9340`](https://github.com/inventage/web-components/commit/eee9340a20436a77602180cf04572394a4b5b1d9) Use non-debounced method for updating padding in sticky mode after each update (in `updated()` Lit callback)
+
 ## 0.12.0
 
 ### Minor Changes
