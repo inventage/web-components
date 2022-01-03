@@ -415,7 +415,8 @@ export class PortalNavigation extends LitElement {
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
-    this.updateAnchorPaddingWhenSticky();
+    // non-debounced update of padding
+    this.updateAnchorPaddingWhenStickyInternal();
   }
 
   render(): unknown {
@@ -1063,9 +1064,22 @@ export class PortalNavigation extends LitElement {
 
   /**
    * Updates the padding of the anchor when navigation should be sticky.
+   * This function is bound to events and is debounced by default.
+   * Use updateAnchorPaddingWhenStickyInternal() when you want to call the non-debounced version.
+   *
+   * @private
    */
   private updateAnchorPaddingWhenSticky() {
-    // Bail when anchor is available or we're not in sticky mode
+    this.updateAnchorPaddingWhenStickyInternal();
+  }
+
+  /**
+   * Updates the padding of the anchor when navigation should be sticky.
+   *
+   * @private
+   */
+  private updateAnchorPaddingWhenStickyInternal() {
+    // Bail when anchor is available, or we're not in sticky mode
     if (!this.sticky || !this.anchorElement) {
       return;
     }
