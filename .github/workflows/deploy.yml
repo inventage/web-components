@@ -26,7 +26,7 @@ jobs:
 
       - name: Run postinstall
         if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run --if-present postinstall
+        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
 
       - name: Storybook Build
         run: npm run storybook:build
