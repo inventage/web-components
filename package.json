@@ -39,9 +39,6 @@
     "storybook:build": "npm run build && npm run analyze && build-storybook",
     "poststorybook:build": "cpy 'packages/*/data/**/*' storybook-static/data/",
     "storybook:start": "web-dev-server --config web-dev-server-storybook.config.mjs",
-    "syncpack": "run-s syncpack:*",
-    "syncpack:mismatches": "syncpack list-mismatches",
-    "syncpack:versions": "syncpack set-semver-ranges",
     "test": "npm run build && wtr --group single",
     "test:all": "npm run build && wtr --group all",
     "test:ci": "npm run test:all -- --coverage",
@@ -106,7 +103,6 @@
     "replace-in-file": "^6.3.2",
     "rimraf": "^3.0.2",
     "sinon": "^12.0.1",
-    "syncpack": "^6.0.0",
     "ts-lit-plugin": "^1.2.1",
     "typescript": "^4.5.4"
   },
