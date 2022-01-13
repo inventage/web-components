@@ -118,23 +118,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1
+        id: changesets
+        uses: changesets/action@v1.1.0
         with:
           publish: npm run release
           version: npm run version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Env Debug
-        run: |
-          echo "${{ env.package_published_on_npm }}"
-
       - name: Storybook Build
-        if: env.package_published_on_npm == '1'
+        if: steps.changesets.outputs.published == 'true'
         run: npm run storybook:build
 
       - name: Deploy to Github Pages
-        if: env.package_published_on_npm == '1'
+        if: steps.changesets.outputs.published == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -157,7 +154,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Publishing canary releases to npm registry
-        if: env.package_published_on_npm != '1' && github.event.inputs.publishCanary == '1'
+        if: steps.changesets.outputs.published != 'true' && github.event.inputs.publishCanary == '1'
         run: |
           git checkout $GITHUB_REF
           npx changeset version --snapshot canary
