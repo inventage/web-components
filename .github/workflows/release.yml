@@ -127,7 +127,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Storybook Build
-        if: steps.changesets.outputs.published == 'true'
         run: npm run storybook:build
 
       - name: Deploy to Github Pages
