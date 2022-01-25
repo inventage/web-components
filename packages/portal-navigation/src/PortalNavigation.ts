@@ -416,7 +416,9 @@ export class PortalNavigation extends LitElement {
     }
 
     // non-debounced update of padding
-    this.updateAnchorPaddingWhenStickyInternal();
+    setTimeout(() => {
+      this.updateAnchorPaddingWhenStickyInternal();
+    });
   }
 
   render(): unknown {
