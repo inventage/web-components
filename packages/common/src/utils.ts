@@ -10,3 +10,10 @@
  * @param time
  */
 export const delay = (time: number): Promise<void> => new Promise(r => setTimeout(r, time));
+
+/**
+ * Promise-based requestAnimationFrame
+ *
+ * await rAF();
+ */
+export const rAF = (): Promise<number> => new Promise(requestAnimationFrame);

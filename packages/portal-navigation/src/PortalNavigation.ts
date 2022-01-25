@@ -415,9 +415,11 @@ export class PortalNavigation extends LitElement {
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
-    // non-debounced update of padding
-    setTimeout(() => {
-      this.updateAnchorPaddingWhenStickyInternal();
+    // Wait two paint cycles until CSS styles have been applied…
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.updateAnchorPaddingWhenStickyInternal();
+      });
     });
   }
 
