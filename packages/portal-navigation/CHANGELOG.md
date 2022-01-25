@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.12.3
+
+### Patch Changes
+
+- [`3765f1c`](https://github.com/inventage/web-components/commit/3765f1c47e1b1cdd45fe438b31315f544068b03d) Use `requestAnimationFrame` (twice) to wait to layout updated before calculating container height in sticky mode
+
 ## 0.12.2
 
 ### Patch Changes
