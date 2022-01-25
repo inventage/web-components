@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.12.2
+
+### Patch Changes
+
+- [`8c17216`](https://github.com/inventage/web-components/commit/8c1721609999c5b15c1a1c241d8a8fab7bff2262) Use `setTimeout` for computing anchor padding when navigation is sticky
+
 ## 0.12.1
 
 ### Patch Changes
