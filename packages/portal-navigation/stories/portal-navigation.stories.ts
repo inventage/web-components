@@ -187,13 +187,26 @@ Empty.parameters = {
  * @param args
  * @constructor
  */
-export const Sticky: Story<ArgTypes> = (args: ArgTypes) => Template(args, undefined, html` <div class="content">${generateParagraphs(20)}</div>`);
+export const Sticky: Story<ArgTypes> = (args: ArgTypes) =>
+  Template(
+    args,
+    undefined,
+    html`
+      <style>
+        :root {
+          --portal-navigation-color-current-background: #f5f5f5;
+        }
+      </style>
+      <div class="content">${generateParagraphs(20)}</div>
+    `
+  );
 
 Sticky.args = {
   src: './data/test-data.json',
   currentApplication: 'app1',
   sticky: true,
   anchor: 'body',
+  activeUrl: '/some/path/item2.3',
 };
 
 Sticky.parameters = {
