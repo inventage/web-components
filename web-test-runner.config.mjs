@@ -44,7 +44,7 @@ const ALL_BROWSERS = [
  *
  * This allows us to keep package-relevant data files in each package while using the same paths as when serving the built
  * storybook package (for storybook, these data directories from all packages are copied and merged (!) into the storybook
- * dist dir and a single 'data' directory.
+ * dist dir and a single 'data' directory).
 
  * @param context
  * @param next
@@ -107,7 +107,7 @@ export default {
   ],
   middleware: [
     /**
-     * Removes custom json path suffix so it becomes a valid file to serve: .json! → .json
+     * Removes custom json path suffix, so it becomes a valid file to serve: .json! → .json
      */
     function rewriteCustomJsonPath(context, next) {
       if (context.url.endsWith('.json!')) {
