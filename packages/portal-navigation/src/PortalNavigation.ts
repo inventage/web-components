@@ -249,7 +249,7 @@ export class PortalNavigation extends LitElement {
   anchor?: string;
 
   /**
-   * The current path of "active" items. e.g. if an item in level 2 is clicked it's parent item and the corresponding menu would be considered "active"
+   * The current path of "active" items. e.g. if an item in level 2 is clicked its parent item and the corresponding menu would be considered "active"
    */
   @state()
   private activePath = new IdPath();
@@ -525,7 +525,7 @@ export class PortalNavigation extends LitElement {
   }
 
   /**
-   * Hides any active dropdowns when a click occurs outside of the dropdown or its menu.
+   * Hides any active dropdowns when a click occurs outside the dropdown or its menu.
    */
   private __globalClickListener(e: Event) {
     if (!this.activeDropdown || !e.composed) {
@@ -635,7 +635,7 @@ export class PortalNavigation extends LitElement {
 
   /**
    * Set a badge value for a specific url.
-   * The method performs a url → id lookup and only inserts a badge value if an id for the given url has been found.
+   * The method performs an url → id lookup and only inserts a badge value if an id for the given url has been found.
    *
    * @param {string} url
    * @param {*} value - the badge value (could be a l11n label object)
@@ -658,7 +658,7 @@ export class PortalNavigation extends LitElement {
    * Checks for a badge for the given id. The url is only checked if no badge value was found for the id.
    *
    * @param id - a menuId or itemId
-   * @param url - a url of an item
+   * @param url - an url of an item
    *
    * @returns the badge value associated with the id or url or undefined if none exists.
    */
@@ -838,7 +838,7 @@ export class PortalNavigation extends LitElement {
    * @param {string} label - the label to be displayed. Either label or icon must be present (or both).
    * @param {string} icon - the icon to be displayed. Either label or icon must be present (or both).
    * @param {string} badge - the badge value to be displayed. If undefined, no badge will be displayed. If there is an icon,
-   * the badge will be associated with the icon. Otherwise it will be associated with the label.
+   * the badge will be associated with the icon. Otherwise, it will be associated with the label.
    */
   private static _createLinkTemplate(id: string, label?: string, icon?: string, badge?: string): TemplateResult[] {
     const result = [];
@@ -1033,7 +1033,7 @@ export class PortalNavigation extends LitElement {
       return;
     }
 
-    // if no defaultItem is defined or it can't be found use the first item.
+    // if no defaultItem is defined, or it can't be found use the first item.
     return items.find(childItem => childItem.id === defaultItem) || items[0];
   }
 
