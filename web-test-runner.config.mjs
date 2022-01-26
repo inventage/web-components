@@ -21,8 +21,7 @@ const SINGLE_BROWSER = [chromeLauncher({ launchOptions: { args: ['--no-sandbox']
  */
 const ALL_BROWSERS = [
   playwrightLauncher({ product: 'chromium' }),
-  // Disable until https://github.com/microsoft/playwright/issues/10108 is resolved
-  // playwrightLauncher({ product: 'webkit' }),
+  playwrightLauncher({ product: 'webkit' }),
   playwrightLauncher({
     product: 'firefox',
     launchOptions: {
