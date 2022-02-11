@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.0
+
+### Minor Changes
+
+- [`0c801d6`](https://github.com/inventage/web-components/commit/0c801d6fd4c129bf6b0ff4f96b1045e8e01f92b2) Adds a `fallbackLanguage` property to use as fallback (key) in label translations. When this exists as a key in the label object, the value of that key will be used for the label instead of falling back to an empty string.
+
 ## 0.12.3
 
 ### Patch Changes
