@@ -172,10 +172,16 @@ export class PortalNavigation extends LitElement {
   src?: string;
 
   /**
-   * The current language. e.g. 'en' or 'de'.
+   * The current language. e.g. 'en', 'de', …
    */
   @property()
   language = 'en';
+
+  /**
+   * The fallback language. This is used for translations of labels for unknown languages
+   */
+  @property()
+  fallbackLanguage = 'en';
 
   /**
    * You can use this to set the active path via the url of an item.
@@ -1051,18 +1057,22 @@ export class PortalNavigation extends LitElement {
       labelObj = (labelProvider as CommonMenuItem).label;
     }
 
+    // If label is a string value, we just return it
     if (typeof labelObj === 'string') {
       return labelObj;
     }
 
-    if (!labelObj || !this.language) {
-      return '';
-    }
-
-    if (this.language in labelObj) {
+    // If label is an object that contains the language as key, we return the value (translation) for that key
+    if (labelObj && this.language in (labelObj || {})) {
       return (labelObj as MenuLabel)[this.language];
     }
 
+    // Try the same with the fallback language
+    if (labelObj && this.fallbackLanguage in (labelObj || {})) {
+      return (labelObj as MenuLabel)[this.fallbackLanguage];
+    }
+
+    // If everything fails…
     return '';
   }
 

@@ -1,4 +1,6 @@
-import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { aTimeout, elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
@@ -591,6 +593,61 @@ describe('<portal-navigation>', () => {
 
       expect(window.location.pathname).to.equal('/');
       expect(detail.url).to.equal('/some/path/parent1');
+    });
+  });
+
+  describe('Translations', () => {
+    it('changes labels when language changes', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el);
+
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_en');
+      el.language = 'de';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_de');
+    });
+
+    it('labels use fallback language when translations for a language are not found', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el);
+
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_en');
+      el.language = 'fr';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_en');
+    });
+
+    it('can set a custom fallback language', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}" fallbacklanguage="de"></portal-navigation>`);
+      await childrenRendered(el);
+
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_en');
+      el.language = 'fr';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_de');
+    });
+
+    it('label translations are empty when fallback language does not exist in label translations', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}" fallbacklanguage="xx"></portal-navigation>`);
+      await childrenRendered(el);
+
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('Parent2_en');
+      el.language = 'fr';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent2"]')!.textContent).to.equal('');
+    });
+
+    it('labels that are strings are rendered as is', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el);
+
+      expect(el.shadowRoot!.querySelector('[part="item-parent5"]')!.textContent).to.equal('Parent5');
+      el.language = 'de';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent5"]')!.textContent).to.equal('Parent5');
+      el.language = 'xx';
+      await elementUpdated(el);
+      expect(el.shadowRoot!.querySelector('[part="item-parent5"]')!.textContent).to.equal('Parent5');
     });
   });
 

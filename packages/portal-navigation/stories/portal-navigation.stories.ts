@@ -30,7 +30,7 @@ export default {
       },
     },
     language: {
-      options: ['en', 'de'],
+      options: ['en', 'de', 'fr'],
       control: {
         type: 'inline-radio',
       },
@@ -63,6 +63,7 @@ export default {
 interface ArgTypes {
   src?: string;
   language?: string;
+  fallbackLanguage?: string;
   activeUrl?: string;
   currentApplication?: string;
   anchor?: string;
@@ -88,6 +89,7 @@ const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], con
     <portal-navigation
       src="${ifDefined(args.src)}"
       language="${ifDefined(args.language)}"
+      fallbackLanguage="${ifDefined(args.fallbackLanguage)}"
       activeUrl="${ifDefined(args.activeUrl)}"
       currentApplication="${ifDefined(args.currentApplication)}"
       anchor="${ifDefined(args.anchor)}"
