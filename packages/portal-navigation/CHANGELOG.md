@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.2
+
+### Patch Changes
+
+- [`1ace7a2`](https://github.com/inventage/web-components/commit/1ace7a2ed424d40a78d688476dcd8f564a9980f4) Release only version, no changes to the previous version.
+
 ## 0.13.1
 
 ### Patch Changes
