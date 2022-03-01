@@ -119,12 +119,12 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1.1.0
+        uses: changesets/action@v1.2.0
         with:
           publish: npm run release
           version: npm run version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Storybook Build
         run: npm run storybook:build
