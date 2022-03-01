@@ -169,16 +169,36 @@ export const Slots: Story<ArgTypes> = (args: ArgTypes) => {
  * @param args
  * @constructor
  */
-export const Empty: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+export const EmptyData: Story<ArgTypes> = (args: ArgTypes) => Template(args, html`<p slot="logo">Logo</p>`);
 
-Empty.args = {
+EmptyData.args = {
+  src: './data/empty-data.json',
+};
+
+EmptyData.parameters = {
+  docs: {
+    description: {
+      story: '`<portal-navigation>` with empty data.',
+    },
+  },
+};
+
+/**
+ * No data story
+ *
+ * @param args
+ * @constructor
+ */
+export const NoData: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+
+NoData.args = {
   src: '',
 };
 
-Empty.parameters = {
+NoData.parameters = {
   docs: {
     description: {
-      story: 'Empty `<portal-navigation>` tag without any `src` specified does not render anything.',
+      story: '`<portal-navigation>` tag without any `src` specified does not render anything.',
     },
   },
 };
