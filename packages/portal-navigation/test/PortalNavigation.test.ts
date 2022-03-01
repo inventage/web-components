@@ -1,5 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/ban-ts-comment
+// noinspection ES6UnusedImports
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { aTimeout, elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
@@ -13,6 +15,7 @@ import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, globalClickHandlerSpy,
 const configurationData = dataJson as ConfigurationData;
 
 const TEST_DATA_JSON_PATH = './data/test-data.json!';
+const EMPTY_DATA_JSON_PATH = './data/empty-data.json!';
 
 type WaitUntilOptions = {
   interval?: number;
@@ -200,6 +203,17 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el, '[part="item-item5.1"]');
 
       expect(<HTMLElement>el.shadowRoot!.querySelector('[part="item-item5.1"]')!).to.be.visible;
+    });
+
+    it('does not render <hamburger-menu> when no data (menus) is available', async () => {
+      await setViewport({ width: 600, height: 400 });
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation src="${EMPTY_DATA_JSON_PATH}" mobilebreakpoint="600"><p slot="logo">Logo</p></portal-navigation>`
+      );
+
+      await childrenRendered(el, '[part="slot-logo"]');
+
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part="hamburger-menu"]')!).to.be.null;
     });
   });
 

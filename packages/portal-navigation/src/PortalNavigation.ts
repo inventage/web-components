@@ -441,6 +441,7 @@ export class PortalNavigation extends LitElement {
     const menuSettings = this._createMenuTemplate(PortalNavigation.menuIds.settings);
     const currentItems = this._createCurrentItemsTemplate();
     const mainMenusEmpty = menuMain === nothing && menuSettings === nothing;
+    const allMenusEmpty = mainMenusEmpty && menuMeta === nothing && menuProfile === nothing && menuLogout === nothing;
 
     /**
      * The list of header menus, filtered by whether they actually render a menu (whether a menu has items or not)
@@ -483,7 +484,7 @@ export class PortalNavigation extends LitElement {
           <div class="slot-right" part="slot-right">
             <slot name="right"></slot>
           </div>
-          ${this.isMobileBreakpoint
+          ${this.isMobileBreakpoint && !allMenusEmpty
             ? html` <hamburger-menu
                 class="hamburger-menu"
                 part="hamburger-menu"
