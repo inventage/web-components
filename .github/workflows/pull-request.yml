@@ -84,13 +84,10 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2.3
         with:
           publish-dir: './storybook-static'
-          production-branch: main
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
           enable-commit-comment: false
-          overwrites-pull-request-comment: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
