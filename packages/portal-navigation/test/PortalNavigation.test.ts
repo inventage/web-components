@@ -7,6 +7,7 @@ import { setViewport } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
 import '../src/portal-navigation.js';
+// noinspection ES6PreferShortImport
 import { NavigationEventListeners, PortalNavigation } from '../src/PortalNavigation.js';
 import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
 import dataJson from '../data/test-data.json';
