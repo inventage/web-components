@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.1
+
+### Patch Changes
+
+- [`c109119`](https://github.com/inventage/web-components/commit/c1091198903762da7540b3b6ea4bfc628116ac55) Do not display hamburger menu when all menus are empty (and hence there's nothing to display behing the hamburger toggle…)
+
 ## 0.13.0
 
 ### Minor Changes
