@@ -129,7 +129,7 @@ jobs:
       - name: Storybook Build
         run: npm run storybook:build
 
-      - name: Upload artifacts
+      - name: Upload Website Build
         uses: actions/upload-artifact@v2
         with:
           name: storybook-static
@@ -167,6 +167,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   commit-build:
+    name: Commit Website Build
     needs: release
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
@@ -191,7 +192,7 @@ jobs:
       - name: Commit and Push
         run: |
           if [ $(git status --porcelain=v1 2>/dev/null | wc -l) != "0" ] ; then
-            git add -f public
+            git add -f storybook-static
             git commit -m "gh-actions deployed a new website build"
             git push --force https://${GITHUB_ACTOR}:$@github.com/${GITHUB_REPOSITORY}.git HEAD:website-build
           fi
