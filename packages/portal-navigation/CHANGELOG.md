@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.3
+
+### Patch Changes
+
+- [`3832039`](https://github.com/inventage/web-components/commit/383203973a56fc1de12aa17d8f6add559666eda1) Empty release to fix gh-pages deployment issues.
+
 ## 0.13.2
 
 ### Patch Changes
