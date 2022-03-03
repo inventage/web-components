@@ -26,7 +26,7 @@ module.exports = {
       generateBundle() {
         try {
           const results = replace.sync({
-            files: `${path.resolve(__dirname, '..', 'storybook-static')}/*.html`,
+            files: `${path.resolve(__dirname, '..', 'storybook-static')}/**/*.html`,
             from: /__BUILD_VERSION__/g,
             to: BUILD_VERSION,
           });
