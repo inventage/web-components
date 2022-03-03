@@ -3,7 +3,7 @@ import globby from 'globby';
 import replace from 'replace-in-file';
 import escapeStringRegexp from 'escape-string-regexp';
 
-// Github usernames to remove "Thanks" for (we do not want to thank ourselves…)
+// GitHub usernames to remove "Thanks" for (we do not want to thank ourselves…)
 const USERNAMES = ['peschee'];
 
 const changelogs = await globby(['packages/**/CHANGELOG.md'], {
