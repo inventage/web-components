@@ -34,7 +34,6 @@ jobs:
         run: npm run storybook:build
 
       - name: Deploy to Github Pages
-        if: steps.changesets.outputs.published == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
