@@ -75,7 +75,7 @@ jobs:
           run: npm run test:vrt
 
         - name: Archive visual diff results
-          uses: actions/upload-artifact@v2
+          uses: actions/upload-artifact@v3
           if: failure()
           with:
             name: visual-diffs
@@ -119,7 +119,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1.2.0
+        uses: changesets/action@v1
         with:
           publish: npm run release
           version: npm run version
@@ -130,7 +130,7 @@ jobs:
         run: npm run storybook:build
 
       - name: Upload Website Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: storybook-static
           path: storybook-static
