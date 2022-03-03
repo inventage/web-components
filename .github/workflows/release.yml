@@ -12,82 +12,82 @@ on:
         default: '0'
 
 jobs:
-  test:
-    name: Lint & Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@v2
-        id: cache
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
-
-      - name: Install packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      - name: Run postinstall
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Test
-        run: sudo npx playwright install-deps && npm run test:ci
-
-      - name: Publish Code Coverage
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-
-  vrt:
-      name: Visual Regression Test
-      runs-on: macos-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v2
-          with:
-            node-version: '16'
-
-        # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-        - uses: actions/cache@v2
-          id: cache
-          with:
-            path: ./node_modules
-            key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
-
-        - name: Install packages
-          if: steps.cache.outputs.cache-hit != 'true'
-          run: npm ci
-
-        - name: Run postinstall
-          if: steps.cache.outputs.cache-hit == 'true'
-          run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
-
-        - name: Test
-          run: npm run test:vrt
-
-        - name: Archive visual diff results
-          uses: actions/upload-artifact@v2
-          if: failure()
-          with:
-            name: visual-diffs
-            path: screenshots
-            retention-days: 7
+#  test:
+#    name: Lint & Test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v2
+#        with:
+#          node-version: '16'
+#
+#      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+#      - uses: actions/cache@v2
+#        id: cache
+#        with:
+#          path: ./node_modules
+#          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+#
+#      - name: Install packages
+#        if: steps.cache.outputs.cache-hit != 'true'
+#        run: npm ci
+#
+#      - name: Run postinstall
+#        if: steps.cache.outputs.cache-hit == 'true'
+#        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
+#
+#      - name: Lint
+#        run: npm run lint
+#
+#      - name: Test
+#        run: sudo npx playwright install-deps && npm run test:ci
+#
+#      - name: Publish Code Coverage
+#        uses: paambaati/codeclimate-action@v2.7.5
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+#
+#  vrt:
+#      name: Visual Regression Test
+#      runs-on: macos-latest
+#      steps:
+#        - uses: actions/checkout@v2
+#        - uses: actions/setup-node@v2
+#          with:
+#            node-version: '16'
+#
+#        # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+#        - uses: actions/cache@v2
+#          id: cache
+#          with:
+#            path: ./node_modules
+#            key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+#
+#        - name: Install packages
+#          if: steps.cache.outputs.cache-hit != 'true'
+#          run: npm ci
+#
+#        - name: Run postinstall
+#          if: steps.cache.outputs.cache-hit == 'true'
+#          run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
+#
+#        - name: Test
+#          run: npm run test:vrt
+#
+#        - name: Archive visual diff results
+#          uses: actions/upload-artifact@v2
+#          if: failure()
+#          with:
+#            name: visual-diffs
+#            path: screenshots
+#            retention-days: 7
 
   release:
     name: Release & Deploy
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
     runs-on: ubuntu-latest
-    needs: [ test, vrt ]
+#    needs: [ test, vrt ]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -194,5 +194,5 @@ jobs:
           if [ $(git status --porcelain=v1 2>/dev/null | wc -l) != "0" ] ; then
             git add -f storybook-static
             git commit -m "gh-actions deployed a new website build"
-            git push --force https://${GITHUB_ACTOR}:$@github.com/${GITHUB_REPOSITORY}.git HEAD:website-build
+            git push --force HEAD:website-build
           fi
