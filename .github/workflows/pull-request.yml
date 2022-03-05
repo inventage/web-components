@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Lint & Test
+    name: Lint & Test & Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -41,6 +41,9 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+      - name: Build
+        run: npm run storybook:build
 
   vrt:
     name: Visual Regression Test
@@ -76,6 +79,3 @@ jobs:
           name: visual-diffs
           path: screenshots
           retention-days: 7
-
-      - name: Storybook Build
-        run: npm run storybook:build
