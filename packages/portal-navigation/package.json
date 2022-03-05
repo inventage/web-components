@@ -43,7 +43,7 @@
   "devDependencies": {
     "@inventage-web-components/dev-helpers": "*",
     "ajv-cli": "^5.0.0",
-    "ts-json-schema-generator": "^0.97.0"
+    "ts-json-schema-generator": "^0.98.0"
   },
   "keywords": [
     "lit-element",
