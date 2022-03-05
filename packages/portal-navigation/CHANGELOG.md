@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.4
+
+### Patch Changes
+
+- [`769ffd7`](https://github.com/inventage/web-components/commit/769ffd77f0b93e8a37d1c1a5ece90c1eab3194d1) Dependency updates (`lit`).
+
 ## 0.13.3
 
 ### Patch Changes
