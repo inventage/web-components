@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.13.5
+
+### Patch Changes
+
+- [`a438a0d`](https://github.com/inventage/web-components/commit/a438a0d5ae01e10a2a1b6e70a82a558343e03239) Call debounced computation of anchor padding in sticky mode immediately.
+
 ## 0.13.4
 
 ### Patch Changes
