@@ -321,7 +321,9 @@ export class PortalNavigation extends LitElement {
     /**
      * @internal
      */
-    this.updateAnchorPaddingWhenSticky = debounce(this.updateAnchorPaddingWhenSticky, 100).bind(this);
+    this.updateAnchorPaddingWhenSticky = debounce(this.updateAnchorPaddingWhenSticky, 100, {
+      isImmediate: true,
+    }).bind(this);
   }
 
   connectedCallback(): void {
