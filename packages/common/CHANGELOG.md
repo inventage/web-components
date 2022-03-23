@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.4.3
+
+### Patch Changes
+
+- [`98480c3`](https://github.com/inventage/web-components/commit/98480c39a20e09064d02f3890de74eef46186833) Patch upgrade `lit`
+
 ## 0.4.2
 
 ### Patch Changes
