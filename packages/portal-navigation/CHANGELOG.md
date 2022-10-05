@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.14.1
+
+### Patch Changes
+
+- [`432b65a`](https://github.com/inventage/web-components/commit/432b65a9dc3735c9362575f369aac838a9b02e7b) Ignore search params and hashes in `activeUrl` when comparing them to the menu item url fuzzily.
+
 ## 0.14.0
 
 ### Minor Changes
