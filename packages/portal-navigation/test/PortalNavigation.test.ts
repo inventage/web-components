@@ -223,7 +223,7 @@ describe('<portal-navigation>', () => {
       expect(PortalNavigation.menuIdsOrdered).to.deep.equal(['main', 'settings', 'meta', 'profile', 'logout']);
     });
 
-    it('sets corresponding activePath when activeUrl is set', async () => {
+    it('sets corresponding activePath when activeUrl is set #1', async () => {
       const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
 
       el.activeUrl = '/some/path/item3.2';
@@ -232,6 +232,17 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getMenuId()).to.eq('meta');
       expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent3');
       expect(el.getActivePath().getId(2)).to.eq('item3.2');
+    });
+
+    it('sets corresponding activePath when activeUrl is set #2', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+
+      el.activeUrl = '/some/path/parent8?foo=bar';
+      await childrenRendered(el, '[part="item-parent8"]');
+
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq(undefined);
     });
 
     it('can return its parsed configuration', async () => {

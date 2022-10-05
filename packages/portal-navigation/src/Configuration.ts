@@ -128,7 +128,7 @@ export interface SelectorFunction {
  * @see https://github.com/inventage/portal-components/blob/master/docs/portal-navigation/configuration.md
  */
 export class Configuration {
-  private readonly data: ConfigurationData | undefined;
+  private readonly data?: ConfigurationData;
 
   constructor(data?: ConfigurationData) {
     this.data = data;
@@ -181,7 +181,7 @@ export class Configuration {
       return menus as RootLevelMenuItem[];
     }
 
-    return undefined;
+    return;
   }
 
   /**
@@ -213,7 +213,7 @@ export class Configuration {
    */
   getData(keyPath: string[], data: ConfigurationData | CommonMenuItem | undefined = this.data): CommonMenuItem | Array<CommonMenuItem> | undefined {
     if (!data || !Array.isArray(keyPath) || keyPath.length <= 0) {
-      return undefined;
+      return;
     }
 
     const head = keyPath[0];
@@ -234,9 +234,9 @@ export class Configuration {
    *
    * @param url - the url of an item within the data set.
    */
-  getIdPathForUrl(url: string | undefined): IdPath | undefined {
+  getIdPathForUrl(url?: string): IdPath | undefined {
     if (!url) {
-      return undefined;
+      return;
     }
 
     const result = this.getIdPathForSelection(object => (object as MenuItem).url === url);
@@ -311,7 +311,7 @@ export class Configuration {
       }
     }
 
-    return undefined;
+    return;
   }
 
   /**
@@ -337,6 +337,6 @@ export class Configuration {
       }
     }
 
-    return undefined;
+    return;
   }
 }

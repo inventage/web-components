@@ -18,11 +18,12 @@ describe('Configuration', () => {
     const configuration = new Configuration(configurationData);
     const result = configuration.getMenu('main');
 
-    expect(result!.items!.length).to.equal(4);
+    expect(result!.items!.length).to.equal(5);
     expect(result!.items![0].id).to.equal('parent1');
     expect(result!.items![1].id).to.equal('parent2');
     expect(result!.items![2].id).to.equal('parent6');
     expect(result!.items![3].id).to.equal('parent7');
+    expect(result!.items![4].id).to.equal('parent8');
   });
 
   it('getMenu should return undefined when menu is a valid object but was not found', () => {
@@ -58,13 +59,29 @@ describe('Configuration', () => {
     expect(result!.getId(2)).to.equal('item2.2');
   });
 
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback', () => {
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #1', () => {
     const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/item2.2/unknown-subitem');
+    const result = configuration.getIdPathForUrl('/some/path/item2.2/unknown-subitem?foo=bar');
 
     expect(result!.getMenuId()).to.equal('main');
     expect(result!.getFirstLevelItemId()).to.equal('parent2');
     expect(result!.getId(2)).to.equal('item2.2');
+  });
+
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #2', () => {
+    const configuration = new Configuration(configurationData);
+    const result = configuration.getIdPathForUrl('/some/path/parent1');
+
+    expect(result!.getMenuId()).to.equal('main');
+    expect(result!.getFirstLevelItemId()).to.equal('parent1');
+  });
+
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #3', () => {
+    const configuration = new Configuration(configurationData);
+    const result = configuration.getIdPathForUrl('/some/path/parent8?foo=bar');
+
+    expect(result!.getMenuId()).to.equal('main');
+    expect(result!.getFirstLevelItemId()).to.equal('parent8');
   });
 
   it('should return empty ObjectPath when menus are missing in data', () => {

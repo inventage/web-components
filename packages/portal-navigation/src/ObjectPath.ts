@@ -32,7 +32,7 @@ export class ObjectPath {
       return this.getObject(this.objects.length - 1);
     }
 
-    return undefined;
+    return;
   }
 
   /**
