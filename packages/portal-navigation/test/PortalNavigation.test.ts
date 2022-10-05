@@ -312,12 +312,12 @@ describe('<portal-navigation>', () => {
 
     it('sets corresponding activeUrl and activePath based on window.location #5', async () => {
       // Simulate navigation
-      window.history.pushState({}, '', '/some/child-path');
+      window.history.pushState({}, '', '/some/child-path?foo=bar');
 
       const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
       await childrenRendered(el, '[part="item-item8.1"]');
 
-      expect(el.activeUrl).to.eq('/some/child-path');
+      expect(el.activeUrl).to.eq('/some/child-path?foo=bar');
       expect(el.getActivePath().getMenuId()).to.eq('main');
       expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
       expect(el.getActivePath().getId(2)).to.eq('item8.1');

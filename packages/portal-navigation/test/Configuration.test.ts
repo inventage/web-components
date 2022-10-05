@@ -100,6 +100,24 @@ describe('Configuration', () => {
     expect(result!.getFirstLevelItemId()).to.equal('parent8');
   });
 
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #6', () => {
+    const configuration = new Configuration(configurationData);
+    const result = configuration.getIdPathForUrl('/some/child-path');
+
+    expect(result!.getMenuId()).to.equal('main');
+    expect(result!.getFirstLevelItemId()).to.equal('parent8');
+    expect(result!.getLastLevelItemId()).to.equal('item8.1');
+  });
+
+  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #7', () => {
+    const configuration = new Configuration(configurationData);
+    const result = configuration.getIdPathForUrl('/some/child-path?foo=bar');
+
+    expect(result!.getMenuId()).to.equal('main');
+    expect(result!.getFirstLevelItemId()).to.equal('parent8');
+    expect(result!.getLastLevelItemId()).to.equal('item8.1');
+  });
+
   it('should return empty ObjectPath when menus are missing in data', () => {
     const configuration = new Configuration({});
     const item = configuration.getObjectPathForSelection(object => (object as MenuItem).url === '/some/path/item2.2/unknown-subitem');

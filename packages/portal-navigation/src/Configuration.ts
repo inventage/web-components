@@ -252,9 +252,10 @@ export class Configuration {
         return true;
       }
 
-      // Otherwise, we only compare paths without search params + hash from menu item url
-      const parsedUrl = new URL(menuItemUrl, 'http://localhost');
-      return parsedUrl.pathname === url;
+      // Otherwise, we only compare paths without search params + hashes for the urls
+      const parsedMenuItemUrl = new URL(menuItemUrl, 'http://localhost');
+      const parsedUrl = new URL(url, 'http://localhost');
+      return parsedMenuItemUrl.pathname === parsedUrl.pathname;
     });
 
     if (result && !result.isEmpty()) {
