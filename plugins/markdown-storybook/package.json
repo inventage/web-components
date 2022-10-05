@@ -4,6 +4,12 @@
   "version": "0.0.0",
   "description": "Plugins for custom markdown files handling in storybook",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    }
+  },
   "files": [
     "**/*.js",
     "**/*.mjs"
@@ -19,11 +25,5 @@
   },
   "peerDependencies": {
     "@web/dev-server-storybook": "*"
-  },
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.cjs"
-    }
   }
 }

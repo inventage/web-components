@@ -11,6 +11,16 @@
   },
   "bugs": "https://github.com/inventage/web-components/issues",
   "type": "module",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./lib/src/*": "./lib/src/*",
+    "./decorators": "./lib/src/decorators.js",
+    "./decorators.js": "./lib/src/decorators.js",
+    "./directives": "./lib/src/directives.js",
+    "./directives.js": "./lib/src/directives.js",
+    "./html": "./lib/src/html.js",
+    "./html.js": "./lib/src/html.js"
+  },
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",
   "files": [
@@ -38,15 +48,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "customElements": "custom-elements.json",
-  "exports": {
-    ".": "./lib/src/index.js",
-    "./lib/src/*": "./lib/src/*",
-    "./decorators": "./lib/src/decorators.js",
-    "./decorators.js": "./lib/src/decorators.js",
-    "./directives": "./lib/src/directives.js",
-    "./directives.js": "./lib/src/directives.js",
-    "./html": "./lib/src/html.js",
-    "./html.js": "./lib/src/html.js"
-  }
+  "customElements": "custom-elements.json"
 }

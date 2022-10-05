@@ -11,6 +11,12 @@
   },
   "bugs": "https://github.com/inventage/web-components/issues",
   "type": "module",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./lib/src/*": "./lib/src/*",
+    "./hamburger-menu": "./lib/src/hamburger-menu.js",
+    "./hamburger-menu.js": "./lib/src/hamburger-menu.js"
+  },
   "main": "lib/src/index.js",
   "module": "lib/src/index.js",
   "files": [
@@ -42,11 +48,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "customElements": "custom-elements.json",
-  "exports": {
-    ".": "./lib/src/index.js",
-    "./lib/src/*": "./lib/src/*",
-    "./hamburger-menu": "./lib/src/hamburger-menu.js",
-    "./hamburger-menu.js": "./lib/src/hamburger-menu.js"
-  }
+  "customElements": "custom-elements.json"
 }
