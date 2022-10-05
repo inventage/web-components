@@ -87,7 +87,8 @@ jobs:
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
     runs-on: ubuntu-latest
-    needs: [ test, vrt ]
+#    needs: [ test, vrt ]
+    needs: [ test ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
