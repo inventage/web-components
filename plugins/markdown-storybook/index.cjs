@@ -1,13 +1,13 @@
-const unified = require('unified');
+const frontmatter = require('remark-frontmatter');
+const highlight = require('remark-highlight.js');
 const remark2Html = require('remark-html');
 const remarkParse = require('remark-parse');
 const remarkGfm = require('remark-gfm');
-const remarkFrontmatter = require('remark-frontmatter');
-const remarkHighlightjs = require('remark-highlight.js');
+const unified = require('unified');
 const yaml = require('js-yaml');
 const { storybookPlugin: modernWebStorybookPlugin } = require('@web/dev-server-storybook');
 
-// Taken from https://github.com/CleverCloud/clever-components/blob/master/stories/lib/markdown.cjs
+// Taken from https://github.com/CleverCloud/clever-components/blob/master/src/stories/lib/markdown.cjs
 // Big Thanks @hsablonniere!
 //
 // Special patched version of '@web/dev-server-storybook'
@@ -15,7 +15,7 @@ const { storybookPlugin: modernWebStorybookPlugin } = require('@web/dev-server-s
 // Don't do this at home ;-)
 function storybookWdsPlugin() {
   const modernWebPlugin = modernWebStorybookPlugin({ type: 'web-components' });
-  return {
+  const patchedPlugin = {
     ...modernWebPlugin,
     async transform(context) {
       if (context.path.endsWith('.md')) {
@@ -25,6 +25,8 @@ function storybookWdsPlugin() {
       }
     },
   };
+
+  return patchedPlugin;
 }
 
 // Same here but for the rollup static build
@@ -42,19 +44,19 @@ function storybookRollupPlugin() {
 }
 
 function markdownToCsfWithDocsPage(markdownText) {
-  const processor = unified().use(remarkParse).use(remarkGfm).use(remarkFrontmatter, ['yaml']).use(remarkHighlightjs).use(remark2Html);
+  const processor = unified().use(remarkParse, {}).use(remarkGfm).use(frontmatter, ['yaml']).use(highlight).use(remark2Html, { sanitize: false });
+
   const markdownAst = processor.parse(markdownText);
 
-  const { children = [] } = markdownAst;
-  const frontmatterNode = children.find(node => node.type === 'yaml');
+  const frontmatterNode = markdownAst.children.find(node => node.type === 'yaml');
   const kind = getKind(frontmatterNode);
 
-  const headingNode = children.find(node => node.type === 'heading' && node.depth === 1);
+  const headingNode = markdownAst.children.find(node => node.type === 'heading' && node.depth === 1);
   const subtitle = getSubTitle(frontmatterNode, headingNode);
 
   const title = [kind, subtitle].filter(a => a != null).join('/');
 
-  const { contents: html } = processor().processSync(markdownText);
+  const html = processor().processSync(markdownText).contents;
 
   const csfScript = `
 
@@ -128,4 +130,7 @@ function getSubTitle(frontmatterNode, headingNode) {
   return 'Untitled';
 }
 
-module.exports = { storybookRollupPlugin, storybookWdsPlugin };
+module.exports = {
+  storybookWdsPlugin,
+  storybookRollupPlugin,
+};
