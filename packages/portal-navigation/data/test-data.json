@@ -81,7 +81,14 @@
           "label": "Parent 8",
           "url": "/some/path/parent8?foo=bar",
           "application": "app1",
-          "internalRouting": true
+          "internalRouting": true,
+          "items": [
+            {
+              "id": "item8.1",
+              "label": "Child 8.1",
+              "url": "/some/child-path"
+            }
+          ]
         }
       ]
     },

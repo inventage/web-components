@@ -294,6 +294,38 @@ describe('<portal-navigation>', () => {
       window.history.pushState({}, '', '/');
     });
 
+    it('sets corresponding activeUrl and activePath based on window.location #4', async () => {
+      // Simulate navigation
+      window.history.pushState({}, '', '/some/path/parent8/child/missing');
+
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el, '[part="item-parent8"]');
+
+      expect(el.activeUrl).to.eq('/some/path/parent8/child/missing');
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq(undefined);
+
+      // Reset URL back to /
+      window.history.pushState({}, '', '/');
+    });
+
+    it('sets corresponding activeUrl and activePath based on window.location #5', async () => {
+      // Simulate navigation
+      window.history.pushState({}, '', '/some/child-path');
+
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el, '[part="item-item8.1"]');
+
+      expect(el.activeUrl).to.eq('/some/child-path');
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq('item8.1');
+
+      // Reset URL back to /
+      window.history.pushState({}, '', '/');
+    });
+
     it('can return its parsed configuration', async () => {
       const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
       await childrenRendered(el);
