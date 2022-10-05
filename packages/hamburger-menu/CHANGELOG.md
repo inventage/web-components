@@ -1,5 +1,11 @@
 # @inventage-web-components/hamburger-menu
 
+## 0.5.2
+
+### Patch Changes
+
+- [`dcf2b83`](https://github.com/inventage/web-components/commit/dcf2b8312784f277d9527af87741da4f4298d0f5) Reformat package.json
+
 ## 0.5.1
 
 ### Patch Changes

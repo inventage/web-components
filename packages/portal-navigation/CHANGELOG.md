@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 0.14.0
+
+### Minor Changes
+
+- [`dd354c9`](https://github.com/inventage/web-components/commit/dd354c9cc68566f1cfae1af61db69612f566dffc) Add a less strict comparison when selecting menu items as "active" based on their URL and the `activeUrl` of the portal navigation component.
+
+### Patch Changes
+
+- [`dcf2b83`](https://github.com/inventage/web-components/commit/dcf2b8312784f277d9527af87741da4f4298d0f5) Reformat package.json
+
+- [`2b92479`](https://github.com/inventage/web-components/commit/2b924794e48ebce8a98b38bf9e623570fc9a36ee) Add more tests
+
 ## 0.13.6
 
 ### Patch Changes
