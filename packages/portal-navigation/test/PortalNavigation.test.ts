@@ -15,8 +15,8 @@ import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, globalClickHandlerSpy,
 
 const configurationData = dataJson as ConfigurationData;
 
-const TEST_DATA_JSON_PATH = './data/test-data.json!';
-const EMPTY_DATA_JSON_PATH = './data/empty-data.json!';
+const TEST_DATA_JSON_PATH = '/packages/portal-navigation/data/test-data.json!';
+const EMPTY_DATA_JSON_PATH = '/packages/portal-navigation/data/empty-data.json!';
 
 type WaitUntilOptions = {
   interval?: number;
@@ -243,6 +243,55 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getMenuId()).to.eq('main');
       expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
       expect(el.getActivePath().getId(2)).to.eq(undefined);
+    });
+
+    it('sets corresponding activeUrl and activePath based on window.location #1', async () => {
+      // Simulate navigation
+      window.history.pushState({}, '', '/some/path/parent1');
+
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el, '[part="item-parent1"]');
+
+      expect(el.activeUrl).to.eq('/some/path/parent1');
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent1');
+      expect(el.getActivePath().getId(2)).to.eq(undefined);
+
+      // Reset URL back to /
+      window.history.pushState({}, '', '/');
+    });
+
+    it('sets corresponding activeUrl and activePath based on window.location #2', async () => {
+      // Simulate navigation
+      window.history.pushState({}, '', '/some/path/parent8');
+
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el, '[part="item-parent8"]');
+
+      // Menu item has search params, but it should still be marked as active
+      expect(el.activeUrl).to.eq('/some/path/parent8');
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq(undefined);
+
+      // Reset URL back to /
+      window.history.pushState({}, '', '/');
+    });
+
+    it('sets corresponding activeUrl and activePath based on window.location #3', async () => {
+      // Simulate navigation
+      window.history.pushState({}, '', '/some/path/parent8?foo=bar');
+
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+      await childrenRendered(el, '[part="item-parent8"]');
+
+      expect(el.activeUrl).to.eq('/some/path/parent8?foo=bar');
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq(undefined);
+
+      // Reset URL back to /
+      window.history.pushState({}, '', '/');
     });
 
     it('can return its parsed configuration', async () => {
@@ -617,8 +666,8 @@ describe('<portal-navigation>', () => {
       setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent1"]')).click());
       const { detail } = await oneEvent(el, 'portal-navigation.routeTo');
 
-      expect(window.location.pathname).to.equal('/');
-      expect(detail.url).to.equal('/some/path/parent1');
+      expect(window.location.pathname, 'window.location.pathname').to.equal('/');
+      expect(detail.url, 'detail.url').to.equal('/some/path/parent1');
     });
   });
 

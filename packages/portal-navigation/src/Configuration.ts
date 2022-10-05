@@ -239,7 +239,24 @@ export class Configuration {
       return;
     }
 
-    const result = this.getIdPathForSelection(object => (object as MenuItem).url === url);
+    const result = this.getIdPathForSelection(object => {
+      const { url: menuItemUrl } = object as MenuItem;
+
+      // Bail if given menu item has no url
+      if (!menuItemUrl) {
+        return false;
+      }
+
+      // We can stop if url exactly match
+      if (menuItemUrl === url) {
+        return true;
+      }
+
+      // Otherwise, we only compare paths without search params + hash from menu item url
+      const parsedUrl = new URL(menuItemUrl, 'http://localhost');
+      return parsedUrl.pathname === url;
+    });
+
     if (result && !result.isEmpty()) {
       return result;
     }

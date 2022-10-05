@@ -334,10 +334,10 @@ export class PortalNavigation extends LitElement {
     }
 
     // Parse URL when connected, only if activeUrl has not been set
-    const parsedUrl = new URL(window.location.href);
-    if (!this.activeUrl && parsedUrl && parsedUrl.pathname && parsedUrl.pathname !== '/') {
-      const { pathname } = parsedUrl;
-      this.activeUrl = pathname;
+    const { pathname } = new URL(location.href) || {};
+    if (!this.activeUrl && pathname !== '/') {
+      const origin = location.origin || location.protocol + '//' + location.host;
+      this.activeUrl = location.href.replace(origin, '');
     }
 
     // Detect whether we have an anchor element
@@ -628,6 +628,7 @@ export class PortalNavigation extends LitElement {
     }
 
     this.activeUrl = url;
+    // TODO: Remove, this should not be needed since activeUrl has @state decorator
     this.requestUpdate('activeUrl');
   }
 
