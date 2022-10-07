@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.15.0
+
+### Minor Changes
+
+- [`d86edd3`](https://github.com/inventage/web-components/commit/d86edd3495b8fffaf945cd78354c93824c2dd22a) Add `getVersion` method to display current package version
+
+### Patch Changes
+
+- [`7e11fa3`](https://github.com/inventage/web-components/commit/7e11fa3092954ddbe585e018c33fe156b8b0ec4e) Match urls with `startsWith` instead of using the `URL` object for fuzzy active item matching based item urls.
+
 ## 0.14.1
 
 ### Patch Changes
