@@ -247,15 +247,8 @@ export class Configuration {
         return false;
       }
 
-      // We can stop if url exactly match
-      if (menuItemUrl === url) {
-        return true;
-      }
-
-      // Otherwise, we only compare paths without search params + hashes for the urls
-      const parsedMenuItemUrl = new URL(menuItemUrl, 'http://localhost');
-      const parsedUrl = new URL(url, 'http://localhost');
-      return parsedMenuItemUrl.pathname === parsedUrl.pathname;
+      // Otherwise, we try to do an exact match or see if either of the urls starts with the other
+      return menuItemUrl === url || menuItemUrl.startsWith(url) || url.startsWith(menuItemUrl);
     });
 
     if (result && !result.isEmpty()) {

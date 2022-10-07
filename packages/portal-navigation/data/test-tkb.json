@@ -1,0 +1,180 @@
+{
+  "menus": [
+    {
+      "id": "main",
+      "items": [
+        {
+          "id": "plattform_uebersicht",
+          "expanded": false,
+          "items": [
+            {
+              "application": "Finbroker",
+              "id": "broker_uebersicht",
+              "expanded": false,
+              "label": { "de": "Broker" },
+              "url": "/broker/uebersicht/alle-auftraege"
+            },
+            { "application": "kgtkb", "id": "kgtkb_uebersicht", "expanded": false, "label": { "de": "TKB" }, "url": "/kgtkb" },
+            { "application": "Kapitalgeber2", "id": "kapitalgeber2_ubersicht", "expanded": false, "label": { "de": "KG2" }, "url": "/kapitalgeber2" },
+            { "application": "ektkb", "id": "ektkb_ubersicht", "expanded": false, "label": { "de": "myHypo TKB" }, "url": "/ektkb/uebersicht/alle-auftraege" }
+          ],
+          "label": { "de": "Übersicht" }
+        },
+        {
+          "id": "kreditanfrage",
+          "expanded": false,
+          "items": [
+            { "application": "kgtkb", "id": "kgtkb_kreditanfrage", "expanded": false, "label": { "de": "TKB" }, "url": "/kgtkb/kreditanfrage" },
+            {
+              "application": "Kapitalgeber2",
+              "id": "kapitalgeber2_kreditanfrage",
+              "expanded": false,
+              "label": { "de": "KG2" },
+              "url": "/kapitalgeber2/kreditanfrage"
+            }
+          ],
+          "label": { "de": "Kreditanfragen" }
+        },
+        {
+          "id": "steuerparameter",
+          "expanded": false,
+          "items": [
+            { "application": "kgtkb", "id": "kgtkb_steuerparameter", "expanded": false, "label": { "de": "TKB" }, "url": "/kgtkb/steuerparameter" },
+            {
+              "application": "Kapitalgeber2",
+              "id": "kapitalgeber2_steuerparameter",
+              "expanded": false,
+              "label": { "de": "KG2" },
+              "url": "/kapitalgeber2/steuerparameter"
+            }
+          ],
+          "label": { "de": "Steuerparameter" }
+        },
+        {
+          "id": "betrieb",
+          "expanded": false,
+          "items": [
+            {
+              "application": "Finbroker",
+              "id": "broker-betrieb-dead",
+              "expanded": false,
+              "label": { "de": "DL Broker" },
+              "url": "/broker/operation/deadletters"
+            },
+            { "application": "kgtkb", "id": "kgtkb_betrieb-dead", "expanded": false, "label": { "de": "DL TKB" }, "url": "/kgtkb/operation/deadletters" },
+            {
+              "application": "Kapitalgeber2",
+              "id": "kapitalgeber2_betrieb-dead",
+              "expanded": false,
+              "label": { "de": "DL KG2" },
+              "url": "/kapitalgeber2/operation/deadletters"
+            },
+            {
+              "application": "kgtkb",
+              "id": "kgtkb_betrieb-zinsen",
+              "expanded": false,
+              "label": { "de": "Zinsen TKB" },
+              "url": "/kgtkb/operation/zinsen-aktualisieren"
+            },
+            {
+              "application": "Kapitalgeber2",
+              "id": "kapitalgeber2_betrieb-zinsen",
+              "expanded": false,
+              "label": { "de": "Zinsen KG2" },
+              "url": "/kapitalgeber2/operation/zinsen-aktualisieren"
+            },
+            {
+              "application": "Finbroker",
+              "id": "broker-betrieb-anonymisierung",
+              "expanded": false,
+              "label": { "de": "Anonymisierung" },
+              "url": "/broker/operation/anonymisierung-protokoll"
+            }
+          ],
+          "label": { "de": "Betrieb" }
+        },
+        {
+          "id": "benutzerverwaltung",
+          "expanded": false,
+          "items": [
+            {
+              "application": "plattform",
+              "id": "benutzerverwaltung-organisationen",
+              "expanded": false,
+              "label": { "de": "Organisationen" },
+              "url": "/plattform/organisations"
+            },
+            {
+              "application": "organisation",
+              "id": "benutzerverwaltung-benutzer",
+              "expanded": false,
+              "label": { "de": "Benutzer" },
+              "url": "/organisation/user"
+            },
+            {
+              "application": "organisation",
+              "id": "benutzerverwaltung-mandanten",
+              "expanded": false,
+              "label": { "de": "Mandanten" },
+              "url": "/organisation/tenant"
+            },
+            {
+              "application": "organisation",
+              "id": "benutzerverwaltung-newInvitation",
+              "expanded": false,
+              "label": { "de": "New Invitation" },
+              "url": "/organisation/invitation/new?internalIdentifier=brokermarket"
+            }
+          ],
+          "label": { "de": "Benutzerverwaltung" }
+        }
+      ]
+    },
+    {
+      "dropdown": true,
+      "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-user' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23006d41' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3Cpath d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /%3E%3C/svg%3E",
+      "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-user' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%23006d41' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3Cpath d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /%3E%3C/svg%3E",
+      "id": "profile",
+      "items": [
+        { "application": "plattform", "id": "benutzerkonto", "expanded": false, "label": { "de": "Benutzerkonto" }, "url": "/plattform/user" },
+        { "id": "anmeldung", "expanded": false, "label": { "de": "Anmeldung" }, "url": "/auth/realms/portal/account/#/security/signingin" },
+        { "id": "geraete", "expanded": false, "label": { "de": "Geräteaktivität" }, "url": "/auth/realms/portal/account/#/security/device-activity" }
+      ],
+      "label": { "en": "Gianluca Vinzens", "de": "Gianluca Vinzens" }
+    },
+    {
+      "id": "logout",
+      "items": [
+        {
+          "id": "logout1",
+          "internalRouting": false,
+          "expanded": false,
+          "internalRoutingApplications": ["application1"],
+          "label": { "de": "Logout", "en": "Logout" },
+          "url": "/navigation/service/logout"
+        }
+      ]
+    }
+  ],
+  "user": {
+    "id": "f:ee438fc7-9354-47f8-b50c-b8340bb78f46:42",
+    "username": "gianluca.vinzens+plattform@inventage.com",
+    "email": "gianluca.vinzens+plattform@inventage.com",
+    "firstName": "Gianluca",
+    "lastName": "Vinzens",
+    "name": "Gianluca Vinzens",
+    "tenant": "portal",
+    "applications": ["Finbroker", "ektkb", "Kapitalgeber2", "Organisation", "Portal-Gateway", "plattform", "kgtkb", "Document"],
+    "roles": {
+      "Finbroker": ["PLATTFORM_ADMIN", "USER", "PLATTFORM_IT"],
+      "Organisation": ["ADMINISTRATOR", "USER"],
+      "Kapitalgeber2": ["PLATTFORM_ADMIN", "USER", "PLATTFORM_IT"],
+      "ektkb": ["USER", "PLATTFORM_ADMIN"],
+      "Portal-Gateway": ["USER"],
+      "plattform": ["ADMIN", "USER"],
+      "kgtkb": ["PLATTFORM_ADMIN", "USER", "PLATTFORM_IT"],
+      "portal": ["portaluser"],
+      "Document": ["USER"]
+    }
+  }
+}

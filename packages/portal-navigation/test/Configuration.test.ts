@@ -94,10 +94,10 @@ describe('Configuration', () => {
 
   it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #5', () => {
     const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/parent8/child/missing');
+    const result = configuration.getIdPathForUrl('/some/path/parent1/child/missing');
 
     expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent8');
+    expect(result!.getFirstLevelItemId()).to.equal('parent1');
   });
 
   it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #6', () => {
@@ -111,7 +111,7 @@ describe('Configuration', () => {
 
   it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #7', () => {
     const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/child-path?foo=bar');
+    const result = configuration.getIdPathForUrl('/some/child-path?foo=bar&bar=baz');
 
     expect(result!.getMenuId()).to.equal('main');
     expect(result!.getFirstLevelItemId()).to.equal('parent8');
