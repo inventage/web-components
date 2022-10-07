@@ -1161,4 +1161,12 @@ export class PortalNavigation extends LitElement {
   getTemporaryBadgeValues(): Map<unknown, unknown> {
     return this.badgeValues;
   }
+
+  /**
+   * Returns the version of this component
+   */
+  getVersion() {
+    // Do not touch, the value will be set in build scripts based on the version in package.json
+    return '__dev';
+  }
 }

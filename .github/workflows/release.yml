@@ -149,6 +149,7 @@ jobs:
         run: |
           git checkout $GITHUB_REF
           npx changeset version --snapshot canary
+          node ./scripts/update-version-variables.mjs
           npx changeset publish --tag canary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
