@@ -7,14 +7,14 @@
 
 import fs from 'node:fs/promises';
 import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Updates a global version variable.
  */
-const updateVersionVariable = async (packageDir, sourcePath, versionString = '__dev') => {
+const updateVersionVariable = async (packageDir, sourcePath) => {
   // Read new version from package.json
   const packagePath = path.resolve(__dirname, '..', 'packages', packageDir, 'package.json');
   const packageSource = await fs.readFile(packagePath, 'utf-8');
@@ -22,24 +22,25 @@ const updateVersionVariable = async (packageDir, sourcePath, versionString = '__
   const { version } = packageData;
 
   // Read source file
-  const filePath = path.resolve(__dirname, '..', 'packages', packageDir, 'lib', 'src', sourcePath);
+  const filePath = path.resolve(__dirname, '..', 'packages', packageDir, 'src', sourcePath);
   console.log(`Updating version for ${filePath} to ${version}…`);
   const fileSource = await fs.readFile(filePath, 'utf-8');
 
   // Replace version number
-  const versionVarRegex = new RegExp(`(return ')(${versionString})(';)`);
+  const versionVarRegex = new RegExp(`(readonly version = ')(.*)(';$)`, 'm');
+  console.log('versionVarRegex', versionVarRegex);
   let replaced = false;
-  const newSource = fileSource.replace(versionVarRegex, (_, pre, versionMatch, post) => {
+  const newSource = fileSource.replace(versionVarRegex, (_, pre, semver, post) => {
     replaced = true;
     return pre + version + post;
   });
 
   if (!replaced) {
-    throw new Error(`Version string not found: ${filePath} ${versionString} `);
+    throw new Error(`Version string not found in ${filePath}`);
   }
 
   // Write file
   await fs.writeFile(filePath, newSource);
 };
 
-await Promise.all([updateVersionVariable('portal-navigation', 'PortalNavigation.js')]);
+await Promise.all([updateVersionVariable('portal-navigation', 'PortalNavigation.ts')]);

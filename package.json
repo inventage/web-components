@@ -9,7 +9,6 @@
     "analyze:cem-packages": "npm run --workspaces --if-present analyze",
     "analyze:cem-root": "cem analyze",
     "build": "run-s build:*",
-    "postbuild": "node scripts/update-version-variables.mjs",
     "build:css": "scripts/build-styles.sh",
     "build:tsc": "tsc -b tsconfig.build.json",
     "clean": "run-p clean:* && npm run get-ready",

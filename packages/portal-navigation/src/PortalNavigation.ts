@@ -266,6 +266,9 @@ export class PortalNavigation extends LitElement {
   @query('.container')
   private container?: HTMLDivElement;
 
+  // Do not touch, this will automatically be updated based on the version in package.json in build & release scripts
+  readonly version = '0.15.0';
+
   /**
    * Map of menu item ids → badges
    */
@@ -1160,13 +1163,5 @@ export class PortalNavigation extends LitElement {
    */
   getTemporaryBadgeValues(): Map<unknown, unknown> {
     return this.badgeValues;
-  }
-
-  /**
-   * Returns the version of this component
-   */
-  getVersion() {
-    // Do not touch, the value will be set in build scripts based on the version in package.json
-    return '__dev';
   }
 }
