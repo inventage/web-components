@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.16.0
+
+### Minor Changes
+
+- [`2eb7f0f`](https://github.com/inventage/web-components/commit/2eb7f0fa028735bd5d2e9689608bdb294aecceb8) Remove `getVersion` method, add a property `version` and replace this properly when releasing
+
+### Patch Changes
+
+- [`4961b90`](https://github.com/inventage/web-components/commit/4961b90600af2869b374b9acb72e44012dd419d0) Add missing (generated) version from package.json
+
 ## 0.15.0
 
 ### Minor Changes
