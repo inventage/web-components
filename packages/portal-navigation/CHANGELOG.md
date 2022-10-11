@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 0.17.0
+
+### Minor Changes
+
+- [`0ce20e7`](https://github.com/inventage/web-components/commit/0ce20e79512f6e8566b36a9d22af1c28e174848f) Validate menu configuration and display errors / warnings accordingly. This mainly check whether there are duplicate IDs and/or URLs in the menu.
+
+### Patch Changes
+
+- [`81417cc`](https://github.com/inventage/web-components/commit/81417ccab212323382e58808ea58f8e73972d91e) Fixes an issue where the fuzzy matching urls to menu items (based on their url) would lead to wrong results.
+
 ## 0.16.0
 
 ### Minor Changes
