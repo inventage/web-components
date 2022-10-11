@@ -133,6 +133,7 @@ export class Configuration {
   constructor(data?: ConfigurationData) {
     this.data = data;
     this.generateAllMissingIds();
+    this.validate();
   }
 
   /**
@@ -351,5 +352,106 @@ export class Configuration {
     }
 
     return;
+  }
+
+  /**
+   * Iterates over the entire menu tree and collects all urls.
+   *
+   * @param menuItems Array of menu items
+   * @param urls Array for collecting the urls
+   * @private
+   */
+  private collectMenuUrls(menuItems?: CommonMenuItem[], urls: string[] = []) {
+    if (!menuItems || menuItems.length < 1) {
+      return;
+    }
+
+    menuItems.forEach(item => {
+      const { url, items = [] } = item as MenuItem;
+      if (url) {
+        urls.push(url);
+      }
+
+      this.collectMenuUrls(items, urls);
+    });
+  }
+
+  /**
+   * Iterates over the entire menu tree and collects all ids.
+   *
+   * @param menuItems Array of menu items
+   * @param ids Array for collecting the ids
+   * @private
+   */
+  private collectMenuIds(menuItems?: CommonMenuItem[], ids: string[] = []) {
+    if (!menuItems || menuItems.length < 1) {
+      return;
+    }
+
+    menuItems.forEach(item => {
+      const { id, items = [] } = item as MenuItem;
+      if (id) {
+        ids.push(id);
+      }
+
+      this.collectMenuIds(items, ids);
+    });
+  }
+
+  /**
+   * Performs structural validations and displays warnings or errors accordingly.
+   *
+   * @private
+   */
+  private validate() {
+    const menuIds = this.getMenuIds();
+    const menuIdsUnique = new Set(menuIds);
+    if (menuIds.length !== [...menuIdsUnique].length) {
+      const duplicateIds = menuIds.filter(id => {
+        if (menuIdsUnique.has(id)) {
+          menuIdsUnique.delete(id);
+          return;
+        }
+
+        return id;
+      });
+
+      console.warn('Duplicate ids found: %s', duplicateIds.join(', '));
+    }
+
+    const menuItemUrls = this.getMenuUrls();
+    const menuItemUrlsUnique = new Set(menuItemUrls);
+    if (menuItemUrls.length !== [...menuItemUrlsUnique].length) {
+      const duplicateUrls = menuItemUrls.filter(url => {
+        if (menuItemUrlsUnique.has(url)) {
+          menuItemUrlsUnique.delete(url);
+          return;
+        }
+
+        return url;
+      });
+
+      console.warn('Duplicate urls found: %s', duplicateUrls.join(', '));
+    }
+
+    return;
+  }
+
+  /**
+   * Convenience method that returns all menu item ids
+   */
+  getMenuIds(): string[] {
+    const menuIds: string[] = [];
+    this.collectMenuIds(this.getMenus(), menuIds);
+    return menuIds;
+  }
+
+  /**
+   * Convenience method that returns all menu item urls
+   */
+  getMenuUrls(): string[] {
+    const menuUrls: string[] = [];
+    this.collectMenuUrls(this.getMenus(), menuUrls);
+    return menuUrls;
   }
 }

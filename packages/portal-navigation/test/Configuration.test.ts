@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 
-import { CommonMenuItem, Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
+import { Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
 
 import dataJson from '../data/test-data.json';
 import dataUrlsJson from '../data/test-urls.json';
@@ -78,23 +78,18 @@ describe('Configuration', () => {
 
   it('all ids (including the generated ones) should be unique across the entire navigation', () => {
     const configuration = new Configuration(configurationData);
-    const menuIds: string[] = [];
+    const menuIds = configuration.getMenuIds();
 
-    const collectMenuIds = (menuItems: CommonMenuItem[], ids: string[] = []) => {
-      menuItems.forEach(menu => {
-        ids.push(menu.id!);
-
-        if (!menu.items || menu.items.length < 1) {
-          return;
-        }
-
-        collectMenuIds(menu.items!, ids);
-      });
-    };
-
-    collectMenuIds(configuration.getMenus()!, menuIds);
-
+    expect(menuIds.length).to.be.greaterThan(1);
     expect(menuIds).to.deep.equal([...new Set(menuIds)]);
+  });
+
+  it('all urls should be unique across the entire navigation', () => {
+    const configuration = new Configuration(configurationData);
+    const menuUrls = configuration.getMenuUrls();
+
+    expect(menuUrls.length).to.be.greaterThan(1);
+    expect(menuUrls).to.deep.equal([...new Set(menuUrls)]);
   });
 
   it('should not generate ids on invalid data', () => {
