@@ -1,9 +1,12 @@
 import { expect } from '@open-wc/testing';
 
 import { CommonMenuItem, Configuration, ConfigurationData, MenuItem } from '../src/Configuration.js';
+
 import dataJson from '../data/test-data.json';
+import dataUrlsJson from '../data/test-urls.json';
 
 const configurationData = dataJson as ConfigurationData;
+const configurationDataUrls = dataUrlsJson as ConfigurationData;
 
 describe('Configuration', () => {
   it('getMenus returns all menus', () => {
@@ -57,65 +60,6 @@ describe('Configuration', () => {
     expect(result!.getMenuId()).to.equal('main');
     expect(result!.getFirstLevelItemId()).to.equal('parent2');
     expect(result!.getId(2)).to.equal('item2.2');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #1', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/item2.2/unknown-subitem?foo=bar');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent2');
-    expect(result!.getId(2)).to.equal('item2.2');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #2', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/parent1');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent1');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #3', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/parent8?foo=bar');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent8');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #4', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/parent8');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent8');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #5', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/path/parent1/child/missing');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent1');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #6', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/child-path');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent8');
-    expect(result!.getLastLevelItemId()).to.equal('item8.1');
-  });
-
-  it('getIdPathForUrl returns first item matching url, and tries to match sub-path as a fallback #7', () => {
-    const configuration = new Configuration(configurationData);
-    const result = configuration.getIdPathForUrl('/some/child-path?foo=bar&bar=baz');
-
-    expect(result!.getMenuId()).to.equal('main');
-    expect(result!.getFirstLevelItemId()).to.equal('parent8');
-    expect(result!.getLastLevelItemId()).to.equal('item8.1');
   });
 
   it('should return empty ObjectPath when menus are missing in data', () => {
@@ -202,5 +146,61 @@ describe('Configuration', () => {
     const objectPath = configuration.getObjectPathForSelection(object => object.id === 'parent3');
 
     expect(objectPath.getLastItem()!.id).to.equal('parent3');
+  });
+
+  describe('URLs', () => {
+    it('getIdPathForUrl fuzzy matches the right url #1', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/foo/bar');
+
+      expect(result!.getMenuId()).to.equal('main');
+      expect(result!.getFirstLevelItemId()).to.equal('1');
+      expect(result!.getId(2)).to.equal('1.1');
+    });
+
+    it('getIdPathForUrl fuzzy matches the right url #2', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/foo/bar?foo=bar&bar=baz');
+
+      expect(result!.getMenuId()).to.equal('main');
+      expect(result!.getFirstLevelItemId()).to.equal('1');
+      expect(result!.getId(2)).to.equal('1.1');
+    });
+
+    it('getIdPathForUrl fuzzy matches the right url #3', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/foo/');
+
+      expect(result!.getMenuId()).to.equal('main');
+      expect(result!.getFirstLevelItemId()).to.equal('1');
+      expect(result!.getId(2)).to.equal('1.2');
+    });
+
+    it('getIdPathForUrl fuzzy matches the right url #4', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/bar/');
+
+      expect(result!.getMenuId()).to.equal('meta');
+      expect(result!.getFirstLevelItemId()).to.equal('2');
+      expect(result!.getId(2)).to.be.undefined;
+    });
+
+    it('getIdPathForUrl fuzzy matches the right url #5', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/bar');
+
+      expect(result!.getMenuId()).to.equal('meta');
+      expect(result!.getFirstLevelItemId()).to.equal('2');
+      expect(result!.getId(2)).to.equal('2.1');
+    });
+
+    it('getIdPathForUrl fuzzy matches the right url #6', () => {
+      const configuration = new Configuration(configurationDataUrls);
+      const result = configuration.getIdPathForUrl('/?foo=bar&bar=baz');
+
+      expect(result!.getMenuId()).to.equal('meta');
+      expect(result!.getFirstLevelItemId()).to.equal('2');
+      expect(result!.getId(2)).to.equal('2.4');
+    });
   });
 });

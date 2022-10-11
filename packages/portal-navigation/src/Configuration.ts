@@ -201,7 +201,7 @@ export class Configuration {
 
   /**
    * Returns the first object within the given data that matches the given array of keys (keyPath).
-   * By default the configurations data will be used, but you can pass subsets of the data to only search these parts.
+   * By default, the configurations data will be used, but you can pass subsets of the data to only search these parts.
    * A key within the path can be a simple string (referring to a property name) or a two strings delimited by '::'.
    * This refers to a menu/item (by id) within an array structure. e.g. ['menus::menu1', 'items::item3'] would find
    * the first item with id 'item3' (in array property named 'items') of menu with id 'menu1' (in array of property
@@ -247,8 +247,10 @@ export class Configuration {
         return false;
       }
 
-      // Otherwise, we try to do an exact match or see if either of the urls starts with the other
-      return menuItemUrl === url || menuItemUrl.startsWith(url) || url.startsWith(menuItemUrl);
+      // Otherwise, we only compare paths without search params + hash from menu item url
+      const parsedMenuItemUrl = new URL(menuItemUrl, 'http://localhost');
+      const parsedUrl = new URL(url, 'http://localhost');
+      return parsedMenuItemUrl.pathname === parsedUrl.pathname;
     });
 
     if (result && !result.isEmpty()) {
@@ -295,7 +297,7 @@ export class Configuration {
   }
 
   /**
-   * Returns an array of objects from the data set to the item selected by the selector, if it should exist. Otherwise,
+   * Returns an array of objects from the data set to the item selected by the selector, if it exists. Otherwise,
    * undefined is returned.
    *
    * @param visitedObjects the path of objects visited so far (will be prepended to the return value if a match is found)
@@ -332,7 +334,7 @@ export class Configuration {
    *
    * @param key - a string that is either the name of a property or the name of a property, that's expected to
    * be an array, followed by '::' and an id of the menu or item within that array to be returned.
-   * @param data - a object from the data set.
+   * @param data - an object from the data set.
    * @returns the object found in data based on the given key, which is either the value of the property or a specific array element if the property's value is an array.
    */
   private resolveValue(key: string, data: ConfigurationData | MenuItem | RootLevelMenuItem): RootLevelMenuItem | MenuItem | undefined {

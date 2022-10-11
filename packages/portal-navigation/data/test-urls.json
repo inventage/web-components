@@ -1,0 +1,35 @@
+{
+  "menus": [
+    {
+      "id": "main",
+      "items": [
+        {
+          "label": "1",
+          "id": "1",
+          "items": [
+            { "label": "1.1", "id": "1.1", "url": "/foo/bar" },
+            { "label": "1.2", "id": "1.2", "url": "/foo/" },
+            { "label": "1.3", "id": "1.3", "url": "/foo/baz" },
+            { "label": "1.4", "id": "1.4", "url": "/foo/bar/baz" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "items": [
+        {
+          "label": "2",
+          "id": "2",
+          "url": "/bar/",
+          "items": [
+            { "label": "2.1", "id": "2.1", "url": "/bar" },
+            { "label": "2.2", "id": "2.2", "url": "/bar/baz" },
+            { "label": "2.3", "id": "2.3", "url": "/baz" },
+            { "label": "2.4", "id": "2.4", "url": "/" }
+          ]
+        }
+      ]
+    }
+  ]
+}
