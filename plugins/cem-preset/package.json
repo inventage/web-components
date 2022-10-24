@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "cem-plugin-module-file-extensions": "^0.0.2",
-    "cem-plugin-readonly": "^0.0.2"
+    "cem-plugin-readonly": "^0.0.5"
   },
   "keywords": [
     "custom-elements-manifest",
