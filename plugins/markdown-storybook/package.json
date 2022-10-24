@@ -18,7 +18,7 @@
     "js-yaml": "^4.1.0",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
-    "remark-highlight.js": "^6.0.0",
+    "remark-highlight.js": "^7.0.1",
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
     "unified": "^9.2.1"
