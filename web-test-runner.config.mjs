@@ -101,7 +101,7 @@ export default {
       // @see https://github.com/mapbox/pixelmatch#api
       diffOptions: {
         threshold: 0.2,
-        includeAA: false,
+        includeAA: true,
       },
     }),
   ],
