@@ -167,7 +167,7 @@ jobs:
           ref: website-build
 
       - name: Download website build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: storybook-static
           path: storybook-static
