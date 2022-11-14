@@ -22,7 +22,7 @@ jobs:
           node-version: '16'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache
         with:
           path: ./node_modules
@@ -57,7 +57,7 @@ jobs:
 #            node-version: '16'
 #
 #        # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-#        - uses: actions/cache@v2
+#        - uses: actions/cache@v3
 #          id: cache
 #          with:
 #            path: ./node_modules
@@ -96,7 +96,7 @@ jobs:
           node-version: '16'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cache
         with:
           path: ./node_modules
