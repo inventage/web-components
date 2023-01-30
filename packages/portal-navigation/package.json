@@ -44,7 +44,7 @@
     "@inventage-web-components/common": "^0.6.0",
     "@inventage-web-components/hamburger-menu": "^0.5.0",
     "ts-debounce": "^4.0.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@inventage-web-components/dev-helpers": "*",
