@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 0.17.2
+
+### Patch Changes
+
+- [`89c8c50`](https://github.com/inventage/web-components/commit/89c8c501c9b42aa2c57d46b52edc8e6d6c46c46f) - Better boolean checks for menu children (items)
+
 ## 0.17.1
 
 ### Patch Changes

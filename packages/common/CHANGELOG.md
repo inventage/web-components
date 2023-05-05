@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 0.6.1
+
+### Patch Changes
+
+- [#99](https://github.com/inventage/web-components/pull/99) [`e828a66`](https://github.com/inventage/web-components/commit/e828a6653175dbbe0057f35cfa97dc6a526907ab) Thanks [@dependabot](https://github.com/apps/dependabot)! - - Update Lit from `2.4.0` to `2.6.1`
+
 ## 0.6.0
 
 ### Minor Changes
