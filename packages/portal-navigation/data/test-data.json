@@ -89,6 +89,14 @@
               "url": "/some/child-path"
             }
           ]
+        },
+        {
+          "id": "parent9",
+          "label": "Parent 9",
+          "url": "/some/path/parent9",
+          "application": "app2",
+          "internalRouting": true,
+          "expanded": false
         }
       ]
     },

@@ -656,6 +656,21 @@ describe('<portal-navigation>', () => {
       expect(window.location.pathname).to.equal('/some/path/item3.2');
     });
 
+    it('does route externally for items with empty children', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}" currentapplication="app1"></portal-navigation>`);
+      await childrenRendered(el);
+
+      // Select menu item that should navigate away from the page
+      const menuItem = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part="item-parent9"]');
+
+      // Click menu item here
+      const clicked = oneEvent(document, 'click');
+      setTimeout(() => menuItem.click());
+      await clicked;
+
+      expect(window.location.pathname).to.equal('/some/path/parent9');
+    });
+
     it('does ignore default item when destination is "extern" on parent item clicks, and does call e.preventDefault()', async () => {
       const eventSpy = spy();
       const el: PortalNavigation = await fixture(
