@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 1.0.0
+
+### Major Changes
+
+- [`3292414`](https://github.com/inventage/web-components/commit/3292414de8cc9864e22dc88c2920b6e80038d2e5) - Initial 1.0 release 🎉
+
 ## 0.6.1
 
 ### Patch Changes
