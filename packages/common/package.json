@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/common",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "description": "Shared, common functionality for @inventage-web-components packages.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",
