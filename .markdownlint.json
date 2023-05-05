@@ -5,5 +5,6 @@
   "no-bare-urls": false,
   "no-trailing-punctuation": {
     "punctuation": ".,;:!。，；：！"
-  }
+  },
+  "no-inline-html": false
 }
