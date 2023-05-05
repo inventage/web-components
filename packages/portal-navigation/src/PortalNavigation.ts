@@ -807,7 +807,7 @@ export class PortalNavigation extends LitElement {
 
     const menuId = this.activePath.getMenuId();
     const activeParentItem = this.configuration.getData([`menus::${menuId}`, `items::${parentItemId}`]);
-    const hasCurrentItems = activeParentItem && !Array.isArray(activeParentItem) && activeParentItem.items && activeParentItem.items.length > 0;
+    const hasCurrentItems = activeParentItem && !Array.isArray(activeParentItem) && !!activeParentItem.items && activeParentItem.items.length > 0;
 
     if (!hasCurrentItems) {
       return nothing;
@@ -907,7 +907,7 @@ export class PortalNavigation extends LitElement {
       return;
     }
 
-    const hasItems = item.items && item.items.length > 0;
+    const hasItems = !!item.items && item.items.length > 0;
     const internalRouting = this.__isInternalRouting(item);
     const { expanded = false } = item as Record<string, boolean>;
 
@@ -991,7 +991,7 @@ export class PortalNavigation extends LitElement {
   private __internalLinkSelected(itemId?: string): void {
     const objectPath = this.configuration.getObjectPathForSelection(object => object.id === itemId);
     const selectedItem = objectPath.getLastItem();
-    const hasItems = selectedItem && selectedItem.items && selectedItem.items.length > 0;
+    const hasItems = selectedItem && !!selectedItem.items && selectedItem.items.length > 0;
 
     this.activeDropdown = undefined;
 
