@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 1.0.1
+
+### Patch Changes
+
+- [`b6007b0`](https://github.com/inventage/web-components/commit/b6007b0fb591de305e368ce197d46ef69f284732) - Update `lit-html` to `2.7.4` (see https://github.com/lit/lit/releases/tag/lit-html%402.7.4)
+
 ## 1.0.0
 
 ### Major Changes
