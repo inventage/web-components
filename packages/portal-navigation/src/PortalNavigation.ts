@@ -84,8 +84,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @listens 'portal-navigation.setBadgeValue' - Listens to event that change the badge value of an item or menu and sets that value accordingly.
  * @listens 'portal-navigation.setActiveUrl' - Listens to event that change the active menu item.
  *
- * @cssprop {color} [--portal-navigation-color-primary=#555] Primary color used for text elements
- * @cssprop {color} [--portal-navigation-color-secondary=rgb(10, 81, 194)] Secondary color used for highlights
+ * @cssprop {color} [--portal-navigation-color-primary=#111827] Primary color used for text elements
+ * @cssprop {color} [--portal-navigation-color-secondary=#0369a1] Secondary color used for highlights
  * @cssprop {color} [--portal-navigation-color-link=var(--portal-navigation-color-primary)] Color used for links
  * @cssprop {color} [--portal-navigation-color-link-breakpoint=var(--portal-navigation-color-primary)] Color used for links in mobile breakpoint
  * @cssprop {color} [--portal-navigation-color-link-dropdown=var(--portal-navigation-color-primary)] Color used for links in dropdowns
@@ -98,8 +98,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop {color} [--portal-navigation-color-badge-background=var(--portal-navigation-color-secondary)] Badge background color
  * @cssprop {color} [--portal-navigation-color-dropdown-background=white] Dropdown background color
  * @cssprop {color} [--portal-navigation-color-border=rgba(44, 62, 80, 0.1)] Default border color
- * @cssprop {color} [--portal-navigation-color-header-background=#eef3fe] Header element background color
- * @cssprop {color} [--portal-navigation-color-meta-bar-background=#dbe7fd] Meta bar element background color
+ * @cssprop {color} [--portal-navigation-color-header-background=#f8fafc] Header element background color
+ * @cssprop {color} [--portal-navigation-color-meta-bar-background=#e5e7eb] Meta bar element background color
  * @cssprop {color} [--portal-navigation-color-main-background=var(--portal-navigation-color-header-background)] Main element background color
  * @cssprop {color} [--portal-navigation-color-current-background=#fff] Current element background color (element that holds the 2nd level navigation)
  *
