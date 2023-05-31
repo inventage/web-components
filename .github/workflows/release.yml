@@ -125,7 +125,7 @@ jobs:
           publish: npm run release
           version: npm run version
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Storybook Build
         run: npm run storybook:build
