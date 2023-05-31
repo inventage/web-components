@@ -1,5 +1,15 @@
 # @inventage-web-components/portal-navigation
 
+## 1.1.0
+
+### Minor Changes
+
+- [`9844a0d`](https://github.com/inventage/web-components/commit/9844a0dc2b47b9a279b59a26d8bacd9eb810a7e6) - Use different defaults (grays) for all colors except for selected & hover state in menu items as well as badge background color. These defaults are a shade of blue.
+
+### Patch Changes
+
+- [`e573e0f`](https://github.com/inventage/web-components/commit/e573e0f775c8708f1a1808993ab309a376a7a15d) - Fix new color docs
+
 ## 1.0.0
 
 ### Major Changes
