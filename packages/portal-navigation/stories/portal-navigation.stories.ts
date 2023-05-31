@@ -216,7 +216,8 @@ export const Sticky: Story<ArgTypes> = (args: ArgTypes) =>
     html`
       <style>
         :root {
-          --portal-navigation-color-current-background: #f5f5f5;
+          --portal-navigation-color-header-background: #e5e7eb;
+          --portal-navigation-color-current-background: #f9fafb;
         }
       </style>
       <div class="content">${generateParagraphs(20)}</div>

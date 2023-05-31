@@ -1,7 +1,7 @@
 :host {
   font-family: var(--portal-navigation-font-family, sans-serif);
   box-sizing: border-box;
-  color: var(--portal-navigation-color-primary, #555);
+  color: var(--portal-navigation-color-primary, #111827);
 }
 
 :host *,
@@ -23,7 +23,7 @@
  * Meta bar styles
  */
 .meta-bar {
-  background: var(--portal-navigation-color-meta-bar-background, #dbe7fd);
+  background: var(--portal-navigation-color-meta-bar-background, #e5e7eb);
 }
 
 .meta-bar > .inner {
@@ -32,7 +32,7 @@
 }
 
 .meta-bar:empty {
-  border: 1px solid red;
+  border: 1px solid #dc2626;
 }
 
 .meta-bar:empty,
@@ -48,7 +48,7 @@
  * Navigation header
  */
 .navigation-header {
-  background: var(--portal-navigation-color-header-background, #eef3fe);
+  background: var(--portal-navigation-color-header-background, #f8fafc);
 }
 
 .navigation-header > .inner {
@@ -64,7 +64,7 @@
  * Main menu wrapper
  */
 .main {
-  background: var(--portal-navigation-color-main-background, var(--portal-navigation-color-header-background, #eef3fe));
+  background: var(--portal-navigation-color-main-background, var(--portal-navigation-color-header-background, #f8fafc));
 }
 
 .main:empty {
@@ -116,12 +116,12 @@
 }
 
 .menu-link.-selected {
-  color: var(--portal-navigation-color-selected, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
+  color: var(--portal-navigation-color-selected, var(--portal-navigation-color-secondary, #0369a1));
 }
 
 @media (hover: hover) {
   .menu-link:hover {
-    color: var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
+    color: var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, #0369a1));
   }
 }
 
@@ -141,13 +141,13 @@
 }
 
 .menu-link > .badge:not(:empty) {
-  background-color: var(--portal-navigation-color-badge-background, var(--portal-navigation-color-secondary, rgb(10, 81, 194)));
+  background-color: var(--portal-navigation-color-badge-background, var(--portal-navigation-color-secondary, #0369a1));
   border-radius: 1em;
   line-height: 1em;
   font-size: var(--portal-navigation-font-size-badge, 1rem);
   padding: 2px 8px;
   text-align: center;
-  color: var(--portal-navigation-color-badge, white);
+  color: var(--portal-navigation-color-badge, #fff);
   font-family: var(--portal-navigation-font-family-badge, var(--portal-navigation-font-family, sans-serif));
   transform: translate(5%, -30%);
 }
@@ -182,7 +182,7 @@
 
 .dropdown {
   display: none;
-  background-color: var(--portal-navigation-color-dropdown-background, white);
+  background-color: var(--portal-navigation-color-dropdown-background, #fff);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   margin: 0;
   min-width: 260px;
@@ -197,7 +197,7 @@
 }
 
 .dropdown::before {
-  background-color: var(--portal-navigation-color-dropdown-background, white);
+  background-color: var(--portal-navigation-color-dropdown-background, #fff);
   box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.25);
   content: '';
   height: 12px;
