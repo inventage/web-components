@@ -6,6 +6,9 @@ on:
       - main
       - next
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Lint & Test & Build

@@ -3,8 +3,13 @@ name: Deploy to GitHub Pages
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   release:
+    permissions:
+      contents: write  # for peaceiris/actions-gh-pages to push pages branch
     name: Build & Deploy
     # Prevents changesets action from creating a PR on forks
     if: github.repository == 'inventage/web-components'
