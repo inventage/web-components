@@ -12,6 +12,7 @@
 [![License](https://img.shields.io/npm/l/@inventage-web-components/common?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/actions/workflow/status/inventage/web-components/release.yml?branch=main&style=flat-square)](https://github.com/inventage/web-components/actions)
 [![Coverage](https://img.shields.io/codeclimate/coverage/inventage/web-components?style=flat-square)](https://codeclimate.com/github/inventage/web-components)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/inventage/web-components/badge?style=flat-square)](https://securityscorecards.dev/viewer/?uri=github.com/inventage/web-components)
 
 A collection of webcomponents for enterprise portals.
 
