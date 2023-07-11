@@ -19,6 +19,6 @@
   "types": "lib/src/index.d.ts",
   "devDependencies": {
     "@inventage-web-components/common": "*",
-    "custom-elements-manifest": "^1.0.0"
+    "custom-elements-manifest": "^2.0.0"
   }
 }
