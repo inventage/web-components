@@ -16,13 +16,13 @@ jobs:
     name: Lint & Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+      - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
         with:
           node-version: '18'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@v3
+      - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         id: cache
         with:
           path: ./node_modules
@@ -43,7 +43,7 @@ jobs:
         run: sudo npx playwright install-deps && npm run test:ci
 
       - name: Publish Code Coverage
-        uses: paambaati/codeclimate-action@v4.0.0
+        uses: paambaati/codeclimate-action@9dea053ab1947f448753ac842b9980de2e44fe88 # v4.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
@@ -51,13 +51,13 @@ jobs:
 #      name: Visual Regression Test
 #      runs-on: macos-12
 #      steps:
-#        - uses: actions/checkout@v3
-#        - uses: actions/setup-node@v3
+#        - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+#        - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
 #          with:
 #            node-version: '18'
 #
 #        # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-#        - uses: actions/cache@v3
+#        - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
 #          id: cache
 #          with:
 #            path: ./node_modules
@@ -75,7 +75,7 @@ jobs:
 #          run: npm run test:vrt
 #
 #        - name: Archive visual diff results
-#          uses: actions/upload-artifact@v3
+#          uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
 #          if: failure()
 #          with:
 #            name: visual-diffs
@@ -90,13 +90,13 @@ jobs:
 #    needs: [ test, vrt ]
     needs: [ test ]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+      - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
         with:
           node-version: '18'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@v3
+      - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         id: cache
         with:
           path: ./node_modules
@@ -120,7 +120,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1.4.4
+        uses: changesets/action@d89c1de63c7f28ac47ec85ed395f5f1d045d4697 # v1.4.4
         with:
           publish: npm run release
           version: npm run version
@@ -131,14 +131,14 @@ jobs:
         run: npm run storybook:build
 
       - name: Upload Website Build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: storybook-static
           path: storybook-static
 
       - name: Deploy to Github Pages
         if: steps.changesets.outputs.published == 'true'
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
@@ -162,12 +162,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone the repoitory
-        uses: actions/checkout@v3
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           ref: website-build
 
       - name: Download website build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with:
           name: storybook-static
           path: storybook-static
