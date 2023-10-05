@@ -1,3 +1,4 @@
 .avatar {
+  max-width: var(--avatar-max-width, 100%);
   /* Nothing yet… */
 }
