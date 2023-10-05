@@ -6,3 +6,5 @@ export { styleMap } from 'lit/directives/style-map.js';
 export type { StyleInfo } from 'lit/directives/style-map.js';
 export { until } from 'lit/directives/until.js';
 export { live } from 'lit/directives/live.js';
+export { unsafeHTML } from 'lit/directives/unsafe-html.js';
+export { unsafeSVG } from 'lit/directives/unsafe-svg.js';
