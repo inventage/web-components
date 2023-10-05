@@ -38,9 +38,11 @@ export type SvgImageOptions = {
   textColor: string;
   fontSize: number;
   round: boolean;
+  className: string;
+  partName: string;
 };
 
-export const svgImageDefaultOptions: SvgImageOptions = {
+export const svgImageDefaultOptions: Pick<SvgImageOptions, 'backgroundColor' | 'textColor' | 'fontSize' | 'round'> = {
   backgroundColor: '#000',
   textColor: '#fff',
   fontSize: 0.5,
@@ -48,16 +50,15 @@ export const svgImageDefaultOptions: SvgImageOptions = {
 };
 
 export const svgImage = (text: string, size: number, options: Partial<SvgImageOptions> = {}) => {
-  const { backgroundColor, textColor, fontSize, round } = {
+  const { backgroundColor, textColor, fontSize, round, className, partName } = {
     ...svgImageDefaultOptions,
     ...options,
   };
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"><${
-    round ? 'circle' : 'rect'
-  } fill="${backgroundColor}" width="${size}" height="${size}" cx="${size / 2}" cy="${size / 2}" r="${
-    size / 2
-  }"/><text x="50%" y="50%" style="color: ${textColor}; line-height: 1; font-family: inherit;" alignment-baseline="middle" text-anchor="middle" font-size="${Math.round(
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}"${className ? ` class="${className}"` : ``}${
+    partName ? `part="${partName}"` : ``
+  }><${round ? 'circle' : 'rect'} fill="${backgroundColor}" width="100%" height="100%" cx="50%" cy="50%" r="50%"/>
+    <text x="50%" y="50%" style="color: ${textColor}; line-height: 1; font-family: inherit;" alignment-baseline="middle" text-anchor="middle" font-size="${Math.round(
     size * fontSize
   )}" dy=".1em" dominant-baseline="middle" fill="${textColor}">${text}</text></svg>`;
 };
