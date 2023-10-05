@@ -11,6 +11,13 @@ describe('<avatar-image>', () => {
     });
   });
 
+  describe('Display', () => {
+    it('is empty by default', async () => {
+      const el: AvatarImage = await fixture(html` <avatar-image></avatar-image>`);
+      await expect(el.shadowRoot!.innerHTML).to.equal('<!---->');
+    });
+  });
+
   describe('Functionality', () => {
     // TODO
   });
