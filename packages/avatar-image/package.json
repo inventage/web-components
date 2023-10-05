@@ -1,0 +1,54 @@
+{
+  "name": "@inventage-web-components/avatar-image",
+  "version": "1.0.0",
+  "description": "An avatar image based on user initials.",
+  "license": "MIT",
+  "author": "Inventage AG <info@inventage.com>",
+  "homepage": "https://github.com/inventage/web-components/tree/main/packages/avatar-image#readme",
+  "repository": {
+    "url": "inventage/web-components",
+    "directory": "packages/avatar-image"
+  },
+  "bugs": "https://github.com/inventage/web-components/issues",
+  "type": "module",
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./lib/src/*": "./lib/src/*",
+    "./avatar-image": "./lib/src/avatar-image.js",
+    "./avatar-image.js": "./lib/src/avatar-image.js"
+  },
+  "main": "lib/src/index.js",
+  "module": "lib/src/index.js",
+  "files": [
+    "custom-elements.json",
+    "lib/src/**/*.d.ts",
+    "lib/src/**/*.js",
+    "lib/src/**/*.js.map"
+  ],
+  "scripts": {
+    "analyze": "cem analyze",
+    "build": "rimraf lib && tsc -b .",
+    "prepublishOnly": "npm run analyze && npm run build",
+    "test": "echo \"Error: run tests from mono-repo root.\" && exit 1"
+  },
+  "sideEffects": [
+    "**/avatar-image.js"
+  ],
+  "types": "lib/src/index.d.ts",
+  "dependencies": {
+    "@inventage-web-components/common": "^1.0.0",
+    "tslib": "^2.6.2"
+  },
+  "keywords": [
+    "avatar",
+    "initials",
+    "lit-element",
+    "lit-html",
+    "portal",
+    "web-components"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "customElements": "custom-elements.json"
+}

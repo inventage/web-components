@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": ".",
+    "outDir": "lib"
+  },
+  "include": ["**/*.ts"],
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../../plugins/dev-helpers"
+    }
+  ]
+}
