@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 1.2.0
+
+### Minor Changes
+
+- [`a334bba`](https://github.com/inventage/web-components/commit/a334bba1cdcdc8c38eb25a0e18a17f138be77654) - Updated `tslib` from `^2.5.0` to `^2.6.2` (see https://github.com/Microsoft/tslib/releases)
+
+### Patch Changes
+
+- Updated dependencies [[`74b6541`](https://github.com/inventage/web-components/commit/74b6541464a943ba770b8a53e52569c00e01276d), [`a334bba`](https://github.com/inventage/web-components/commit/a334bba1cdcdc8c38eb25a0e18a17f138be77654)]:
+  - @inventage-web-components/common@1.1.0
+  - @inventage-web-components/hamburger-menu@1.1.0
+
 ## 1.1.0
 
 ### Minor Changes
