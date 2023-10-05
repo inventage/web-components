@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 1.1.0
+
+### Minor Changes
+
+- [`74b6541`](https://github.com/inventage/web-components/commit/74b6541464a943ba770b8a53e52569c00e01276d) - Updated `lit` from `^2.7.4` to `^2.8.0`
+
 ## 1.0.1
 
 ### Patch Changes
