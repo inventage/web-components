@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/avatar-image",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An avatar image based on user initials.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",
@@ -36,7 +36,7 @@
   ],
   "types": "lib/src/index.d.ts",
   "dependencies": {
-    "@inventage-web-components/common": "^1.0.0",
+    "@inventage-web-components/common": "^1.2.0",
     "tslib": "^2.6.2"
   },
   "keywords": [
