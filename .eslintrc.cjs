@@ -26,6 +26,12 @@ module.exports = {
       },
     },
     {
+      files: ['web-test-runner*.js'],
+      env: {
+        node: true,
+      },
+    },
+    {
       files: ['**/*.ts'],
       extends: ['plugin:@typescript-eslint/recommended'],
       plugins: ['@typescript-eslint'],
