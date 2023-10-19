@@ -59,6 +59,6 @@ export const svgImage = (text: string, size: number, options: Partial<SvgImageOp
     partName ? `part="${partName}"` : ``
   }><${round ? 'circle' : 'rect'} fill="${backgroundColor}" width="100%" height="100%" cx="50%" cy="50%" r="50%"/>
     <text x="50%" y="50%" style="color: ${textColor}; line-height: 1; font-family: inherit;" alignment-baseline="middle" text-anchor="middle" font-size="${Math.round(
-    size * fontSize
-  )}" dy=".1em" dominant-baseline="middle" fill="${textColor}">${text}</text></svg>`;
+      size * fontSize
+    )}" dy=".1em" dominant-baseline="middle" fill="${textColor}">${text}</text></svg>`;
 };
