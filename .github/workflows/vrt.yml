@@ -1,0 +1,52 @@
+name: Visual Regression Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+# https://github.com/orgs/community/discussions/26681
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  vrt:
+    name: Visual Regression Test
+    runs-on: macos-12
+    if: false
+    steps:
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+        with:
+          node-version: '18'
+
+      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        id: cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run postinstall
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
+
+      - name: Test
+        run: npm run test:vrt
+
+      - name: Archive visual diff results
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: visual-diffs
+          path: screenshots
+          retention-days: 7
