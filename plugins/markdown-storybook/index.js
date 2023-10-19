@@ -3,11 +3,11 @@ import highlight from 'remark-highlight.js';
 import remark2Html from 'remark-html';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
-import unified from 'unified';
+import { unified } from 'unified';
 import yaml from 'js-yaml';
 import { storybookPlugin as modernWebStorybookPlugin } from '@web/dev-server-storybook';
 
-// Taken from https://github.com/CleverCloud/clever-components/blob/master/src/stories/lib/markdown.cjs
+// Taken from https://github.com/CleverCloud/clever-components/blob/11.2.1/src/stories/lib/markdown.cjs
 // Big Thanks @hsablonniere!
 //
 // Special patched version of '@web/dev-server-storybook'
@@ -15,11 +15,12 @@ import { storybookPlugin as modernWebStorybookPlugin } from '@web/dev-server-sto
 // Don't do this at home ;-)
 export const storybookWdsPlugin = () => {
   const modernWebPlugin = modernWebStorybookPlugin({ type: 'web-components' });
+  // noinspection UnnecessaryLocalVariableJS
   const patchedPlugin = {
     ...modernWebPlugin,
     async transform(context) {
       if (context.path.endsWith('.md')) {
-        context.body = markdownToCsfWithDocsPage(context.body);
+        context.body = await markdownToCsfWithDocsPage(context.body);
       } else {
         return modernWebPlugin.transform(context);
       }
@@ -43,8 +44,8 @@ export const storybookRollupPlugin = () => {
   };
 };
 
-function markdownToCsfWithDocsPage(markdownText) {
-  const processor = unified().use(remarkParse, {}).use(remarkGfm).use(frontmatter, ['yaml']).use(highlight).use(remark2Html, { sanitize: false });
+const markdownToCsfWithDocsPage = async markdownText => {
+  const processor = unified().use(remarkParse).use(remarkGfm).use(frontmatter, ['yaml']).use(highlight).use(remark2Html, { sanitize: false });
 
   const markdownAst = processor.parse(markdownText);
 
@@ -56,13 +57,14 @@ function markdownToCsfWithDocsPage(markdownText) {
 
   const title = [kind, subtitle].filter(a => a != null).join('/');
 
-  const html = processor().processSync(markdownText).contents;
+  const html = await processor.process(markdownText);
 
+  // noinspection UnnecessaryLocalVariableJS
   const csfScript = `
 
     import { React } from '@web/storybook-prebuilt/web-components.js';
 
-    const html = ${JSON.stringify(html)};
+    const html = ${JSON.stringify(`${html}`)};
 
     class HtmlComponent extends React.Component {
       constructor(props) {
@@ -102,9 +104,9 @@ function markdownToCsfWithDocsPage(markdownText) {
   `;
 
   return csfScript;
-}
+};
 
-function getKind(frontmatterNode) {
+const getKind = frontmatterNode => {
   if (frontmatterNode != null) {
     const fmObject = yaml.load(frontmatterNode.value);
     if (fmObject.kind != null) {
@@ -113,9 +115,9 @@ function getKind(frontmatterNode) {
   }
 
   return null;
-}
+};
 
-function getSubTitle(frontmatterNode, headingNode) {
+const getSubTitle = (frontmatterNode, headingNode) => {
   if (frontmatterNode != null) {
     const fmObject = yaml.load(frontmatterNode.value);
     if (fmObject.title != null) {
@@ -128,4 +130,4 @@ function getSubTitle(frontmatterNode, headingNode) {
   }
 
   return 'Untitled';
-}
+};

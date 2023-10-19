@@ -11,6 +11,9 @@
       "path": "packages/portal-navigation"
     },
     {
+      "path": "packages/avatar-image"
+    },
+    {
       "path": "plugins/dev-helpers"
     }
   ]
