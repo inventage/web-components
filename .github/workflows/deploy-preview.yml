@@ -65,7 +65,7 @@ jobs:
           netlify deploy \
             --alias ${{ env.BRANCH_NAME_SLUG }} \
             --build false \
-            --dir dist \
+            --dir storybook-static \
             --message 'Preview deployment for ${{ steps.slug.outputs.branch-name }} (${{ env.GITHUB_SHA_SHORT }})' \
             --prod false \
             --json true
