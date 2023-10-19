@@ -1,4 +1,4 @@
-name: Test
+name: Build
 
 # Prevent pull requests trigger duplicate checks for both [push] and [pull_request]
 # @see https://github.com/orgs/community/discussions/26940
@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
