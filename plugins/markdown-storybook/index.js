@@ -1,11 +1,11 @@
-const frontmatter = require('remark-frontmatter');
-const highlight = require('remark-highlight.js');
-const remark2Html = require('remark-html');
-const remarkParse = require('remark-parse');
-const remarkGfm = require('remark-gfm');
-const unified = require('unified');
-const yaml = require('js-yaml');
-const { storybookPlugin: modernWebStorybookPlugin } = require('@web/dev-server-storybook');
+import frontmatter from 'remark-frontmatter';
+import highlight from 'remark-highlight.js';
+import remark2Html from 'remark-html';
+import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
+import unified from 'unified';
+import yaml from 'js-yaml';
+import { storybookPlugin as modernWebStorybookPlugin } from '@web/dev-server-storybook';
 
 // Taken from https://github.com/CleverCloud/clever-components/blob/master/src/stories/lib/markdown.cjs
 // Big Thanks @hsablonniere!
@@ -13,7 +13,7 @@ const { storybookPlugin: modernWebStorybookPlugin } = require('@web/dev-server-s
 // Special patched version of '@web/dev-server-storybook'
 // This loads plain markdown documents with kind/title frontmatter support
 // Don't do this at home ;-)
-function storybookWdsPlugin() {
+export const storybookWdsPlugin = () => {
   const modernWebPlugin = modernWebStorybookPlugin({ type: 'web-components' });
   const patchedPlugin = {
     ...modernWebPlugin,
@@ -27,12 +27,12 @@ function storybookWdsPlugin() {
   };
 
   return patchedPlugin;
-}
+};
 
 // Same here but for the rollup static build
 // This loads plain markdown documents with kind/title frontmatter support
 // Don't do this at home ;-)
-function storybookRollupPlugin() {
+export const storybookRollupPlugin = () => {
   return {
     name: 'md-plain',
     transform(code, id) {
@@ -41,7 +41,7 @@ function storybookRollupPlugin() {
       }
     },
   };
-}
+};
 
 function markdownToCsfWithDocsPage(markdownText) {
   const processor = unified().use(remarkParse, {}).use(remarkGfm).use(frontmatter, ['yaml']).use(highlight).use(remark2Html, { sanitize: false });
@@ -129,8 +129,3 @@ function getSubTitle(frontmatterNode, headingNode) {
 
   return 'Untitled';
 }
-
-module.exports = {
-  storybookWdsPlugin,
-  storybookRollupPlugin,
-};

@@ -6,9 +6,6 @@
   "license": "MIT",
   "type": "module",
   "main": "index.js",
-  "files": [
-    "*.js"
-  ],
   "dependencies": {
     "cem-plugin-module-file-extensions": "^0.0.5",
     "cem-plugin-readonly": "^0.0.5"
