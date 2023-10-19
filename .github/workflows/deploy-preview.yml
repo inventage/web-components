@@ -1,0 +1,91 @@
+name: Deploy Preview
+
+on:
+  push:
+    branches-ignore:
+      - '!main'
+  pull_request:
+    branches:
+      - '!dependabot/**'
+
+# https://github.com/orgs/community/discussions/26681
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+        with:
+          node-version: '18'
+
+      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        id: cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        env:
+          HUSKY_SKIP_HOOKS: 1
+        run: npm ci
+
+      - name: Run postinstall
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
+
+      - name: Storybook Build
+        run: npm run storybook:build
+
+      - uses: gacts/github-slug@v1
+        id: slug
+
+      - run: |
+          echo "BRANCH_NAME_SLUG=${{ steps.slug.outputs.branch-name-slug }}" >> $GITHUB_ENV
+          echo "DEPLOY_URL=https://${{ steps.slug.outputs.branch-name-slug }}--inventage-web-components.netlify.app" >> $GITHUB_ENV
+          echo "GITHUB_SHA_SHORT=$(git rev-parse --short ${{ github.sha }})" >> $GITHUB_ENV
+
+      # Use netlify-cli directly, since it is installed in the latest ubuntu runner
+      # @see https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md#cli-tools
+      # @see https://cli.netlify.com/commands/deploy/
+      - name: Deploy
+        id: deploy
+        run: |
+          netlify deploy \
+            --alias ${{ env.BRANCH_NAME_SLUG }} \
+            --build false \
+            --dir dist \
+            --message 'Preview deployment for ${{ steps.slug.outputs.branch-name }} (${{ env.GITHUB_SHA_SHORT }})' \
+            --prod false \
+            --json true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      # Creates a status check with link to preview
+      - name: Status check
+        uses: Sibz/github-status-action@v1.1.6
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: Deployment
+          description: Deployed preview to Netlify
+          state: success
+          target_url: ${{ env.DEPLOY_URL }}
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          message: |
+            Deployed to ${{ env.DEPLOY_URL }}
+          comment_tag: deployment
