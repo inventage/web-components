@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 1.2.0
+
+### Minor Changes
+
+- [#154](https://github.com/inventage/web-components/pull/154) [`d340286`](https://github.com/inventage/web-components/commit/d3402861096daa46034c9970f60494d69438d287) Added exports for `unsafeHTML` and `unsafeSVG` directives.
+
 ## 1.1.0
 
 ### Minor Changes
