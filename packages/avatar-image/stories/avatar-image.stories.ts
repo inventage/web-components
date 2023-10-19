@@ -9,9 +9,6 @@ import cem from '../custom-elements.json';
 
 const customElement = getCustomElement(cem as Package, 'src/AvatarImage.js', 'AvatarImage');
 
-console.log('customElement', customElement);
-console.log('getCssPropArgTypes(customElement)', getArgTypes(customElement));
-
 export default {
   component: 'avatar-image',
   title: 'Avatar Image',

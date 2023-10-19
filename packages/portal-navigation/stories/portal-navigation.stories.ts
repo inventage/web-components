@@ -1,6 +1,6 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
 import { ifDefined } from '@inventage-web-components/common/lib/src/directives.js';
-import { generateParagraphs, getArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
+import { generateParagraphs, getArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { NavigationEvents } from '../src/index.js';
@@ -80,7 +80,7 @@ interface ArgTypes {
 
 const Template = (args: ArgTypes, slots?: TemplateResult | TemplateResult[], content?: TemplateResult | TemplateResult[]): TemplateResult => {
   // Automatically set styles for each CSS custom prop passed as argument
-  // setCssStyleFromArgs(args, document.documentElement.style);
+  setCssStyleFromArgs(args, document.documentElement.style);
 
   // Reset padding top, since the navigation might have set this (e.g. in sticky mode)
   document.querySelector('body')!.style.paddingTop = '';
