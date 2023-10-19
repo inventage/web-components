@@ -1,7 +1,7 @@
-const json = require('@rollup/plugin-json');
-const { storybookRollupPlugin } = require('@inventage-web-components/markdown-storybook');
+import json from '@rollup/plugin-json';
+import { storybookRollupPlugin } from '@inventage-web-components/markdown-storybook';
 
-module.exports = {
+export default {
   stories: ['../packages/*/docs/**/*.md', '../packages/*/lib/stories/*.stories.js'],
 
   rollupConfig(config) {
