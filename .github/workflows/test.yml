@@ -1,0 +1,50 @@
+name: Test
+
+# Prevent pull requests trigger duplicate checks for both [push] and [pull_request]
+# @see https://github.com/orgs/community/discussions/26940
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**' #avoid duplicates: only run the PR, not the push
+      - 'gh-pages' #github pages do not trigger all tests
+    tags-ignore:
+      - 'v*' #avoid rerun existing commit on release
+  pull_request:
+    branches:
+      - 'main'
+      - 'next'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+        with:
+          node-version: '18'
+
+      # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
+      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        id: cache
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install packages
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Run postinstall
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
+
+      - name: Build
+        run: npm run storybook:build

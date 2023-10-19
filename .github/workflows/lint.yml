@@ -1,22 +1,28 @@
-name: Deploy to GitHub Pages
+name: Lint
 
+# Prevent pull requests trigger duplicate checks for both [push] and [pull_request]
+# @see https://github.com/orgs/community/discussions/26940
 on:
-  workflow_dispatch:
+  push:
+    branches-ignore:
+      - 'dependabot/**' #avoid duplicates: only run the PR, not the push
+      - 'gh-pages' #github pages do not trigger all tests
+    tags-ignore:
+      - 'v*' #avoid rerun existing commit on release
+  pull_request:
+    branches:
+      - 'main'
+      - 'next'
 
 permissions:
   contents: read
 
 jobs:
-  release:
-    permissions:
-      contents: write  # for peaceiris/actions-gh-pages to push pages branch
-    name: Build & Deploy
-    # Prevents changesets action from creating a PR on forks
-    if: github.repository == 'inventage/web-components'
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@1b05615854632b887b69ae1be8cbefe72d3ae423 # v2.6.0
+        uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
         with:
           egress-policy: audit
 
@@ -26,7 +32,7 @@ jobs:
           node-version: '18'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+      - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         id: cache
         with:
           path: ./node_modules
@@ -40,12 +46,5 @@ jobs:
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
 
-      - name: Storybook Build
-        run: npm run storybook:build
-
-      - name: Deploy to Github Pages
-        uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3.9.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
-          allow_empty_commit: true
+      - name: Lint
+        run: npm run lint
