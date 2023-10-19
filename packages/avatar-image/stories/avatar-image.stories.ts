@@ -1,5 +1,5 @@
 import { html, nothing, TemplateResult } from '@inventage-web-components/common';
-import { getCssPropArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
+import { getArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
 import { ClassInfo } from 'lit-html/development/directives/class-map';
 import { classMap } from '@inventage-web-components/common/lib/src/directives.js';
 
@@ -8,6 +8,9 @@ import '../src/avatar-image.js';
 import cem from '../custom-elements.json';
 
 const customElement = getCustomElement(cem as Package, 'src/AvatarImage.js', 'AvatarImage');
+
+console.log('customElement', customElement);
+console.log('getCssPropArgTypes(customElement)', getArgTypes(customElement));
 
 export default {
   component: 'avatar-image',
@@ -21,7 +24,7 @@ export default {
       },
     },
     // CSS prop arg types
-    ...getCssPropArgTypes(customElement),
+    ...getArgTypes(customElement),
   },
 };
 

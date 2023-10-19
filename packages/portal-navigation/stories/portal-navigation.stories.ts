@@ -1,6 +1,6 @@
 import { html, TemplateResult } from '@inventage-web-components/common';
 import { ifDefined } from '@inventage-web-components/common/lib/src/directives.js';
-import { generateParagraphs, getCssPropArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
+import { generateParagraphs, getArgTypes, getCustomElement, Package, Story } from '@inventage-web-components/dev-helpers';
 
 import '../src/portal-navigation.js';
 import { NavigationEvents } from '../src/index.js';
@@ -51,7 +51,7 @@ export default {
       },
     },
     // CSS prop arg types
-    ...getCssPropArgTypes(customElement),
+    ...getArgTypes(customElement),
   },
   parameters: {
     actions: {

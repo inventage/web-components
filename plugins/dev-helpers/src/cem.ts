@@ -1,4 +1,4 @@
-import { CssCustomProperty, CustomElement, Package } from 'custom-elements-manifest/schema.js';
+import { CssCustomProperty, CssPart, CustomElement, Package, Slot } from 'custom-elements-manifest/schema.js';
 
 /**
  * Returns the custom element declaration from the given custom elements manifest at the given path and for the given class name.
@@ -50,16 +50,55 @@ export const getCssProperties = (element?: CustomElement): CssCustomProperty[] =
 };
 
 /**
- * Returns the argType object with all CSS properties for the given custom element.
+ * Returns the list of css parts for the given custom element.
  *
  * @param element
  */
-export const getCssPropArgTypes = (element?: CustomElement): Record<string, unknown> => {
+export const getCssParts = (element?: CustomElement): CssPart[] => {
+  if (!element) {
+    return [];
+  }
+
+  const { cssParts } = element;
+  if (!cssParts) {
+    return [];
+  }
+
+  return cssParts;
+};
+
+/**
+ * Returns the list of slots for the given custom element.
+ *
+ * @param element
+ */
+export const getSlots = (element?: CustomElement): Slot[] => {
+  if (!element) {
+    return [];
+  }
+
+  const { slots } = element;
+  if (!slots) {
+    return [];
+  }
+
+  return slots;
+};
+
+/**
+ * Returns the argType object with all custom element for the given custom element.
+ *
+ * @param element
+ * @see https://storybook.js.org/docs/web-components/essentials/controls#annotation
+ */
+export const getArgTypes = (element?: CustomElement): Record<string, unknown> => {
   const cssPropArgTypes: Record<string, unknown> = {};
   const cssProperties = getCssProperties(element);
+  const cssParts = getCssParts(element);
+  const slots = getSlots(element);
 
-  // Define CSS custom prop argTypes for all CSS properties
-  cssProperties.map(prop => {
+  // Define argTypes for all CSS properties
+  cssProperties.map((prop: CssCustomProperty) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { type: { text = {} } = {}, name } = prop as unknown as any;
     if (!name) {
@@ -69,13 +108,26 @@ export const getCssPropArgTypes = (element?: CustomElement): Record<string, unkn
     cssPropArgTypes[name] = {
       control: {
         type: `${text}`.toLowerCase() === 'color' ? 'color' : 'text',
-        // This seems to be automatically inferred from CEM…
-        // table: {
-        //   defaultValue: {
-        //     type: `${text}`.toLowerCase() === 'color' ? 'color' : 'text',
-        //     summary: prop.default,
-        //   },
-        // },
+      },
+    };
+  });
+
+  // Define argTypes for all CSS parts
+  cssParts.map(prop => {
+    const { name } = prop;
+
+    cssPropArgTypes[name] = {
+      control: false,
+    };
+  });
+
+  // Define argTypes for all slots
+  slots.map(slot => {
+    const { name } = slot;
+
+    cssPropArgTypes[name] = {
+      control: {
+        type: 'text',
       },
     };
   });

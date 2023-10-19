@@ -1,5 +1,5 @@
 import { html } from '@inventage-web-components/common';
-import { getCssPropArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
+import { getArgTypes, getCustomElement, Package, setCssStyleFromArgs, Story } from '@inventage-web-components/dev-helpers';
 import '../src/hamburger-menu.js';
 import cem from '../custom-elements.json';
 
@@ -18,7 +18,7 @@ export default {
   argTypes: {
     toggled: { control: 'boolean' },
     // CSS prop arg types
-    ...getCssPropArgTypes(customElement),
+    ...getArgTypes(customElement),
   },
   parameters: {
     actions: {
