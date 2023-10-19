@@ -4,7 +4,6 @@ import { ClassInfo } from 'lit-html/development/directives/class-map';
 import { classMap } from '@inventage-web-components/common/lib/src/directives.js';
 
 import '../src/avatar-image.js';
-
 import cem from '../custom-elements.json';
 
 const customElement = getCustomElement(cem as Package, 'src/AvatarImage.js', 'AvatarImage');
@@ -42,11 +41,11 @@ const Template = (args: ArgTypes, options: Partial<TemplateOptions> = {}) => {
   // Automatically set styles for each CSS custom prop passed as argument
   setCssStyleFromArgs(args, document.documentElement.style);
 
-  return html`<avatar-image .input="${args.input}" class="${classMap(classInfo)}">${slots ?? nothing}</avatar-image>`;
+  return html` <avatar-image .input="${args.input}" class="${classMap(classInfo)}">${slots ?? nothing}</avatar-image>`;
 };
 
 export const Default: Story<ArgTypes> = (args: ArgTypes) =>
-  html`${Template(args)}${html`<style>
+  html`${Template(args)}${html` <style>
     avatar-image {
       width: 64px;
     }
@@ -57,6 +56,13 @@ Default.args = {
 
 export const Empty: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 Empty.args = {};
+Empty.parameters = {
+  docs: {
+    description: {
+      story: '`<avatar-image>` with empty data.',
+    },
+  },
+};
 
 export const Sizes: Story<ArgTypes> = (args: ArgTypes) => {
   return html`${Template(args, {
@@ -94,4 +100,30 @@ export const Sizes: Story<ArgTypes> = (args: ArgTypes) => {
 };
 Sizes.args = {
   input: 'John Wick',
+};
+Sizes.parameters = {
+  docs: {
+    description: {
+      story: 'Various sizes of the `<avatar-image>`.',
+    },
+  },
+};
+
+export const Font: Story<ArgTypes> = (args: ArgTypes) =>
+  html`${html` <style>
+      .custom-font {
+        width: 64px;
+        font-family: monospace;
+      }
+    </style>`}
+    <div class="custom-font">${Template(args)}</div>`;
+Font.args = {
+  input: 'John Wick',
+};
+Font.parameters = {
+  docs: {
+    description: {
+      story: 'Custom font for the `<avatar-image>` inherited from the light DOM.',
+    },
+  },
 };
