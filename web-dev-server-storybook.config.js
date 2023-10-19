@@ -1,7 +1,7 @@
 import { fromRollup } from '@web/dev-server-rollup';
 import rollupJson from '@rollup/plugin-json';
 import { storybookWdsPlugin } from '@inventage-web-components/markdown-storybook';
-import { rewriteDataJsonPaths } from './web-test-runner.config.mjs';
+import { rewriteDataJsonPaths } from './web-test-runner.config.js';
 
 const json = fromRollup(rollupJson);
 
