@@ -3,10 +3,10 @@ name: Deploy Preview
 on:
   push:
     branches-ignore:
-      - '!main'
+      - main
   pull_request:
-    branches:
-      - '!dependabot/**'
+    branches-ignore:
+      - 'dependabot/**'
 
 # https://github.com/orgs/community/discussions/26681
 concurrency:
