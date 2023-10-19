@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 2.0.0
+
+### Major Changes
+
+- [`f37e930`](https://github.com/inventage/web-components/commit/f37e9301923d9d5824c5452b9488ac614afb3696) - Upgrade Lit from `2.8.0` to `3.0.0`. See https://lit.dev/blog/2023-10-10-lit-3.0/x
+
 ## 1.2.0
 
 ### Minor Changes
