@@ -1,4 +1,4 @@
-import config from './web-test-runner.config.mjs';
+import config from './web-test-runner.config.js';
 
 // Increase timeouts for vrt
 config.testsFinishTimeout = 200000;
