@@ -7,14 +7,16 @@ import { html, TemplateResult } from '@inventage-web-components/common';
  */
 export const generateParagraphs = (count = 1): TemplateResult[] => {
   return [...Array(count).keys()].map(
-    () => html` <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat ligula mi.
-      Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus porttitor, mi ante
-      varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo sit amet, rhoncus tempus orci.
-      Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum semper. Duis pulvinar id tellus a sagittis.
-      Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor tincidunt, mattis sapien. Cras mi turpis, dictum in tempor
-      id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas metus tellus, finibus non volutpat vel, egestas quis velit.
-    </p>`
+    () =>
+      html` <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum ac est accumsan malesuada. Vivamus id scelerisque dolor. Duis feugiat ligula
+        mi. Nullam nulla ligula, lobortis eu vulputate ac, tristique a elit. Aliquam quis dignissim tortor. Phasellus imperdiet, erat at dapibus porttitor, mi
+        ante varius ante, sed congue libero magna ut urna. Aenean rutrum ante in vehicula tincidunt. Quisque urna odio, commodo eget leo sit amet, rhoncus
+        tempus orci. Curabitur enim mi, sagittis nec tellus auctor, pellentesque consequat enim. Nulla finibus velit vel bibendum semper. Duis pulvinar id
+        tellus a sagittis. Fusce a eros at turpis fermentum congue vestibulum vel justo. Ut nec elit congue, auctor dolor tincidunt, mattis sapien. Cras mi
+        turpis, dictum in tempor id, blandit eget tortor. Curabitur nec libero vel lacus mollis accumsan. Maecenas metus tellus, finibus non volutpat vel,
+        egestas quis velit.
+      </p>`
   );
 };
 
