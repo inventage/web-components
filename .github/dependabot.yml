@@ -31,3 +31,8 @@ updates:
     directory: /packages/portal-navigation
     schedule:
       interval: daily
+
+  - package-ecosystem: npm
+    directory: /packages/avatar-image
+    schedule:
+      interval: daily
