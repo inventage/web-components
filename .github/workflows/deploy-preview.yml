@@ -61,6 +61,7 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
+          mv package.json _package.json && \
           netlify deploy \
             --alias ${{ env.BRANCH_NAME_SLUG }} \
             --build false \
