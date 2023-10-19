@@ -1,18 +1,15 @@
 name: Build
 
-# Prevent pull requests trigger duplicate checks for both [push] and [pull_request]
-# @see https://github.com/orgs/community/discussions/26940
 on:
   push:
-    branches-ignore:
-      - 'dependabot/**' #avoid duplicates: only run the PR, not the push
-      - 'gh-pages' #github pages do not trigger all tests
-    tags-ignore:
-      - 'v*' #avoid rerun existing commit on release
-  pull_request:
     branches:
-      - 'main'
-      - 'next'
+      - master
+  pull_request:
+
+# https://github.com/orgs/community/discussions/26681
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
