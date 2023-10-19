@@ -3,7 +3,7 @@
 An avatar image based on user initials.
 
 [![Published on npm](https://img.shields.io/npm/v/@inventage-web-components/avatar-image.svg?style=flat-square)](https://www.npmjs.com/package/@inventage-web-components/avatar-image)
-[![License](https://img.shields.io/npm/l/@inventage-web-components/common?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/@inventage-web-components/avatar-image?style=flat-square)](https://github.com/inventage/web-components/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/actions/workflow/status/inventage/web-components/release.yml?style=flat-square)](https://github.com/inventage/web-components/actions)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@inventage-web-components/avatar-image/latest?style=flat-square)](https://bundlephobia.com/package/@inventage-web-components/avatar-image@latest)
 
@@ -14,10 +14,10 @@ Use [unpkg.com](https://unpkg.com/browse/@inventage-web-components/avatar-image/
 ```html
 <script type="module" src="https://unpkg.com/@inventage-web-components/avatar-image/lib/src/avatar-image.js?module"></script>
 
-<avatar-image></avatar-image>
+<avatar-image input="John Doe"></avatar-image>
 ```
 
-Here's an [example of this method](https://hail-lacy-buckthorn.glitch.me/) to get you started.
+Here's an [example of this method](https://catkin-bottlenose-beetle.glitch.me/) to get you started.
 
 ## Installation
 
@@ -37,7 +37,7 @@ npm i @inventage-web-components/avatar-image
   src="/node_modules/@inventage-web-components/avatar-image/lib/src/avatar-image.js"
 </script>
 
-<avatar-image></avatar-image>
+<avatar-image input="John Doe"></avatar-image>
 ```
 
 ## Documentation
