@@ -35,6 +35,8 @@ const BACKGROUND_COLORS = [
  *
  * @csspart avatar - The wrapper element around the avatar image
  * @csspart avatar-image - The avatar image as SVG
+ *
+ * @cssprop {length} [--avatar-image-avatar-max-width=100%] Primary color used for text elements
  */
 export class AvatarImage extends LitElement {
   static get styles(): CSSResultArray {
