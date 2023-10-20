@@ -31,8 +31,6 @@ const BACKGROUND_COLORS = [
 /**
  * An avatar image based on user initials.
  *
- * @prop {String} input - The string input to use for generating the avatar image
- *
  * @csspart avatar - The wrapper element around the avatar image
  * @csspart avatar-image - The avatar image as SVG
  *
@@ -43,6 +41,9 @@ export class AvatarImage extends LitElement {
     return [baseStyles, styles];
   }
 
+  /**
+   * The string input to use for generating the avatar image
+   */
   @property()
   input?: string;
 
@@ -69,7 +70,7 @@ export class AvatarImage extends LitElement {
       return nothing;
     }
 
-    return html`<div class="avatar" part="avatar">
+    return html` <div class="avatar" part="avatar">
       ${html`${unsafeSVG(
         svgImage(getInitialsFromString(this.initials)!, 64, {
           backgroundColor: this.backgroundColor,

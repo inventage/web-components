@@ -1,4 +1,4 @@
-import { CssCustomProperty, CssPart, CustomElement, Package, Slot } from 'custom-elements-manifest/schema.js';
+import { Attribute, CssCustomProperty, CssPart, CustomElement, Package, Slot } from 'custom-elements-manifest/schema.js';
 
 /**
  * Returns the custom element declaration from the given custom elements manifest at the given path and for the given class name.
@@ -68,6 +68,24 @@ export const getCssParts = (element?: CustomElement): CssPart[] => {
 };
 
 /**
+ * Returns the list of attributes for the given custom element.
+ *
+ * @param element
+ */
+export const getAttributes = (element?: CustomElement): Attribute[] => {
+  if (!element) {
+    return [];
+  }
+
+  const { attributes } = element;
+  if (!attributes) {
+    return [];
+  }
+
+  return attributes;
+};
+
+/**
  * Returns the list of slots for the given custom element.
  *
  * @param element
@@ -96,6 +114,7 @@ export const getArgTypes = (element?: CustomElement): Record<string, unknown> =>
   const cssProperties = getCssProperties(element);
   const cssParts = getCssParts(element);
   const slots = getSlots(element);
+  const attributes = getAttributes(element);
 
   // Define argTypes for all CSS properties
   cssProperties.map((prop: CssCustomProperty) => {
@@ -115,6 +134,15 @@ export const getArgTypes = (element?: CustomElement): Record<string, unknown> =>
   // Define argTypes for all CSS parts
   cssParts.map(prop => {
     const { name } = prop;
+
+    cssPropArgTypes[name] = {
+      control: false,
+    };
+  });
+
+  // Define argTypes for all attributes
+  attributes.map(attr => {
+    const { name } = attr;
 
     cssPropArgTypes[name] = {
       control: false,
