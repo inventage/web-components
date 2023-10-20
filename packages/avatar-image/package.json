@@ -1,6 +1,6 @@
 {
   "name": "@inventage-web-components/avatar-image",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An avatar image based on user initials.",
   "license": "MIT",
   "author": "Inventage AG <info@inventage.com>",

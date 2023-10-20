@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 1.2.2
+
+### Patch Changes
+
+- [`fdd1d0a`](https://github.com/inventage/web-components/commit/fdd1d0a96b6ebb4e132ae47d8498b53a60d28ac3) - Prevent re-defining components when the component names have already been consumed (fixes issues with errors like `Failed to execute 'define' on 'CustomElementRegistry': the name "avatar-image" has already been used with this registry)`).
+
 ## 1.2.1
 
 ### Patch Changes
