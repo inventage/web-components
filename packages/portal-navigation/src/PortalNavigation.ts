@@ -267,7 +267,7 @@ export class PortalNavigation extends LitElement {
   private container?: HTMLDivElement;
 
   // Do not touch, this will automatically be updated based on the version in package.json in build & release scripts
-  readonly version = '1.2.1';
+  readonly version = '1.2.2';
 
   /**
    * Map of menu item ids → badges
