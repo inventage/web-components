@@ -44,4 +44,4 @@ jobs:
         run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
 
       - name: Test
-        run: sudo npx playwright install-deps && npm run test:ci
+        run: sudo npx playwright install-deps && sudo npx playwright install && npm run test:ci
