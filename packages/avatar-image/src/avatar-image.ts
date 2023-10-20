@@ -1,6 +1,6 @@
 import { AvatarImage } from './AvatarImage.js';
 
-customElements.define('avatar-image', AvatarImage);
+customElements.get('avatar-image') || customElements.define('avatar-image', AvatarImage);
 
 declare global {
   interface HTMLElementTagNameMap {
