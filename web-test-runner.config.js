@@ -10,14 +10,14 @@ const json = fromRollup(rollupJson);
 /**
  * Single browser default.
  *
- * @type {ChromeLauncher[]}
+ * @type {import('@web/test-runner').ChromeLauncher[]}
  */
 const SINGLE_BROWSER = [chromeLauncher({ launchOptions: { args: ['--no-sandbox'] } })];
 
 /**
  * Define playwright browsers to launch.
  *
- * @type {PlaywrightLauncher[]}
+ * @type {import('@web/test-runner-playwright').PlaywrightLauncher[]}
  */
 const ALL_BROWSERS = [
   playwrightLauncher({ product: 'chromium' }),
@@ -77,7 +77,8 @@ export async function rewriteDataJsonPaths(context, next) {
   return next();
 }
 
-export default {
+/** @type {import('@web/dev-server').DevServerConfig} */
+const config = {
   nodeResolve: true,
   plugins: [
     json(),
@@ -144,3 +145,5 @@ export default {
     },
   },
 };
+
+export default config;

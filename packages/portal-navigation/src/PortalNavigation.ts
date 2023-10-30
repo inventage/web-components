@@ -154,6 +154,16 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart current - Element wrapper for the current items (2nd level) container
  * @csspart tree-container - Element wrapper for the tree items container (mobile breakpoint)
  * @csspart navigation-header-container - Element for the navigation header in mobile breakpoint
+ * @csspart menu-item - The menu item
+ * @csspart menu-main-item - The menu item inside the main items (1st level) container
+ * @csspart menu-current-item - The menu item inside the current items (2nd level) container
+ * @csspart menu-settings-item - The menu item inside the settings menu
+ * @csspart menu-meta-item - The menu item inside the meta menu
+ * @csspart menu-profile-item - The menu item inside the profile menu
+ * @csspart menu-logout-item - The menu item inside the logout menu
+ * @csspart label - The label element of a menu item
+ * @csspart badge - The badge element of a menu item
+ * @csspart icon - The icon element of a menu item
  *
  * @slot logo - The slot for the logo
  * @slot right - The right slot
@@ -745,11 +755,11 @@ export class PortalNavigation extends LitElement {
           >${PortalNavigation._createLinkTemplate(menuId, label, menu.icon, badge)}</span
         >
         <div class="dropdown ${classMap({ '-show': this.activeDropdown === menuId })}">
-          ${menu.items.map(item => this._createFirstLevelItemTemplate(item))}
+          ${menu.items.map(item => this._createFirstLevelItemTemplate(item, false, menuId))}
         </div>`;
     }
 
-    return html`${menu.items.map(item => this._createFirstLevelItemTemplate(item))}`;
+    return html`${menu.items.map(item => this._createFirstLevelItemTemplate(item, false, menuId))}`;
   }
 
   /**
@@ -757,8 +767,9 @@ export class PortalNavigation extends LitElement {
    *
    * @param item the item to be rendered.
    * @param isTreeMode whether this template should be provided for tree mode (hamburger menu) or default display purposes.
+   * @param menuId The id of the menu this item belongs to
    */
-  private _createFirstLevelItemTemplate(item: FirstLevelMenuItem | MenuItem, isTreeMode = false): TemplateResult {
+  private _createFirstLevelItemTemplate(item: FirstLevelMenuItem | MenuItem, isTreeMode = false, menuId: string): TemplateResult {
     const { id, icon, url: itemUrl, items } = item;
     const hasItems = items && items.length > 0;
     const badge = this.getBadgeValue(id!, itemUrl);
@@ -775,7 +786,7 @@ export class PortalNavigation extends LitElement {
 
     return html`<a
         href="${ifDefined(url)}"
-        part="item-${ifDefined(id)}"
+        part="menu-item menu-${menuId}-item item-${ifDefined(id)}"
         id="item-${ifDefined(id)}"
         class="${classMap({
           link: true,
@@ -830,7 +841,7 @@ export class PortalNavigation extends LitElement {
 
     return html`<a
       href="${ifDefined(url)}"
-      part="item-${ifDefined(id)}"
+      part="menu-item menu-current-item item-${ifDefined(id)}"
       id="item-${ifDefined(id)}"
       class="${classMap({
         link: true,
@@ -856,16 +867,16 @@ export class PortalNavigation extends LitElement {
   private static _createLinkTemplate(id: string, label?: string, icon?: string, badge?: string): TemplateResult[] {
     const result = [];
     if (icon) {
-      result.push(html`<img src="${icon}" alt="" part="${`icon-${id}`}" id="${`icon-${id}`}" class="icon" />`);
+      result.push(html`<img src="${icon}" alt="" part="icon ${`icon-${id}`}" id="${`icon-${id}`}" class="icon" />`);
       if (badge) {
-        result.push(html`<span part="${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
+        result.push(html`<span part="badge ${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
       }
     }
 
     if (label) {
-      result.push(html`<span part="${`label-${id}`}" id="${`label-${id}`}" class="label">${label}</span>`);
+      result.push(html`<span part="label ${`label-${id}`}" id="${`label-${id}`}" class="label">${label}</span>`);
       if (!icon && badge) {
-        result.push(html`<span part="${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
+        result.push(html`<span part="badge ${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
       }
     }
 
@@ -885,7 +896,7 @@ export class PortalNavigation extends LitElement {
     menus.forEach(menuId => {
       const menu = this.configuration.getMenu(menuId);
       if (menu) {
-        templates.push(...menu.items!.map(item => this._createFirstLevelItemTemplate(item, true)));
+        templates.push(...menu.items!.map(item => this._createFirstLevelItemTemplate(item, true, menuId)));
       }
     });
 
