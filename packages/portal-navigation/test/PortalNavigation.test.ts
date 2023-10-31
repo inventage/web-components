@@ -11,7 +11,7 @@ import '../src/portal-navigation.js';
 import { NavigationEventListeners, PortalNavigation } from '../src/PortalNavigation.js';
 import { ConfigurationData, MenuLabel } from '../src/Configuration.js';
 import dataJson from '../data/test-data.json';
-import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, globalClickHandlerSpy, isInViewport } from './test-utils.js';
+import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, defaultFixture, globalClickHandlerSpy, isInViewport } from './test-utils.js';
 
 const configurationData = dataJson as ConfigurationData;
 
@@ -62,37 +62,11 @@ describe('<portal-navigation>', () => {
       expect(el).not.to.be.displayed;
     });
 
-    // it('passes the a11y audit', async () => {
-    //   const el: PortalNavigation = await fixture(
-    //     html` <portal-navigation
-    //       src="${TEST_DATA_JSON_PATH}"
-    //       @portal-navigation.configured="${() => {
-    //         document.dispatchEvent(
-    //           new CustomEvent(NavigationEventListeners.setBadgeValue, {
-    //             detail: {
-    //               id: 'meta',
-    //               value: 9,
-    //             },
-    //           })
-    //         );
-    //
-    //         document.dispatchEvent(
-    //           new CustomEvent(NavigationEventListeners.setBadgeValue, {
-    //             detail: {
-    //               id: 'parent2',
-    //               value: { en: 'new', de: 'neu' },
-    //             },
-    //           })
-    //         );
-    //       }}"
-    //     ></portal-navigation>`
-    //   );
-    //
-    //   await aTimeout(100000);
-    //
-    //   await childrenRendered(el);
-    //   await expect(el).to.be.accessible();
-    // });
+    it('passes the a11y audit', async () => {
+      const el = await defaultFixture();
+      await childrenRendered(el);
+      await expect(el).to.be.accessible();
+    });
 
     it('is not visible when scrolled and not sticky (desktop)', async () => {
       const el: PortalNavigation = await fixture(
@@ -217,6 +191,32 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el, '[part~="slot-logo"]');
 
       expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="hamburger-menu"]')!).to.be.null;
+    });
+
+    it('renders badges with appropriate part attributes', async () => {
+      const el = await defaultFixture();
+      await childrenRendered(el);
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="badge-parent2"]')!).not.to.be.null;
+      expect(el.shadowRoot!.querySelectorAll('[part~="badge-menu-meta"]').length, 'Renders part="badge-menu-meta"').to.eq(1);
+      expect(el.shadowRoot!.querySelectorAll('[part~="badge-menu-main"]').length, 'Renders part="badge-menu-main"').to.eq(1);
+      expect(el.shadowRoot!.querySelectorAll('[part~="badge-parent2"]').length, 'Renders part="badge-parent2"').to.eq(1);
+    });
+
+    it('renders labels with appropriate part attributes', async () => {
+      const el = await defaultFixture();
+      await childrenRendered(el);
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="label-parent2"]')!).not.to.be.null;
+      expect(el.shadowRoot!.querySelectorAll('[part~="label-menu-meta"]').length, 'Renders part="label-menu-meta"').to.eq(3);
+      expect(el.shadowRoot!.querySelectorAll('[part~="label-menu-main"]').length, 'Renders part="label-menu-main"').to.eq(6);
+      expect(el.shadowRoot!.querySelectorAll('[part~="label-parent2"]').length, 'Renders part="label-parent2"').to.eq(1);
+    });
+
+    it('renders icons with appropriate part attributes', async () => {
+      const el = await defaultFixture();
+      await childrenRendered(el);
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="icon-menu-meta"]')!).not.to.be.null;
+      expect(el.shadowRoot!.querySelectorAll('[part~="icon"]').length, 'Renders part="icon"').to.eq(1);
+      expect(el.shadowRoot!.querySelectorAll('[part~="icon-menu-meta"]').length, 'Renders part="icon-menu-meta"').to.eq(1);
     });
   });
 

@@ -145,6 +145,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart slot-left - Slot element wrapper for the left slot
  * @csspart slot-right - Slot element wrapper for the right slot
  * @csspart slot-current - Slot element wrapper for the current slot
+ *
  * @csspart container - The top-level, container element wrapping everything inside the host element
  * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)
  * @csspart menu-main - Element wrapper for the main menu items (1st level)
@@ -154,6 +155,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart current - Element wrapper for the current items (2nd level) container
  * @csspart tree-container - Element wrapper for the tree items container (mobile breakpoint)
  * @csspart navigation-header-container - Element for the navigation header in mobile breakpoint
+ *
  * @csspart menu-item - The menu item
  * @csspart menu-main-item - The menu item inside the main items (1st level) container
  * @csspart menu-current-item - The menu item inside the current items (2nd level) container
@@ -162,8 +164,23 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart menu-profile-item - The menu item inside the profile menu
  * @csspart menu-logout-item - The menu item inside the logout menu
  * @csspart label - The label element of a menu item
+ * @csspart label-menu-main - The label element of a menu item in the main menu
+ * @csspart label-menu-current - The label element of a menu item in the current menu
+ * @csspart label-menu-settings - The label element of a menu item in the settings menu
+ * @csspart label-menu-profile - The label element of a menu item in the profile menu
+ * @csspart label-menu-logout - The label element of a menu item in the logout menu
  * @csspart badge - The badge element of a menu item
+ * @csspart badge-menu-main - The badge element of a menu item in the main menu
+ * @csspart badge-menu-current - The badge element of a menu item in the current menu
+ * @csspart badge-menu-settings - The badge element of a menu item in the settings menu
+ * @csspart badge-menu-profile - The badge element of a menu item in the profile menu
+ * @csspart badge-menu-logout - The badge element of a menu item in the logout menu
  * @csspart icon - The icon element of a menu item
+ * @csspart icon-menu-main - The icon element of a menu item in the main menu
+ * @csspart icon-menu-current - The icon element of a menu item in the current menu
+ * @csspart icon-menu-settings - The icon element of a menu item in the settings menu
+ * @csspart icon-menu-profile - The icon element of a menu item in the profile menu
+ * @csspart icon-menu-logout - The icon element of a menu item in the logout menu
  *
  * @slot logo - The slot for the logo
  * @slot right - The right slot
@@ -752,7 +769,7 @@ export class PortalNavigation extends LitElement {
             [PortalNavigation.classes.selected]: this.activePath.contains(menuId),
           })}"
           @click="${() => this.__toggleDropdown(menuId)}"
-          >${PortalNavigation._createLinkTemplate(menuId, label, menu.icon, badge)}</span
+          >${PortalNavigation._createLinkTemplate(undefined, menuId, label, menu.icon, badge)}</span
         >
         <div class="dropdown ${classMap({ '-show': this.activeDropdown === menuId })}">
           ${menu.items.map(item => this._createFirstLevelItemTemplate(item, false, menuId))}
@@ -797,12 +814,12 @@ export class PortalNavigation extends LitElement {
         })}"
         target="${destination === 'extern' && !hasItems ? '_blank' : '_self'}"
         @click="${(e: Event) => this.__onLink(e, item)}"
-        >${PortalNavigation._createLinkTemplate(id!, label, icon, badge)}${isTreeMode && hasItems
+        >${PortalNavigation._createLinkTemplate(id, menuId, label, icon, badge)}${isTreeMode && hasItems
           ? html`<span class="tree-parent-indicator indicator" part="tree-parent-indicator"></span>`
           : nothing}</a
       >
       ${isTreeMode && (active || expanded) && hasItems
-        ? html` <div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem))}</div>`
+        ? html` <div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem, menuId))}</div>`
         : nothing}`;
   }
 
@@ -824,16 +841,17 @@ export class PortalNavigation extends LitElement {
       return nothing;
     }
 
-    return html`${(activeParentItem as MenuItem).items!.map(item => this._createSecondLevelItemTemplate(item))}`;
+    return html`${(activeParentItem as MenuItem).items!.map(item => this._createSecondLevelItemTemplate(item, menuId))}`;
   }
 
   /**
    * Creates the html template for second-level items, which can either be in the third row (current items)
    * or second-level in tree mode (hamburger menu).
    *
-   * @param item the item for which to create a html template.
+   * @param item - the item for which to create a html template.
+   * @param menuId - the id of the menu this item belongs to
    */
-  private _createSecondLevelItemTemplate(item: MenuItem): TemplateResult {
+  private _createSecondLevelItemTemplate(item: MenuItem, menuId?: string): TemplateResult {
     const { id, icon, url, destination } = item;
     const badge = this.getBadgeValue(id!, url);
     const label = this.__getLabel(item);
@@ -850,7 +868,7 @@ export class PortalNavigation extends LitElement {
       })}"
       @click="${(e: Event) => this.__onLink(e, item)}"
       target="${destination === 'extern' ? '_blank' : '_self'}"
-      >${PortalNavigation._createLinkTemplate(id!, label, icon, badge)}</a
+      >${PortalNavigation._createLinkTemplate(id, menuId, label, icon, badge)}</a
     >`;
   }
 
@@ -859,24 +877,39 @@ export class PortalNavigation extends LitElement {
    * the label, icon and badge value.
    *
    * @param {string} id - the id of the link (used to create named css classes and parts).
+   * @param {string} menuId - the id of the menu this item belongs to
    * @param {string} label - the label to be displayed. Either label or icon must be present (or both).
    * @param {string} icon - the icon to be displayed. Either label or icon must be present (or both).
    * @param {string} badge - the badge value to be displayed. If undefined, no badge will be displayed. If there is an icon,
-   * the badge will be associated with the icon. Otherwise, it will be associated with the label.
+   *                         the badge will be associated with the icon. Otherwise, it will be associated with the label.
    */
-  private static _createLinkTemplate(id: string, label?: string, icon?: string, badge?: string): TemplateResult[] {
+  private static _createLinkTemplate(id?: string, menuId?: string, label?: string, icon?: string, badge?: string) {
+    const itemId = id || menuId;
+    if (!itemId) {
+      return nothing;
+    }
+
     const result = [];
+
     if (icon) {
-      result.push(html`<img src="${icon}" alt="" part="icon ${`icon-${id}`}" id="${`icon-${id}`}" class="icon" />`);
+      result.push(
+        html`<img src="${icon}" alt="" part="icon ${menuId ? `icon-menu-${menuId}` : ''} ${id ? `icon-${id}` : ''}" id="${`icon-${itemId}`}" class="icon" />`
+      );
       if (badge) {
-        result.push(html`<span part="badge ${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
+        result.push(
+          html`<span part="badge ${menuId ? `badge-menu-${menuId}` : ''} ${id ? `badge-${id}` : ''}" id="${`badge-${itemId}`}" class="badge">${badge}</span>`
+        );
       }
     }
 
     if (label) {
-      result.push(html`<span part="label ${`label-${id}`}" id="${`label-${id}`}" class="label">${label}</span>`);
+      result.push(
+        html`<span part="label ${menuId ? `label-menu-${menuId}` : ''} ${id ? `label-${id}` : ''}" id="${`label-${itemId}`}" class="label">${label}</span>`
+      );
       if (!icon && badge) {
-        result.push(html`<span part="badge ${`badge-${id}`}" id="${`badge-${id}`}" class="badge">${badge}</span>`);
+        result.push(
+          html`<span part="badge ${menuId ? `badge-menu-${menuId}` : ''} ${id ? `badge-${id}` : ''}" id="${`badge-${itemId}`}" class="badge">${badge}</span>`
+        );
       }
     }
 

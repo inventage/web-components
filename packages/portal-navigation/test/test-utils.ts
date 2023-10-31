@@ -1,7 +1,12 @@
 import { spy } from 'sinon';
+import { fixture, html } from '@open-wc/testing';
+import { NavigationEventListeners, PortalNavigation } from '../src/PortalNavigation.js';
+import '../src/portal-navigation.js';
 
 export const DEFAULT_VIEWPORT_WIDTH = 1200;
 export const DEFAULT_VIEWPORT_HEIGHT = 800;
+
+const TEST_DATA_JSON_PATH = '/packages/portal-navigation/data/test-data.json!';
 
 /**
  * From pwa-helpers
@@ -49,5 +54,32 @@ export const isInViewport = (element: Element) => {
     rect.left >= 0 &&
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+export const defaultFixture = (): Promise<PortalNavigation> => {
+  return fixture(
+    html` <portal-navigation
+      src="${TEST_DATA_JSON_PATH}"
+      @portal-navigation.configured="${() => {
+        document.dispatchEvent(
+          new CustomEvent(NavigationEventListeners.setBadgeValue, {
+            detail: {
+              id: 'meta',
+              value: 9,
+            },
+          })
+        );
+
+        document.dispatchEvent(
+          new CustomEvent(NavigationEventListeners.setBadgeValue, {
+            detail: {
+              id: 'parent2',
+              value: { en: 'new', de: 'neu' },
+            },
+          })
+        );
+      }}"
+    ></portal-navigation>`
   );
 };
