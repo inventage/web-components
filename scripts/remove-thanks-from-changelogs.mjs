@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import globby from 'globby';
+import { globby } from 'globby';
 import replace from 'replace-in-file';
 import escapeStringRegexp from 'escape-string-regexp';
 

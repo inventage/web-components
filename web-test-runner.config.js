@@ -3,7 +3,7 @@ import { chromeLauncher } from '@web/test-runner';
 import { playwrightLauncher } from '@web/test-runner-playwright';
 import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugin';
 import rollupJson from '@rollup/plugin-json';
-import globby from 'globby';
+import { globby } from 'globby';
 
 const json = fromRollup(rollupJson);
 
