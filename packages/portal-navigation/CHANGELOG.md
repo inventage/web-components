@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 1.5.0
+
+### Minor Changes
+
+- [`becd7bc`](https://github.com/inventage/web-components/commit/becd7bc5a4d051045856f1a5ad1bf358f1d4a7f4) - Added more CSS parts. Each menu is now marked as a `menu` part as well as `menu-MENU` part (where `MENU` is one of `main`, `current`, `settings`, `profile` or `logout`).
+
 ## 1.4.0
 
 ### Minor Changes
