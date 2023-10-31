@@ -130,6 +130,7 @@
         },
         {
           "defaultItem": "main.trade.stockMarketOrders",
+          "url": "/ebanking/trade",
           "label": {
             "de": "Handel",
             "en": "Trade"
@@ -141,7 +142,7 @@
                 "de": "Börsenaufträge",
                 "en": "Stock Market Orders"
               },
-              "url": "/ebanking/show-stex-orders",
+              "url": "/ebanking/trade/1",
               "application": "ebanking"
             },
             {
@@ -149,7 +150,7 @@
                 "de": "Kauf",
                 "en": "Buy"
               },
-              "url": "/ebanking/create-stex-buy-order",
+              "url": "/ebanking/trade/2",
               "application": "ebanking"
             },
             {
@@ -157,7 +158,7 @@
                 "de": "Verkauf",
                 "en": "Sell"
               },
-              "url": "/ebanking/create-stex-sell-order",
+              "url": "/ebanking/trade/3",
               "application": "ebanking"
             }
           ]

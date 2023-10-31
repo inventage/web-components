@@ -87,6 +87,16 @@
               "id": "item8.1",
               "label": "Child 8.1",
               "url": "/some/child-path"
+            },
+            {
+              "id": "item8.2",
+              "label": "Child 8.2",
+              "url": "/some/child-path#2"
+            },
+            {
+              "id": "item8.3",
+              "label": "Child 8.3",
+              "url": "/some/child-path#3"
             }
           ]
         },
