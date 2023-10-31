@@ -298,6 +298,7 @@ export class PortalNavigation extends LitElement {
   @query('.container')
   private container?: HTMLDivElement;
 
+  /** @private */
   // Do not touch, this will automatically be updated based on the version in package.json in build & release scripts
   readonly version = '1.5.0';
 
