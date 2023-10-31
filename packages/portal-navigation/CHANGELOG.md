@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 1.6.0
+
+### Minor Changes
+
+- [`70cf2d6`](https://github.com/inventage/web-components/commit/70cf2d67d6882593f1e19371950107b9ffac344f) - Added more CSS parts. Each tree menu (in mobile breakpoint) is now marked as a `menu-tree` part as well as `menu-tree-MENU` part (where `MENU` is one of `main`, `settings`, `profile` or `logout`).
+
+  The current menu items (2nd level) are marked as `tree-items` part in the mobile breakpoint version.
+
 ## 1.5.0
 
 ### Minor Changes
