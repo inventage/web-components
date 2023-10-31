@@ -1,5 +1,11 @@
 # @inventage-web-components/common
 
+## 2.0.1
+
+### Patch Changes
+
+- [`8acbc31`](https://github.com/inventage/web-components/commit/8acbc31030b41ae9b15c55ca3ea55222e53360c8) - Bump `lit` from `^3.0.0` to `^3.0.1`
+
 ## 2.0.0
 
 ### Major Changes

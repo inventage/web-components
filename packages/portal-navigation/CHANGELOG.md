@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 1.4.0
+
+### Minor Changes
+
+- [`3fe37ad`](https://github.com/inventage/web-components/commit/3fe37ade44631c654afcfda29196ff443f022ac7) - Added more CSS parts. Each badge is now marked as a `badge` part, `badge-menu-MENU` part (where `MENU` is one of `main`, `current`, `settings`, `profile` or `logout`) as well as `badge-ID` part when the menu item defines an ID.
+
+  The same logic is applied to `icon` and `label` element respectively.
+
 ## 1.3.0
 
 ### Minor Changes
