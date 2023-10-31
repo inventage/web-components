@@ -148,7 +148,12 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  *
  * @csspart container - The top-level, container element wrapping everything inside the host element
  * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)
+ * @csspart menu - Element wrapper for the menu items (1st level)
  * @csspart menu-main - Element wrapper for the main menu items (1st level)
+ * @csspart menu-current - Element wrapper for the current menu items (2nd level)
+ * @csspart menu-settings - Element wrapper for the settings menu items
+ * @csspart menu-profile - Element wrapper for the settings menu items
+ * @csspart menu-logout - Element wrapper for the settings menu items
  * @csspart meta-bar - Element wrapper for the meta bar
  * @csspart navigation-header - Element wrapper for the navigation header
  * @csspart main - Element wrapper for the main navigation area / container
@@ -481,12 +486,16 @@ export class PortalNavigation extends LitElement {
      */
     const headerMenus = [
       (classInfo: ClassInfo = {}) =>
-        !this.isMobileBreakpoint && menuMeta !== nothing ? html` <div class="menu-meta menu ${classMap(classInfo)}">${menuMeta}</div>` : nothing,
+        !this.isMobileBreakpoint && menuMeta !== nothing
+          ? html` <div class="menu-meta menu ${classMap(classInfo)}" part="menu-meta menu">${menuMeta}</div>`
+          : nothing,
       (classInfo: ClassInfo = {}) =>
-        !this.isMobileBreakpoint && menuProfile !== nothing ? html` <div class="menu-profile menu ${classMap(classInfo)}">${menuProfile}</div>` : nothing,
+        !this.isMobileBreakpoint && menuProfile !== nothing
+          ? html` <div class="menu-profile menu ${classMap(classInfo)}" part="menu-profile menu">${menuProfile}</div>`
+          : nothing,
       (classInfo: ClassInfo = {}) =>
         menuLogout !== nothing && ((this.isMobileBreakpoint && this.logoutMenuInMobileHeader) || (!this.isMobileBreakpoint && !this.logoutMenuInMetaBar))
-          ? html` <div class="menu-logout menu ${classMap(classInfo)}">${menuLogout}</div>`
+          ? html` <div class="menu-logout menu ${classMap(classInfo)}" part="menu-logout menu">${menuLogout}</div>`
           : nothing,
     ].filter(menuTemplate => menuTemplate() !== nothing);
 
@@ -534,8 +543,8 @@ export class PortalNavigation extends LitElement {
         : html` <main class="main" part="main">
             ${!this.isMobileBreakpoint && (menuMain !== nothing || menuSettings !== nothing)
               ? html` <div class="container-max-width inner">
-                  ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main">${menuMain}</div>` : nothing}
-                  ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings">${menuSettings}</div>` : nothing}
+                  ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main menu">${menuMain}</div>` : nothing}
+                  ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings menu">${menuSettings}</div>` : nothing}
                 </div>`
               : nothing}
             ${this.isMobileBreakpoint && this.hamburgerMenuExpanded
@@ -556,7 +565,7 @@ export class PortalNavigation extends LitElement {
               <div class="slot-current" part="slot-current">
                 <slot name="current"></slot>
               </div>
-              <div class="menu-current menu" part="menu-current">${currentItems}</div>
+              <div class="menu-current menu" part="menu-current menu">${currentItems}</div>
             </div>
           </div>`
         : nothing}
