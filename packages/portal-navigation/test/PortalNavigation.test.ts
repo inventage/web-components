@@ -247,6 +247,20 @@ describe('<portal-navigation>', () => {
       expect(el.getActivePath().getId(2)).to.eq(undefined);
     });
 
+    /**
+     * In order for fuzzy matching URLs to work, we have to compare the URLs of menu items without hashes & search params…
+     */
+    it('sets corresponding activePath when activeUrl is set to an URL with hashes', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}"></portal-navigation>`);
+
+      el.activeUrl = '/some/child-path#2';
+      await childrenRendered(el, '[part~="item-item8.1"]');
+
+      expect(el.getActivePath().getMenuId()).to.eq('main');
+      expect(el.getActivePath().getFirstLevelItemId()).to.eq('parent8');
+      expect(el.getActivePath().getId(2)).to.eq('item8.1');
+    });
+
     it('sets corresponding activeUrl and activePath based on window.location #1', async () => {
       // Simulate navigation
       window.history.pushState({}, '', '/some/path/parent1');

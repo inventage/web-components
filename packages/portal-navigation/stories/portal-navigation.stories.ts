@@ -118,6 +118,7 @@ export const Default: Story<ArgTypes> = (args: ArgTypes) => Template(args);
 Default.args = {
   language: 'en',
   internalRouting: true,
+  activeUrl: '/ebanking/trade/2',
 };
 
 /**
