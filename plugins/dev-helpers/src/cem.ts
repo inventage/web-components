@@ -1,4 +1,8 @@
-import { Attribute, CssCustomProperty, CssPart, CustomElement, Package, Slot } from 'custom-elements-manifest/schema.js';
+import { Attribute, CssCustomProperty, ClassField, CssPart, CustomElement, Package, Slot, ClassMember } from 'custom-elements-manifest/schema.js';
+
+const isAClassField = (member: ClassMember): member is ClassField => {
+  return member.kind === 'field';
+};
 
 /**
  * Returns the custom element declaration from the given custom elements manifest at the given path and for the given class name.
@@ -86,6 +90,24 @@ export const getAttributes = (element?: CustomElement): Attribute[] => {
 };
 
 /**
+ * Returns the list of class fields for the given custom element.
+ *
+ * @param element
+ */
+export const getClassFields = (element?: CustomElement): ClassField[] => {
+  if (!element) {
+    return [];
+  }
+
+  const { members } = element;
+  if (!members) {
+    return [];
+  }
+
+  return members.filter(m => isAClassField(m)) as ClassField[];
+};
+
+/**
  * Returns the list of slots for the given custom element.
  *
  * @param element
@@ -115,6 +137,7 @@ export const getArgTypes = (element?: CustomElement): Record<string, unknown> =>
   const cssParts = getCssParts(element);
   const slots = getSlots(element);
   const attributes = getAttributes(element);
+  const fields = getClassFields(element);
 
   // Define argTypes for all CSS properties
   cssProperties.map((prop: CssCustomProperty) => {
@@ -143,6 +166,11 @@ export const getArgTypes = (element?: CustomElement): Record<string, unknown> =>
   // Define argTypes for all attributes
   attributes.map(attr => {
     const { name } = attr;
+
+    // Do not overwrite properties with the same name
+    if (fields.find(f => f.name === attr.fieldName)) {
+      return;
+    }
 
     cssPropArgTypes[name] = {
       control: false,
