@@ -161,6 +161,13 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart tree-container - Element wrapper for the tree items container (mobile breakpoint)
  * @csspart navigation-header-container - Element for the navigation header in mobile breakpoint
  *
+ * @csspart menu-tree - Element wrapper for the tree menu items (mobile breakpoint)
+ * @csspart menu-tree-main - Element wrapper for the tree menu items for the main menu (mobile breakpoint)
+ * @csspart menu-tree-settings - Element wrapper for the tree menu items for the settings menu (mobile breakpoint)
+ * @csspart menu-tree-profile - Element wrapper for the tree menu items for the profile menu (mobile breakpoint)
+ * @csspart menu-tree-logout - Element wrapper for the tree menu items for the logout menu (mobile breakpoint)
+ * @csspart tree-items - Element wrapper for the tree menu items for the current menu (2nd level, mobile breakpoint)
+ *
  * @csspart menu-item - The menu item
  * @csspart menu-main-item - The menu item inside the main items (1st level) container
  * @csspart menu-current-item - The menu item inside the current items (2nd level) container
@@ -168,18 +175,21 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart menu-meta-item - The menu item inside the meta menu
  * @csspart menu-profile-item - The menu item inside the profile menu
  * @csspart menu-logout-item - The menu item inside the logout menu
+ *
  * @csspart label - The label element of a menu item
  * @csspart label-menu-main - The label element of a menu item in the main menu
  * @csspart label-menu-current - The label element of a menu item in the current menu
  * @csspart label-menu-settings - The label element of a menu item in the settings menu
  * @csspart label-menu-profile - The label element of a menu item in the profile menu
  * @csspart label-menu-logout - The label element of a menu item in the logout menu
+ *
  * @csspart badge - The badge element of a menu item
  * @csspart badge-menu-main - The badge element of a menu item in the main menu
  * @csspart badge-menu-current - The badge element of a menu item in the current menu
  * @csspart badge-menu-settings - The badge element of a menu item in the settings menu
  * @csspart badge-menu-profile - The badge element of a menu item in the profile menu
  * @csspart badge-menu-logout - The badge element of a menu item in the logout menu
+ *
  * @csspart icon - The icon element of a menu item
  * @csspart icon-menu-main - The icon element of a menu item in the main menu
  * @csspart icon-menu-current - The icon element of a menu item in the current menu
@@ -829,7 +839,7 @@ export class PortalNavigation extends LitElement {
           : nothing}</a
       >
       ${isTreeMode && (active || expanded) && hasItems
-        ? html` <div class="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem, menuId))}</div>`
+        ? html` <div class="tree-items" part="tree-items">${item.items!.map(childItem => this._createSecondLevelItemTemplate(childItem, menuId))}</div>`
         : nothing}`;
   }
 
@@ -928,7 +938,6 @@ export class PortalNavigation extends LitElement {
 
   /**
    * Creates the html template for tree mode (hamburger menu).
-   * You may override this to customize the order and elements of the tree structure for the hamburger menu.
    */
   private _createTreeTemplate(): unknown {
     const templates: TemplateResult[] = [];
@@ -939,7 +948,9 @@ export class PortalNavigation extends LitElement {
     menus.forEach(menuId => {
       const menu = this.configuration.getMenu(menuId);
       if (menu) {
-        templates.push(...menu.items!.map(item => this._createFirstLevelItemTemplate(item, true, menuId)));
+        templates.push(
+          html`<div part="menu-tree menu-tree-${menuId}">${menu.items!.map(item => this._createFirstLevelItemTemplate(item, true, menuId))}</div>`
+        );
       }
     });
 
