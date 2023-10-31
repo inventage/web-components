@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.repository_owner == 'inventage' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
