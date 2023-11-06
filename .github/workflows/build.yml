@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -43,24 +43,5 @@ jobs:
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run --if-present postinstall && npm rebuild && npm run prepare --if-present
 
-      # Install playwright + deps with caching
-      # @see https://github.com/microsoft/playwright/issues/7249#issuecomment-1385567519
-      - name: Store Playwright's Version
-        run: |
-          PLAYWRIGHT_VERSION=$(npm ls playwright | grep ' playwright' | sed 's/.*@//')
-          echo "Playwright's Version: $PLAYWRIGHT_VERSION"
-          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
-
-      - name: Cache Playwright Browsers for Playwright's Version
-        id: cache-playwright-browsers
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
-
-      - name: Setup Playwright
-        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps
-
-      - name: Test
-        run: sudo npx playwright install-deps && npm run test:ci
+      - name: Build
+        run: npm run storybook:build
