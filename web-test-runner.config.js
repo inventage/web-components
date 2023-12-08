@@ -77,6 +77,19 @@ export async function rewriteDataJsonPaths(context, next) {
   return next();
 }
 
+/**
+ * Filter unwanted browser log statements we're not really interested in when running tests.
+ *
+ * @type {import('@web/test-runner').TestRunnerConfig.filterBrowserLogs}
+ * @param args
+ * @returns {boolean}
+ */
+const removeUnneededLogs = ({ args }) => {
+  const ignoredBrowserLogs = new Set(['Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.']);
+
+  return !args.some(argument => ignoredBrowserLogs.has(argument));
+};
+
 /** @type {import('@web/dev-server').DevServerConfig} */
 const config = {
   nodeResolve: true,
@@ -144,6 +157,7 @@ const config = {
       timeout: 2000,
     },
   },
+  filterBrowserLogs: removeUnneededLogs,
 };
 
 export default config;
