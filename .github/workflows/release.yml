@@ -11,6 +11,10 @@ on:
         required: false
         default: '0'
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   test:
     name: Lint & Test
