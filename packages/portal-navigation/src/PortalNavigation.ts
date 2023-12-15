@@ -6,7 +6,7 @@ import '@inventage-web-components/hamburger-menu/lib/src/hamburger-menu.js';
 
 import { IdPath } from './IdPath.js';
 import { styles } from './styles-css.js';
-import { CommonMenuItem, Configuration, FirstLevelMenuItem, MenuItem, MenuLabel } from './Configuration.js';
+import { CommonMenuItem, Configuration, FirstLevelMenuItem, hasUrl, isFirstLevelMenuItemOrMenuItem, MenuItem, MenuLabel } from './Configuration.js';
 
 /**
  * A listing of key menu ids that are handled specifically by the portal navigation component.
@@ -972,7 +972,7 @@ export class PortalNavigation extends LitElement {
       return;
     }
 
-    const hasItems = !!item.items && item.items.length > 0;
+    const hasItems = !item.url && !!item.items && item.items.length > 0;
     const internalRouting = this.__isInternalRouting(item);
     const { expanded = false } = item as Record<string, boolean>;
 
@@ -1020,7 +1020,7 @@ export class PortalNavigation extends LitElement {
    */
   private __isInternalRouting(item?: MenuItem): boolean {
     let refItem: MenuItem | undefined = item;
-    if (item && item.items && item.items.length > 0) {
+    if (item && !item.url && item.items && item.items.length > 0) {
       refItem = <MenuItem>this.__getDefaultItemOf(item);
     }
 
@@ -1064,8 +1064,8 @@ export class PortalNavigation extends LitElement {
     let dispatchEvent = true;
     let closeHamburgerExpanded = true;
     if (hasItems) {
-      refItem = this.__getDefaultItemOf(selectedItem!);
-      dispatchEvent = !!refItem && !this.isMobileBreakpoint && refItem.destination !== 'extern';
+      refItem = hasUrl(selectedItem) ? selectedItem : this.__getDefaultItemOf(selectedItem!);
+      dispatchEvent = !this.isMobileBreakpoint && !!refItem && isFirstLevelMenuItemOrMenuItem(refItem) && refItem.destination !== 'extern';
 
       // Expanded hamburger should be closed only when the clicked item does not have an internal default item
       // This ensures that accordions in mobile breakpoint can be expanded. The routeTo event will still be thrown

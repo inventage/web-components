@@ -695,14 +695,14 @@ describe('<portal-navigation>', () => {
       await childrenRendered(el);
 
       const clickElement = <HTMLAnchorElement>el.shadowRoot!.querySelector('[part~="item-parent5"]');
-      const clicked = oneEvent(clickElement, 'click');
+      const clicked = oneEvent(document, 'click');
       setTimeout(() => clickElement.click());
       await clicked;
 
       expect(eventSpy.callCount).to.equal(0);
       expect(el.getActivePath().getMenuId()).to.equal('logout');
-      expect(el.getActivePath().getId(2)).to.be.undefined;
       expect(el.getActivePath().getFirstLevelItemId()).to.equal('parent5');
+      expect(el.getActivePath().getId(2)).to.be.undefined;
     });
 
     it('dispatches the "routeTo" event', async () => {
@@ -731,6 +731,17 @@ describe('<portal-navigation>', () => {
 
       expect(window.location.pathname, 'window.location.pathname').to.equal('/');
       expect(detail.url, 'detail.url').to.equal('/some/path/parent1');
+    });
+
+    it('dispatches the "routeTo" event when item has children but also has a URL set', async () => {
+      const el: PortalNavigation = await fixture(html` <portal-navigation src="${TEST_DATA_JSON_PATH}" currentapplication="app1"></portal-navigation>`);
+      await childrenRendered(el);
+
+      setTimeout(() => (<HTMLAnchorElement>el.shadowRoot!.querySelector('[part~="item-parent8"]')).click());
+      const { detail } = await oneEvent(el, 'portal-navigation.routeTo');
+
+      expect(window.location.pathname, 'window.location.pathname').to.equal('/');
+      expect(detail.url, 'detail.url').to.equal('/some/path/parent8?foo=bar');
     });
   });
 

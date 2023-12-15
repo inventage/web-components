@@ -121,6 +121,14 @@ export interface SelectorFunction {
   (menu: CommonMenuItem): boolean;
 }
 
+export const isFirstLevelMenuItemOrMenuItem = (item: CommonMenuItem): item is FirstLevelMenuItem | MenuItem => {
+  return 'url' in item;
+};
+
+export const hasUrl = (item: CommonMenuItem): boolean => {
+  return isFirstLevelMenuItemOrMenuItem(item) && !!item.url;
+};
+
 /**
  * Wraps the json structured configuration of a portal navigation, does some basic sanitizing of the received data
  * (e.g. generating missing ids), and provides convenience functions to access menus and items with the data.
