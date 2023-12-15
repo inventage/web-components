@@ -1,5 +1,14 @@
 # @inventage-web-components/portal-navigation
 
+## 1.6.1
+
+### Patch Changes
+
+- [`5b9bd9d`](https://github.com/inventage/web-components/commit/5b9bd9d23942a19ec1898b0b4fe391c0fcf80ca0) Menu items with child items an `url` attribute navigate to their url instead of their default child item or the first child item.
+
+- Updated dependencies [[`fc456be`](https://github.com/inventage/web-components/commit/fc456be97be01f15ab09efffa770e308f2da4d83)]:
+  - @inventage-web-components/common@2.1.0
+
 ## 1.6.0
 
 ### Minor Changes
