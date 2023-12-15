@@ -119,7 +119,7 @@
         {
           "id": "parent3",
           "label": { "de": "Parent3_de", "en": "Parent3_en" },
-          "url": "/some/path/parent3",
+          "application": "app2",
           "items": [
             {
               "id": "item3.1",
@@ -152,7 +152,6 @@
         {
           "id": "parent5",
           "label": "Parent5",
-          "url": "/some/path/parent5",
           "expanded": true,
           "items": [
             {
