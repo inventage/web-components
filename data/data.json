@@ -445,7 +445,8 @@
       },
       "items": [
         {
-          "defaultItem": "profile.preferences.userSettings",
+          "url": "/ebanking/preferences",
+          "application": "ebanking",
           "label": {
             "de": "Einstellungen",
             "en": "Preferences"
@@ -457,7 +458,7 @@
                 "de": "Benutzereinstellungen",
                 "en": "User Settings"
               },
-              "url": "/ebanking/update-user-preferences",
+              "url": "/ebanking/preferences/user",
               "application": "ebanking"
             },
             {
@@ -465,7 +466,7 @@
                 "de": "Sicherheit",
                 "en": "Security"
               },
-              "url": "/ebanking/update-security-preferences",
+              "url": "/ebanking/preferences/security",
               "application": "ebanking"
             },
             {
@@ -473,7 +474,7 @@
                 "de": "Darstellung",
                 "en": "Presentation"
               },
-              "url": "/ebanking/update-presentation-preferences",
+              "url": "/ebanking/preferences/presentation",
               "application": "ebanking"
             },
             {
@@ -481,7 +482,7 @@
                 "de": "Benachrichtigungen",
                 "en": "Notifications"
               },
-              "url": "/ebanking/update-notification-preferences",
+              "url": "/ebanking/preferences/notification",
               "application": "ebanking"
             },
             {
@@ -489,7 +490,7 @@
                 "de": "Mobiles Banking",
                 "en": "Mobile Banking"
               },
-              "url": "/ebanking/update-mobile-preferences",
+              "url": "/ebanking/preferences/mobile",
               "application": "ebanking"
             }
           ]
