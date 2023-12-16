@@ -59,7 +59,7 @@
     var polyfills = [];
     polyfills.push(loadScript('./polyfills/regenerator-runtime.e2c951e2eae648aacbcac529428355da.js'));
     if (!('fetch' in window) || !('Request' in window) || !('signal' in window.Request.prototype)) {
-      polyfills.push(loadScript('./polyfills/fetch.2db8e84a32a91d765437245f6b157333.js'));
+      polyfills.push(loadScript('./polyfills/fetch.4bffd430813f6b29e92f531498cbaaa3.js'));
     }
     polyfills.push(loadScript('./polyfills/systemjs.313aa3efe387d07302303eedf6510222.js'));
     if (!('IntersectionObserver' in window && 'IntersectionObserverEntry' in window && 'intersectionRatio' in window.IntersectionObserverEntry.prototype)) {
@@ -89,7 +89,7 @@
       document.head.removeChild(s);
       polyfillsLoader();
     }
-    s.src = "./polyfills/core-js.eb936b2d59a9693a08ac5343aac5b577.js";
+    s.src = "./polyfills/core-js.1b0b8605f71450048334d73b491520e3.js";
     s.onload = onLoaded;
     s.onerror = function () {
       console.error('[polyfills-loader] failed to load: ' + s.src + ' check the network tab for HTTP status.');
