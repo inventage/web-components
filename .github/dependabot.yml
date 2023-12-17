@@ -36,3 +36,18 @@ updates:
     directory: /packages/avatar-image
     schedule:
       interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/cem-preset
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/dev-helpers
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /plugins/markdown-storybook
+    schedule:
+      interval: daily

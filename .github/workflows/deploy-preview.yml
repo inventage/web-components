@@ -49,7 +49,7 @@ jobs:
       - name: Storybook Build
         run: npm run storybook:build
 
-      - uses: gacts/github-slug@v1
+      - uses: gacts/github-slug@ee992367ac8f20b63d223a84858cc8e4d6842382 # v1.3.0
         id: slug
 
       - run: |
@@ -77,7 +77,7 @@ jobs:
 
       # Creates a status check with link to preview
       - name: Status check
-        uses: Sibz/github-status-action@v1.1.6
+        uses: Sibz/github-status-action@650dd1a882a76dbbbc4576fb5974b8d22f29847f # v1.1.6
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           context: Deployment
@@ -86,7 +86,7 @@ jobs:
           target_url: ${{ env.DEPLOY_URL }}
 
       - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@1d3973dc4b8e1399c0620d3f2b1aa5e795465308 # v2.4.3
         if: ${{ github.event_name == 'pull_request' }}
         with:
           message: |
