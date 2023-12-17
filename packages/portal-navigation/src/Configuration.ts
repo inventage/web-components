@@ -129,6 +129,10 @@ export const hasUrl = (item: CommonMenuItem): boolean => {
   return isFirstLevelMenuItemOrMenuItem(item) && !!item.url;
 };
 
+export const hasDefaultItem = (item: CommonMenuItem): boolean => {
+  return isFirstLevelMenuItemOrMenuItem(item) && !!item.defaultItem;
+};
+
 /**
  * Wraps the json structured configuration of a portal navigation, does some basic sanitizing of the received data
  * (e.g. generating missing ids), and provides convenience functions to access menus and items with the data.

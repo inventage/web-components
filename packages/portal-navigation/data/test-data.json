@@ -107,6 +107,26 @@
           "application": "app2",
           "internalRouting": true,
           "expanded": false
+        },
+        {
+          "id": "parent10",
+          "label": "Parent 10",
+          "url": "/some/path/parent10",
+          "application": "app1",
+          "internalRouting": true,
+          "defaultItem": "item10.2",
+          "items": [
+            {
+              "id": "item10.1",
+              "label": "Child 10.1",
+              "url": "/some/parent10/child-path"
+            },
+            {
+              "id": "item10.2",
+              "label": "Child 10.2",
+              "url": "/some/parent10/child-path#2"
+            }
+          ]
         }
       ]
     },

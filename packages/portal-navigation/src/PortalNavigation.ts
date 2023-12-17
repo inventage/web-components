@@ -6,7 +6,16 @@ import '@inventage-web-components/hamburger-menu/lib/src/hamburger-menu.js';
 
 import { IdPath } from './IdPath.js';
 import { styles } from './styles-css.js';
-import { CommonMenuItem, Configuration, FirstLevelMenuItem, hasUrl, isFirstLevelMenuItemOrMenuItem, MenuItem, MenuLabel } from './Configuration.js';
+import {
+  CommonMenuItem,
+  Configuration,
+  FirstLevelMenuItem,
+  hasDefaultItem,
+  hasUrl,
+  isFirstLevelMenuItemOrMenuItem,
+  MenuItem,
+  MenuLabel,
+} from './Configuration.js';
 
 /**
  * A listing of key menu ids that are handled specifically by the portal navigation component.
@@ -1064,7 +1073,7 @@ export class PortalNavigation extends LitElement {
     let dispatchEvent = true;
     let closeHamburgerExpanded = true;
     if (hasItems) {
-      refItem = hasUrl(selectedItem) ? selectedItem : this.__getDefaultItemOf(selectedItem!);
+      refItem = hasUrl(selectedItem) && !hasDefaultItem(selectedItem) ? selectedItem : this.__getDefaultItemOf(selectedItem!);
       dispatchEvent = !this.isMobileBreakpoint && !!refItem && isFirstLevelMenuItemOrMenuItem(refItem) && refItem.destination !== 'extern';
 
       // Expanded hamburger should be closed only when the clicked item does not have an internal default item
