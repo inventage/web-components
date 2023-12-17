@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 1.6.2
+
+### Patch Changes
+
+- [`c3eb1767dcda0e4dfcf876404b2fe17b10e6b8fe`](https://github.com/inventage/web-components/commit/c3eb1767dcda0e4dfcf876404b2fe17b10e6b8fe) The internal routing events should be dispatched for the `defaultItem` for menu items with a `url` attribute.
+
 ## 1.6.1
 
 ### Patch Changes
