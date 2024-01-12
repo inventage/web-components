@@ -1,5 +1,13 @@
 # @inventage-web-components/portal-navigation
 
+## 1.6.3
+
+### Patch Changes
+
+- [`fca9078b925c7ca971f892b30812fbc1e32981ea`](https://github.com/inventage/web-components/commit/fca9078b925c7ca971f892b30812fbc1e32981ea) Instead of relying on two nested `requestAnimationFrame` callbacks to detect when style and layout information have been applied (for computing the `anchor` padding in `sticky` mode), we instead now use `requestAnimationFrame` in combination with `setTimeout`.
+
+  This should hopefully give us a more reliable hook into the point in time where the style and layout information have been calculated and the paint has occurred.
+
 ## 1.6.2
 
 ### Patch Changes
