@@ -1,13 +1,12 @@
 name: Deploy Preview
 
 on:
-  push:
-    branches-ignore:
-      - main
+#  push:
+#    branches-ignore:
+#      - main
   pull_request:
     branches-ignore:
       - 'dependabot/**'
-      - 'changeset-release/**'
 
 # https://github.com/orgs/community/discussions/26681
 concurrency:
