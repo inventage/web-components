@@ -478,11 +478,12 @@ export class PortalNavigation extends LitElement {
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
-    // Wait two paint cycles until CSS styles have been applied…
+    // This code will be run ASAP after Style and Layout information have been calculated and the paint has occurred.
+    // @see https://firefox-source-docs.mozilla.org/performance/bestpractices.html
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         this.updateAnchorPaddingWhenStickyInternal();
-      });
+      }, 0);
     });
   }
 
