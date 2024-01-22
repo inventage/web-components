@@ -31,7 +31,7 @@ jobs:
           node-version: '18'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         id: cache
         with:
           path: ./node_modules
@@ -58,7 +58,7 @@ jobs:
 
       - name: Cache Playwright Browsers for Playwright's Version
         id: cache-playwright-browsers
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
@@ -85,7 +85,7 @@ jobs:
 #            node-version: '18'
 #
 #        # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-#        - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+#        - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
 #          id: cache
 #          with:
 #            path: ./node_modules
@@ -132,7 +132,7 @@ jobs:
           node-version: '18'
 
       # @see https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-      - uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         id: cache
         with:
           path: ./node_modules
