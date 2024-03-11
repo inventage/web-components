@@ -173,7 +173,7 @@ export const Slots: Story<ArgTypes> = (args: ArgTypes) => {
     html`<span slot="${name}" style="font-size: 0.75rem; display: flex; align-items: center; color: #c0392b"
       ><code style="padding-right: 0.5em;"><b>${name}</b></code> slot
     </span>`;
-  const slots = ['logo', 'right', 'left', 'meta-left', 'meta-right', 'header-mobile', 'tree-bottom', 'current'];
+  const slots = ['logo', 'right', 'left', 'meta-left', 'meta-right', 'header-mobile', 'tree-bottom', 'tree-top', 'current'];
 
   return Template(
     args,
