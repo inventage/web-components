@@ -154,6 +154,8 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart slot-left - Slot element wrapper for the left slot
  * @csspart slot-right - Slot element wrapper for the right slot
  * @csspart slot-current - Slot element wrapper for the current slot
+ * @csspart slot-tree-bottom - Slot element wrapper for the tree-bottom slot
+ * @csspart slot-tree-top - Slot element wrapper for the tree-top slot
  *
  * @csspart container - The top-level, container element wrapping everything inside the host element
  * @csspart hamburger-menu - The hamburger menu element (shown in mobile breakpoint)
@@ -212,6 +214,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @slot meta-left - The left slot inside the meta bar
  * @slot meta-right - The right slot inside the meta bar
  * @slot header-mobile - The slot rendered in the top bar in the mobile breakpoint
+ * @slot tree-top - The slot rendered at the top of the menu tree (mobile breakpoint)
  * @slot tree-bottom - The slot rendered at the bottom of the menu tree (mobile breakpoint)
  * @slot current - The slot rendered next to the current items (2nd level), in non-mobile variant only
  */
@@ -571,8 +574,11 @@ export class PortalNavigation extends LitElement {
               ${this.renderMetaBar(menuLogout)}
               <!-- Hamburger Menu Tree Elements -->
               <div class="tree-container" part="tree-container">
+                <div class="slot-tree-top" part="slot-tree-top">
+                  <slot name="tree-top"></slot>
+                </div>
                 ${this._createTreeTemplate()}
-                <div class="slot-tree-bottom">
+                <div class="slot-tree-bottom" part="slot-tree-bottom">
                   <slot name="tree-bottom"></slot>
                 </div>
               </div>`
