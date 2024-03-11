@@ -559,27 +559,25 @@ export class PortalNavigation extends LitElement {
         </div>
       </header>
 
-      ${mainMenusEmpty
-        ? nothing
-        : html` <main class="main" part="main">
-            ${!this.isMobileBreakpoint && (menuMain !== nothing || menuSettings !== nothing)
-              ? html` <div class="container-max-width inner">
-                  ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main menu">${menuMain}</div>` : nothing}
-                  ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings menu">${menuSettings}</div>` : nothing}
-                </div>`
-              : nothing}
-            ${this.isMobileBreakpoint && this.hamburgerMenuExpanded
-              ? html` <!-- Meta bar -->
-                  ${this.renderMetaBar(menuLogout)}
-                  <!-- Hamburger Menu Tree Elements -->
-                  <div class="tree-container" part="tree-container">
-                    ${this._createTreeTemplate()}
-                    <div class="slot-tree-bottom">
-                      <slot name="tree-bottom"></slot>
-                    </div>
-                  </div>`
-              : nothing}
-          </main>`}
+      ${html` <main class="main" part="main">
+        ${!this.isMobileBreakpoint && (menuMain !== nothing || menuSettings !== nothing)
+          ? html` <div class="container-max-width inner">
+              ${menuMain !== nothing ? html` <div class="menu-main menu" part="menu-main menu">${menuMain}</div>` : nothing}
+              ${menuSettings !== nothing ? html` <div class="menu-settings menu" part="menu-settings menu">${menuSettings}</div>` : nothing}
+            </div>`
+          : nothing}
+        ${this.isMobileBreakpoint && this.hamburgerMenuExpanded
+          ? html` <!-- Meta bar -->
+              ${this.renderMetaBar(menuLogout)}
+              <!-- Hamburger Menu Tree Elements -->
+              <div class="tree-container" part="tree-container">
+                ${this._createTreeTemplate()}
+                <div class="slot-tree-bottom">
+                  <slot name="tree-bottom"></slot>
+                </div>
+              </div>`
+          : nothing}
+      </main>`}
       ${!this.isMobileBreakpoint && currentItems !== nothing
         ? html` <div class="current" part="current">
             <div class="container-max-width inner">

@@ -146,6 +146,23 @@ Mobile.parameters = {
 };
 
 /**
+ * Mobile breakpoint for a menu structure where the main menu is empty.
+ *
+ * @param args
+ * @constructor
+ */
+export const Mobile_Without_Main: Story<ArgTypes> = (args: ArgTypes) => Template(args);
+Mobile_Without_Main.args = {
+  src: './data/data-without-main.json',
+  hamburgerMenuExpanded: true,
+};
+Mobile_Without_Main.parameters = {
+  viewport: {
+    defaultViewport: 'mobile2',
+  },
+};
+
+/**
  * Story showing all slots.
  *
  * @param args
