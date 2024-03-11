@@ -1,7 +1,6 @@
 import { baseStyles, CSSResultArray, html, LitElement, nothing, PropertyValues, TemplateResult } from '@inventage-web-components/common';
 import { property, state, query } from '@inventage-web-components/common/lib/src/decorators.js';
 import { classMap, ClassInfo, ifDefined } from '@inventage-web-components/common/lib/src/directives.js';
-import { debounce } from 'ts-debounce';
 import '@inventage-web-components/hamburger-menu/lib/src/hamburger-menu.js';
 
 import { IdPath } from './IdPath.js';
@@ -335,6 +334,10 @@ export class PortalNavigation extends LitElement {
 
   private initialAnchorElementPadding?: string;
 
+  private anchorElementPaddingRefreshInterval?: number;
+  private anchorElementPaddingRefreshCount = 0;
+  private anchorElementPaddingRefreshMaxCount = 100;
+
   static get styles(): CSSResultArray {
     return [baseStyles, styles];
   }
@@ -375,13 +378,8 @@ export class PortalNavigation extends LitElement {
     this.__setActiveUrlEventListener = this.__setActiveUrlEventListener.bind(this);
     this.__globalClickListener = this.__globalClickListener.bind(this);
 
-    // Always debounce anchor padding updates
-    /**
-     * @internal
-     */
-    this.updateAnchorPaddingWhenSticky = debounce(this.updateAnchorPaddingWhenSticky, 100, {
-      isImmediate: true,
-    }).bind(this);
+    // We bind this as well since we bind it to the global resize event listener
+    this.updateAnchorPaddingWhenSticky = this.updateAnchorPaddingWhenSticky.bind(this);
   }
 
   connectedCallback(): void {
@@ -481,13 +479,22 @@ export class PortalNavigation extends LitElement {
       this.dispatchEvent(new CustomEvent(NavigationEvents.breakpointChanged, { detail: this.isMobileBreakpoint, composed: true, bubbles: true }));
     }
 
-    // This code will be run ASAP after Style and Layout information have been calculated and the paint has occurred.
-    // @see https://firefox-source-docs.mozilla.org/performance/bestpractices.html
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        this.updateAnchorPaddingWhenStickyInternal();
-      }, 0);
-    });
+    this.anchorElementPaddingRefreshInterval && cancelAnimationFrame(this.anchorElementPaddingRefreshInterval);
+    if (this.shouldUpdateAnchorPadding()) {
+      this.anchorElementPaddingRefreshCount = 0;
+      this.anchorElementPaddingRefreshInterval = window.requestAnimationFrame(() => this.anchorElementPaddingRefresh());
+    }
+  }
+
+  private anchorElementPaddingRefresh() {
+    if (++this.anchorElementPaddingRefreshCount >= this.anchorElementPaddingRefreshMaxCount) {
+      this.anchorElementPaddingRefreshCount = 0;
+      this.anchorElementPaddingRefreshInterval && cancelAnimationFrame(this.anchorElementPaddingRefreshInterval);
+      return;
+    }
+
+    this.updateAnchorPaddingWhenSticky();
+    this.anchorElementPaddingRefreshInterval = window.requestAnimationFrame(() => this.anchorElementPaddingRefresh());
   }
 
   render(): unknown {
@@ -1164,28 +1171,11 @@ export class PortalNavigation extends LitElement {
 
   /**
    * Updates the padding of the anchor when navigation should be sticky.
-   * This function is bound to events and is debounced by default.
-   * Use updateAnchorPaddingWhenStickyInternal() when you want to call the non-debounced version.
    *
    * @private
    */
   private updateAnchorPaddingWhenSticky() {
-    this.updateAnchorPaddingWhenStickyInternal();
-  }
-
-  /**
-   * Updates the padding of the anchor when navigation should be sticky.
-   *
-   * @private
-   */
-  private updateAnchorPaddingWhenStickyInternal() {
-    // Bail when anchor is available, or we're not in sticky mode
-    if (!this.sticky || !this.anchorElement) {
-      return;
-    }
-
-    // Do nothing to the padding when the mobile menu is open
-    if (this.isMobileBreakpoint && this.hamburgerMenuExpanded) {
+    if (!this.shouldUpdateAnchorPadding()) {
       return;
     }
 
@@ -1195,16 +1185,32 @@ export class PortalNavigation extends LitElement {
     }
 
     const targetPadding = `${height}px`;
-    if (this.anchorElement.style.paddingTop === targetPadding) {
+    if (this.anchorElement!.style.paddingTop === targetPadding) {
       return;
     }
 
     // Save initial padding in case we need to restore it later
     if (this.initialAnchorElementPadding === undefined) {
-      this.initialAnchorElementPadding = this.anchorElement.style.paddingTop;
+      this.initialAnchorElementPadding = this.anchorElement!.style.paddingTop;
     }
 
-    this.anchorElement.style.paddingTop = targetPadding;
+    this.anchorElement!.style.paddingTop = targetPadding;
+  }
+
+  /**
+   * The anchor padding should be updated when we're in sticky mode, the anchor is available,
+   * and we're not in mobile breakpoint with an expanded hamburger menu.
+   *
+   * @private
+   */
+  private shouldUpdateAnchorPadding() {
+    // Bail when anchor is available, or we're not in sticky mode
+    if (!this.sticky || !this.anchorElement) {
+      return false;
+    }
+
+    // Do nothing to the padding when the mobile menu is open
+    return !(this.isMobileBreakpoint && this.hamburgerMenuExpanded);
   }
 
   /**
