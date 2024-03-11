@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 1.7.0
+
+### Minor Changes
+
+- [`c9343ffa49458089177a9a4377b211008b1a46e4`](https://github.com/inventage/web-components/commit/c9343ffa49458089177a9a4377b211008b1a46e4) Rewrite the anchor padding updating mechanism in sticky mode to use `requestAnimationFrame` for a maximum of `100` times after each update. This should fix the padding issues in sticky mode once and for all…
+
+- [#227](https://github.com/inventage/web-components/pull/227) [`5599c3a8ad28d8bdb7e376759fbe3c981de50903`](https://github.com/inventage/web-components/commit/5599c3a8ad28d8bdb7e376759fbe3c981de50903) Fixes an issue where nothing was being rendered in the mobile breakpoint when the `main` menu was empty.
+
+  Released as a minor instead of patch since this also add a new behaviour to the mobile breakpoint.
+
+- [`cc5db2118939379d2e6f5f89a5d5b8fc4a8f175a`](https://github.com/inventage/web-components/commit/cc5db2118939379d2e6f5f89a5d5b8fc4a8f175a) Adds a `tree-top` slot (for mobile menus) as well as some missing CSS parts related to these tree slots
+
 ## 1.6.3
 
 ### Patch Changes
