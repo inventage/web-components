@@ -17,6 +17,7 @@ const configurationData = dataJson as ConfigurationData;
 
 const TEST_DATA_JSON_PATH = '/packages/portal-navigation/data/test-data.json!';
 const EMPTY_DATA_JSON_PATH = '/packages/portal-navigation/data/empty-data.json!';
+const WITHOUT_MAIN_DATA_JSON_PATH = '/packages/portal-navigation/data/data-without-main.json!';
 
 type WaitUntilOptions = {
   interval?: number;
@@ -217,6 +218,20 @@ describe('<portal-navigation>', () => {
       expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="icon-menu-meta"]')!).not.to.be.null;
       expect(el.shadowRoot!.querySelectorAll('[part~="icon"]').length, 'Renders part="icon"').to.eq(1);
       expect(el.shadowRoot!.querySelectorAll('[part~="icon-menu-meta"]').length, 'Renders part="icon-menu-meta"').to.eq(1);
+    });
+
+    it('renders all menus when main menu is missing or empty', async () => {
+      await setViewport({ width: 600, height: 400 });
+      const el: PortalNavigation = await fixture(
+        html` <portal-navigation src="${WITHOUT_MAIN_DATA_JSON_PATH}" mobilebreakpoint="600" currentapplication="app1" internalrouting></portal-navigation>`
+      );
+
+      el.hamburgerMenuExpanded = true;
+      await childrenRendered(el, '[part~="menu-tree-meta"]');
+
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="menu-tree-meta"]')!).to.be.visible;
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="menu-tree-profile"]')!).to.be.visible;
+      expect(<HTMLElement>el.shadowRoot!.querySelector('[part~="menu-tree-logout"]')!).to.be.visible;
     });
   });
 

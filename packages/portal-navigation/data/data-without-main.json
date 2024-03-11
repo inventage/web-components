@@ -1,0 +1,200 @@
+{
+  "menus": [
+    {
+      "id": "meta",
+      "items": [
+        {
+          "id": "meta.urgent",
+          "label": "[!!!]",
+          "items": [
+            {
+              "label": "Urgent Messages",
+              "url": "/ebanking/show-urgent-messages",
+              "application": "ebanking"
+            },
+            {
+              "label": "Warnings",
+              "url": "/ebanking/show-warnings",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "id": "meta.messages",
+          "defaultItem": "meta.messages.inbox",
+          "label": {
+            "de": "Nachrichten",
+            "en": "Messages"
+          },
+          "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-mail' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Crect x='3' y='5' width='18' height='14' rx='2' /%3E%3Cpolyline points='3 7 12 13 21 7' /%3E%3C/svg%3E",
+          "items": [
+            {
+              "id": "meta.messages.inbox",
+              "label": {
+                "de": "Posteingang",
+                "en": "Inbox"
+              },
+              "url": "/ebanking/show-messages-inbox",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Postausgang",
+                "en": "Outbox"
+              },
+              "url": "/ebanking/show-messages-outbox",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Nachricht erfassen",
+                "en": "Create message"
+              },
+              "url": "/ebanking/create-message",
+              "application": "ebanking"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "dropdown": true,
+      "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-user' width='24' height='24' viewBox='0 0 24 24' stroke-width='1.5' stroke='%232c3e50' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z'/%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3Cpath d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /%3E%3C/svg%3E",
+      "label": {
+        "en": "1001/usr",
+        "de": "1001/usr"
+      },
+      "items": [
+        {
+          "url": "/ebanking/preferences",
+          "application": "ebanking",
+          "label": {
+            "de": "Einstellungen",
+            "en": "Preferences"
+          },
+          "items": [
+            {
+              "id": "profile.preferences.userSettings",
+              "label": {
+                "de": "Benutzereinstellungen",
+                "en": "User Settings"
+              },
+              "url": "/ebanking/preferences/user",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Sicherheit",
+                "en": "Security"
+              },
+              "url": "/ebanking/preferences/security",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Darstellung",
+                "en": "Presentation"
+              },
+              "url": "/ebanking/preferences/presentation",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Benachrichtigungen",
+                "en": "Notifications"
+              },
+              "url": "/ebanking/preferences/notification",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Mobiles Banking",
+                "en": "Mobile Banking"
+              },
+              "url": "/ebanking/preferences/mobile",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "defaultItem": "profile.manageCustomerGroups.customerGroups",
+          "label": {
+            "de": "Kundengruppen verwalten",
+            "en": "Manage customer groups"
+          },
+          "items": [
+            {
+              "id": "profile.manageCustomerGroups.customerGroups",
+              "label": {
+                "de": "Kundengruppen",
+                "en": "Customer groups"
+              },
+              "url": "/ebanking/show-customer-groups",
+              "application": "ebanking"
+            },
+            {
+              "label": {
+                "de": "Kundengruppe erstellen",
+                "en": "Create customer group"
+              },
+              "url": "/ebanking/create-customer-group",
+              "application": "ebanking"
+            }
+          ]
+        },
+        {
+          "label": {
+            "de": "Alias verwalten",
+            "en": "Manage alias"
+          },
+          "url": "/ebanking/show-alias",
+          "application": "ebanking"
+        },
+        {
+          "label": {
+            "de": "Zugriffe Dritter",
+            "en": "Third party access"
+          },
+          "url": "/ebanking/tpp-access",
+          "application": "ebanking"
+        },
+        {
+          "label": {
+            "de": "Kontakt & Support",
+            "en": "Contact & support"
+          },
+          "url": "/node/226",
+          "application": "portal",
+          "internalRouting": false,
+          "destination": "extern"
+        }
+      ]
+    },
+    {
+      "id": "logout",
+      "dropdown": true,
+      "label": "Logout",
+      "items": [
+        {
+          "label": {
+            "de": "Erscheine Offline",
+            "en": "Appear Offline"
+          },
+          "url": "/portal/api/offline",
+          "internalRouting": true,
+          "internalRoutingApplications": ["ebanking"]
+        },
+        {
+          "label": {
+            "de": "Logout",
+            "en": "Logout"
+          },
+          "url": "/portal/api/logout",
+          "internalRouting": true,
+          "internalRoutingApplications": ["ebanking"]
+        }
+      ]
+    }
+  ]
+}
