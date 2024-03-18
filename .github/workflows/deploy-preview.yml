@@ -85,7 +85,7 @@ jobs:
           target_url: ${{ env.DEPLOY_URL }}
 
       - name: Comment PR
-        uses: thollander/actions-comment-pull-request@1d3973dc4b8e1399c0620d3f2b1aa5e795465308 # v2.4.3
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
         if: ${{ github.event_name == 'pull_request' }}
         with:
           message: |
