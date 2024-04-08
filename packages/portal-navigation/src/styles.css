@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   color: var(--portal-navigation-color-link, var(--portal-navigation-color-primary));
-  padding: var(--portal-navigation-menu-item-padding-y, 0.5rem) var(--portal-navigation-menu-item-padding-x, 0);
+  padding: var(--portal-navigation-menu-item-padding-y, 0.5rem) var(--portal-navigation-menu-item-padding-x, 0.5rem);
   white-space: var(--portal-navigation-menu-item-white-space, nowrap);
 
   cursor: pointer; /* because we can have a element without an href attribute */
@@ -234,7 +234,8 @@
  * Tree menu (mobile breakpoint)
  */
 .tree-parent {
-  padding: var(--portal-navigation-vertical-base, 0.5rem) 0;
+  padding: var(--portal-navigation-tree-parent-padding-y, var(--portal-navigation-menu-item-padding-y, 0.5rem))
+    var(--portal-navigation-tree-parent-padding-x, var(--portal-navigation-menu-item-padding-x, 0.5rem));
   border-top: var(--portal-navigation-tree-parent-border-top, none);
   border-bottom: var(--portal-navigation-tree-parent-border-bottom, solid 1px var(--portal-navigation-color-border, rgba(44, 62, 80, 0.1)));
   width: 100%;
@@ -259,11 +260,6 @@
   background-repeat: no-repeat;
   width: 1.5rem;
   height: 1.5rem;
-}
-
-.tree-container > .link {
-  padding: var(--portal-navigation-tree-parent-padding-y, var(--portal-navigation-menu-item-padding-y, 0.5rem))
-    var(--portal-navigation-tree-parent-padding-x, var(--portal-navigation-horizontal-base, 1rem));
 }
 
 .tree-items {

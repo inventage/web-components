@@ -130,7 +130,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  *
  * @cssprop {length} [--portal-navigation-dropdown-item-padding-x=0.5rem] Dropdown item horizontal padding
  * @cssprop {length} [--portal-navigation-dropdown-item-padding-y=1rem] Dropdown item vertical padding
- * @cssprop {length} [--portal-navigation-tree-parent-padding-x=var(--portal-navigation-horizontal-base)] Horizontal padding of parent items in the tree (mobile breakpoint)
+ * @cssprop {length} [--portal-navigation-tree-parent-padding-x=var(--portal-navigation-menu-item-padding-x)] Horizontal padding of parent items in the tree (mobile breakpoint)
  * @cssprop {length} [--portal-navigation-tree-parent-padding-y=var(--portal-navigation-menu-item-padding-y)] Vertical padding of parent items in the tree (mobile breakpoint)
  * @cssprop {length} [--portal-navigation-tree-items-margin-y=var(--portal-navigation-vertical-base)] Vertical margin of parent items in the tree (mobile breakpoint)
  * @cssprop {length} [--portal-navigation-tree-items-link-padding-x=var(--portal-navigation-horizontal-base)] Horizontal padding of links in parent items in the tree (mobile breakpoint)
