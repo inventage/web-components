@@ -1,5 +1,11 @@
 # @inventage-web-components/portal-navigation
 
+## 1.7.1
+
+### Patch Changes
+
+- [`b9121122f83af3008d12d048e99309e89df00b58`](https://github.com/inventage/web-components/commit/b9121122f83af3008d12d048e99309e89df00b58) Fix tree parent element padding, properly using the `--portal-navigation-tree-parent-padding-x` and `--portal-navigation-tree-parent-padding-y` values with their respective fallbacks to menu item padding values `--portal-navigation-menu-item-padding-x` and `--portal-navigation-menu-item-padding-y`.
+
 ## 1.7.0
 
 ### Minor Changes
