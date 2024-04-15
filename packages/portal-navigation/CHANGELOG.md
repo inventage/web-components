@@ -1,5 +1,17 @@
 # @inventage-web-components/portal-navigation
 
+## 1.8.0
+
+### Minor Changes
+
+- [`fb2d211d41465dcfc7935c5f5094163fa483391f`](https://github.com/inventage/web-components/commit/fb2d211d41465dcfc7935c5f5094163fa483391f) Add `dropdown` CSS part for the dropdown overlay
+
+- [`73a53f39b4d8599b64ebb8e0fa5eceeb95936953`](https://github.com/inventage/web-components/commit/73a53f39b4d8599b64ebb8e0fa5eceeb95936953) Add `--portal-navigation-color-link-dropdown-selected` CSS custom property for styling selected menu links in dropdowns.
+
+### Patch Changes
+
+- [`825d36c857e4d427f98b28c70224a05db1bb4bf8`](https://github.com/inventage/web-components/commit/825d36c857e4d427f98b28c70224a05db1bb4bf8) Add missing CSS variable fallbacks for `--portal-navigation-color-hover`.
+
 ## 1.7.1
 
 ### Patch Changes
