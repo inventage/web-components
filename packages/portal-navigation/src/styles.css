@@ -169,7 +169,7 @@
 
 @media (hover: hover) {
   .menu-current > .link:not(.-selected):hover {
-    color: var(--portal-navigation-color-hover-current, var(--portal-navigation-color-hover));
+    color: var(--portal-navigation-color-hover-current, var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, #0369a1)));
   }
 }
 
@@ -226,7 +226,7 @@
 
 @media (hover: hover) {
   .dropdown > .link:hover {
-    color: var(--portal-navigation-color-hover-dropdown, var(--portal-navigation-color-hover));
+    color: var(--portal-navigation-color-hover-dropdown, var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, #0369a1)));
   }
 }
 
