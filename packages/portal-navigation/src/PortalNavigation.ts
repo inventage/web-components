@@ -171,6 +171,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @csspart current - Element wrapper for the current items (2nd level) container
  * @csspart tree-container - Element wrapper for the tree items container (mobile breakpoint)
  * @csspart navigation-header-container - Element for the navigation header in mobile breakpoint
+ * @csspart dropdown - Element for the dropdown overlay
  *
  * @csspart menu-tree - Element wrapper for the tree menu items (mobile breakpoint)
  * @csspart menu-tree-main - Element wrapper for the tree menu items for the main menu (mobile breakpoint)
@@ -813,7 +814,7 @@ export class PortalNavigation extends LitElement {
           @click="${() => this.__toggleDropdown(menuId)}"
           >${PortalNavigation._createLinkTemplate(undefined, menuId, label, menu.icon, badge)}</span
         >
-        <div class="dropdown ${classMap({ '-show': this.activeDropdown === menuId })}">
+        <div class="dropdown ${classMap({ '-show': this.activeDropdown === menuId })}" part="dropdown">
           ${menu.items.map(item => this._createFirstLevelItemTemplate(item, false, menuId))}
         </div>`;
     }
