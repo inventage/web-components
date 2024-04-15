@@ -224,6 +224,10 @@
   padding: var(--portal-navigation-dropdown-item-padding-y, 0.5rem) var(--portal-navigation-dropdown-item-padding-x, 1rem);
 }
 
+.dropdown > .link.-selected {
+  color: var(--portal-navigation-color-link-dropdown-selected, var(--portal-navigation-color-selected, var(--portal-navigation-color-secondary, #0369a1)));
+}
+
 @media (hover: hover) {
   .dropdown > .link:hover {
     color: var(--portal-navigation-color-hover-dropdown, var(--portal-navigation-color-hover, var(--portal-navigation-color-secondary, #0369a1)));

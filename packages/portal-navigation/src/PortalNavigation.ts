@@ -97,6 +97,7 @@ type NavigationCssClasses = typeof NavigationCssClasses;
  * @cssprop {color} [--portal-navigation-color-link=var(--portal-navigation-color-primary)] Color used for links
  * @cssprop {color} [--portal-navigation-color-link-breakpoint=var(--portal-navigation-color-primary)] Color used for links in mobile breakpoint
  * @cssprop {color} [--portal-navigation-color-link-dropdown=var(--portal-navigation-color-primary)] Color used for links in dropdowns
+ * @cssprop {color} [--portal-navigation-color-link-dropdown-selected=var(--portal-navigation-color-selected)] Color used for selected links in dropdowns
  * @cssprop {color} [--portal-navigation-color-link-current=var(--portal-navigation-color-link)] Color used for links in current items
  * @cssprop {color} [--portal-navigation-color-selected=var(--portal-navigation-color-secondary)] Color used for selected elements
  * @cssprop {color} [--portal-navigation-color-hover=var(--portal-navigation-color-secondary)] Hover color
